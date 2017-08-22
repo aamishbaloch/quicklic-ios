@@ -42,6 +42,17 @@ import UIKit
         }
     }
     
+    @IBInspectable public var rounded: Bool = false {
+        didSet {
+            if rounded {
+                layer.cornerRadius = frame.height/2
+            }
+            else{
+                layer.cornerRadius = cornerRadius
+            }
+        }
+    }
+    
     @IBInspectable public var shadowColor: UIColor = UIColor.clear {
         didSet {
             layer.shadowColor = shadowColor.cgColor
