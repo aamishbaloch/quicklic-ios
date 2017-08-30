@@ -12,6 +12,20 @@
 		691C040D1F39BE2E0078A4E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 691C040C1F39BE2E0078A4E4 /* Assets.xcassets */; };
 		691C04101F39BE2E0078A4E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 691C040E1F39BE2E0078A4E4 /* LaunchScreen.storyboard */; };
 		691C041B1F39BE2E0078A4E4 /* QuicklicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C041A1F39BE2E0078A4E4 /* QuicklicTests.swift */; };
+		6969CE8E1F569EC7007E2E05 /* SearchDoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969CE8D1F569EC7007E2E05 /* SearchDoctorViewController.swift */; };
+		6969CE901F56AC24007E2E05 /* SearchDoctorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969CE8F1F56AC24007E2E05 /* SearchDoctorCollectionViewCell.swift */; };
+		6969CE921F56B1A9007E2E05 /* AppointmentsHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969CE911F56B1A9007E2E05 /* AppointmentsHistoryViewController.swift */; };
+		6969CE941F56D785007E2E05 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969CE931F56D785007E2E05 /* LandingViewController.swift */; };
+		6969CE961F56D837007E2E05 /* AnnouncementCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969CE951F56D837007E2E05 /* AnnouncementCollectionViewCell.swift */; };
+		69A5539B1F544CCF00E8A5C5 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A553951F544CCF00E8A5C5 /* Configuration.swift */; };
+		69A5539C1F544CCF00E8A5C5 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A553961F544CCF00E8A5C5 /* DayCell.swift */; };
+		69A5539D1F544CCF00E8A5C5 /* DayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69A553971F544CCF00E8A5C5 /* DayCell.xib */; };
+		69A5539E1F544CCF00E8A5C5 /* LoadableFromXibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A553981F544CCF00E8A5C5 /* LoadableFromXibView.swift */; };
+		69A5539F1F544CCF00E8A5C5 /* ScrollableDatepicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A553991F544CCF00E8A5C5 /* ScrollableDatepicker.swift */; };
+		69A553A01F544CCF00E8A5C5 /* ScrollableDatepicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69A5539A1F544CCF00E8A5C5 /* ScrollableDatepicker.xib */; };
+		69A553A21F55640400E8A5C5 /* DoctorAppointmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A553A11F55640400E8A5C5 /* DoctorAppointmentCollectionViewCell.swift */; };
+		69A553A41F5568E600E8A5C5 /* LeftMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A553A31F5568E600E8A5C5 /* LeftMenuTableViewCell.swift */; };
+		69A553A61F55D3ED00E8A5C5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A553A51F55D3ED00E8A5C5 /* EditProfileViewController.swift */; };
 		69F7855B1F4AC629005197A6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F785311F4AC629005197A6 /* Constants.swift */; };
 		69F7855C1F4AC629005197A6 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F785321F4AC629005197A6 /* Router.swift */; };
 		69F7855D1F4AC629005197A6 /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F785341F4AC629005197A6 /* AsyncButton.swift */; };
@@ -55,6 +69,11 @@
 		69F7858F1F4C2551005197A6 /* SF-UI-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 69F785861F4C2551005197A6 /* SF-UI-Display-Semibold.otf */; };
 		69F785901F4C2551005197A6 /* SF-UI-Display-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 69F785871F4C2551005197A6 /* SF-UI-Display-Thin.otf */; };
 		69F785911F4C2551005197A6 /* SF-UI-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 69F785881F4C2551005197A6 /* SF-UI-Display-Ultralight.otf */; };
+		69F785961F504430005197A6 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F785951F504430005197A6 /* LeftMenuViewController.swift */; };
+		69F785981F50552C005197A6 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F785971F50552C005197A6 /* SignInViewController.swift */; };
+		69F7859A1F505535005197A6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F785991F505535005197A6 /* SignUpViewController.swift */; };
+		69F7859C1F52E44B005197A6 /* PatientDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F7859B1F52E44B005197A6 /* PatientDashboardViewController.swift */; };
+		86A4269C2E52DE810B7CD185 /* libPods-Quicklic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5516CCBDAF692E4BBD7432D6 /* libPods-Quicklic.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +87,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5516CCBDAF692E4BBD7432D6 /* libPods-Quicklic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Quicklic.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		691C04021F39BE2E0078A4E4 /* Quicklic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quicklic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		691C04051F39BE2E0078A4E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		691C040A1F39BE2E0078A4E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -77,6 +97,20 @@
 		691C04161F39BE2E0078A4E4 /* QuicklicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuicklicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		691C041A1F39BE2E0078A4E4 /* QuicklicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuicklicTests.swift; sourceTree = "<group>"; };
 		691C041C1F39BE2E0078A4E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6969CE8D1F569EC7007E2E05 /* SearchDoctorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDoctorViewController.swift; sourceTree = "<group>"; };
+		6969CE8F1F56AC24007E2E05 /* SearchDoctorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDoctorCollectionViewCell.swift; sourceTree = "<group>"; };
+		6969CE911F56B1A9007E2E05 /* AppointmentsHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppointmentsHistoryViewController.swift; sourceTree = "<group>"; };
+		6969CE931F56D785007E2E05 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		6969CE951F56D837007E2E05 /* AnnouncementCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementCollectionViewCell.swift; sourceTree = "<group>"; };
+		69A553951F544CCF00E8A5C5 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		69A553961F544CCF00E8A5C5 /* DayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
+		69A553971F544CCF00E8A5C5 /* DayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayCell.xib; sourceTree = "<group>"; };
+		69A553981F544CCF00E8A5C5 /* LoadableFromXibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadableFromXibView.swift; sourceTree = "<group>"; };
+		69A553991F544CCF00E8A5C5 /* ScrollableDatepicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableDatepicker.swift; sourceTree = "<group>"; };
+		69A5539A1F544CCF00E8A5C5 /* ScrollableDatepicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollableDatepicker.xib; sourceTree = "<group>"; };
+		69A553A11F55640400E8A5C5 /* DoctorAppointmentCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorAppointmentCollectionViewCell.swift; sourceTree = "<group>"; };
+		69A553A31F5568E600E8A5C5 /* LeftMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuTableViewCell.swift; sourceTree = "<group>"; };
+		69A553A51F55D3ED00E8A5C5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		69F785311F4AC629005197A6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		69F785321F4AC629005197A6 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		69F785341F4AC629005197A6 /* AsyncButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
@@ -121,6 +155,13 @@
 		69F785861F4C2551005197A6 /* SF-UI-Display-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Semibold.otf"; sourceTree = "<group>"; };
 		69F785871F4C2551005197A6 /* SF-UI-Display-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Thin.otf"; sourceTree = "<group>"; };
 		69F785881F4C2551005197A6 /* SF-UI-Display-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Ultralight.otf"; sourceTree = "<group>"; };
+		69F785941F5043B6005197A6 /* Quicklic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Quicklic-Bridging-Header.h"; sourceTree = "<group>"; };
+		69F785951F504430005197A6 /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
+		69F785971F50552C005197A6 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		69F785991F505535005197A6 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		69F7859B1F52E44B005197A6 /* PatientDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDashboardViewController.swift; sourceTree = "<group>"; };
+		9B3B503ED6796ADFF30BC563 /* Pods-Quicklic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quicklic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Quicklic/Pods-Quicklic.debug.xcconfig"; sourceTree = "<group>"; };
+		AF5168AC7A62D6EF164AEDB8 /* Pods-Quicklic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quicklic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Quicklic/Pods-Quicklic.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86A4269C2E52DE810B7CD185 /* libPods-Quicklic.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +189,8 @@
 				691C04041F39BE2E0078A4E4 /* Quicklic */,
 				691C04191F39BE2E0078A4E4 /* QuicklicTests */,
 				691C04031F39BE2E0078A4E4 /* Products */,
+				ACA073CCC6FA398FD984CC3A /* Pods */,
+				F07639B97D5ACBBA47CF64B9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -172,6 +216,7 @@
 				691C040C1F39BE2E0078A4E4 /* Assets.xcassets */,
 				691C040E1F39BE2E0078A4E4 /* LaunchScreen.storyboard */,
 				691C04111F39BE2E0078A4E4 /* Info.plist */,
+				69F785941F5043B6005197A6 /* Quicklic-Bridging-Header.h */,
 			);
 			path = Quicklic;
 			sourceTree = "<group>";
@@ -185,9 +230,30 @@
 			path = QuicklicTests;
 			sourceTree = "<group>";
 		};
+		69A553941F544CCF00E8A5C5 /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				69A553951F544CCF00E8A5C5 /* Configuration.swift */,
+				69A553961F544CCF00E8A5C5 /* DayCell.swift */,
+				69A553971F544CCF00E8A5C5 /* DayCell.xib */,
+				69A553981F544CCF00E8A5C5 /* LoadableFromXibView.swift */,
+				69A553991F544CCF00E8A5C5 /* ScrollableDatepicker.swift */,
+				69A5539A1F544CCF00E8A5C5 /* ScrollableDatepicker.xib */,
+			);
+			path = DatePicker;
+			sourceTree = "<group>";
+		};
 		69F785291F4AC629005197A6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				69F785951F504430005197A6 /* LeftMenuViewController.swift */,
+				69F785971F50552C005197A6 /* SignInViewController.swift */,
+				69F785991F505535005197A6 /* SignUpViewController.swift */,
+				69F7859B1F52E44B005197A6 /* PatientDashboardViewController.swift */,
+				69A553A51F55D3ED00E8A5C5 /* EditProfileViewController.swift */,
+				6969CE8D1F569EC7007E2E05 /* SearchDoctorViewController.swift */,
+				6969CE911F56B1A9007E2E05 /* AppointmentsHistoryViewController.swift */,
+				6969CE931F56D785007E2E05 /* LandingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -204,6 +270,7 @@
 			children = (
 				69F785311F4AC629005197A6 /* Constants.swift */,
 				69F785321F4AC629005197A6 /* Router.swift */,
+				69A553941F544CCF00E8A5C5 /* DatePicker */,
 				69F785331F4AC629005197A6 /* Spring */,
 				69F785521F4AC629005197A6 /* Styles.swift */,
 				69F785531F4AC629005197A6 /* UtilityManager.swift */,
@@ -252,6 +319,10 @@
 			isa = PBXGroup;
 			children = (
 				69F7857D1F4C16FC005197A6 /* GradientView.swift */,
+				69A553A11F55640400E8A5C5 /* DoctorAppointmentCollectionViewCell.swift */,
+				69A553A31F5568E600E8A5C5 /* LeftMenuTableViewCell.swift */,
+				6969CE8F1F56AC24007E2E05 /* SearchDoctorCollectionViewCell.swift */,
+				6969CE951F56D837007E2E05 /* AnnouncementCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -272,6 +343,23 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		ACA073CCC6FA398FD984CC3A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9B3B503ED6796ADFF30BC563 /* Pods-Quicklic.debug.xcconfig */,
+				AF5168AC7A62D6EF164AEDB8 /* Pods-Quicklic.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F07639B97D5ACBBA47CF64B9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5516CCBDAF692E4BBD7432D6 /* libPods-Quicklic.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -279,9 +367,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 691C041F1F39BE2E0078A4E4 /* Build configuration list for PBXNativeTarget "Quicklic" */;
 			buildPhases = (
+				BFD798656C6DBE40C2EE40FF /* [CP] Check Pods Manifest.lock */,
 				691C03FE1F39BE2E0078A4E4 /* Sources */,
 				691C03FF1F39BE2E0078A4E4 /* Frameworks */,
 				691C04001F39BE2E0078A4E4 /* Resources */,
+				7A4A15A8AD27C0005E3C4F64 /* [CP] Embed Pods Frameworks */,
+				8DA759BEE4BD4CDD35DCF006 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -363,11 +454,13 @@
 				69F785891F4C2551005197A6 /* SF-UI-Display-Black.otf in Resources */,
 				69F7858C1F4C2551005197A6 /* SF-UI-Display-Light.otf in Resources */,
 				691C040B1F39BE2E0078A4E4 /* Main.storyboard in Resources */,
+				69A553A01F544CCF00E8A5C5 /* ScrollableDatepicker.xib in Resources */,
 				69F785901F4C2551005197A6 /* SF-UI-Display-Thin.otf in Resources */,
 				69F7858F1F4C2551005197A6 /* SF-UI-Display-Semibold.otf in Resources */,
 				69F7858E1F4C2551005197A6 /* SF-UI-Display-Regular.otf in Resources */,
 				69F785911F4C2551005197A6 /* SF-UI-Display-Ultralight.otf in Resources */,
 				69F7856C1F4AC629005197A6 /* LoadingView.xib in Resources */,
+				69A5539D1F544CCF00E8A5C5 /* DayCell.xib in Resources */,
 				69F7858B1F4C2551005197A6 /* SF-UI-Display-Heavy.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,41 +474,105 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7A4A15A8AD27C0005E3C4F64 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Quicklic/Pods-Quicklic-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8DA759BEE4BD4CDD35DCF006 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Quicklic/Pods-Quicklic-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BFD798656C6DBE40C2EE40FF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		691C03FE1F39BE2E0078A4E4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69A553A61F55D3ED00E8A5C5 /* EditProfileViewController.swift in Sources */,
 				69F785711F4AC629005197A6 /* SpringButton.swift in Sources */,
 				69F7856E1F4AC629005197A6 /* SoundPlayer.swift in Sources */,
 				69F7857E1F4C16FC005197A6 /* GradientView.swift in Sources */,
 				69F7857A1F4AC629005197A6 /* Styles.swift in Sources */,
+				69A5539C1F544CCF00E8A5C5 /* DayCell.swift in Sources */,
 				69F785751F4AC629005197A6 /* SpringTextView.swift in Sources */,
 				69F785651F4AC629005197A6 /* DesignableTextField.swift in Sources */,
+				69F7859A1F505535005197A6 /* SignUpViewController.swift in Sources */,
+				6969CE901F56AC24007E2E05 /* SearchDoctorCollectionViewCell.swift in Sources */,
 				69F785661F4AC629005197A6 /* DesignableTextView.swift in Sources */,
 				69F785781F4AC629005197A6 /* TransitionZoom.swift in Sources */,
+				69A553A41F5568E600E8A5C5 /* LeftMenuTableViewCell.swift in Sources */,
+				6969CE8E1F569EC7007E2E05 /* SearchDoctorViewController.swift in Sources */,
+				69A5539E1F544CCF00E8A5C5 /* LoadableFromXibView.swift in Sources */,
 				69F785741F4AC629005197A6 /* SpringTextField.swift in Sources */,
 				69F785621F4AC629005197A6 /* DesignableImageView.swift in Sources */,
+				69A553A21F55640400E8A5C5 /* DoctorAppointmentCollectionViewCell.swift in Sources */,
 				69F7855C1F4AC629005197A6 /* Router.swift in Sources */,
 				69F785671F4AC629005197A6 /* DesignableView.swift in Sources */,
 				69F7856D1F4AC629005197A6 /* Misc.swift in Sources */,
 				69F7855E1F4AC629005197A6 /* AsyncImageView.swift in Sources */,
+				69A5539F1F544CCF00E8A5C5 /* ScrollableDatepicker.swift in Sources */,
+				6969CE921F56B1A9007E2E05 /* AppointmentsHistoryViewController.swift in Sources */,
 				69F785641F4AC629005197A6 /* DesignableTabBarController.swift in Sources */,
 				69F7855F1F4AC629005197A6 /* AutoTextView.swift in Sources */,
 				69F785791F4AC629005197A6 /* UnwindSegue.swift in Sources */,
 				69F785761F4AC629005197A6 /* SpringView.swift in Sources */,
+				69F7859C1F52E44B005197A6 /* PatientDashboardViewController.swift in Sources */,
+				69F785961F504430005197A6 /* LeftMenuViewController.swift in Sources */,
 				69F785731F4AC629005197A6 /* SpringLabel.swift in Sources */,
+				69A5539B1F544CCF00E8A5C5 /* Configuration.swift in Sources */,
 				69F7856A1F4AC629005197A6 /* KeyboardLayoutConstraint.swift in Sources */,
 				69F7855D1F4AC629005197A6 /* AsyncButton.swift in Sources */,
+				6969CE941F56D785007E2E05 /* LandingViewController.swift in Sources */,
 				69F785681F4AC629005197A6 /* ImageLoader.swift in Sources */,
 				69F7856F1F4AC629005197A6 /* Spring.swift in Sources */,
 				69F785771F4AC629005197A6 /* TransitionManager.swift in Sources */,
 				69F7857B1F4AC629005197A6 /* UtilityManager.swift in Sources */,
 				69F785611F4AC629005197A6 /* DesignableButton.swift in Sources */,
 				69F785601F4AC629005197A6 /* BlurView.swift in Sources */,
+				69F785981F50552C005197A6 /* SignInViewController.swift in Sources */,
 				691C04061F39BE2E0078A4E4 /* AppDelegate.swift in Sources */,
 				69F785631F4AC629005197A6 /* DesignableLabel.swift in Sources */,
 				69F785701F4AC629005197A6 /* SpringAnimation.swift in Sources */,
+				6969CE961F56D837007E2E05 /* AnnouncementCollectionViewCell.swift in Sources */,
 				69F7855B1F4AC629005197A6 /* Constants.swift in Sources */,
 				69F7856B1F4AC629005197A6 /* LoadingView.swift in Sources */,
 				69F785721F4AC629005197A6 /* SpringImageView.swift in Sources */,
@@ -557,24 +714,30 @@
 		};
 		691C04201F39BE2E0078A4E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B3B503ED6796ADFF30BC563 /* Pods-Quicklic.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Quicklic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danialzahid.Quicklic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Quicklic/Quicklic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		691C04211F39BE2E0078A4E4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF5168AC7A62D6EF164AEDB8 /* Pods-Quicklic.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Quicklic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danialzahid.Quicklic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Quicklic/Quicklic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

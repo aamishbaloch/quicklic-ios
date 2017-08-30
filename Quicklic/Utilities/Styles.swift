@@ -26,10 +26,10 @@ struct ShadowStyle {
 }
 
 enum Font : String {
-    case Standard = "Montserrat-Regular"
-    case Bold = "Montserrat-Bold"
-    case SemiBold = "Montserrat-SemiBold"
-    case Light = "Montserrat-Light"
+    case Standard = "SFUIDisplay-Regular"
+    case Bold = "SFUIDisplay-Bold"
+    case SemiBold = "SFUIDisplay-SemiBold"
+    case Light = "SFUIDisplay-Light"
 }
 
 class Styles {
@@ -39,7 +39,9 @@ class Styles {
     public func applyGlobalAppearance() {
         //Probably want to set the tintColor of UIWindow but it didn't seem necessary right now
         
-        UINavigationBar.appearance().barTintColor = UIColor(hex: "#2c3e50")
+//        UINavigationBar.appearance().barTintColor = UIColor(hex: "#71AB21")
+        UINavigationBar.appearance().barTintColor = UIColor(hex: "#429321")
+        
         UIApplication.shared.statusBarStyle = .lightContent
         UINavigationBar.appearance().tintColor = .white
         UIToolbar.appearance().tintColor = UIColor.blue
