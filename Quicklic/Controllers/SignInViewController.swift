@@ -10,11 +10,13 @@ import UIKit
 
 class SignInViewController: UIViewController {
 
+    @IBOutlet weak var emailField: DesignableTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        Router.sharedInstance.showPatientDashboardAsRoot()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,7 +26,14 @@ class SignInViewController: UIViewController {
     
 
     @IBAction func signinButtonPressed(_ sender: Any) {
-        Router.sharedInstance.showPatientDashboardAsRoot()
+        
+        ApplicationManager.sharedInstance.userType = .Patient
+        Router.sharedInstance.showDashboardAsRoot()
+    }
+    
+    @IBAction func touchIDPressed(_ sender: Any) {
+        ApplicationManager.sharedInstance.userType = .Doctor
+        Router.sharedInstance.showDashboardAsRoot()
     }
     /*
     // MARK: - Navigation

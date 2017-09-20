@@ -14,6 +14,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     
     @IBOutlet weak var datePicker: ScrollableDatepicker!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var newAppointmentButton: DesignableButton!
     
     override func viewDidLoad() {
         
@@ -25,6 +26,10 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         setupDatePicker()
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        if ApplicationManager.sharedInstance.userType == .Doctor {
+            newAppointmentButton.setTitle("Patients", for: UIControlState.normal)
+        }
         
         
     }
@@ -59,6 +64,11 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         self.presentLeftMenuViewController(nil)
     }
     
+    
+    @IBAction func hospitalDetailsButtonPressed(_ sender: Any) {
+        Router.sharedInstance.showHospitalDetails(fromController: self)
+    }
+    
     func datepicker(_ datepicker: ScrollableDatepicker, didSelectDate date: Date) {
         
     }
@@ -73,7 +83,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        Router.sharedInstance.showAppointmentDetails(fromController: self)
     }
 
     /*

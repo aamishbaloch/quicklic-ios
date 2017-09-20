@@ -14,7 +14,7 @@ class Router: NSObject {
     
     var centralRootViewController : RESideMenu!
     
-    func showPatientDashboardAsRoot(){
+    func showDashboardAsRoot(){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let contentViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: PatientDashboardViewController.storyboardID)
@@ -67,8 +67,23 @@ class Router: NSObject {
         centralRootViewController.hideViewController()
     }
     
+    func showPatientsList() {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: PatientsListViewController.storyboardID)
+        centralRootViewController.setContentViewController(controller, animated: true)
+        centralRootViewController.hideViewController()
+    }
+    
     func hideSideMenu() {
         centralRootViewController.hideViewController()
     }
     
+    func showAppointmentDetails(fromController: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: AppointmentDetailsViewController.storyboardID)
+        fromController.present(controller, animated: false, completion: nil)
+    }
+    
+    func showHospitalDetails(fromController: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: HospitalDetailsViewController.storyboardID)
+        fromController.present(controller, animated: false, completion: nil)
+    }
 }

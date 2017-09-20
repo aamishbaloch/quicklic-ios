@@ -1,12 +1,18 @@
 PODS:
+  - Crashlytics (3.8.5):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.12)
   - RESideMenu (4.0.7)
 
 DEPENDENCIES:
+  - Crashlytics
   - RESideMenu (~> 4.0.7)
 
 SPEC CHECKSUMS:
+  Crashlytics: dfbae35ef22ca189240d230ad501feea4ee85d2d
+  Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
 
-PODFILE CHECKSUM: 9509519a0e4e19be47d7b0123c699e290e0a5ec4
+PODFILE CHECKSUM: 0692536413556527ff4e891b707e6d75465d5ed6
 
 COCOAPODS: 1.2.1

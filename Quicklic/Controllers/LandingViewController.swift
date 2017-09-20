@@ -39,6 +39,9 @@ class LandingViewController: UIViewController, UICollectionViewDelegate, UIColle
         return CGSize(width: self.collectionView.bounds.width, height: self.collectionView.bounds.height);
     }
     
+    @IBAction func showHospitalDetails(_ sender: Any) {
+        Router.sharedInstance.showHospitalDetails(fromController: self)
+    }
 
     /*
     // MARK: - Navigation

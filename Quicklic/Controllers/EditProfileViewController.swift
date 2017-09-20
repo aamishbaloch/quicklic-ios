@@ -12,10 +12,23 @@ class EditProfileViewController: UIViewController {
 
     static let storyboardID = "editProfileViewController"
     
+    @IBOutlet weak var nameField: DesignableTextField!
+    @IBOutlet weak var phoneField: DesignableTextField!
+    @IBOutlet weak var addressField: DesignableTextField!
+    @IBOutlet weak var dobField: DesignableTextField!
+    @IBOutlet weak var emailField: DesignableTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Edit Profile"
+        
+        if ApplicationManager.sharedInstance.userType == .Doctor {
+            phoneField.placeholder = "Speciality"
+            addressField.placeholder = "Phone Number"
+            dobField.placeholder = "Degree"
+            emailField.placeholder = "Experience"
+        }
         // Do any additional setup after loading the view.
     }
 

@@ -13,6 +13,8 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
     static let storyboardID = "leftMenuViewController"
     
     var selectedIndex = 0
+    let patientmenuItems = ["Dashboard", "New Appointment", "Edit Profile", "Appointment History", "Logout"]
+    let doctorMenuItems = ["Appointments", "Patients", "Edit Profile", "Logout"]
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -34,25 +36,23 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        switch ApplicationManager.sharedInstance.userType {
+        case .Doctor:
+            return doctorMenuItems.count
+        case .Patient:
+            return patientmenuItems.count
+        }
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LeftMenuTableViewCell.identifier) as! LeftMenuTableViewCell
         
-        switch indexPath.row {
-        case 0:
-            cell.titleLabel.text = "Dashboard"
-        case 1:
-            cell.titleLabel.text = "New Appointment"
-        case 2:
-            cell.titleLabel.text = "Edit Profile"
-        case 3:
-            cell.titleLabel.text = "Appointment History"
-        case 4:
-            cell.titleLabel.text = "Logout"
-        default:
-            cell.titleLabel.text = ""
+        switch ApplicationManager.sharedInstance.userType {
+        case .Doctor:
+            cell.titleLabel.text = doctorMenuItems[indexPath.row]
+        case .Patient:
+            cell.titleLabel.text = patientmenuItems[indexPath.row]
         }
         
         return cell
@@ -66,20 +66,39 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
             return
         }
         
-        switch indexPath.row {
-        case 0:
-            Router.sharedInstance.showPatientDashboard()
-        case 1:
-            Router.sharedInstance.showSearchDoctor()
-        case 2:
-            Router.sharedInstance.showPatientEditProfile()
-        case 3:
-            Router.sharedInstance.showAppointmentHistory()
-        case 4:
-            Router.sharedInstance.showLandingPage()
-        default: break
+        switch ApplicationManager.sharedInstance.userType {
+        case .Doctor:
+            switch indexPath.row {
+            case 0:
+                Router.sharedInstance.showAppointmentHistory()
+            case 1:
+                Router.sharedInstance.showPatientsList()
+            case 2:
+                Router.sharedInstance.showPatientEditProfile()
+            case 3:
+                Router.sharedInstance.showLandingPage()
             
+            default: break
+                
+            }
+        case .Patient:
+            switch indexPath.row {
+            case 0:
+                Router.sharedInstance.showPatientDashboard()
+            case 1:
+                Router.sharedInstance.showSearchDoctor()
+            case 2:
+                Router.sharedInstance.showPatientEditProfile()
+            case 3:
+                Router.sharedInstance.showAppointmentHistory()
+            case 4:
+                Router.sharedInstance.showLandingPage()
+            default: break
+                
+            }
         }
+        
+        
     }
 
     /*
