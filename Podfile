@@ -4,5 +4,7 @@ target 'Quicklic' do
 
 pod 'RESideMenu', '~> 4.0.7'
 pod 'Crashlytics'
+pod 'AFNetworking', '~> 3.0'
+pod 'TPKeyboardAvoiding'
 
 end

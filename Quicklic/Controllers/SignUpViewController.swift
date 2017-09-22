@@ -10,6 +10,14 @@ import UIKit
 
 class SignUpViewController: UIViewController {
 
+    @IBOutlet weak var nameField: DesignableTextField!
+    @IBOutlet weak var emailField: DesignableTextField!
+    @IBOutlet weak var phoneField: DesignableTextField!
+    @IBOutlet weak var dobField: DatePickerTextField!
+    @IBOutlet weak var genderSegmentControl: UISegmentedControl!
+    @IBOutlet weak var passwordField: DesignableTextField!
+    @IBOutlet weak var confirmPasswordField: DesignableTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,7 +30,48 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signupButtonPressed(_ sender: Any) {
-        Router.sharedInstance.showDashboardAsRoot()
+        /*
+         {
+         "email": "patient03@gmail.com",
+         "first_name": "patient03",
+         "last_name": "user",
+         "password": "arbisoft",
+         "gender": "M",
+         "phone": "23423324234",
+         "dob": "2017-08-08"
+         }*/
+        var params = [String: String]()
+        params["email"] = emailField.text
+        let names = nameField.text?.components(separatedBy: " ")
+        params["first_name"] = names?.first
+        params["last_name"] = names?.last
+        params["password"] = passwordField.text
+        switch genderSegmentControl.selectedSegmentIndex {
+        case 0:
+            params["gender"] = "M"
+        case 1:
+            params["gender"] = "F"
+        case 2:
+            params["gender"] = "U"
+        default:
+            break
+        }
+        params["phone"] = phoneField.text
+        params["dob"] = UtilityManager.serverDateStringFromAppDateString(date: dobField.text!)
+        
+        RequestManager.signUpUser(param: params, successBlock: { (response: [String : AnyObject]) in
+            if response["role"] as! String == "PAT" {
+                ApplicationManager.sharedInstance.userType = .Patient
+            }
+            else{
+                ApplicationManager.sharedInstance.userType = .Doctor
+            }
+            Router.sharedInstance.showDashboardAsRoot()
+        }) { (error) in
+            print(error)
+        }
+        
+        
     }
 
     /*

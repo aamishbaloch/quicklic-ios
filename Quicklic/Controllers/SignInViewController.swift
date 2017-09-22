@@ -11,6 +11,7 @@ import UIKit
 class SignInViewController: UIViewController {
 
     @IBOutlet weak var emailField: DesignableTextField!
+    @IBOutlet weak var passwordField: DesignableTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +28,25 @@ class SignInViewController: UIViewController {
 
     @IBAction func signinButtonPressed(_ sender: Any) {
         
-        ApplicationManager.sharedInstance.userType = .Patient
-        Router.sharedInstance.showDashboardAsRoot()
+        var params = [String: String]()
+        params["email"] = emailField.text
+        params["password"] = passwordField.text
+        
+        RequestManager.loginUser(param: params, successBlock: { (response: [String : AnyObject]) in
+            if response["role"] as! String == "PAT" {
+                ApplicationManager.sharedInstance.userType = .Patient
+            }
+            else{
+                ApplicationManager.sharedInstance.userType = .Doctor
+            }
+            Router.sharedInstance.showDashboardAsRoot()
+        }) { (error) in
+            print(error)
+        }
     }
     
     @IBAction func touchIDPressed(_ sender: Any) {
-        ApplicationManager.sharedInstance.userType = .Doctor
-        Router.sharedInstance.showDashboardAsRoot()
+        
     }
     /*
     // MARK: - Navigation

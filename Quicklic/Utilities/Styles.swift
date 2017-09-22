@@ -64,6 +64,10 @@ class Styles {
         return UIColor(red: CGFloat(126.0/255.0), green: CGFloat(199.0/255.0), blue: CGFloat(143.0/255.0), alpha: CGFloat(1.00))
     }
     
+    public var primaryGreyColor : UIColor {
+        return UIColor(white: 0.9, alpha: 1.0)
+    }
+    
     ///**Warning:** Not from style guide. Do not add more uses
     public var progressBarTrackTintColor : UIColor {
         return UIColor(red: CGFloat(223.0/255.0), green: CGFloat(242.0/255.0), blue: CGFloat(228.0/255.0), alpha: CGFloat(1.00))
