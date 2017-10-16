@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6916708E1F93711600C39034 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6916708D1F93711600C39034 /* VerificationViewController.swift */; };
 		691C04061F39BE2E0078A4E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C04051F39BE2E0078A4E4 /* AppDelegate.swift */; };
 		691C040B1F39BE2E0078A4E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 691C04091F39BE2E0078A4E4 /* Main.storyboard */; };
 		691C040D1F39BE2E0078A4E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 691C040C1F39BE2E0078A4E4 /* Assets.xcassets */; };
@@ -15,11 +16,16 @@
 		692AFF8E1F70333C00E3ECB9 /* PatientCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692AFF8D1F70333C00E3ECB9 /* PatientCollectionViewCell.swift */; };
 		692AFF901F7035D800E3ECB9 /* DZImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692AFF8F1F7035D800E3ECB9 /* DZImageView.swift */; };
 		692AFF921F70368F00E3ECB9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 692AFF911F70368F00E3ECB9 /* MobileCoreServices.framework */; };
+		69416EF01F87E2CE00E2E0E2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69416EEF1F87E2CE00E2E0E2 /* User.swift */; };
+		69416EF31F87EA9B00E2E0E2 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 69416EF21F87EA9B00E2E0E2 /* BaseEntity.m */; };
+		6968D6681F8E589200B39CCF /* NSString+Levenshtein.m in Sources */ = {isa = PBXBuildFile; fileRef = 6968D6621F8E589200B39CCF /* NSString+Levenshtein.m */; };
+		6968D6691F8E589200B39CCF /* MLPAutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6968D6661F8E589200B39CCF /* MLPAutoCompleteTextField.m */; };
 		6969CE8E1F569EC7007E2E05 /* SearchDoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969CE8D1F569EC7007E2E05 /* SearchDoctorViewController.swift */; };
 		6969CE901F56AC24007E2E05 /* SearchDoctorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969CE8F1F56AC24007E2E05 /* SearchDoctorCollectionViewCell.swift */; };
 		6969CE921F56B1A9007E2E05 /* AppointmentsHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969CE911F56B1A9007E2E05 /* AppointmentsHistoryViewController.swift */; };
 		6969CE941F56D785007E2E05 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969CE931F56D785007E2E05 /* LandingViewController.swift */; };
 		6969CE961F56D837007E2E05 /* AnnouncementCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969CE951F56D837007E2E05 /* AnnouncementCollectionViewCell.swift */; };
+		6975ADB81F94FDD500CEF94D /* GenericModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6975ADB71F94FDD500CEF94D /* GenericModel.swift */; };
 		69A5539B1F544CCF00E8A5C5 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A553951F544CCF00E8A5C5 /* Configuration.swift */; };
 		69A5539C1F544CCF00E8A5C5 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A553961F544CCF00E8A5C5 /* DayCell.swift */; };
 		69A5539D1F544CCF00E8A5C5 /* DayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69A553971F544CCF00E8A5C5 /* DayCell.xib */; };
@@ -98,6 +104,7 @@
 
 /* Begin PBXFileReference section */
 		5516CCBDAF692E4BBD7432D6 /* libPods-Quicklic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Quicklic.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6916708D1F93711600C39034 /* VerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
 		691C04021F39BE2E0078A4E4 /* Quicklic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quicklic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		691C04051F39BE2E0078A4E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		691C040A1F39BE2E0078A4E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -110,11 +117,22 @@
 		692AFF8D1F70333C00E3ECB9 /* PatientCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientCollectionViewCell.swift; sourceTree = "<group>"; };
 		692AFF8F1F7035D800E3ECB9 /* DZImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DZImageView.swift; sourceTree = "<group>"; };
 		692AFF911F70368F00E3ECB9 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		69416EEF1F87E2CE00E2E0E2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		69416EF11F87EA9B00E2E0E2 /* BaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEntity.h; sourceTree = "<group>"; };
+		69416EF21F87EA9B00E2E0E2 /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
+		6968D6611F8E589200B39CCF /* MLPAutoCompleteTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompleteTextField.h; sourceTree = "<group>"; };
+		6968D6621F8E589200B39CCF /* NSString+Levenshtein.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Levenshtein.m"; sourceTree = "<group>"; };
+		6968D6631F8E589200B39CCF /* MLPAutoCompletionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompletionObject.h; sourceTree = "<group>"; };
+		6968D6641F8E589200B39CCF /* NSString+Levenshtein.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Levenshtein.h"; sourceTree = "<group>"; };
+		6968D6651F8E589200B39CCF /* MLPAutoCompleteTextFieldDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompleteTextFieldDataSource.h; sourceTree = "<group>"; };
+		6968D6661F8E589200B39CCF /* MLPAutoCompleteTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPAutoCompleteTextField.m; sourceTree = "<group>"; };
+		6968D6671F8E589200B39CCF /* MLPAutoCompleteTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompleteTextFieldDelegate.h; sourceTree = "<group>"; };
 		6969CE8D1F569EC7007E2E05 /* SearchDoctorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDoctorViewController.swift; sourceTree = "<group>"; };
 		6969CE8F1F56AC24007E2E05 /* SearchDoctorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDoctorCollectionViewCell.swift; sourceTree = "<group>"; };
 		6969CE911F56B1A9007E2E05 /* AppointmentsHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppointmentsHistoryViewController.swift; sourceTree = "<group>"; };
 		6969CE931F56D785007E2E05 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		6969CE951F56D837007E2E05 /* AnnouncementCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementCollectionViewCell.swift; sourceTree = "<group>"; };
+		6975ADB71F94FDD500CEF94D /* GenericModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericModel.swift; sourceTree = "<group>"; };
 		69A553951F544CCF00E8A5C5 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		69A553961F544CCF00E8A5C5 /* DayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		69A553971F544CCF00E8A5C5 /* DayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayCell.xib; sourceTree = "<group>"; };
@@ -252,6 +270,20 @@
 			path = QuicklicTests;
 			sourceTree = "<group>";
 		};
+		6968D6601F8E589200B39CCF /* MLPAutoCompleteTextField */ = {
+			isa = PBXGroup;
+			children = (
+				6968D6611F8E589200B39CCF /* MLPAutoCompleteTextField.h */,
+				6968D6621F8E589200B39CCF /* NSString+Levenshtein.m */,
+				6968D6631F8E589200B39CCF /* MLPAutoCompletionObject.h */,
+				6968D6641F8E589200B39CCF /* NSString+Levenshtein.h */,
+				6968D6651F8E589200B39CCF /* MLPAutoCompleteTextFieldDataSource.h */,
+				6968D6661F8E589200B39CCF /* MLPAutoCompleteTextField.m */,
+				6968D6671F8E589200B39CCF /* MLPAutoCompleteTextFieldDelegate.h */,
+			);
+			path = MLPAutoCompleteTextField;
+			sourceTree = "<group>";
+		};
 		69A553941F544CCF00E8A5C5 /* DatePicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,6 +311,7 @@
 				69BAE1A81F6FB4560035D23D /* HospitalDetailsViewController.swift */,
 				69BAE1AA1F6FBC020035D23D /* AppointmentDetailsViewController.swift */,
 				69D847E11F702E9C003A7EC9 /* PatientsListViewController.swift */,
+				6916708D1F93711600C39034 /* VerificationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -286,6 +319,10 @@
 		69F7852F1F4AC629005197A6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				69416EF11F87EA9B00E2E0E2 /* BaseEntity.h */,
+				69416EF21F87EA9B00E2E0E2 /* BaseEntity.m */,
+				69416EEF1F87E2CE00E2E0E2 /* User.swift */,
+				6975ADB71F94FDD500CEF94D /* GenericModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -293,6 +330,7 @@
 		69F785301F4AC629005197A6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				6968D6601F8E589200B39CCF /* MLPAutoCompleteTextField */,
 				69F4B7D31F751F8A00BFB414 /* DatePickerTextField.swift */,
 				69F4B7D11F74F3C000BFB414 /* WebClient.swift */,
 				692AFF8F1F7035D800E3ECB9 /* DZImageView.swift */,
@@ -592,11 +630,14 @@
 				69A553A61F55D3ED00E8A5C5 /* EditProfileViewController.swift in Sources */,
 				69F785711F4AC629005197A6 /* SpringButton.swift in Sources */,
 				69F7856E1F4AC629005197A6 /* SoundPlayer.swift in Sources */,
+				6975ADB81F94FDD500CEF94D /* GenericModel.swift in Sources */,
 				69F7857E1F4C16FC005197A6 /* GradientView.swift in Sources */,
+				6968D6691F8E589200B39CCF /* MLPAutoCompleteTextField.m in Sources */,
 				69BAE1AB1F6FBC020035D23D /* AppointmentDetailsViewController.swift in Sources */,
 				69F7857A1F4AC629005197A6 /* Styles.swift in Sources */,
 				69A5539C1F544CCF00E8A5C5 /* DayCell.swift in Sources */,
 				69F785751F4AC629005197A6 /* SpringTextView.swift in Sources */,
+				69416EF01F87E2CE00E2E0E2 /* User.swift in Sources */,
 				69F4B7D41F751F8A00BFB414 /* DatePickerTextField.swift in Sources */,
 				69F785651F4AC629005197A6 /* DesignableTextField.swift in Sources */,
 				69F7859A1F505535005197A6 /* SignUpViewController.swift in Sources */,
@@ -609,6 +650,7 @@
 				69A5539E1F544CCF00E8A5C5 /* LoadableFromXibView.swift in Sources */,
 				69F785741F4AC629005197A6 /* SpringTextField.swift in Sources */,
 				69F785621F4AC629005197A6 /* DesignableImageView.swift in Sources */,
+				6968D6681F8E589200B39CCF /* NSString+Levenshtein.m in Sources */,
 				69D847E01F702BD5003A7EC9 /* ApplicationManager.swift in Sources */,
 				69A553A21F55640400E8A5C5 /* DoctorAppointmentCollectionViewCell.swift in Sources */,
 				69F7855C1F4AC629005197A6 /* Router.swift in Sources */,
@@ -640,10 +682,12 @@
 				69F785601F4AC629005197A6 /* BlurView.swift in Sources */,
 				69F785981F50552C005197A6 /* SignInViewController.swift in Sources */,
 				691C04061F39BE2E0078A4E4 /* AppDelegate.swift in Sources */,
+				6916708E1F93711600C39034 /* VerificationViewController.swift in Sources */,
 				69F785631F4AC629005197A6 /* DesignableLabel.swift in Sources */,
 				69F785701F4AC629005197A6 /* SpringAnimation.swift in Sources */,
 				6969CE961F56D837007E2E05 /* AnnouncementCollectionViewCell.swift in Sources */,
 				69F7855B1F4AC629005197A6 /* Constants.swift in Sources */,
+				69416EF31F87EA9B00E2E0E2 /* BaseEntity.m in Sources */,
 				69F7856B1F4AC629005197A6 /* LoadingView.swift in Sources */,
 				69F785721F4AC629005197A6 /* SpringImageView.swift in Sources */,
 			);

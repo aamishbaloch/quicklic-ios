@@ -10,13 +10,13 @@ import UIKit
 
 public class Constant: NSObject {
 
-
     static let applicationName = "Quicklic"
     static let serverDateFormat = "yyyy-MM-dd"
     static let appDateFormat = "MM/dd/yyyy"
     static let animationDuration : TimeInterval = 0.5
     
-    static let serverURL = "http://staging.quicklic.com/api/v1/"
+//    static let serverURL = "http://staging.quicklic.com/api/v1/"
+    static let serverURL = "http://c6212ddb.ngrok.io/api/v1/"
     
     static let mainColor = UIColor(red: 145.0/255.0, green: 20.0/255.0, blue: 217.0/255.0, alpha: 1.0)
     

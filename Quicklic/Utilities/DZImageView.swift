@@ -11,6 +11,7 @@ import UIKit
 @IBDesignable class DZImageView: UIImageView, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var parentController: UIViewController?
+//    var url : URL
 
     @IBInspectable var placeholderImage: UIImage? {
         didSet {
@@ -30,6 +31,8 @@ import UIKit
         self.isUserInteractionEnabled = true
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.imageViewTapped(sender:)))
         self.addGestureRecognizer(singleTap)
+        self.layer.cornerRadius = self.frame.height/2
+        self.layer.masksToBounds = true
         
     }
     
@@ -98,6 +101,17 @@ import UIKit
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         self.image = image
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            self.contentMode = .scaleAspectFill
+//            self.image = pickedImage
+            
+            self.image = pickedImage.resizeImageWith(newSize: CGSize(width: 200, height: 200))
+        }
+        
         picker.dismiss(animated: true, completion: nil)
     }
     

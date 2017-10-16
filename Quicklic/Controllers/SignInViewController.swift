@@ -7,16 +7,27 @@
 //
 
 import UIKit
+import SwiftValidator
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var emailField: DesignableTextField!
     @IBOutlet weak var passwordField: DesignableTextField!
+    @IBOutlet weak var errorLabel: UILabel!
+    
+    let validator = Validator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        validator.registerField(emailField, errorLabel: errorLabel, rules: [RequiredRule() as Rule,PhoneNumberRule(message: "Invalid Phone Number")])
+        validator.registerField(passwordField, errorLabel: errorLabel, rules: [RequiredRule() as Rule, MinLengthRule(length: 8) as Rule, MaxLengthRule(length: 20) as Rule])
+        
+        [emailField,passwordField].forEach { (field) in
+            field?.delegate = self
+        }
         
     }
 
@@ -25,29 +36,61 @@ class SignInViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     @IBAction func signinButtonPressed(_ sender: Any) {
         
-        var params = [String: String]()
-        params["email"] = emailField.text
-        params["password"] = passwordField.text
+        validator.validate(self)
         
-        RequestManager.loginUser(param: params, successBlock: { (response: [String : AnyObject]) in
-            if response["role"] as! String == "PAT" {
-                ApplicationManager.sharedInstance.userType = .Patient
-            }
-            else{
-                ApplicationManager.sharedInstance.userType = .Doctor
-            }
-            Router.sharedInstance.showDashboardAsRoot()
-        }) { (error) in
-            print(error)
-        }
     }
     
     @IBAction func touchIDPressed(_ sender: Any) {
         
     }
+    
+    func validationSuccessful() {
+        var params = [String: String]()
+        params["phone"] = emailField.text
+        params["password"] = passwordField.text
+        SVProgressHUD.show(withStatus: "Signing In")
+        RequestManager.loginUser(param: params, successBlock: { (response: [String : AnyObject]) in
+            SVProgressHUD.dismiss()
+            UserDefaults.standard.set(response["token"] as! String, forKey: "token")
+            if response["role"] as! Int == Role.Patient.rawValue {
+                ApplicationManager.sharedInstance.userType = .Patient
+            }
+            else{
+                ApplicationManager.sharedInstance.userType = .Doctor
+            }
+            if response["verified"] as! Bool == true {
+                Router.sharedInstance.showDashboardAsRoot()
+            }
+            else{
+                Router.sharedInstance.showVerification(fromController: self)
+            }
+            
+        }) { (error) in
+            SVProgressHUD.dismiss()
+            print(error)
+        }
+    }
+    
+    func validationFailed(_ errors: [(Validatable, ValidationError)]) {
+        for (field, error) in errors {
+            if let field = field as? UITextField {
+                field.layer.borderColor = UIColor.red.cgColor
+                field.layer.borderWidth = 1.0
+                if error.errorLabel?.isHidden == true {
+                    error.errorLabel?.text = error.errorMessage // works if you added labels
+                    error.errorLabel?.isHidden = false
+                }
+            }
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.layer.borderColor = UIColor(red: 175.0/255.0, green: 179.0/255.0, blue: 182.0/255.0, alpha: 1.0).cgColor
+        errorLabel.isHidden = true
+    }
+    
     /*
     // MARK: - Navigation
 

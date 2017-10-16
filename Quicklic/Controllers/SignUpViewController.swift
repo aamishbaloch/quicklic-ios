@@ -7,21 +7,33 @@
 //
 
 import UIKit
+import SwiftValidator
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var nameField: DesignableTextField!
-    @IBOutlet weak var emailField: DesignableTextField!
     @IBOutlet weak var phoneField: DesignableTextField!
     @IBOutlet weak var dobField: DatePickerTextField!
     @IBOutlet weak var genderSegmentControl: UISegmentedControl!
     @IBOutlet weak var passwordField: DesignableTextField!
     @IBOutlet weak var confirmPasswordField: DesignableTextField!
+    @IBOutlet weak var errorLabel: UILabel!
+    
+    let validator = Validator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        validator.registerField(nameField, errorLabel: errorLabel, rules: [RequiredRule() as Rule,FullNameRule() as Rule])
+        validator.registerField(passwordField, errorLabel: errorLabel, rules: [RequiredRule() as Rule, MinLengthRule(length: 8) as Rule, MaxLengthRule(length: 20) as Rule])
+        validator.registerField(confirmPasswordField, errorLabel: errorLabel, rules: [ConfirmationRule(confirmField: passwordField)])
+        validator.registerField(phoneField, errorLabel: errorLabel, rules: [RequiredRule() as Rule,PhoneNumberRule(message: "Invalid Phone Number")])
+        
+        [nameField,passwordField,confirmPasswordField,phoneField].forEach { (field) in
+            field?.delegate = self
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,6 +42,12 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signupButtonPressed(_ sender: Any) {
+        validator.validate(self)
+        
+        
+    }
+    
+    func validationSuccessful() {
         /*
          {
          "email": "patient03@gmail.com",
@@ -41,37 +59,51 @@ class SignUpViewController: UIViewController {
          "dob": "2017-08-08"
          }*/
         var params = [String: String]()
-        params["email"] = emailField.text
         let names = nameField.text?.components(separatedBy: " ")
         params["first_name"] = names?.first
         params["last_name"] = names?.last
         params["password"] = passwordField.text
-        switch genderSegmentControl.selectedSegmentIndex {
-        case 0:
-            params["gender"] = "M"
-        case 1:
-            params["gender"] = "F"
-        case 2:
-            params["gender"] = "U"
-        default:
-            break
-        }
+//        params["gender"] = "\(genderSegmentControl.selectedSegmentIndex+1)"
         params["phone"] = phoneField.text
-        params["dob"] = UtilityManager.serverDateStringFromAppDateString(date: dobField.text!)
-        
+//        params["dob"] = UtilityManager.serverDateStringFromAppDateString(date: dobField.text!)
+        SVProgressHUD.show()
         RequestManager.signUpUser(param: params, successBlock: { (response: [String : AnyObject]) in
-            if response["role"] as! String == "PAT" {
+            SVProgressHUD.dismiss()
+            UserDefaults.standard.set(response["token"] as! String, forKey: "token")
+            if response["role"] as! Int == Role.Patient.rawValue {
                 ApplicationManager.sharedInstance.userType = .Patient
             }
             else{
                 ApplicationManager.sharedInstance.userType = .Doctor
             }
-            Router.sharedInstance.showDashboardAsRoot()
+//            if response["verified"] == true {
+//                Router.sharedInstance.showDashboardAsRoot()
+//            }
+//            else{
+                Router.sharedInstance.showVerification(fromController: self)
+//            }
         }) { (error) in
+            SVProgressHUD.showError(withStatus: error)
             print(error)
         }
-        
-        
+    }
+    
+    func validationFailed(_ errors: [(Validatable, ValidationError)]) {
+        for (field, error) in errors {
+            if let field = field as? UITextField {
+                field.layer.borderColor = UIColor.red.cgColor
+                field.layer.borderWidth = 1.0
+                if error.errorLabel?.isHidden == true {
+                    error.errorLabel?.text = error.errorMessage // works if you added labels
+                    error.errorLabel?.isHidden = false
+                }
+            }
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.layer.borderColor = UIColor(red: 175.0/255.0, green: 179.0/255.0, blue: 182.0/255.0, alpha: 1.0).cgColor
+        errorLabel.isHidden = true
     }
 
     /*

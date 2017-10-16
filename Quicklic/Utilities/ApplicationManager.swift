@@ -19,6 +19,7 @@ class ApplicationManager {
     static let sharedInstance = ApplicationManager()
     
     //MARK: - Variable
+    var user = User()
     var userType : UserType = UserType.Patient
     var token = ""
     

@@ -18,12 +18,14 @@ PODS:
     - Fabric (~> 1.6.3)
   - Fabric (1.6.12)
   - RESideMenu (4.0.7)
+  - SVProgressHUD (2.2.1)
   - TPKeyboardAvoiding (1.3.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - Crashlytics
   - RESideMenu (~> 4.0.7)
+  - SVProgressHUD
   - TPKeyboardAvoiding
 
 SPEC CHECKSUMS:
@@ -31,8 +33,9 @@ SPEC CHECKSUMS:
   Crashlytics: dfbae35ef22ca189240d230ad501feea4ee85d2d
   Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
+  SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
   TPKeyboardAvoiding: 0d6af20e95e2850f4c621841225b59ec7d8dd852
 
-PODFILE CHECKSUM: 843984a50a75478bef16aa658329a962f45e8d1f
+PODFILE CHECKSUM: 88ea1f9c333f8368cec7ccbc213bf56010409217
 
 COCOAPODS: 1.2.1

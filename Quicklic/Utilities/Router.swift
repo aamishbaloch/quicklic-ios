@@ -73,6 +73,11 @@ class Router: NSObject {
         centralRootViewController.hideViewController()
     }
     
+    func showVerification(fromController: UIViewController) {
+    let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: VerificationViewController.storyboardID)
+    fromController.show(controller, sender: nil)
+    }
+    
     func hideSideMenu() {
         centralRootViewController.hideViewController()
     }
