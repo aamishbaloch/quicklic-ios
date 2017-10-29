@@ -41,6 +41,8 @@ class Router: NSObject {
     }
     
     func showLandingPage() {
+        UserDefaults.standard.set(nil, forKey: "userPhone")
+        UserDefaults.standard.set(nil, forKey: "userPassword")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController()
@@ -49,7 +51,7 @@ class Router: NSObject {
     }
     
     func showPatientEditProfile() {
-        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: EditProfileViewController.storyboardID)
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ProfileViewController.storyboardID)
         centralRootViewController.setContentViewController(controller, animated: true)
         centralRootViewController.hideViewController()
         
@@ -90,5 +92,11 @@ class Router: NSObject {
     func showHospitalDetails(fromController: UIViewController) {
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: HospitalDetailsViewController.storyboardID)
         fromController.present(controller, animated: false, completion: nil)
+    }
+    
+    func showClinicsList() {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ClinicListViewController.storyboardID)
+        centralRootViewController.setContentViewController(controller, animated: true)
+        centralRootViewController.hideViewController()
     }
 }

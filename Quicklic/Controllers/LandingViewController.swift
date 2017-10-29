@@ -19,6 +19,10 @@ class LandingViewController: UIViewController, UICollectionViewDelegate, UIColle
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        if let phone = UserDefaults.standard.value(forKey: "userPhone") as? String, phone != "" {
+            Router.sharedInstance.showDashboardAsRoot()
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {

@@ -47,9 +47,14 @@ class WebClient: AFHTTPSessionManager {
             print(error)
             let err = error as NSError
             do {
-                let dictionary = try JSONSerialization.jsonObject(with: err.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as! Data,
-                                                                  options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: String]
-                failure(dictionary["detail"]!)
+                if let data = err.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as? Data {
+                    let dictionary = try JSONSerialization.jsonObject(with: data,
+                                                                      options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: String]
+                    failure(dictionary["detail"]!)
+                }
+                else{
+                    failure("Failed to connect")
+                }
             }catch
             {
                 
@@ -88,35 +93,19 @@ class WebClient: AFHTTPSessionManager {
             print(error)
             let err = error as NSError
             do {
-                let dictionary = try JSONSerialization.jsonObject(with: err.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as! Data,
-                                                                  options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: String]
-                failure(dictionary["detail"]!)
+                if let data = err.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as? Data {
+                    let dictionary = try JSONSerialization.jsonObject(with: data,
+                                                                      options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: String]
+                    failure(dictionary["detail"]!)
+                }
+                else{
+                    failure("Failed to connect")
+                }
             }catch
             {
                 
             }
         })
-        
-        
-        
-        //        manager.put(, parameters: params, success: {
-        //            (sessionTask, responseObject) -> () in
-        //            print(responseObject ?? "")
-        //            success(responseObject! as AnyObject)
-        //        },  failure: {
-        //            (sessionTask, error) -> () in
-        //            print(error)
-        //            let err = error as NSError
-        //            do {
-        //                let dictionary = try JSONSerialization.jsonObject(with: err.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as! Data,
-        //                                                                  options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: String]
-        //                failure(dictionary["detail"]!)
-        //            }catch
-        //            {
-        //
-        //            }
-        //
-        //        })
     }
     
     func getPath(urlString: String,
@@ -144,9 +133,14 @@ class WebClient: AFHTTPSessionManager {
             print(error)
             let err = error as NSError
             do {
-                let dictionary = try JSONSerialization.jsonObject(with: err.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as! Data,
-                                                                  options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: String]
-                failure(dictionary["detail"]!)
+                if let data = err.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as? Data {
+                    let dictionary = try JSONSerialization.jsonObject(with: data,
+                        options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: String]
+                    failure(dictionary["detail"]!)
+                }
+                else{
+                    failure("Failed to connect")
+                }
             }catch
             {
                 
@@ -249,27 +243,47 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
-    func getWeather(param: [String: AnyObject], successBlock success:@escaping ([String: AnyObject]) -> (),
-                    failureBlock failure:@escaping (String) -> ()){
-        /*
-         self.getPath(urlString: Constant.getWeather, params: param, successBlock: { (response) -> () in
-         print(response)
-         
-         //                if (response.object(forKey: Constant.successKey) as AnyObject).boolValue == true{
-         success(response as! [String : AnyObject])
-         //                }
-         //                else{
-         //                    if response.object(forKey: "message") as? String != "" {
-         //                        failure(response.object(forKey: "message") as! String)
-         //                    }
-         //                    else{
-         //                        failure("Unable to fetch data")
-         //                    }
-         //                }
-         }) { (error: NSError) -> () in
-         failure(error.localizedDescription)
-         }
-         */
+    func getDoctorsList( params: [String: Any], successBlock success:@escaping ([[String: AnyObject]]) -> (),
+                         failureBlock failure:@escaping (String) -> ()){
+        
+        var params = params
+        params["active"] = "true"
+        
+        self.getPath(urlString: "doctor/list/", params: params as [String : AnyObject], successBlock: { (response) in
+            print(response)
+            success(response as! [[String : AnyObject]])
+        }) { (error) in
+            failure(error)
+        }
     }
+    
+    func getClinicsList(successBlock success:@escaping ([[String: AnyObject]]) -> (),
+                         failureBlock failure:@escaping (String) -> ()){
+        
+        
+        let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/clinic" : "doctor/clinic"
+        
+        self.getPath(urlString: url, params: [:], successBlock: { (response) in
+            print(response)
+            success(response as! [[String : AnyObject]])
+        }) { (error) in
+            failure(error)
+        }
+    }
+    
+    func addClinic( params: [String: Any], successBlock success:@escaping ([[String: AnyObject]]) -> (),
+                         failureBlock failure:@escaping (String) -> ()){
+        
+        let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/clinic" : "doctor/clinic"
+        
+        self.getPath(urlString: url, params: params as [String : AnyObject], successBlock: { (response) in
+            print(response)
+            success(response as! [[String : AnyObject]])
+        }) { (error) in
+            failure(error)
+        }
+    }
+
+   
     
 }

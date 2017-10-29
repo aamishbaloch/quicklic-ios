@@ -34,29 +34,51 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
 
         title = "Edit Profile"
         
-        cityField.autoCompleteDelegate = self
-        cityField.autoCompleteDataSource = self
-        
-        countryField.autoCompleteDelegate = self
-        countryField.autoCompleteDataSource = self
-        
-        occupationField.autoCompleteDelegate = self
-        occupationField.autoCompleteDataSource = self
+        [countryField,occupationField,serviceField,specializationField,cityField].forEach { (field) in
+            let padding = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 0))
+            field?.leftViewMode = UITextFieldViewMode.always
+            field?.leftView = padding
+            
+            field?.autoCompleteDelegate = self
+            field?.autoCompleteDataSource = self
+        }
         
         profileImageView.parentController = self
         // Do any additional setup after loading the view.
         
+        let user = ApplicationManager.sharedInstance.user
+        
+        
+        
+        
+        //Universal fields
+        self.nameField.text = "\(user.first_name!) \(user.last_name!)"
+        self.emailField.text = user.email
+        if let avatar = URL(string: user.avatar ?? "") {
+            self.profileImageView.sd_setImage(with: avatar, completed: nil)
+        }
+        self.addressField.text = user.address
+        self.cityField.text = user.cityName
+        self.countryField.text = user.countryName
+        
         if ApplicationManager.sharedInstance.userType == .Doctor {
+            //Doctor Fields
             doctorView.isHidden = false
             doctorSubmitConstraint.constant = -30
-            serviceField.autoCompleteDelegate = self
-            serviceField.autoCompleteDataSource = self
-            specializationField.autoCompleteDelegate = self
-            specializationField.autoCompleteDataSource = self
+            
         }
         else{
             doctorView.isHidden = true
         }
+        
+        self.heightField.text = user.height
+        self.weightField.text = user.weight
+        
+        if let index = user.marital_status?.rawValue {
+            maritalStatusControl.selectedSegmentIndex = index-1
+        }
+        
+        occupationField.text = user.occupationName
         
         
     }
@@ -66,11 +88,6 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
         // Dispose of any resources that can be recreated.
     }
     
-    
-    @IBAction func menuButtonPressed(_ sender: Any) {
-        
-        self.presentLeftMenuViewController(nil)
-    }
     
     @IBAction func doneButtonPressed(_ sender: Any) {
         
@@ -82,10 +99,12 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
         params["address"] = addressField.text as AnyObject
         params["city"] = cityField.text as AnyObject
         params["country"] = countryField.text as AnyObject
+        params["email"] = emailField.text as AnyObject
         if ApplicationManager.sharedInstance.userType == .Patient {
             params["height"] = heightField.text as AnyObject
             params["weight"] = weightField.text as AnyObject
             params["occupation"] = occupationField.text as AnyObject
+            params["marital_status"] = "\(maritalStatusControl.selectedSegmentIndex+1)" as AnyObject
         }
         else{
             params["specialization"] = specializationField.text as AnyObject
@@ -95,7 +114,10 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
         
         SVProgressHUD.show(withStatus: "Updating Profile")
         RequestManager.editUser(param: params, image: profileImageView.image, successBlock: { (response) in
+            let user = User(dictionary: response)
+            ApplicationManager.sharedInstance.user = user
             SVProgressHUD.showSuccess(withStatus: "Updated")
+            self.navigationController?.popViewController(animated: true)
         }) { (error) in
             SVProgressHUD.showError(withStatus: error)
         }

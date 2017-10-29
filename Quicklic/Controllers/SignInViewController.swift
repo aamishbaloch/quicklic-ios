@@ -14,6 +14,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     @IBOutlet weak var emailField: DesignableTextField!
     @IBOutlet weak var passwordField: DesignableTextField!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var countryCodeField: CountryPickerTextField!
     
     let validator = Validator()
     
@@ -24,6 +25,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         
         validator.registerField(emailField, errorLabel: errorLabel, rules: [RequiredRule() as Rule,PhoneNumberRule(message: "Invalid Phone Number")])
         validator.registerField(passwordField, errorLabel: errorLabel, rules: [RequiredRule() as Rule, MinLengthRule(length: 8) as Rule, MaxLengthRule(length: 20) as Rule])
+        validator.registerField(countryCodeField, errorLabel: errorLabel, rules: [RequiredRule() as Rule])
         
         [emailField,passwordField].forEach { (field) in
             field?.delegate = self
@@ -48,12 +50,18 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     
     func validationSuccessful() {
         var params = [String: String]()
-        params["phone"] = emailField.text
+        params["phone"] = countryCodeField.text! + emailField.text!
         params["password"] = passwordField.text
         SVProgressHUD.show(withStatus: "Signing In")
         RequestManager.loginUser(param: params, successBlock: { (response: [String : AnyObject]) in
             SVProgressHUD.dismiss()
+            
+            let user = User(dictionary: response)
+            ApplicationManager.sharedInstance.user = user
+            
             UserDefaults.standard.set(response["token"] as! String, forKey: "token")
+            UserDefaults.standard.set(user.phone, forKey: "userPhone")
+            UserDefaults.standard.set(self.passwordField.text, forKey: "userPassword")
             if response["role"] as! Int == Role.Patient.rawValue {
                 ApplicationManager.sharedInstance.userType = .Patient
             }
@@ -68,7 +76,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
             }
             
         }) { (error) in
-            SVProgressHUD.dismiss()
+            SVProgressHUD.showError(withStatus: error)
             print(error)
         }
     }

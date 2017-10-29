@@ -12,3 +12,4 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "BaseEntity.h"
 #import "MLPAutoCompleteTextField.h"
+#import <SDWebImage/UIImageView+WebCache.h>

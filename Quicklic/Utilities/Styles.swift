@@ -65,7 +65,7 @@ class Styles {
     }
     
     public var primaryGreyColor : UIColor {
-        return UIColor(white: 0.9, alpha: 1.0)
+        return UIColor(white: 0.2, alpha: 1.0)
     }
     
     ///**Warning:** Not from style guide. Do not add more uses

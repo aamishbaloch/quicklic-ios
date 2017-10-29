@@ -18,6 +18,14 @@ class UtilityManager: NSObject {
         return dateFormatter.string(from: date as Date)
         
     }
+//    
+//    static func stringFromServerDate(date: NSDate) -> String {
+//        
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = format
+//        return dateFormatter.string(from: date as Date)
+//        
+//    }
     
     static func dateFromStringWithFormat(date: String, format: String) -> NSDate{
         let dateFormatter = DateFormatter()

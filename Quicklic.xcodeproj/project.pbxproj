@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69025FE01F975409000C312B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69025FDF1F975409000C312B /* ProfileViewController.swift */; };
+		69025FE21F9768FA000C312B /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69025FE11F9768FA000C312B /* ProfileTableViewCell.swift */; };
 		6916708E1F93711600C39034 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6916708D1F93711600C39034 /* VerificationViewController.swift */; };
+		691AA9181F98A283002A6DFC /* MRCountryPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 691AA9171F98A282002A6DFC /* MRCountryPicker.framework */; };
 		691C04061F39BE2E0078A4E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C04051F39BE2E0078A4E4 /* AppDelegate.swift */; };
 		691C040B1F39BE2E0078A4E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 691C04091F39BE2E0078A4E4 /* Main.storyboard */; };
 		691C040D1F39BE2E0078A4E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 691C040C1F39BE2E0078A4E4 /* Assets.xcassets */; };
@@ -18,6 +21,7 @@
 		692AFF921F70368F00E3ECB9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 692AFF911F70368F00E3ECB9 /* MobileCoreServices.framework */; };
 		69416EF01F87E2CE00E2E0E2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69416EEF1F87E2CE00E2E0E2 /* User.swift */; };
 		69416EF31F87EA9B00E2E0E2 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 69416EF21F87EA9B00E2E0E2 /* BaseEntity.m */; };
+		69439F4F1F99DC8A00DC6F44 /* CountryPickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69439F4E1F99DC8A00DC6F44 /* CountryPickerTextField.swift */; };
 		6968D6681F8E589200B39CCF /* NSString+Levenshtein.m in Sources */ = {isa = PBXBuildFile; fileRef = 6968D6621F8E589200B39CCF /* NSString+Levenshtein.m */; };
 		6968D6691F8E589200B39CCF /* MLPAutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6968D6661F8E589200B39CCF /* MLPAutoCompleteTextField.m */; };
 		6969CE8E1F569EC7007E2E05 /* SearchDoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969CE8D1F569EC7007E2E05 /* SearchDoctorViewController.swift */; };
@@ -26,6 +30,9 @@
 		6969CE941F56D785007E2E05 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969CE931F56D785007E2E05 /* LandingViewController.swift */; };
 		6969CE961F56D837007E2E05 /* AnnouncementCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969CE951F56D837007E2E05 /* AnnouncementCollectionViewCell.swift */; };
 		6975ADB81F94FDD500CEF94D /* GenericModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6975ADB71F94FDD500CEF94D /* GenericModel.swift */; };
+		699E702B1FA38CEC0070BFBA /* ClinicListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699E702A1FA38CEC0070BFBA /* ClinicListViewController.swift */; };
+		699E702D1FA39ADE0070BFBA /* ClinicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699E702C1FA39ADE0070BFBA /* ClinicCollectionViewCell.swift */; };
+		699E702F1FA39DF00070BFBA /* Clinic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699E702E1FA39DF00070BFBA /* Clinic.swift */; };
 		69A5539B1F544CCF00E8A5C5 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A553951F544CCF00E8A5C5 /* Configuration.swift */; };
 		69A5539C1F544CCF00E8A5C5 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A553961F544CCF00E8A5C5 /* DayCell.swift */; };
 		69A5539D1F544CCF00E8A5C5 /* DayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69A553971F544CCF00E8A5C5 /* DayCell.xib */; };
@@ -37,6 +44,7 @@
 		69A553A61F55D3ED00E8A5C5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A553A51F55D3ED00E8A5C5 /* EditProfileViewController.swift */; };
 		69BAE1A91F6FB4560035D23D /* HospitalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BAE1A81F6FB4560035D23D /* HospitalDetailsViewController.swift */; };
 		69BAE1AB1F6FBC020035D23D /* AppointmentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BAE1AA1F6FBC020035D23D /* AppointmentDetailsViewController.swift */; };
+		69D0D4ED1FA607A600D4E0D2 /* AddClinicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D0D4EC1FA607A600D4E0D2 /* AddClinicViewController.swift */; };
 		69D847E01F702BD5003A7EC9 /* ApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D847DF1F702BD5003A7EC9 /* ApplicationManager.swift */; };
 		69D847E21F702E9C003A7EC9 /* PatientsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D847E11F702E9C003A7EC9 /* PatientsListViewController.swift */; };
 		69F4B7D21F74F3C000BFB414 /* WebClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F4B7D11F74F3C000BFB414 /* WebClient.swift */; };
@@ -104,7 +112,10 @@
 
 /* Begin PBXFileReference section */
 		5516CCBDAF692E4BBD7432D6 /* libPods-Quicklic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Quicklic.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		69025FDF1F975409000C312B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		69025FE11F9768FA000C312B /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		6916708D1F93711600C39034 /* VerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
+		691AA9171F98A282002A6DFC /* MRCountryPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MRCountryPicker.framework; path = Carthage/Build/iOS/MRCountryPicker.framework; sourceTree = "<group>"; };
 		691C04021F39BE2E0078A4E4 /* Quicklic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quicklic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		691C04051F39BE2E0078A4E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		691C040A1F39BE2E0078A4E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -120,6 +131,7 @@
 		69416EEF1F87E2CE00E2E0E2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		69416EF11F87EA9B00E2E0E2 /* BaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEntity.h; sourceTree = "<group>"; };
 		69416EF21F87EA9B00E2E0E2 /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
+		69439F4E1F99DC8A00DC6F44 /* CountryPickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryPickerTextField.swift; sourceTree = "<group>"; };
 		6968D6611F8E589200B39CCF /* MLPAutoCompleteTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompleteTextField.h; sourceTree = "<group>"; };
 		6968D6621F8E589200B39CCF /* NSString+Levenshtein.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Levenshtein.m"; sourceTree = "<group>"; };
 		6968D6631F8E589200B39CCF /* MLPAutoCompletionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompletionObject.h; sourceTree = "<group>"; };
@@ -133,6 +145,9 @@
 		6969CE931F56D785007E2E05 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		6969CE951F56D837007E2E05 /* AnnouncementCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementCollectionViewCell.swift; sourceTree = "<group>"; };
 		6975ADB71F94FDD500CEF94D /* GenericModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericModel.swift; sourceTree = "<group>"; };
+		699E702A1FA38CEC0070BFBA /* ClinicListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicListViewController.swift; sourceTree = "<group>"; };
+		699E702C1FA39ADE0070BFBA /* ClinicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicCollectionViewCell.swift; sourceTree = "<group>"; };
+		699E702E1FA39DF00070BFBA /* Clinic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clinic.swift; sourceTree = "<group>"; };
 		69A553951F544CCF00E8A5C5 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		69A553961F544CCF00E8A5C5 /* DayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		69A553971F544CCF00E8A5C5 /* DayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayCell.xib; sourceTree = "<group>"; };
@@ -144,6 +159,7 @@
 		69A553A51F55D3ED00E8A5C5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		69BAE1A81F6FB4560035D23D /* HospitalDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HospitalDetailsViewController.swift; sourceTree = "<group>"; };
 		69BAE1AA1F6FBC020035D23D /* AppointmentDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppointmentDetailsViewController.swift; sourceTree = "<group>"; };
+		69D0D4EC1FA607A600D4E0D2 /* AddClinicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClinicViewController.swift; sourceTree = "<group>"; };
 		69D847DF1F702BD5003A7EC9 /* ApplicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationManager.swift; sourceTree = "<group>"; };
 		69D847E11F702E9C003A7EC9 /* PatientsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientsListViewController.swift; sourceTree = "<group>"; };
 		69F4B7D11F74F3C000BFB414 /* WebClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebClient.swift; sourceTree = "<group>"; };
@@ -209,6 +225,7 @@
 			files = (
 				692AFF921F70368F00E3ECB9 /* MobileCoreServices.framework in Frameworks */,
 				69F4B7D61F75317D00BFB414 /* SwiftValidator.framework in Frameworks */,
+				691AA9181F98A283002A6DFC /* MRCountryPicker.framework in Frameworks */,
 				86A4269C2E52DE810B7CD185 /* libPods-Quicklic.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,6 +329,9 @@
 				69BAE1AA1F6FBC020035D23D /* AppointmentDetailsViewController.swift */,
 				69D847E11F702E9C003A7EC9 /* PatientsListViewController.swift */,
 				6916708D1F93711600C39034 /* VerificationViewController.swift */,
+				69025FDF1F975409000C312B /* ProfileViewController.swift */,
+				699E702A1FA38CEC0070BFBA /* ClinicListViewController.swift */,
+				69D0D4EC1FA607A600D4E0D2 /* AddClinicViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -323,6 +343,7 @@
 				69416EF21F87EA9B00E2E0E2 /* BaseEntity.m */,
 				69416EEF1F87E2CE00E2E0E2 /* User.swift */,
 				6975ADB71F94FDD500CEF94D /* GenericModel.swift */,
+				699E702E1FA39DF00070BFBA /* Clinic.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -330,6 +351,7 @@
 		69F785301F4AC629005197A6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				69439F4E1F99DC8A00DC6F44 /* CountryPickerTextField.swift */,
 				6968D6601F8E589200B39CCF /* MLPAutoCompleteTextField */,
 				69F4B7D31F751F8A00BFB414 /* DatePickerTextField.swift */,
 				69F4B7D11F74F3C000BFB414 /* WebClient.swift */,
@@ -391,6 +413,8 @@
 				6969CE8F1F56AC24007E2E05 /* SearchDoctorCollectionViewCell.swift */,
 				6969CE951F56D837007E2E05 /* AnnouncementCollectionViewCell.swift */,
 				692AFF8D1F70333C00E3ECB9 /* PatientCollectionViewCell.swift */,
+				69025FE11F9768FA000C312B /* ProfileTableViewCell.swift */,
+				699E702C1FA39ADE0070BFBA /* ClinicCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -423,6 +447,7 @@
 		F07639B97D5ACBBA47CF64B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				691AA9171F98A282002A6DFC /* MRCountryPicker.framework */,
 				69F4B7D51F75317D00BFB414 /* SwiftValidator.framework */,
 				692AFF911F70368F00E3ECB9 /* MobileCoreServices.framework */,
 				5516CCBDAF692E4BBD7432D6 /* libPods-Quicklic.a */,
@@ -568,6 +593,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftValidator.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/MRCountryPicker.framework",
 			);
 			outputPaths = (
 			);
@@ -596,9 +622,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Quicklic/Pods-Quicklic-resources.sh",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -611,13 +640,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Quicklic-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -633,9 +665,11 @@
 				6975ADB81F94FDD500CEF94D /* GenericModel.swift in Sources */,
 				69F7857E1F4C16FC005197A6 /* GradientView.swift in Sources */,
 				6968D6691F8E589200B39CCF /* MLPAutoCompleteTextField.m in Sources */,
+				69025FE01F975409000C312B /* ProfileViewController.swift in Sources */,
 				69BAE1AB1F6FBC020035D23D /* AppointmentDetailsViewController.swift in Sources */,
 				69F7857A1F4AC629005197A6 /* Styles.swift in Sources */,
 				69A5539C1F544CCF00E8A5C5 /* DayCell.swift in Sources */,
+				699E702D1FA39ADE0070BFBA /* ClinicCollectionViewCell.swift in Sources */,
 				69F785751F4AC629005197A6 /* SpringTextView.swift in Sources */,
 				69416EF01F87E2CE00E2E0E2 /* User.swift in Sources */,
 				69F4B7D41F751F8A00BFB414 /* DatePickerTextField.swift in Sources */,
@@ -644,9 +678,12 @@
 				6969CE901F56AC24007E2E05 /* SearchDoctorCollectionViewCell.swift in Sources */,
 				692AFF901F7035D800E3ECB9 /* DZImageView.swift in Sources */,
 				69F785661F4AC629005197A6 /* DesignableTextView.swift in Sources */,
+				69439F4F1F99DC8A00DC6F44 /* CountryPickerTextField.swift in Sources */,
+				69D0D4ED1FA607A600D4E0D2 /* AddClinicViewController.swift in Sources */,
 				69F785781F4AC629005197A6 /* TransitionZoom.swift in Sources */,
 				69A553A41F5568E600E8A5C5 /* LeftMenuTableViewCell.swift in Sources */,
 				6969CE8E1F569EC7007E2E05 /* SearchDoctorViewController.swift in Sources */,
+				699E702B1FA38CEC0070BFBA /* ClinicListViewController.swift in Sources */,
 				69A5539E1F544CCF00E8A5C5 /* LoadableFromXibView.swift in Sources */,
 				69F785741F4AC629005197A6 /* SpringTextField.swift in Sources */,
 				69F785621F4AC629005197A6 /* DesignableImageView.swift in Sources */,
@@ -674,11 +711,13 @@
 				69F4B7D21F74F3C000BFB414 /* WebClient.swift in Sources */,
 				69F7855D1F4AC629005197A6 /* AsyncButton.swift in Sources */,
 				6969CE941F56D785007E2E05 /* LandingViewController.swift in Sources */,
+				69025FE21F9768FA000C312B /* ProfileTableViewCell.swift in Sources */,
 				69F785681F4AC629005197A6 /* ImageLoader.swift in Sources */,
 				69F7856F1F4AC629005197A6 /* Spring.swift in Sources */,
 				69F785771F4AC629005197A6 /* TransitionManager.swift in Sources */,
 				69F7857B1F4AC629005197A6 /* UtilityManager.swift in Sources */,
 				69F785611F4AC629005197A6 /* DesignableButton.swift in Sources */,
+				699E702F1FA39DF00070BFBA /* Clinic.swift in Sources */,
 				69F785601F4AC629005197A6 /* BlurView.swift in Sources */,
 				69F785981F50552C005197A6 /* SignInViewController.swift in Sources */,
 				691C04061F39BE2E0078A4E4 /* AppDelegate.swift in Sources */,
@@ -842,8 +881,8 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danialzahid.Quicklic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cc87fd73-237d-4eb6-bed9-a67e2769e0ea";
-				PROVISIONING_PROFILE_SPECIFIER = "Wildcard Prov";
+				PROVISIONING_PROFILE = "cdfd2e03-55c2-49a5-a2b1-97d8f6cc3a8f";
+				PROVISIONING_PROFILE_SPECIFIER = WildcardAllProv;
 				SWIFT_OBJC_BRIDGING_HEADER = "Quicklic/Quicklic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

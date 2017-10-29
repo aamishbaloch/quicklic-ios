@@ -13,8 +13,8 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
     static let storyboardID = "leftMenuViewController"
     
     var selectedIndex = 0
-    let patientmenuItems = ["Dashboard", "New Appointment", "Edit Profile", "Appointment History", "Logout"]
-    let doctorMenuItems = ["Appointments", "Patients", "Edit Profile", "Logout"]
+    let patientmenuItems = ["Dashboard", "New Appointment", "Profile", "Appointment History", "Clinics", "Logout"]
+    let doctorMenuItems = ["Appointments", "Patients", "Profile", "Clinics", "Logout"]
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -62,9 +62,9 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
         
         if indexPath.row == selectedIndex {
             Router.sharedInstance.hideSideMenu()
-            selectedIndex = indexPath.row
             return
         }
+        selectedIndex = indexPath.row
         
         switch ApplicationManager.sharedInstance.userType {
         case .Doctor:
@@ -76,6 +76,8 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
             case 2:
                 Router.sharedInstance.showPatientEditProfile()
             case 3:
+                Router.sharedInstance.showClinicsList()
+            case 4:
                 UserDefaults.standard.set("", forKey: "token")
                 Router.sharedInstance.showLandingPage()
             
@@ -93,6 +95,8 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
             case 3:
                 Router.sharedInstance.showAppointmentHistory()
             case 4:
+                Router.sharedInstance.showClinicsList()
+            case 5:
                 UserDefaults.standard.set("", forKey: "token")
                 Router.sharedInstance.showLandingPage()
             default: break

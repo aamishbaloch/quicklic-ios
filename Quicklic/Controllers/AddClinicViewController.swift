@@ -1,21 +1,15 @@
 //
-//  VerificationViewController.swift
+//  AddClinicViewController.swift
 //  Quicklic
 //
-//  Created by Danial Zahid on 15/10/2017.
+//  Created by Danial Zahid on 29/10/2017.
 //  Copyright © 2017 Danial Zahid. All rights reserved.
 //
 
 import UIKit
 
-class VerificationViewController: UIViewController {
+class AddClinicViewController: UIViewController {
 
-    static let storyboardID = "verificationViewController"
-    
-    @IBOutlet weak var phoneField: DesignableTextField!
-    @IBOutlet weak var errorLabel: UILabel!
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,17 +21,7 @@ class VerificationViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func verifyButtonPressed(_ sender: Any) {
-        let params = ["code":phoneField.text ?? ""]
-        SVProgressHUD.show(withStatus: "Verifying")
-        RequestManager.verifyUser(param: params, successBlock: { (response) in
-            SVProgressHUD.dismiss()
-            Router.sharedInstance.showDashboardAsRoot()
-        }) { (error) in
-            SVProgressHUD.showError(withStatus: error)
-        }
-    }
-    
+
     /*
     // MARK: - Navigation
 

@@ -13,11 +13,13 @@ class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDel
 
     @IBOutlet weak var nameField: DesignableTextField!
     @IBOutlet weak var phoneField: DesignableTextField!
+    @IBOutlet weak var phoneCodeField: CountryPickerTextField!
     @IBOutlet weak var dobField: DatePickerTextField!
     @IBOutlet weak var genderSegmentControl: UISegmentedControl!
     @IBOutlet weak var passwordField: DesignableTextField!
     @IBOutlet weak var confirmPasswordField: DesignableTextField!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var clinicPasscodeField: DesignableTextField!
     
     let validator = Validator()
     
@@ -30,10 +32,13 @@ class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDel
         validator.registerField(passwordField, errorLabel: errorLabel, rules: [RequiredRule() as Rule, MinLengthRule(length: 8) as Rule, MaxLengthRule(length: 20) as Rule])
         validator.registerField(confirmPasswordField, errorLabel: errorLabel, rules: [ConfirmationRule(confirmField: passwordField)])
         validator.registerField(phoneField, errorLabel: errorLabel, rules: [RequiredRule() as Rule,PhoneNumberRule(message: "Invalid Phone Number")])
+        validator.registerField(phoneCodeField, errorLabel: errorLabel, rules: [RequiredRule() as Rule])
+        validator.registerField(clinicPasscodeField, errorLabel: errorLabel, rules: [RequiredRule() as Rule, MinLengthRule(length: 6) as Rule])
         
         [nameField,passwordField,confirmPasswordField,phoneField].forEach { (field) in
             field?.delegate = self
         }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,40 +53,40 @@ class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDel
     }
     
     func validationSuccessful() {
-        /*
-         {
-         "email": "patient03@gmail.com",
-         "first_name": "patient03",
-         "last_name": "user",
-         "password": "arbisoft",
-         "gender": "M",
-         "phone": "23423324234",
-         "dob": "2017-08-08"
-         }*/
+        
         var params = [String: String]()
         let names = nameField.text?.components(separatedBy: " ")
         params["first_name"] = names?.first
         params["last_name"] = names?.last
         params["password"] = passwordField.text
-//        params["gender"] = "\(genderSegmentControl.selectedSegmentIndex+1)"
-        params["phone"] = phoneField.text
-//        params["dob"] = UtilityManager.serverDateStringFromAppDateString(date: dobField.text!)
+        params["gender"] = "\(genderSegmentControl.selectedSegmentIndex+1)"
+        params["phone"] = phoneCodeField.text! + phoneField.text!
+        params["dob"] = UtilityManager.serverDateStringFromAppDateString(date: dobField.text!)
         SVProgressHUD.show()
         RequestManager.signUpUser(param: params, successBlock: { (response: [String : AnyObject]) in
-            SVProgressHUD.dismiss()
+            
+            let user = User(dictionary: response)
+            ApplicationManager.sharedInstance.user = user
             UserDefaults.standard.set(response["token"] as! String, forKey: "token")
+            UserDefaults.standard.set(user.phone, forKey: "userPhone")
+            UserDefaults.standard.set(self.passwordField.text, forKey: "userPassword")
             if response["role"] as! Int == Role.Patient.rawValue {
                 ApplicationManager.sharedInstance.userType = .Patient
             }
             else{
                 ApplicationManager.sharedInstance.userType = .Doctor
             }
-//            if response["verified"] == true {
-//                Router.sharedInstance.showDashboardAsRoot()
-//            }
-//            else{
+            
+            RequestManager.addClinic(params: ["code":self.clinicPasscodeField.text!], successBlock: { (response) in
+                SVProgressHUD.dismiss()
                 Router.sharedInstance.showVerification(fromController: self)
-//            }
+            }, failureBlock: { (error) in
+                SVProgressHUD.showError(withStatus: error)
+            })
+            
+            
+            
+
         }) { (error) in
             SVProgressHUD.showError(withStatus: error)
             print(error)

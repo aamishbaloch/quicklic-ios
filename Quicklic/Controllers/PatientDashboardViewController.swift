@@ -15,6 +15,8 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     @IBOutlet weak var datePicker: ScrollableDatepicker!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var newAppointmentButton: DesignableButton!
+    @IBOutlet weak var profileImageView: DesignableImageView!
+    @IBOutlet weak var nameLabel: UILabel!
     
     override func viewDidLoad() {
         
@@ -27,11 +29,53 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        if ApplicationManager.sharedInstance.userType == .Doctor {
-            newAppointmentButton.setTitle("Patients", for: UIControlState.normal)
+        let user = ApplicationManager.sharedInstance.user
+        if user.userType == nil {
+            
+            var params = [String: String]()
+            params["phone"] = UserDefaults.standard.value(forKey: "userPhone") as? String
+            params["password"] = UserDefaults.standard.value(forKey: "userPassword") as? String
+
+            SVProgressHUD.show()
+            RequestManager.loginUser(param: params, successBlock: { (response: [String : AnyObject]) in
+                SVProgressHUD.dismiss()
+                
+                let user = User(dictionary: response)
+                ApplicationManager.sharedInstance.user = user
+                
+                UserDefaults.standard.set(response["token"] as! String, forKey: "token")
+    
+                if response["role"] as! Int == Role.Patient.rawValue {
+                    ApplicationManager.sharedInstance.userType = .Patient
+                }
+                else{
+                    ApplicationManager.sharedInstance.userType = .Doctor
+                }
+                self.updateUI(user: user)
+                
+            }) { (error) in
+                SVProgressHUD.showError(withStatus: error)
+                UserDefaults.standard.set("", forKey: "token")
+                Router.sharedInstance.showLandingPage()
+                print(error)
+            }
+        }
+        else{
+            updateUI(user: user)
         }
         
         
+        
+        
+    }
+    
+    func updateUI(user: User) {
+        nameLabel.text = user.full_name
+        profileImageView.sd_setImage(with: URL(string: user.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
+        
+        if ApplicationManager.sharedInstance.userType == .Doctor {
+            newAppointmentButton.setTitle("Patients", for: UIControlState.normal)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,7 +129,16 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         Router.sharedInstance.showAppointmentDetails(fromController: self)
     }
-
+    
+    
+    @IBAction func newAppointmentButtonPressed(_ sender: Any) {
+        Router.sharedInstance.showSearchDoctor()
+    }
+    
+    @IBAction func appointmentHistoryButtonPressed(_ sender: Any) {
+        Router.sharedInstance.showAppointmentHistory()
+        
+    }
     /*
     // MARK: - Navigation
 

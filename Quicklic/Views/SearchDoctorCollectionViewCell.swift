@@ -10,4 +10,12 @@ import UIKit
 
 class SearchDoctorCollectionViewCell: UICollectionViewCell {
     static let identifier = "searchDoctorCollectionViewCell"
+    
+    
+    @IBOutlet weak var profileImageView: DesignableImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var specializationLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    
+    
 }
