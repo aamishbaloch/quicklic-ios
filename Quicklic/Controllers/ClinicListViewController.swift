@@ -50,7 +50,12 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBAction func menuButtonPressed(_ sender: Any) {
         self.presentLeftMenuViewController(nil)
     }
-    
+
+    func deleteButtonPressed(cell: ClinicCollectionViewCell)
+    {
+        RequestManager
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.clinicArray.count
     }
@@ -64,15 +69,21 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
         cell.clinicImageView.sd_setImage(with: URL(string: clinic.image ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
         cell.phoneLabel.text = clinic.phone
         cell.locationLabel.text = clinic.location
+        cell.tag = indexPath.row
+        cell.deleteButton.addTarget(self, action: #selector(deleteButtonPressed(cell:)), for: UIControlEvents.touchUpInside)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
+
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+
+    }
     
     func addButtonPressed(_ sender: UIButton) {
-        
+        performSegue(withIdentifier: "showAddClinic", sender: self)
     }
 
 }

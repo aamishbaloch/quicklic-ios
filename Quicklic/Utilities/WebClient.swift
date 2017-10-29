@@ -261,7 +261,7 @@ class WebClient: AFHTTPSessionManager {
                          failureBlock failure:@escaping (String) -> ()){
         
         
-        let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/clinic" : "doctor/clinic"
+        let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/clinic/" : "doctor/clinic/"
         
         self.getPath(urlString: url, params: [:], successBlock: { (response) in
             print(response)
@@ -271,19 +271,18 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
-    func addClinic( params: [String: Any], successBlock success:@escaping ([[String: AnyObject]]) -> (),
+    func addClinic( params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (),
                          failureBlock failure:@escaping (String) -> ()){
         
-        let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/clinic" : "doctor/clinic"
-        
-        self.getPath(urlString: url, params: params as [String : AnyObject], successBlock: { (response) in
+        let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/clinic/" : "doctor/clinic/"
+
+        self.postPath(urlString: url, params: params as [String : AnyObject], successBlock: { (response) in
             print(response)
-            success(response as! [[String : AnyObject]])
+            success(response as! [String : AnyObject])
         }) { (error) in
             failure(error)
         }
     }
-
    
     
 }

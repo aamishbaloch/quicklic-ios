@@ -68,5 +68,10 @@ class UtilityManager: NSObject {
         
         return randomString
     }
+    static func turnTextFieldRed(textField: UITextField)
+    {
+        textField.layer.borderColor = UIColor.red.cgColor
+        textField.layer.borderWidth = 1.0
+    }
     
 }
