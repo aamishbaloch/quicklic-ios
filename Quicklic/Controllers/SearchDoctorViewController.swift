@@ -8,11 +8,12 @@
 
 import UIKit
 
-class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
 
     static let storyboardID = "searchDoctorViewController"
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchField: DesignableTextField!
     
     var doctorsArray = [User]()
     
@@ -25,8 +26,26 @@ class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UI
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        searchField.delegate = self
+//        searchField.addTarget(self, action: #selector(self.searchFieldValueChanged(_:)), for: .)
+        
         SVProgressHUD.show()
-        RequestManager.getDoctorsList(params: [:], successBlock: { (response) in
+        fetchData()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func fetchData(searchString: String? = nil) {
+        
+        var params = [String:String]()
+        if let string = searchString {
+            params["query"] = string
+        }
+        
+        RequestManager.getDoctorsList(params: params, successBlock: { (response) in
             self.doctorsArray.removeAll()
             for object in response {
                 self.doctorsArray.append(User(dictionary: object))
@@ -38,11 +57,6 @@ class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UI
             SVProgressHUD.showError(withStatus: error)
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     @IBAction func menuButtonPressed(_ sender: Any) {
         self.presentLeftMenuViewController(nil)
@@ -50,6 +64,7 @@ class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UI
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.doctorsArray.count
+//        return self.doctorsArray.count == 0 ? 0 : 20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -66,9 +81,18 @@ class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        Router.sharedInstance.showDoctorDetails(doctor: self.doctorsArray[indexPath.row], fromController: self)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+  
+    @IBAction func searchFieldValueChanged(_ sender: Any) {
+        fetchData(searchString: searchField.text)
         
     }
-
     /*
     // MARK: - Navigation
 

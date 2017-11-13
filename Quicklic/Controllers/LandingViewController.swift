@@ -44,7 +44,7 @@ class LandingViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     @IBAction func showHospitalDetails(_ sender: Any) {
-        Router.sharedInstance.showHospitalDetails(fromController: self)
+//        Router.sharedInstance.showHospitalDetails(fromController: self)
     }
 
     /*

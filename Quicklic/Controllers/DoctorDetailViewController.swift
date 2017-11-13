@@ -1,0 +1,58 @@
+//
+//  DoctorDetailViewController.swift
+//  Quicklic
+//
+//  Created by Danial Zahid on 01/11/2017.
+//  Copyright © 2017 Danial Zahid. All rights reserved.
+//
+
+import UIKit
+
+class DoctorDetailViewController: UIViewController {
+
+    static let storyboardID = "doctorDetailViewController"
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var profileImageView: DesignableImageView!
+    @IBOutlet weak var specialityLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var educationLabel: UILabel!
+    @IBOutlet weak var serviceLabel: UILabel!
+    
+    var doctor: User!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        nameLabel.text = doctor.full_name
+        profileImageView.sd_setImage(with: URL(string: doctor.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
+        specialityLabel.text = doctor.specializationName ?? "N/A"
+        phoneLabel.text = doctor.phone ?? "N?A"
+        educationLabel.text = doctor.degree ?? "N/A"
+        serviceLabel.text = doctor.servicesArray.joined(separator: ", ").length > 0 ? doctor.servicesArray.joined(separator: ", ") : "N/A"
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func scheduleAppointmentButtonPressed(_ sender: Any) {
+    }
+    
+    @IBAction func closeButtonPressed(_ sender: Any) {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}

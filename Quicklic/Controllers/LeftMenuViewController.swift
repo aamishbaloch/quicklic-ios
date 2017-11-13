@@ -74,7 +74,7 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
             case 1:
                 Router.sharedInstance.showPatientsList()
             case 2:
-                Router.sharedInstance.showPatientEditProfile()
+                Router.sharedInstance.showProfile()
             case 3:
                 Router.sharedInstance.showClinicsList()
             case 4:
@@ -91,7 +91,7 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
             case 1:
                 Router.sharedInstance.showSearchDoctor()
             case 2:
-                Router.sharedInstance.showPatientEditProfile()
+                Router.sharedInstance.showProfile()
             case 3:
                 Router.sharedInstance.showAppointmentHistory()
             case 4:

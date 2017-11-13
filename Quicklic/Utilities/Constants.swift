@@ -16,7 +16,7 @@ public class Constant: NSObject {
     static let animationDuration : TimeInterval = 0.5
     
     static let serverURL = "http://staging.quicklic.com/api/v1/"
-//    static let serverURL = "http://1a1d857e.ngrok.io/api/v1/"
+//    static let serverURL = "http://dce3debf.ngrok.io/api/v1/"
     
     static let mainColor = UIColor(red: 145.0/255.0, green: 20.0/255.0, blue: 217.0/255.0, alpha: 1.0)
     

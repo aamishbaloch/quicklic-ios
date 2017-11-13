@@ -109,10 +109,6 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     }
     
     
-    @IBAction func hospitalDetailsButtonPressed(_ sender: Any) {
-        Router.sharedInstance.showHospitalDetails(fromController: self)
-    }
-    
     func datepicker(_ datepicker: ScrollableDatepicker, didSelectDate date: Date) {
         
     }

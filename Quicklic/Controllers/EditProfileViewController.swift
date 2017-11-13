@@ -27,12 +27,33 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
     @IBOutlet weak var degreeField: DesignableTextField!
     @IBOutlet weak var doctorView: UIView!
     @IBOutlet weak var doctorSubmitConstraint: NSLayoutConstraint!
+    @IBOutlet weak var updateButton: DesignableButton!
+    
+    var editable : Bool = true
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Edit Profile"
+        
+        if editable == false {
+            ([nameField,emailField,addressField,cityField,heightField,countryField,weightField,occupationField,serviceField,specializationField,degreeField] as [UITextField]).forEach({ (field) in
+                field.isUserInteractionEnabled = false
+            })
+            
+            profileImageView.isUserInteractionEnabled = false
+            maritalStatusControl.isUserInteractionEnabled = false
+            
+            let button = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(self.editButtonPressed))
+            navigationItem.rightBarButtonItem = button
+            
+            let leftButton = UIBarButtonItem(image: UIImage(named: "menu-button-white"), style: .plain, target: self, action: #selector(self.menuButtonPressed))
+            navigationItem.leftBarButtonItem = leftButton
+            
+            updateButton.isHidden = true
+            title = "Profile"
+        }
         
         [countryField,occupationField,serviceField,specializationField,cityField].forEach { (field) in
             let padding = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 0))
@@ -46,9 +67,11 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
         profileImageView.parentController = self
         // Do any additional setup after loading the view.
         
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         let user = ApplicationManager.sharedInstance.user
-        
-        
         
         
         //Universal fields
@@ -79,10 +102,8 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
         }
         
         occupationField.text = user.occupationName
-        
-        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -186,21 +207,17 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
         }
     }
     
-//    func autoCompleteTextField(_ textField: MLPAutoCompleteTextField!, possibleCompletionsFor string: String!) -> [Any]! {
-//        if textField == cityField{
-//            return cities
-//        }
-//        else if textField == countryField {
-//            return countries
-//        }
-//        else if textField == occupationLabel {
-//            return occupation
-//        }
-//        else { return [""] }
-//    }
-    
     func autoCompleteTextField(_ textField: MLPAutoCompleteTextField!, didSelectAutoComplete selectedString: String!, withAutoComplete selectedObject: MLPAutoCompletionObject!, forRowAt indexPath: IndexPath!) {
         
+    }
+    
+    func editButtonPressed() {
+        Router.sharedInstance.showEditProfile(fromController: self)
+    }
+    
+    func menuButtonPressed() {
+        
+        self.presentLeftMenuViewController(nil)
     }
 
     /*

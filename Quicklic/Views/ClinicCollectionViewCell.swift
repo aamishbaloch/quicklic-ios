@@ -13,9 +13,9 @@ class ClinicCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var clinicImageView: DesignableImageView!
     
-    @IBOutlet weak var gradientView: GradientView!
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var deleteButton: UIButton!
+    
 }

@@ -22,6 +22,9 @@
 		69416EF01F87E2CE00E2E0E2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69416EEF1F87E2CE00E2E0E2 /* User.swift */; };
 		69416EF31F87EA9B00E2E0E2 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 69416EF21F87EA9B00E2E0E2 /* BaseEntity.m */; };
 		69439F4F1F99DC8A00DC6F44 /* CountryPickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69439F4E1F99DC8A00DC6F44 /* CountryPickerTextField.swift */; };
+		695FDA861FA9142F004B6735 /* DoctorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695FDA851FA9142F004B6735 /* DoctorDetailViewController.swift */; };
+		695FDA881FA9BD19004B6735 /* CreateAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695FDA871FA9BD19004B6735 /* CreateAppointmentViewController.swift */; };
+		696762941FA90D3C00C4E2F4 /* UIAlertController+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 696762931FA90D3B00C4E2F4 /* UIAlertController+Blocks.m */; };
 		6968D6681F8E589200B39CCF /* NSString+Levenshtein.m in Sources */ = {isa = PBXBuildFile; fileRef = 6968D6621F8E589200B39CCF /* NSString+Levenshtein.m */; };
 		6968D6691F8E589200B39CCF /* MLPAutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6968D6661F8E589200B39CCF /* MLPAutoCompleteTextField.m */; };
 		6969CE8E1F569EC7007E2E05 /* SearchDoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6969CE8D1F569EC7007E2E05 /* SearchDoctorViewController.swift */; };
@@ -132,6 +135,10 @@
 		69416EF11F87EA9B00E2E0E2 /* BaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEntity.h; sourceTree = "<group>"; };
 		69416EF21F87EA9B00E2E0E2 /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
 		69439F4E1F99DC8A00DC6F44 /* CountryPickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryPickerTextField.swift; sourceTree = "<group>"; };
+		695FDA851FA9142F004B6735 /* DoctorDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorDetailViewController.swift; sourceTree = "<group>"; };
+		695FDA871FA9BD19004B6735 /* CreateAppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAppointmentViewController.swift; sourceTree = "<group>"; };
+		696762921FA90D3B00C4E2F4 /* UIAlertController+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Blocks.h"; sourceTree = "<group>"; };
+		696762931FA90D3B00C4E2F4 /* UIAlertController+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Blocks.m"; sourceTree = "<group>"; };
 		6968D6611F8E589200B39CCF /* MLPAutoCompleteTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompleteTextField.h; sourceTree = "<group>"; };
 		6968D6621F8E589200B39CCF /* NSString+Levenshtein.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Levenshtein.m"; sourceTree = "<group>"; };
 		6968D6631F8E589200B39CCF /* MLPAutoCompletionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompletionObject.h; sourceTree = "<group>"; };
@@ -317,21 +324,23 @@
 		69F785291F4AC629005197A6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				69D0D4EC1FA607A600D4E0D2 /* AddClinicViewController.swift */,
+				69BAE1AA1F6FBC020035D23D /* AppointmentDetailsViewController.swift */,
+				6969CE911F56B1A9007E2E05 /* AppointmentsHistoryViewController.swift */,
+				699E702A1FA38CEC0070BFBA /* ClinicListViewController.swift */,
+				695FDA871FA9BD19004B6735 /* CreateAppointmentViewController.swift */,
+				695FDA851FA9142F004B6735 /* DoctorDetailViewController.swift */,
+				69A553A51F55D3ED00E8A5C5 /* EditProfileViewController.swift */,
+				69BAE1A81F6FB4560035D23D /* HospitalDetailsViewController.swift */,
+				6969CE931F56D785007E2E05 /* LandingViewController.swift */,
 				69F785951F504430005197A6 /* LeftMenuViewController.swift */,
+				69F7859B1F52E44B005197A6 /* PatientDashboardViewController.swift */,
+				69D847E11F702E9C003A7EC9 /* PatientsListViewController.swift */,
+				69025FDF1F975409000C312B /* ProfileViewController.swift */,
+				6969CE8D1F569EC7007E2E05 /* SearchDoctorViewController.swift */,
 				69F785971F50552C005197A6 /* SignInViewController.swift */,
 				69F785991F505535005197A6 /* SignUpViewController.swift */,
-				69F7859B1F52E44B005197A6 /* PatientDashboardViewController.swift */,
-				69A553A51F55D3ED00E8A5C5 /* EditProfileViewController.swift */,
-				6969CE8D1F569EC7007E2E05 /* SearchDoctorViewController.swift */,
-				6969CE911F56B1A9007E2E05 /* AppointmentsHistoryViewController.swift */,
-				6969CE931F56D785007E2E05 /* LandingViewController.swift */,
-				69BAE1A81F6FB4560035D23D /* HospitalDetailsViewController.swift */,
-				69BAE1AA1F6FBC020035D23D /* AppointmentDetailsViewController.swift */,
-				69D847E11F702E9C003A7EC9 /* PatientsListViewController.swift */,
 				6916708D1F93711600C39034 /* VerificationViewController.swift */,
-				69025FDF1F975409000C312B /* ProfileViewController.swift */,
-				699E702A1FA38CEC0070BFBA /* ClinicListViewController.swift */,
-				69D0D4EC1FA607A600D4E0D2 /* AddClinicViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -351,6 +360,8 @@
 		69F785301F4AC629005197A6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				696762921FA90D3B00C4E2F4 /* UIAlertController+Blocks.h */,
+				696762931FA90D3B00C4E2F4 /* UIAlertController+Blocks.m */,
 				69439F4E1F99DC8A00DC6F44 /* CountryPickerTextField.swift */,
 				6968D6601F8E589200B39CCF /* MLPAutoCompleteTextField */,
 				69F4B7D31F751F8A00BFB414 /* DatePickerTextField.swift */,
@@ -649,7 +660,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -659,6 +670,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				695FDA861FA9142F004B6735 /* DoctorDetailViewController.swift in Sources */,
 				69A553A61F55D3ED00E8A5C5 /* EditProfileViewController.swift in Sources */,
 				69F785711F4AC629005197A6 /* SpringButton.swift in Sources */,
 				69F7856E1F4AC629005197A6 /* SoundPlayer.swift in Sources */,
@@ -697,6 +709,7 @@
 				69A5539F1F544CCF00E8A5C5 /* ScrollableDatepicker.swift in Sources */,
 				69BAE1A91F6FB4560035D23D /* HospitalDetailsViewController.swift in Sources */,
 				6969CE921F56B1A9007E2E05 /* AppointmentsHistoryViewController.swift in Sources */,
+				695FDA881FA9BD19004B6735 /* CreateAppointmentViewController.swift in Sources */,
 				69D847E21F702E9C003A7EC9 /* PatientsListViewController.swift in Sources */,
 				69F785641F4AC629005197A6 /* DesignableTabBarController.swift in Sources */,
 				69F7855F1F4AC629005197A6 /* AutoTextView.swift in Sources */,
@@ -721,6 +734,7 @@
 				69F785601F4AC629005197A6 /* BlurView.swift in Sources */,
 				69F785981F50552C005197A6 /* SignInViewController.swift in Sources */,
 				691C04061F39BE2E0078A4E4 /* AppDelegate.swift in Sources */,
+				696762941FA90D3C00C4E2F4 /* UIAlertController+Blocks.m in Sources */,
 				6916708E1F93711600C39034 /* VerificationViewController.swift in Sources */,
 				69F785631F4AC629005197A6 /* DesignableLabel.swift in Sources */,
 				69F785701F4AC629005197A6 /* SpringAnimation.swift in Sources */,
@@ -871,6 +885,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = AYEH6C5B8A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -894,6 +909,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = AYEH6C5B8A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -36,11 +36,13 @@ class UtilityManager: NSObject {
     static func serverDateStringFromAppDateString(date: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = Constant.appDateFormat
-        
+
         let newDateFormatter = DateFormatter()
         newDateFormatter.dateFormat = Constant.serverDateFormat
         return newDateFormatter.string(from: dateFormatter.date(from: date)! as NSDate as Date)
     }
+    
+    
     
     //MARK: - Other Methods
     

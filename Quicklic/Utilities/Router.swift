@@ -50,11 +50,20 @@ class Router: NSObject {
         appDelegate.window?.rootViewController = controller
     }
     
-    func showPatientEditProfile() {
-        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ProfileViewController.storyboardID)
+    func showProfile() {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "profileNavViewController") as! UINavigationController
+        let vc = controller.viewControllers.first as! EditProfileViewController
+        vc.editable = false
         centralRootViewController.setContentViewController(controller, animated: true)
         centralRootViewController.hideViewController()
         
+    }
+    
+    func showEditProfile(fromController: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: EditProfileViewController.storyboardID) as! EditProfileViewController
+        
+        controller.editable = true
+        fromController.show(controller, sender: fromController)
     }
     
     func showSearchDoctor() {
@@ -89,8 +98,10 @@ class Router: NSObject {
         fromController.present(controller, animated: false, completion: nil)
     }
     
-    func showHospitalDetails(fromController: UIViewController) {
-        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: HospitalDetailsViewController.storyboardID)
+    func showHospitalDetails(clinic: Clinic, fromController: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: HospitalDetailsViewController.storyboardID) as! HospitalDetailsViewController
+        controller.clinic = clinic
+        controller.delegate = fromController as? HospitalDeletionDelegate
         fromController.present(controller, animated: false, completion: nil)
     }
     
@@ -98,5 +109,11 @@ class Router: NSObject {
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ClinicListViewController.storyboardID)
         centralRootViewController.setContentViewController(controller, animated: true)
         centralRootViewController.hideViewController()
+    }
+    
+    func showDoctorDetails(doctor: User, fromController: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: DoctorDetailViewController.storyboardID) as! DoctorDetailViewController
+        controller.doctor = doctor
+        fromController.present(controller, animated: false, completion: nil)
     }
 }

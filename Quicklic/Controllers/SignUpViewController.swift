@@ -19,7 +19,6 @@ class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDel
     @IBOutlet weak var passwordField: DesignableTextField!
     @IBOutlet weak var confirmPasswordField: DesignableTextField!
     @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var clinicPasscodeField: DesignableTextField!
     
     let validator = Validator()
     
@@ -33,7 +32,6 @@ class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDel
         validator.registerField(confirmPasswordField, errorLabel: errorLabel, rules: [ConfirmationRule(confirmField: passwordField)])
         validator.registerField(phoneField, errorLabel: errorLabel, rules: [RequiredRule() as Rule,PhoneNumberRule(message: "Invalid Phone Number")])
         validator.registerField(phoneCodeField, errorLabel: errorLabel, rules: [RequiredRule() as Rule])
-        validator.registerField(clinicPasscodeField, errorLabel: errorLabel, rules: [RequiredRule() as Rule, MinLengthRule(length: 6) as Rule])
         
         [nameField,passwordField,confirmPasswordField,phoneField].forEach { (field) in
             field?.delegate = self
@@ -77,12 +75,8 @@ class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDel
                 ApplicationManager.sharedInstance.userType = .Doctor
             }
             
-            RequestManager.addClinic(params: ["code":self.clinicPasscodeField.text!], successBlock: { (response) in
-                SVProgressHUD.dismiss()
-                Router.sharedInstance.showVerification(fromController: self)
-            }, failureBlock: { (error) in
-                SVProgressHUD.showError(withStatus: error)
-            })
+            SVProgressHUD.dismiss()
+            Router.sharedInstance.showVerification(fromController: self)
             
             
             

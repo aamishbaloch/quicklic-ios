@@ -13,7 +13,7 @@ class ProfileTableViewCell: UITableViewCell {
     static let identifier = "profileTableViewCell"
 
     @IBOutlet weak var headingLabel: UILabel!
-    @IBOutlet weak var bodyLabel: UILabel!
+    @IBOutlet weak var bodyField: DesignableTextField!
     
     
     override func awakeFromNib() {

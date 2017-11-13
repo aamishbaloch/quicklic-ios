@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, HospitalDeletionDelegate {
 
     static let storyboardID = "clinicListViewController"
     
@@ -26,6 +26,19 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView.dataSource = self
         
         SVProgressHUD.show()
+        fetchData()
+        
+        let barButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(ClinicListViewController.addButtonPressed(_:)))
+        self.navigationItem.rightBarButtonItem = barButton
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func fetchData() {
+        
         RequestManager.getClinicsList(successBlock: { (response) in
             self.clinicArray.removeAll()
             for object in response {
@@ -37,23 +50,11 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
         }) { (error) in
             SVProgressHUD.showError(withStatus: error)
         }
-        
-        let barButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(ClinicListViewController.addButtonPressed(_:)))
-        self.navigationItem.rightBarButtonItem = barButton
-    }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func menuButtonPressed(_ sender: Any) {
         self.presentLeftMenuViewController(nil)
-    }
-
-    func deleteButtonPressed(cell: ClinicCollectionViewCell)
-    {
-        RequestManager
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -69,21 +70,21 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
         cell.clinicImageView.sd_setImage(with: URL(string: clinic.image ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
         cell.phoneLabel.text = clinic.phone
         cell.locationLabel.text = clinic.location
-        cell.tag = indexPath.row
-        cell.deleteButton.addTarget(self, action: #selector(deleteButtonPressed(cell:)), for: UIControlEvents.touchUpInside)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-
+        Router.sharedInstance.showHospitalDetails(clinic: clinicArray[indexPath.row], fromController: self)
+        
     }
     
     func addButtonPressed(_ sender: UIButton) {
         performSegue(withIdentifier: "showAddClinic", sender: self)
+    }
+    
+    func didDeleteClinic(withID: String) {
+        fetchData()
     }
 
 }

@@ -25,11 +25,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         title = "Profile"
         
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 70
+//        tableView.rowHeight = UITableViewAutomaticDimension
+//        tableView.estimatedRowHeight = 70
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.separatorColor = UIColor.clear
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
 //        user = ApplicationManager.sharedInstance.user
 //        nameLabel.text = user.full_name
@@ -53,6 +56,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 77
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if user.userType == .Patient {
@@ -70,61 +77,61 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         switch indexPath.row {
         case 0:
             cell.headingLabel.text = "Phone Number"
-            cell.bodyLabel.text = user.phone ?? "N/A"
+            cell.bodyField.text = user.phone ?? "N/A"
         case 1:
             cell.headingLabel.text = "Email"
-            cell.bodyLabel.text = user.email ?? "N/A"
+            cell.bodyField.text = user.email ?? "N/A"
         case 2:
             cell.headingLabel.text = "Gender"
-            cell.bodyLabel.text = user.gender?.value ?? "N/A"
+            cell.bodyField.text = user.gender?.value ?? "N/A"
         case 3:
             cell.headingLabel.text = "Date of Birth"
             if let dob = user.dob {
-                cell.bodyLabel.text = UtilityManager.stringFromNSDateWithFormat(date: dob, format: Constant.appDateFormat)
+                cell.bodyField.text = UtilityManager.stringFromNSDateWithFormat(date: dob, format: Constant.appDateFormat)
             }
             else{
-                cell.bodyLabel.text = "N/A"
+                cell.bodyField.text = "N/A"
             }
         case 4:
             cell.headingLabel.text = "Address"
-            cell.bodyLabel.text = user.address ?? "N/A"
+            cell.bodyField.text = user.address ?? "N/A"
         case 5:
             cell.headingLabel.text = "City"
-            cell.bodyLabel.text = user.cityName ?? "N/A"
+            cell.bodyField.text = user.cityName ?? "N/A"
         case 6:
             cell.headingLabel.text = "Country"
-            cell.bodyLabel.text = user.countryName ?? "N/A"
+            cell.bodyField.text = user.countryName ?? "N/A"
         case 7:
             if user.userType == .Patient {
                 cell.headingLabel.text = "Height"
-                cell.bodyLabel.text = user.height ?? "N/A"
+                cell.bodyField.text = user.height ?? "N/A"
             }
             else{
                 cell.headingLabel.text = "Services"
-                cell.bodyLabel.text = user.servicesArray.joined(separator: ", ")
+                cell.bodyField.text = user.servicesArray.joined(separator: ", ")
             }
         case 8:
             if user.userType == .Patient {
                 cell.headingLabel.text = "Weight"
-                cell.bodyLabel.text = user.weight ?? "N/A"
+                cell.bodyField.text = user.weight ?? "N/A"
             }
             else{
                 cell.headingLabel.text = "Specialization"
-                cell.bodyLabel.text = user.specializationName ?? "N/A"
+                cell.bodyField.text = user.specializationName ?? "N/A"
             }
         case 9:
             if user.userType == .Patient {
                 cell.headingLabel.text = "Marital Status"
-                cell.bodyLabel.text = user.marital_status?.value ?? "N/A"
+                cell.bodyField.text = user.marital_status?.value ?? "N/A"
             }
             else{
                 cell.headingLabel.text = "Degree"
-                cell.bodyLabel.text = user.degree
+                cell.bodyField.text = user.degree
             }
             
         case 10:
             cell.headingLabel.text = "Occupation"
-            cell.bodyLabel.text = user.occupationName ?? "N/A"
+            cell.bodyField.text = user.occupationName ?? "N/A"
         default: break
         }
         
