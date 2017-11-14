@@ -113,7 +113,20 @@ class Router: NSObject {
     
     func showDoctorDetails(doctor: User, fromController: UIViewController) {
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: DoctorDetailViewController.storyboardID) as! DoctorDetailViewController
+        if let from = fromController as? DoctorDetailDelegate {
+            controller.delegate = from
+        }
         controller.doctor = doctor
         fromController.present(controller, animated: false, completion: nil)
     }
+    
+    
+    //-->> Furqan
+    func createAppointment(doctor: User, fromController: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: CreateAppointmentViewController.storyboardID) as! CreateAppointmentViewController
+        controller.doctor = doctor
+        fromController.present(controller, animated: false, completion: nil)
+      
+    }
+    
 }

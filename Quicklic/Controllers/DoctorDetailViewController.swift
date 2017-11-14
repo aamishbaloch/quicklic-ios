@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol DoctorDetailDelegate {
+    func didPressAppointmentButtion(doctor: User)
+}
+
 class DoctorDetailViewController: UIViewController {
 
     static let storyboardID = "doctorDetailViewController"
@@ -20,6 +24,8 @@ class DoctorDetailViewController: UIViewController {
     @IBOutlet weak var serviceLabel: UILabel!
     
     var doctor: User!
+    
+    var delegate: DoctorDetailDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +45,14 @@ class DoctorDetailViewController: UIViewController {
     }
     
     @IBAction func scheduleAppointmentButtonPressed(_ sender: Any) {
+        
+        self.dismiss(animated: false) {
+            self.delegate?.didPressAppointmentButtion(doctor: self.doctor)
+        }
     }
     
     @IBAction func closeButtonPressed(_ sender: Any) {
+        
         self.dismiss(animated: false, completion: nil)
     }
     

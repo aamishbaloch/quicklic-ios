@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
+class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate, DoctorDetailDelegate {
 
     static let storyboardID = "searchDoctorViewController"
     
@@ -93,6 +93,11 @@ class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UI
         fetchData(searchString: searchField.text)
         
     }
+    
+    func didPressAppointmentButtion(doctor: User) {
+        Router.sharedInstance.createAppointment(doctor: doctor, fromController: self)
+    }
+    
     /*
     // MARK: - Navigation
 

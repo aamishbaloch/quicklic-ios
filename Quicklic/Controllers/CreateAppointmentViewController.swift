@@ -20,7 +20,7 @@ class CreateAppointmentViewController: UIViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var dateField: DatePickerTextField!
     
-    var doctor: User!
+    var doctor: User?
     var reasons = [GenericModel]()
     var selectedReason: GenericModel?
     var clinicID = ""
@@ -41,12 +41,19 @@ class CreateAppointmentViewController: UIViewController{
             SVProgressHUD.showError(withStatus: error)
         }
         
-        RequestManager.getDoctorClinicsList(doctorID: doctor.id!, successBlock: { (response) in
-            let clinic = Clinic(dictionary: response.first)
-            self.clinicID = clinic.id!
-        }) { (error) in
-            SVProgressHUD.showError(withStatus: error)
+        if let doctorID = doctor?.id {
+            RequestManager.getDoctorClinicsList(doctorID: doctorID, successBlock: { (response) in
+                let clinic = Clinic(dictionary: response.first)
+                self.clinicID = clinic.id!
+            }) { (error) in
+                SVProgressHUD.showError(withStatus: error)
+            }
         }
+        
+        
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
