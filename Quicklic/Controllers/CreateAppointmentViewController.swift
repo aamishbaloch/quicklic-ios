@@ -81,5 +81,10 @@ class CreateAppointmentViewController: UIViewController{
     @IBAction func doneButtonPressed(_ sender: Any) {
     }
     
+    @IBAction func closeButtonPressed(_ sender: Any) {
+        
+        self.dismiss(animated: false, completion: nil)
+    }
+    
 
 }

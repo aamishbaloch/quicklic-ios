@@ -300,7 +300,7 @@ class WebClient: AFHTTPSessionManager {
                    failureBlock failure:@escaping (String) -> ()){
         self.getPath(urlString: "city/", params: ["query":query as AnyObject], successBlock: { (response) in
             print(response)
-            success(response["results"] as! [[String : AnyObject]])
+            success(response as! [[String : AnyObject]])
         }) { (error) in
             failure(error)
         }
@@ -310,7 +310,7 @@ class WebClient: AFHTTPSessionManager {
                    failureBlock failure:@escaping (String) -> ()){
         self.getPath(urlString: "service/", params: ["query":query as AnyObject], successBlock: { (response) in
             print(response)
-            success(response["results"] as! [[String : AnyObject]])
+            success(response as! [[String : AnyObject]])
         }) { (error) in
             failure(error)
         }
@@ -320,7 +320,7 @@ class WebClient: AFHTTPSessionManager {
                    failureBlock failure:@escaping (String) -> ()){
         self.getPath(urlString: "specialization/", params: ["query":query as AnyObject], successBlock: { (response) in
             print(response)
-            success(response["results"] as! [[String : AnyObject]])
+            success(response as! [[String : AnyObject]])
         }) { (error) in
             failure(error)
         }
@@ -330,7 +330,7 @@ class WebClient: AFHTTPSessionManager {
                       failureBlock failure:@escaping (String) -> ()){
         self.getPath(urlString: "country/", params: ["query":query as AnyObject], successBlock: { (response) in
             print(response)
-            success(response["results"] as! [[String : AnyObject]])
+            success(response as! [[String : AnyObject]])
         }) { (error) in
             failure(error)
         }
@@ -340,7 +340,7 @@ class WebClient: AFHTTPSessionManager {
                         failureBlock failure:@escaping (String) -> ()){
         self.getPath(urlString: "occupation/", params: ["query":query as AnyObject], successBlock: { (response) in
             print(response)
-            success(response["results"] as! [[String : AnyObject]])
+            success(response as! [[String : AnyObject]])
         }) { (error) in
             failure(error)
         }
@@ -352,7 +352,7 @@ class WebClient: AFHTTPSessionManager {
         var params = params
         params["active"] = "true"
         
-        self.getPath(urlString: "doctor/", params: params as [String : AnyObject], successBlock: { (response) in
+        self.getPath(urlString: "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/doctor/", params: params as [String : AnyObject], successBlock: { (response) in
             print(response)
             success(response["results"] as! [[String : AnyObject]])
         }) { (error) in
@@ -364,11 +364,11 @@ class WebClient: AFHTTPSessionManager {
                          failureBlock failure:@escaping (String) -> ()){
         
         
-        let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/clinic/" : "doctor/clinic/"
+        let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/clinic/" : "doctor/\(ApplicationManager.sharedInstance.user.id ?? "0")/clinic/"
         
         self.getPath(urlString: url, params: [:], successBlock: { (response) in
             print(response)
-            success(response as! [[String : AnyObject]])
+            success(response["results"] as! [[String : AnyObject]])
         }) { (error) in
             failure(error)
         }
@@ -377,7 +377,7 @@ class WebClient: AFHTTPSessionManager {
     func addClinic( params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (),
                          failureBlock failure:@escaping (String) -> ()){
         
-        let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/clinic/" : "doctor/clinic/"
+        let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/clinic/" : "doctor/\(ApplicationManager.sharedInstance.user.id ?? "0")/clinic/"
 
         self.postPath(urlString: url, params: params as [String : AnyObject], successBlock: { (response) in
             print(response)
@@ -389,7 +389,7 @@ class WebClient: AFHTTPSessionManager {
     
     func deleteClinic( clinicID: String, successBlock success:@escaping ([String: AnyObject]) -> (),
                     failureBlock failure:@escaping (String) -> ()){
-        let url = String("patient/clinic/") + clinicID
+        let url = String("patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/clinic/") + clinicID
         self.deletePath(urlString: url, params: [:], successBlock: { (response) in
             print(response)
             success(response as! [String : AnyObject])
@@ -403,7 +403,7 @@ class WebClient: AFHTTPSessionManager {
         
         self.getPath(urlString: "reason/", params: params as [String : AnyObject], successBlock: { (response) in
             print(response)
-            success(response["results"] as! [[String : AnyObject]])
+            success(response as! [[String : AnyObject]])
         }) { (error) in
             failure(error)
         }
@@ -412,7 +412,7 @@ class WebClient: AFHTTPSessionManager {
     func getDoctorClinicsList(doctorID: String, successBlock success:@escaping ([[String: AnyObject]]) -> (),
                          failureBlock failure:@escaping (String) -> ()){
         
-        self.getPath(urlString: "doctor/\(doctorID)/clinic", params: [:] as [String : AnyObject], successBlock: { (response) in
+        self.getPath(urlString: "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/doctor/\(doctorID)/clinic", params: [:] as [String : AnyObject], successBlock: { (response) in
             print(response)
             success(response["results"] as! [[String : AnyObject]])
         }) { (error) in
