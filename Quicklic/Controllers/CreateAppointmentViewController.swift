@@ -75,6 +75,8 @@ class CreateAppointmentViewController: UIViewController{
     
     @IBAction func reasonButtonPressed(_ sender: Any) {
         
+        Router.sharedInstance.reasonSelection(fromController: self)
+        
     }
     
     

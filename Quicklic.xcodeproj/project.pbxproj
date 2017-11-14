@@ -101,6 +101,7 @@
 		69F7859A1F505535005197A6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F785991F505535005197A6 /* SignUpViewController.swift */; };
 		69F7859C1F52E44B005197A6 /* PatientDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F7859B1F52E44B005197A6 /* PatientDashboardViewController.swift */; };
 		86A4269C2E52DE810B7CD185 /* libPods-Quicklic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5516CCBDAF692E4BBD7432D6 /* libPods-Quicklic.a */; };
+		D1BC6D541FBAD29D00A20344 /* ReasonSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BC6D531FBAD29D00A20344 /* ReasonSelectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -223,6 +224,7 @@
 		69F7859B1F52E44B005197A6 /* PatientDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDashboardViewController.swift; sourceTree = "<group>"; };
 		9B3B503ED6796ADFF30BC563 /* Pods-Quicklic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quicklic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Quicklic/Pods-Quicklic.debug.xcconfig"; sourceTree = "<group>"; };
 		AF5168AC7A62D6EF164AEDB8 /* Pods-Quicklic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quicklic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Quicklic/Pods-Quicklic.release.xcconfig"; sourceTree = "<group>"; };
+		D1BC6D531FBAD29D00A20344 /* ReasonSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonSelectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -341,6 +343,7 @@
 				69F785971F50552C005197A6 /* SignInViewController.swift */,
 				69F785991F505535005197A6 /* SignUpViewController.swift */,
 				6916708D1F93711600C39034 /* VerificationViewController.swift */,
+				D1BC6D531FBAD29D00A20344 /* ReasonSelectionViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				69F7859C1F52E44B005197A6 /* PatientDashboardViewController.swift in Sources */,
 				69F785961F504430005197A6 /* LeftMenuViewController.swift in Sources */,
 				69F785731F4AC629005197A6 /* SpringLabel.swift in Sources */,
+				D1BC6D541FBAD29D00A20344 /* ReasonSelectionViewController.swift in Sources */,
 				69A5539B1F544CCF00E8A5C5 /* Configuration.swift in Sources */,
 				69F7856A1F4AC629005197A6 /* KeyboardLayoutConstraint.swift in Sources */,
 				69F4B7D21F74F3C000BFB414 /* WebClient.swift in Sources */,

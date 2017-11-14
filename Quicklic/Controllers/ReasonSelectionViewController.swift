@@ -10,6 +10,12 @@ import UIKit
 
 class ReasonSelectionViewController: UIViewController {
 
+    static let storyboardID = "reasonSelection"
+    
+    //var doctor: User?
+    //var reasons = [GenericModel]()
+    //var selectedReason: GenericModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
