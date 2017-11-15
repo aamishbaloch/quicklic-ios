@@ -8,7 +8,8 @@
 
 import UIKit
 
-class CreateAppointmentViewController: UIViewController{
+class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,UICollectionViewDelegate,UICollectionViewDataSource{
+    
 
     static let storyboardID = "createAppointmentViewController"
 
@@ -24,22 +25,18 @@ class CreateAppointmentViewController: UIViewController{
     var reasons = [GenericModel]()
     var selectedReason: GenericModel?
     var clinicID = ""
-
+    
+    var timeArray = [Time]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
-        SVProgressHUD.show()
-        RequestManager.getReasonsList(params: [:], successBlock: { (response) in
-            SVProgressHUD.dismiss()
-            self.reasons.removeAll()
-            for object in response {
-                self.reasons.append(GenericModel(dictionary: object))
-            }
-        }) { (error) in
-            SVProgressHUD.showError(withStatus: error)
-        }
+        dateField.pickerView.minimumDate = NSDate() as Date
+        dateField.pickerView.maximumDate = nil
         
         if let doctorID = doctor?.id {
             RequestManager.getDoctorClinicsList(doctorID: doctorID, successBlock: { (response) in
@@ -49,11 +46,6 @@ class CreateAppointmentViewController: UIViewController{
                 SVProgressHUD.showError(withStatus: error)
             }
         }
-        
-        
-        
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,32 +53,88 @@ class CreateAppointmentViewController: UIViewController{
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func didSelectReason(reason: GenericModel) {
+        selectedReason = reason
+        print("selected reason is:\(String(describing: selectedReason?.name))")
+        reasonButton.titleLabel?.text = selectedReason?.name
     }
-    */
-    
-    
+  
     @IBAction func reasonButtonPressed(_ sender: Any) {
-        
         Router.sharedInstance.reasonSelection(fromController: self)
-        
     }
-    
     
     @IBAction func doneButtonPressed(_ sender: Any) {
+        
+        creatAppointment()
+        
     }
     
     @IBAction func closeButtonPressed(_ sender: Any) {
-        
         self.dismiss(animated: false, completion: nil)
     }
     
-
+    @IBAction func didEndEditingDateField(_ sender: DatePickerTextField) {
+        fetchTime(dateString: dateField.text)
+    }
+    
+    
+    func fetchTime(dateString: String? = nil){
+        
+        guard let date = dateString else { return }
+        
+        let convertedDate = UtilityManager.serverDateStringFromAppDateString(date: date)
+        let params = ["date": convertedDate]
+        
+        SVProgressHUD.show()
+        RequestManager.getTimeList(doctorID: (doctor?.id)!,params: params, successBlock: { (response) in
+ 
+            for object in response {
+            self.timeArray.append(Time(dictionary: object))
+            }
+            self.collectionView.reloadData()
+            SVProgressHUD.dismiss()
+            
+        }) { (error) in
+            SVProgressHUD.showError(withStatus: error)
+        }
+    }
+   
+    func creatAppointment(){
+        
+        var params = [String: Any]()
+        params["start_datetime"] = "2017-11-15T12:00:00"
+        params["end_datetime"] = "2017-11-15T12:50:00"
+        params["clinic"] = clinicID
+        params["doctor"] = doctor?.id
+        params["patient"] = ApplicationManager.sharedInstance.user.id
+        params["reason"] = selectedReason?.id
+        params["status"] = 2
+        
+        
+        SVProgressHUD.show()
+        RequestManager.createAppointment(params:params, successBlock: { (response) in
+            SVProgressHUD.dismiss()
+            
+        }) { (error) in
+            SVProgressHUD.showError(withStatus: error)
+            print(error)
+        }
+        
+    }
+   
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.timeArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreatAppointmentCollectionViewCell.identifier, for: indexPath) as! CreatAppointmentCollectionViewCell
+        
+        if let startTime = self.timeArray[indexPath.row].start {
+            cell.timelbl.text = UtilityManager.stringFromNSDateWithFormat(date: startTime, format: "HH:mm a")
+        }
+       
+        return cell
+    }
+    
+ 
 }

@@ -125,15 +125,17 @@ class Router: NSObject {
     func createAppointment(doctor: User, fromController: UIViewController) {
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: CreateAppointmentViewController.storyboardID) as! CreateAppointmentViewController
         controller.doctor = doctor
-        fromController.present(controller, animated: false, completion: nil)
-      
+       fromController.present(controller, animated: false, completion: nil)
     }
     
     func reasonSelection(fromController: UIViewController) {
-        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ReasonSelectionViewController.storyboardID)
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ReasonSelectionViewController.storyboardID) as! ReasonSelectionViewController
+       
+        if let from = fromController as? ReasonSelectionDelegate {
+            controller.delegate = from
+        }
         
         fromController.present(controller, animated: false, completion: nil)
-        
     }
     
     
