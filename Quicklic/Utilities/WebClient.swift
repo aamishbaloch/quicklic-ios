@@ -431,12 +431,53 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
-    func createAppointment( params: [String: Any], successBlock success:@escaping ([[String: AnyObject]]) -> (),
+    
+    
+    /*
+     {
+     clinic =     {
+     id = 1;
+     image = "http://staging.quicklic.com/media/uploads/clinics/cvs-minute-clinic-walk-in-clinic-review_J61uC7B.jpg";
+     name = "Baloch Clinic";
+     };
+     "created_at" = "2017-11-16T12:21:28.542223";
+     doctor =     {
+     avatar = "<null>";
+     "first_name" = Dr;
+     id = 2;
+     "last_name" = "Jim Jones";
+     phone = "+923214170655";
+     specialization =         {
+     id = 2;
+     name = Radiology;
+     };
+     };
+     "end_datetime" = "2017-11-15T12:50:00";
+     id = 24;
+     "is_active" = 1;
+     notes = "<null>";
+     patient =     {
+     avatar = "<null>";
+     "first_name" = Danial;
+     id = 10;
+     "last_name" = Zahid;
+     phone = "+13349821389";
+     };
+     qid = "10-2-1900";
+     reason =     {
+     id = 2;
+     name = "Followup Appointment";
+     };
+     "start_datetime" = "2017-11-15T12:00:00";
+     status = 2;
+     }
+     */
+    func createAppointment( params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (),
                          failureBlock failure:@escaping (String) -> ()){
         
         self.postPath(urlString: "appointment/", params: params as [String : AnyObject], successBlock: { (response) in
             print(response)
-            success(response as! [[String : AnyObject]])
+            success(response as! [String : AnyObject])
         }) { (error) in
             failure(error)
         }

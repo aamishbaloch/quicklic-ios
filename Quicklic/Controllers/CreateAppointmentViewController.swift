@@ -38,6 +38,8 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         dateField.pickerView.minimumDate = NSDate() as Date
         dateField.pickerView.maximumDate = nil
         
+        dateField.text = UtilityManager.stringFromNSDateWithFormat(date: NSDate(), format: Constant.appDateFormat)
+        
         if let doctorID = doctor?.id {
             RequestManager.getDoctorClinicsList(doctorID: doctorID, successBlock: { (response) in
                 let clinic = Clinic(dictionary: response.first)
@@ -56,7 +58,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
     func didSelectReason(reason: GenericModel) {
         selectedReason = reason
         print("selected reason is:\(String(describing: selectedReason?.name))")
-        reasonButton.titleLabel?.text = selectedReason?.name
+        reasonButton.setTitle("\(selectedReason?.name ?? "")   ", for: .normal)
     }
   
     @IBAction func reasonButtonPressed(_ sender: Any) {

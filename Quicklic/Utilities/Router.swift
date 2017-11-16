@@ -129,13 +129,13 @@ class Router: NSObject {
     }
     
     func reasonSelection(fromController: UIViewController) {
-        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ReasonSelectionViewController.storyboardID) as! ReasonSelectionViewController
-       
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ReasonSelectionViewController.storyboardID) as! UINavigationController
+        let vc = controller.viewControllers.first as! ReasonSelectionViewController
         if let from = fromController as? ReasonSelectionDelegate {
-            controller.delegate = from
+            vc.delegate = from
         }
         
-        fromController.present(controller, animated: false, completion: nil)
+        fromController.present(controller, animated: true, completion: nil)
     }
     
     

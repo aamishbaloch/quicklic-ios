@@ -13,53 +13,54 @@ protocol ReasonSelectionDelegate {
 }
 
 class ReasonSelectionViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-
+    
     static let storyboardID = "reasonSelectionViewController"
     
     var reasons = [GenericModel]()
     
-    
-    
     @IBOutlet weak var reasonSelectionTable: UITableView!
-     var delegate:ReasonSelectionDelegate?
-     
-
-    
+    var delegate:ReasonSelectionDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        title = "Select Reason"
+        
+        setupNav()
         fetchData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    func setupNav() {
+        let leftButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.cancelButtonPressed))
+        navigationItem.leftBarButtonItem = leftButton
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return reasons.count
+        return reasons.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = reasonSelectionTable.dequeueReusableCell(withIdentifier: ReasonSelectionTableViewCell.identifier, for: indexPath) as! ReasonSelectionTableViewCell
         
-         cell.lblReason.text = reasons[indexPath.row].name
-      
+        cell.lblReason.text = reasons[indexPath.row].name
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.dismiss(animated: false) {
+        self.dismiss(animated: true) {
             self.delegate?.didSelectReason(reason: self.reasons[indexPath.row])
         }
     }
     
     func fetchData(searchString: String? = nil){
-        
         var params = [String:String]()
         if let string = searchString {
             params["query"] = string
@@ -78,18 +79,8 @@ class ReasonSelectionViewController: UIViewController,UITableViewDelegate,UITabl
         }
     }
     
-    
-   
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func cancelButtonPressed() {
+        dismiss(animated: true, completion: nil)
     }
-    */
-
+    
 }
