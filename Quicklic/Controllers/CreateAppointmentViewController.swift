@@ -35,6 +35,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        
         dateField.pickerView.minimumDate = NSDate() as Date
         dateField.pickerView.maximumDate = nil
         
@@ -48,7 +49,11 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         }
     }
 
+    
+    
+    
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -112,7 +117,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         
         
         SVProgressHUD.show()
-        RequestManager.createAppointment(params:params, successBlock: { (response) in
+        RequestManager.postCreateAppointment(params:params, successBlock: { (response) in
             SVProgressHUD.dismiss()
             
         }) { (error) in

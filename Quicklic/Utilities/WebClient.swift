@@ -431,7 +431,7 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
-    func createAppointment( params: [String: Any], successBlock success:@escaping ([[String: AnyObject]]) -> (),
+    func postCreateAppointment( params: [String: Any], successBlock success:@escaping ([[String: AnyObject]]) -> (),
                          failureBlock failure:@escaping (String) -> ()){
         
         self.postPath(urlString: "appointment/", params: params as [String : AnyObject], successBlock: { (response) in
@@ -441,5 +441,19 @@ class WebClient: AFHTTPSessionManager {
             failure(error)
         }
     }
+    
+    func getCreateAppointment(params: [String: Any],successBlock success:@escaping ([[String: AnyObject]]) -> (),
+                                failureBlock failure:@escaping (String) -> ()){
+        
+        self.getPath(urlString: "appointment/", params: params as [String : AnyObject], successBlock: { (response) in
+            print(response)
+            success(response["results"] as! [[String : AnyObject]])
+        }) { (error) in
+            failure(error)
+        }
+    }
+    
+    
+    
     
 }

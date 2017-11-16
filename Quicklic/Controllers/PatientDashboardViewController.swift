@@ -64,7 +64,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
             updateUI(user: user)
         }
         
-        
+        fetchData()
         
         
     }
@@ -106,6 +106,23 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     
     @IBAction func menuButtonPressed(_ sender: Any) {
         self.presentLeftMenuViewController(nil)
+    }
+    
+    func fetchData() {
+        
+        var params = [String: Any]()
+        params["start_date"] = "2018-10-04"
+        
+        RequestManager.getCreateAppointment(params:params, successBlock: { (response) in
+           
+        print(response)
+            
+            SVProgressHUD.dismiss()
+            
+        }) { (error) in
+            SVProgressHUD.showError(withStatus: error)
+        }
+        
     }
     
     
