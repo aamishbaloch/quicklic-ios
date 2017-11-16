@@ -12,6 +12,9 @@ class DoctorAppointmentCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "doctorAppointmentCollectionViewCell"
  
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    
     @IBOutlet weak var statusView: UIView!
     
     override func awakeFromNib() {

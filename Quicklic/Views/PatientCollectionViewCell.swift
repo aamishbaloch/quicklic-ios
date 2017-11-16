@@ -10,4 +10,6 @@ import UIKit
 
 class PatientCollectionViewCell: UICollectionViewCell {
     static let identifier = "patientCollectionViewCell"
+    
+    
 }

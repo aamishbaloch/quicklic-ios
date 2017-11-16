@@ -18,6 +18,8 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     @IBOutlet weak var profileImageView: DesignableImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
+    var appointmentsArray = [Appointments]()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -64,9 +66,11 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
             updateUI(user: user)
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         fetchData()
-        
-        
     }
     
     func updateUI(user: User) {
@@ -111,12 +115,13 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     func fetchData() {
         
         var params = [String: Any]()
-        params["start_date"] = "2018-10-04"
+        params["start_date"] = "2017-11-16"
         
-        RequestManager.getCreateAppointment(params:params, successBlock: { (response) in
-           
-        print(response)
-            
+        RequestManager.getAppointments(params:params, successBlock: { (response) in
+            for object in response {
+                self.appointmentsArray.append(Appointments(dictionary: object))
+            }
+            self.collectionView.reloadData()
             SVProgressHUD.dismiss()
             
         }) { (error) in
@@ -131,11 +136,15 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return appointmentsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DoctorAppointmentCollectionViewCell.identifier, for: indexPath) as! DoctorAppointmentCollectionViewCell
+     
+        cell.nameLabel.text = appointmentsArray[indexPath.row].name
+        
+        
         return cell
     }
     

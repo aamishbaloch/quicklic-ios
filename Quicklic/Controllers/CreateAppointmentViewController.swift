@@ -25,7 +25,8 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
     var reasons = [GenericModel]()
     var selectedReason: GenericModel?
     var clinicID = ""
-    
+    var startTime:NSDate?
+    var selectedTimeIndex = -1
     var timeArray = [Time]()
     
     
@@ -39,7 +40,9 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         dateField.pickerView.minimumDate = NSDate() as Date
         dateField.pickerView.maximumDate = nil
         
+        
         dateField.text = UtilityManager.stringFromNSDateWithFormat(date: NSDate(), format: Constant.appDateFormat)
+        fetchTime(dateString: dateField.text)
         
         if let doctorID = doctor?.id {
             RequestManager.getDoctorClinicsList(doctorID: doctorID, successBlock: { (response) in
@@ -51,9 +54,6 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         }
     }
 
-    
-    
-    
     override func didReceiveMemoryWarning() {
         
         super.didReceiveMemoryWarning()
@@ -61,9 +61,18 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
     }
     
     func didSelectReason(reason: GenericModel) {
+        
         selectedReason = reason
         print("selected reason is:\(String(describing: selectedReason?.name))")
-        reasonButton.setTitle("\(selectedReason?.name ?? "")   ", for: .normal)
+      
+        if let isReason = selectedReason {
+            reasonButton.setTitle("\(isReason.name ?? "")", for: .normal)
+        }
+        else{
+            SVProgressHUD.showError(withStatus: "Please select reason")
+            return
+        }
+  
     }
   
     @IBAction func reasonButtonPressed(_ sender: Any) {
@@ -83,8 +92,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
     @IBAction func didEndEditingDateField(_ sender: DatePickerTextField) {
         fetchTime(dateString: dateField.text)
     }
-    
-    
+   
     func fetchTime(dateString: String? = nil){
         
         guard let date = dateString else { return }
@@ -105,30 +113,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
             SVProgressHUD.showError(withStatus: error)
         }
     }
-   
-    func creatAppointment(){
-        
-        var params = [String: Any]()
-        params["start_datetime"] = "2017-11-15T12:00:00"
-        params["end_datetime"] = "2017-11-15T12:50:00"
-        params["clinic"] = clinicID
-        params["doctor"] = doctor?.id
-        params["patient"] = ApplicationManager.sharedInstance.user.id
-        params["reason"] = selectedReason?.id
-        params["status"] = 2
-        
-        
-        SVProgressHUD.show()
-        RequestManager.postCreateAppointment(params:params, successBlock: { (response) in
-            SVProgressHUD.dismiss()
-            
-        }) { (error) in
-            SVProgressHUD.showError(withStatus: error)
-            print(error)
-        }
-        
-    }
-   
+  
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.timeArray.count
     }
@@ -139,9 +124,75 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         if let startTime = self.timeArray[indexPath.row].start {
             cell.timelbl.text = UtilityManager.stringFromNSDateWithFormat(date: startTime, format: "HH:mm a")
         }
+        
+        if indexPath.item == selectedTimeIndex {
+            cell.layer.borderWidth = 1.0
+            cell.layer.borderColor = UIColor.green.cgColor
+        }
+        else{
+            cell.layer.borderWidth = 0
+            cell.layer.borderColor = UIColor.white.cgColor
+        }
        
         return cell
     }
     
- 
+     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.allowsMultipleSelection = false
+        selectedTimeIndex = indexPath.item
+        collectionView.reloadData()
+        
+    }
+    
+    func creatAppointment(){
+        
+        guard let appointmentDate = dateField.text else {
+            
+            SVProgressHUD.showError(withStatus: "Please select date")
+            return
+            
+        }
+      
+        var start = ""
+        var end = ""
+        
+        if let startTime = self.timeArray[selectedTimeIndex].start,selectedTimeIndex >= 0 {
+            let startDateString = UtilityManager.serverDateStringFromAppDateString(date: appointmentDate)
+            let startTimeString = UtilityManager.stringFromNSDateWithFormat(date: startTime, format: "hh:mm:ss")
+            start = "\(startDateString)T\(startTimeString)"
+            print("Start date is: \(start)")
+        }
+        else{
+            SVProgressHUD.showError(withStatus: "Please select time")
+            return
+        }
+        
+       if let endTime = self.timeArray[selectedTimeIndex].end {
+            let endDateString = UtilityManager.serverDateStringFromAppDateString(date: appointmentDate)
+            let endTimeString = UtilityManager.stringFromNSDateWithFormat(date: endTime, format: "hh:mm:ss")
+            end = "\(endDateString)T\(endTimeString)"
+            print("End date is: \(end)")
+        }
+       else{
+        
+        }
+    
+        var params = [String: Any]()
+        params["start_datetime"] = start
+        params["end_datetime"] = end
+        params["clinic"] = clinicID
+        params["doctor"] = doctor?.id
+        params["patient"] = ApplicationManager.sharedInstance.user.id
+        params["reason"] = selectedReason?.id
+        params["status"] = 2
+        
+        SVProgressHUD.show()
+        RequestManager.createAppointment(params:params, successBlock: { (response) in
+            SVProgressHUD.dismiss()
+            
+        }) { (error) in
+            SVProgressHUD.showError(withStatus: error)
+            print(error)
+        }
+    }
 }
