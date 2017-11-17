@@ -11,6 +11,18 @@ import UIKit
 class AppointmentDetailsViewController: UIViewController {
     
     static let storyboardID = "appointmentDetailsViewController"
+    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var reasonforvisitLabel: UILabel!
+    @IBOutlet weak var selectedLabel: UILabel!
+    @IBOutlet weak var selectedtimeLabel: UILabel!
+    
+    var appointment: Appointment!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +33,21 @@ class AppointmentDetailsViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        nameLabel.text = appointment.doctor.full_name ?? "N/A"
+        phoneLabel.text = appointment.doctor.phone ?? "N/A"
+        addressLabel.text = appointment.doctor.address ?? "N/A"
+        emailLabel.text = appointment.doctor.email ?? "N/A"
+        imageView.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
+        if let startTime = appointment.start_datetime {
+            selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
+        }
+        reasonforvisitLabel.text = appointment.reason.name ?? "N/A"
+    
     }
     
     

@@ -35,7 +35,7 @@ class Router: NSObject {
     }
     
     func showPatientDashboard() {
-        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: PatientDashboardViewController.storyboardID)
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: PatientDashboardViewController.storyboardID) as! PatientDashboardViewController
         centralRootViewController.setContentViewController(controller, animated: true)
         centralRootViewController.hideViewController()
     }
@@ -93,8 +93,10 @@ class Router: NSObject {
         centralRootViewController.hideViewController()
     }
     
-    func showAppointmentDetails(fromController: UIViewController) {
-        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: AppointmentDetailsViewController.storyboardID)
+    func showAppointmentDetails(appointment: Appointment ,fromController: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: AppointmentDetailsViewController.storyboardID) as! AppointmentDetailsViewController
+            controller.appointment = appointment
+        
         fromController.present(controller, animated: false, completion: nil)
     }
     

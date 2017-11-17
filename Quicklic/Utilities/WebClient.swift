@@ -244,9 +244,7 @@ class WebClient: AFHTTPSessionManager {
             
         })
     }
-    
-    
-    
+  
     func signUpUser(param: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (),
                     failureBlock failure:@escaping (String) -> ()){
         self.postPath(urlString: Constant.registrationURL, params: param as [String : AnyObject],addToken: false, successBlock: { (response) in
@@ -483,15 +481,15 @@ class WebClient: AFHTTPSessionManager {
     func getAppointments(params: [String: Any],successBlock success:@escaping ([[String: AnyObject]]) -> (),
                                 failureBlock failure:@escaping (String) -> ()){
         
-        self.getPath(urlString: "appointment/", params: params as [String : AnyObject], successBlock: { (response) in
+        let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/appointment/" : "doctor/\(ApplicationManager.sharedInstance.user.id ?? "0")/appointment/"
+        
+        self.getPath(urlString: url, params: params as [String : AnyObject], successBlock: { (response) in
             print(response)
             success(response["results"] as! [[String : AnyObject]])
         }) { (error) in
             failure(error)
         }
     }
-    
-    
-    
+   
     
 }

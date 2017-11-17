@@ -18,7 +18,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     @IBOutlet weak var profileImageView: DesignableImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
-    var appointmentsArray = [Appointments]()
+    var appointmentsArray = [Appointment]()
     
     override func viewDidLoad() {
         
@@ -40,7 +40,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
 
             SVProgressHUD.show()
             RequestManager.loginUser(param: params, successBlock: { (response: [String : AnyObject]) in
-                SVProgressHUD.dismiss()
+//                SVProgressHUD.dismiss()
                 
                 let user = User(dictionary: response)
                 ApplicationManager.sharedInstance.user = user
@@ -54,7 +54,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
                     ApplicationManager.sharedInstance.userType = .Doctor
                 }
                 self.updateUI(user: user)
-                
+                self.fetchData()
             }) { (error) in
                 SVProgressHUD.showError(withStatus: error)
                 UserDefaults.standard.set("", forKey: "token")
@@ -70,7 +70,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        fetchData()
+        
     }
     
     func updateUI(user: User) {
@@ -115,11 +115,13 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     func fetchData() {
         
         var params = [String: Any]()
-        params["start_date"] = "2017-11-16"
+        params["start_date"] = "2017-11-17"
         
         RequestManager.getAppointments(params:params, successBlock: { (response) in
+            self.appointmentsArray.removeAll()
             for object in response {
-                self.appointmentsArray.append(Appointments(dictionary: object))
+                self.appointmentsArray.append(Appointment(dictionary: object))
+                print("Array is : \(object)")
             }
             self.collectionView.reloadData()
             SVProgressHUD.dismiss()
@@ -140,16 +142,31 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DoctorAppointmentCollectionViewCell.identifier, for: indexPath) as! DoctorAppointmentCollectionViewCell
-     
-        cell.nameLabel.text = appointmentsArray[indexPath.row].name
+        let appointment = appointmentsArray[indexPath.item]
         
         
+        if ApplicationManager.sharedInstance.userType == .Patient {
+            cell.nameLabel.text = appointment.doctor.full_name
+            cell.specializationLabel.text = appointment.doctor.specializationName
+            cell.drImage.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
+        }
+        else{
+            cell.nameLabel.text = appointment.patient.full_name
+            cell.specializationLabel.text = nil
+            cell.drImage.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
+        }
+        
+        if let startTime = self.appointmentsArray[indexPath.row].start_datetime {
+            cell.timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
+        }
+
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        Router.sharedInstance.showAppointmentDetails(fromController: self)
+        Router.sharedInstance.showAppointmentDetails(appointment: self.appointmentsArray[indexPath.item], fromController: self)
     }
     
     
