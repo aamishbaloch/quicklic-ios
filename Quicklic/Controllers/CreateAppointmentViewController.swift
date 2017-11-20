@@ -40,7 +40,9 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         dateField.pickerView.minimumDate = NSDate() as Date
         dateField.pickerView.maximumDate = nil
         
-        
+        nameLabel.text = doctor?.full_name ?? "N/A"
+        phoneLabel.text = doctor?.phone ?? "N/A"
+        specialityLabel.text = doctor?.specializationName ?? "N/A"
         dateField.text = UtilityManager.stringFromNSDateWithFormat(date: NSDate(), format: Constant.appDateFormat)
         fetchTime(dateString: dateField.text)
         
