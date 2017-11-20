@@ -61,34 +61,27 @@ class AppointmentDetailsViewController: UIViewController {
     
     
     @IBAction func okButtonPressed(_ sender: UIButton) {
-     print("ok button pressed")
-     let params = ["status": 1]
-        print("Appointment Id \(String(describing: appointment.id))")
-        SVProgressHUD.show()
-        RequestManager.appointmentStatus(doctorID:appointment.doctor.id!, appointmentID: appointment.id! , params: params, successBlock: { (response) in
+    
         
-        self.pendingConfirmationLabel.text = "Confirmed"
-        self.pendingConfirmationLabel.textColor = UIColor.green
-        SVProgressHUD.dismiss()
-        }, failureBlock: { (error) in
-            SVProgressHUD.showError(withStatus: error)
-        })
-        
+        UIAlertController.showAlert(in: self, withTitle: "Confirmation", message: "Are you sure you want to confirm?", cancelButtonTitle: "No", destructiveButtonTitle: nil, otherButtonTitles: ["Yes"]) { (alertController, alertAction, buttonIndex) in
+            if buttonIndex == alertController.firstOtherButtonIndex {
+                 self.confirmed()
+            }
+        }
         
     }
-    
+  
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
-        
-        let params = ["status": 2]
-        print("Appointment Id \(String(describing: appointment.id))")
-        SVProgressHUD.show()
-        RequestManager.appointmentStatus(doctorID:appointment.doctor.id!, appointmentID: appointment.id! , params: params, successBlock: { (response) in
-            self.pendingConfirmationLabel.text = "Discard"
-            self.pendingConfirmationLabel.textColor = UIColor.orange
-            SVProgressHUD.dismiss()
-        }, failureBlock: { (error) in
-            SVProgressHUD.showError(withStatus: error)
-        })
+      
+        UIAlertController.showAlert(in: self, withTitle: "Confirmation", message: "Are you sure you want to cancel?", cancelButtonTitle: "Yes", destructiveButtonTitle: nil, otherButtonTitles: ["No"]) { (alertController, alertAction, buttonIndex) in
+            if buttonIndex == alertController.firstOtherButtonIndex {
+                self.dismiss(animated: true, completion: nil)
+            }
+            else if buttonIndex == alertController.cancelButtonIndex {
+                self.cancelled()
+            }
+           
+        }
         
     }
     
@@ -96,6 +89,39 @@ class AppointmentDetailsViewController: UIViewController {
         self.dismiss(animated: false, completion: nil)
     }
 
+    func confirmed(){
+        
+        let params = ["status": 1]
+        print("Appointment Id \(String(describing: appointment.id))")
+        SVProgressHUD.show()
+        RequestManager.appointmentStatus(doctorID:appointment.doctor.id!, appointmentID: appointment.id! , params: params, successBlock: { (response) in
+            
+            self.pendingConfirmationLabel.text = "Confirmed"
+            self.pendingConfirmationLabel.textColor = UIColor.green
+            SVProgressHUD.dismiss()
+        }, failureBlock: { (error) in
+            SVProgressHUD.showError(withStatus: error)
+        })
+        
+    }
+    
+    func cancelled(){
+        
+        let params = ["status": 5]
+        print("Appointment Id \(String(describing: appointment.id))")
+        SVProgressHUD.show()
+        RequestManager.appointmentStatus(doctorID:appointment.doctor.id!, appointmentID: appointment.id! , params: params, successBlock: { (response) in
+            self.pendingConfirmationLabel.text = "Discard"
+            self.pendingConfirmationLabel.textColor = UIColor.red
+            SVProgressHUD.dismiss()
+        }, failureBlock: { (error) in
+            SVProgressHUD.showError(withStatus: error)
+        })
+        
+        
+        
+    }
+    
     /*
     // MARK: - Navigation
 

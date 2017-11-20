@@ -60,7 +60,6 @@ class HospitalDetailsViewController: UIViewController {
             }
         }
         
-        
     }
     /*
     // MARK: - Navigation
