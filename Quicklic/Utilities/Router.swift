@@ -93,10 +93,15 @@ class Router: NSObject {
         centralRootViewController.hideViewController()
     }
     
-    func showAppointmentDetails(appointment: Appointment ,fromController: UIViewController) {
+    func showAppointmentDetails(appointment: Appointment, appointmentIndex: Int, fromController: UIViewController) {
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: AppointmentDetailsViewController.storyboardID) as! AppointmentDetailsViewController
-            controller.appointment = appointment
+        controller.appointment = appointment
+        controller.appointmentIndex = appointmentIndex
         
+        if let from = fromController as? AppointmentStatusDelegate {
+            controller.delegate = from
+        }
+       
         fromController.present(controller, animated: false, completion: nil)
     }
     

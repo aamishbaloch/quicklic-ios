@@ -15,8 +15,8 @@ class DoctorAppointmentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var specializationLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var drImage: DesignableImageView!
-    
+    @IBOutlet weak var drImage: DesignableImageView!    
+    @IBOutlet weak var statusLabel: UILabel!
     
     @IBOutlet weak var statusView: UIView!
     

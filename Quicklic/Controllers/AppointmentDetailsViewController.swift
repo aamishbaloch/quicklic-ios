@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol AppointmentStatusDelegate {
+
+    func appointmenConfirmation(status:AppointmentStatus, index: Int)
+    
+}
+
 class AppointmentDetailsViewController: UIViewController {
     
     static let storyboardID = "appointmentDetailsViewController"
@@ -25,7 +31,9 @@ class AppointmentDetailsViewController: UIViewController {
     
     var appointment: Appointment!
     var doctor:User?
-
+    var delegate:AppointmentStatusDelegate?
+    var appointmentIndex: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,7 +46,6 @@ class AppointmentDetailsViewController: UIViewController {
         appointmentStatusView.isHidden = true
         }
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -56,9 +63,8 @@ class AppointmentDetailsViewController: UIViewController {
             selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
         }
         reasonforvisitLabel.text = appointment.reason.name ?? "N/A"
-    
+        
     }
-    
     
     @IBAction func okButtonPressed(_ sender: UIButton) {
     
@@ -68,7 +74,6 @@ class AppointmentDetailsViewController: UIViewController {
                  self.confirmed()
             }
         }
-        
     }
   
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
@@ -80,9 +85,7 @@ class AppointmentDetailsViewController: UIViewController {
             else if buttonIndex == alertController.cancelButtonIndex {
                 self.cancelled()
             }
-           
         }
-        
     }
     
     @IBAction func closeButtonPressed(_ sender: Any) {
@@ -95,14 +98,16 @@ class AppointmentDetailsViewController: UIViewController {
         print("Appointment Id \(String(describing: appointment.id))")
         SVProgressHUD.show()
         RequestManager.appointmentStatus(doctorID:appointment.doctor.id!, appointmentID: appointment.id! , params: params, successBlock: { (response) in
-            
             self.pendingConfirmationLabel.text = "Confirmed"
             self.pendingConfirmationLabel.textColor = UIColor.green
+            
+            self.delegate?.appointmenConfirmation(status: AppointmentStatus.Confirm, index: self.appointmentIndex!)
+
             SVProgressHUD.dismiss()
+            self.dismiss(animated: false, completion: nil)
         }, failureBlock: { (error) in
             SVProgressHUD.showError(withStatus: error)
         })
-        
     }
     
     func cancelled(){
@@ -112,14 +117,16 @@ class AppointmentDetailsViewController: UIViewController {
         SVProgressHUD.show()
         RequestManager.appointmentStatus(doctorID:appointment.doctor.id!, appointmentID: appointment.id! , params: params, successBlock: { (response) in
             self.pendingConfirmationLabel.text = "Discard"
+            
+            self.delegate?.appointmenConfirmation(status: AppointmentStatus.Discard, index: self.appointmentIndex!)
+            
             self.pendingConfirmationLabel.textColor = UIColor.red
             SVProgressHUD.dismiss()
+            self.dismiss(animated: false, completion: nil)
         }, failureBlock: { (error) in
             SVProgressHUD.showError(withStatus: error)
         })
-        
-        
-        
+  
     }
     
     /*

@@ -8,6 +8,25 @@
 
 import UIKit
 
+enum AppointmentStatus: Int {
+    case Confirm = 1, Pending, NoShow, Cancel, Discard = 5
+    
+    var value : String {
+        switch self {
+        case .Confirm:
+            return "Confirmed"
+        case .Pending:
+            return "Pending"
+        case .NoShow:
+            return "No Show"
+        case .Cancel:
+            return "Cancel"
+        case .Discard:
+            return "Discard"
+        }
+    }
+}
+
 class Appointment: BaseEntity {
     
     /*
@@ -59,6 +78,7 @@ class Appointment: BaseEntity {
     var patient = User()
     var reason = GenericModel()
     var start_datetime:Date?
+    var status: AppointmentStatus?
     
     
     override init() {
@@ -75,7 +95,7 @@ class Appointment: BaseEntity {
         self.doctor = User(dictionary: dictionary["doctor"]  as! [String: AnyObject])
         self.reason = GenericModel(dictionary: dictionary["reason"] as! [String: AnyObject])
         self.patient = User(dictionary: dictionary["patient"] as! [String: AnyObject])
-        
+        self.status = AppointmentStatus(rawValue: dictionary["status"] as? Int ?? 2)
     }
 }
 

@@ -8,8 +8,8 @@
 
 import UIKit
 
-class PatientDashboardViewController: UIViewController, ScrollableDatepickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
-
+class PatientDashboardViewController: UIViewController, ScrollableDatepickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource,AppointmentStatusDelegate {
+  
     static let storyboardID = "patientContentController"
     
     @IBOutlet weak var datePicker: ScrollableDatepicker!
@@ -17,7 +17,8 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     @IBOutlet weak var newAppointmentButton: DesignableButton!
     @IBOutlet weak var profileImageView: DesignableImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    
+   
+   
     var appointmentsArray = [Appointment]()
     var selectedDate:String?
     
@@ -31,7 +32,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         setupDatePicker()
         collectionView.delegate = self
         collectionView.dataSource = self
-        
+      
         let date = Date()
         selectedDate = UtilityManager.stringFromNSDateWithFormat(date: date as NSDate, format: "yyyy-MM-dd")
        
@@ -70,7 +71,11 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         else{
             updateUI(user: user)
         }
-        
+    }
+    
+    func appointmenConfirmation(status: AppointmentStatus, index: Int) {
+        appointmentsArray[index].status = status
+        collectionView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,10 +123,9 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     }
 
     func datepicker(_ datepicker: ScrollableDatepicker, didSelectDate date: Date) {
-        //selectedDate = date
         
         selectedDate = UtilityManager.stringFromNSDateWithFormat(date: date as NSDate, format: "yyyy-MM-dd")
-//        print("Did select date ! \(String(describing: selectedDate))")
+        //print("Did select date ! \(String(describing: selectedDate))")
         fetchData()
         
     }
@@ -175,12 +179,14 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         if let startTime = self.appointmentsArray[indexPath.row].start_datetime {
             cell.timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
         }
-
+        let status = appointment.status?.value
+        cell.statusLabel.text = status
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        Router.sharedInstance.showAppointmentDetails(appointment: self.appointmentsArray[indexPath.item], fromController: self)
+        Router.sharedInstance.showAppointmentDetails(appointment: self.appointmentsArray[indexPath.item],appointmentIndex: indexPath.item, fromController: self)
     }
     
     @IBAction func newAppointmentButtonPressed(_ sender: Any) {

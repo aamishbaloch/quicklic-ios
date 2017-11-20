@@ -1274,6 +1274,7 @@
                                             <outlet property="drImage" destination="Ry5-rT-VWo" id="lMf-EF-Bys"/>
                                             <outlet property="nameLabel" destination="zdb-8k-EFQ" id="MkR-aF-0og"/>
                                             <outlet property="specializationLabel" destination="HV0-Ow-n4C" id="8wJ-mI-Cm0"/>
+                                            <outlet property="statusLabel" destination="FX1-f0-sRv" id="oWV-0P-juR"/>
                                             <outlet property="statusView" destination="CGk-Zh-GJ1" id="gAZ-9N-Wgp"/>
                                             <outlet property="timeLabel" destination="rVJ-L2-Gtp" id="oiY-0s-T26"/>
                                         </connections>
@@ -2504,7 +2505,7 @@
                                         <rect key="frame" x="0.0" y="228" width="347" height="90"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Appointment Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdL-P9-5Wo">
-                                                <rect key="frame" x="23" y="13" width="124.5" height="25"/>
+                                                <rect key="frame" x="23" y="13" width="125" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="FWD-mY-AJT"/>
                                                 </constraints>
@@ -2513,7 +2514,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending Confirmation" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJz-Io-EuM">
-                                                <rect key="frame" x="165" y="13" width="158" height="25"/>
+                                                <rect key="frame" x="165.5" y="13" width="157.5" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="0XY-wq-c69"/>
                                                 </constraints>
