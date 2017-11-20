@@ -19,6 +19,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     @IBOutlet weak var nameLabel: UILabel!
     
     var appointmentsArray = [Appointment]()
+    var selectedDate:String?
     
     override func viewDidLoad() {
         
@@ -30,6 +31,10 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         setupDatePicker()
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        let date = Date()
+        selectedDate = UtilityManager.stringFromNSDateWithFormat(date: date as NSDate, format: "yyyy-MM-dd")
+       
         
         let user = ApplicationManager.sharedInstance.user
         if user.userType == nil {
@@ -111,11 +116,24 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     @IBAction func menuButtonPressed(_ sender: Any) {
         self.presentLeftMenuViewController(nil)
     }
+
+    func datepicker(_ datepicker: ScrollableDatepicker, didSelectDate date: Date) {
+        //selectedDate = date
+        
+        selectedDate = UtilityManager.stringFromNSDateWithFormat(date: date as NSDate, format: "yyyy-MM-dd")
+//        print("Did select date ! \(String(describing: selectedDate))")
+        fetchData()
+        
+    }
     
     func fetchData() {
         
         var params = [String: Any]()
-        params["start_date"] = "2017-11-17"
+        
+       // params["start_date"] = "2017-11-17"
+        if let date = selectedDate {
+            params["start_date"] = date
+        }
         
         RequestManager.getAppointments(params:params, successBlock: { (response) in
             self.appointmentsArray.removeAll()
@@ -132,10 +150,6 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         
     }
     
-    
-    func datepicker(_ datepicker: ScrollableDatepicker, didSelectDate date: Date) {
-        
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return appointmentsArray.count
@@ -168,7 +182,6 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         Router.sharedInstance.showAppointmentDetails(appointment: self.appointmentsArray[indexPath.item], fromController: self)
     }
-    
     
     @IBAction func newAppointmentButtonPressed(_ sender: Any) {
         Router.sharedInstance.showSearchDoctor()

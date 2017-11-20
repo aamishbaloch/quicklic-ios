@@ -20,14 +20,23 @@ class AppointmentDetailsViewController: UIViewController {
     @IBOutlet weak var reasonforvisitLabel: UILabel!
     @IBOutlet weak var selectedLabel: UILabel!
     @IBOutlet weak var selectedtimeLabel: UILabel!
+    @IBOutlet weak var appointmentStatusView: UIView!
+    @IBOutlet weak var pendingConfirmationLabel: UILabel!
     
     var appointment: Appointment!
-    
+    var doctor:User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+      if  ApplicationManager.sharedInstance.userType == .Doctor
+      {
+        appointmentStatusView.isHidden = false
+      }else{
+        appointmentStatusView.isHidden = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,6 +59,38 @@ class AppointmentDetailsViewController: UIViewController {
     
     }
     
+    
+    @IBAction func okButtonPressed(_ sender: UIButton) {
+     print("ok button pressed")
+     let params = ["status": 1]
+        print("Appointment Id \(String(describing: appointment.id))")
+        SVProgressHUD.show()
+        RequestManager.appointmentStatus(doctorID:appointment.doctor.id!, appointmentID: appointment.id! , params: params, successBlock: { (response) in
+        
+        self.pendingConfirmationLabel.text = "Confirmed"
+        self.pendingConfirmationLabel.textColor = UIColor.green
+        SVProgressHUD.dismiss()
+        }, failureBlock: { (error) in
+            SVProgressHUD.showError(withStatus: error)
+        })
+        
+        
+    }
+    
+    @IBAction func cancelButtonPressed(_ sender: UIButton) {
+        
+        let params = ["status": 2]
+        print("Appointment Id \(String(describing: appointment.id))")
+        SVProgressHUD.show()
+        RequestManager.appointmentStatus(doctorID:appointment.doctor.id!, appointmentID: appointment.id! , params: params, successBlock: { (response) in
+            self.pendingConfirmationLabel.text = "Discard"
+            self.pendingConfirmationLabel.textColor = UIColor.orange
+            SVProgressHUD.dismiss()
+        }, failureBlock: { (error) in
+            SVProgressHUD.showError(withStatus: error)
+        })
+        
+    }
     
     @IBAction func closeButtonPressed(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)

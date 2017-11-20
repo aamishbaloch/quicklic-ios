@@ -29,7 +29,6 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
     var selectedTimeIndex = -1
     var timeArray = [Time]()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +42,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         nameLabel.text = doctor?.full_name ?? "N/A"
         phoneLabel.text = doctor?.phone ?? "N/A"
         specialityLabel.text = doctor?.specializationName ?? "N/A"
+        profileImageView.sd_setImage(with: URL(string: doctor?.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
         dateField.text = UtilityManager.stringFromNSDateWithFormat(date: NSDate(), format: Constant.appDateFormat)
         fetchTime(dateString: dateField.text)
         
@@ -74,7 +74,6 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
             SVProgressHUD.showError(withStatus: "Please select reason")
             return
         }
-  
     }
   
     @IBAction func reasonButtonPressed(_ sender: Any) {
@@ -148,11 +147,9 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
     
     func creatAppointment(){
         
-        guard let appointmentDate = dateField.text else {
-            
+            guard let appointmentDate = dateField.text else {
             SVProgressHUD.showError(withStatus: "Please select date")
             return
-            
         }
       
         var start = ""
@@ -178,7 +175,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
        else{
         
         }
-    
+        
         var params = [String: Any]()
         params["start_datetime"] = start
         params["end_datetime"] = end

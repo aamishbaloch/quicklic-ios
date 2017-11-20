@@ -50,7 +50,7 @@ class Appointment: BaseEntity {
      }
      */
     
-    var id:Int?
+    var id:String?
     var name:String?
    //var first_name:String?
    //var last_name:String?

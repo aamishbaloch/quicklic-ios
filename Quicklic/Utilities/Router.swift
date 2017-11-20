@@ -35,7 +35,7 @@ class Router: NSObject {
     }
     
     func showPatientDashboard() {
-        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: PatientDashboardViewController.storyboardID) as! PatientDashboardViewController
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: PatientDashboardViewController.storyboardID)
         centralRootViewController.setContentViewController(controller, animated: true)
         centralRootViewController.hideViewController()
     }

@@ -2389,7 +2389,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Hm-Nu-vdQ" customClass="DesignableView" customModule="Quicklic" customModuleProvider="target">
-                                <rect key="frame" x="14.5" y="158.5" width="347" height="350"/>
+                                <rect key="frame" x="15" y="159" width="347" height="345"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-image" translatesAutoresizingMaskIntoConstraints="NO" id="Map-vQ-Sn9">
                                         <rect key="frame" x="20" y="15" width="80" height="80"/>
@@ -2399,46 +2399,46 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Melissa John" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFy-aU-UOp">
-                                        <rect key="frame" x="115" y="15" width="147" height="30"/>
+                                        <rect key="frame" x="115" y="15" width="147" height="29.5"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone-icon" translatesAutoresizingMaskIntoConstraints="NO" id="yBb-rb-FKh">
-                                        <rect key="frame" x="116" y="53" width="10" height="10"/>
+                                        <rect key="frame" x="116" y="52.5" width="10" height="10"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="10" id="HwR-2K-UL8"/>
                                             <constraint firstAttribute="width" constant="10" id="d7s-J9-YXr"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1 234 567 8901" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idf-JM-Lah">
-                                        <rect key="frame" x="131" y="51.5" width="83.5" height="13"/>
+                                        <rect key="frame" x="131" y="52" width="83.5" height="13"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="11"/>
                                         <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location-icon" translatesAutoresizingMaskIntoConstraints="NO" id="kTB-vJ-80Z">
-                                        <rect key="frame" x="116" y="68" width="10" height="10"/>
+                                        <rect key="frame" x="116" y="67.5" width="10" height="10"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="10" id="63g-GC-TsM"/>
                                             <constraint firstAttribute="width" constant="10" id="pPq-yG-pPS"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="313 Brooklyn Street, 34567 NY, USA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82o-aS-X7d">
-                                        <rect key="frame" x="131" y="66.5" width="179" height="13"/>
+                                        <rect key="frame" x="131" y="67" width="179" height="13"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="11"/>
                                         <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email-icon" translatesAutoresizingMaskIntoConstraints="NO" id="A9M-Nz-ZKW">
-                                        <rect key="frame" x="116" y="83" width="10" height="10"/>
+                                        <rect key="frame" x="116" y="82.5" width="10" height="10"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="10" id="JHd-RO-16K"/>
                                             <constraint firstAttribute="height" constant="10" id="mtE-T1-g9N"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mellissa@email.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ni-lY-L3t">
-                                        <rect key="frame" x="131" y="81.5" width="99.5" height="13"/>
+                                        <rect key="frame" x="131" y="82" width="99.5" height="13"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="11"/>
                                         <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2454,13 +2454,13 @@
                                         <rect key="frame" x="22" y="133" width="17" height="17"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REASON FOR VISIT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qo-Gs-lk5">
-                                        <rect key="frame" x="46.5" y="134.5" width="108" height="14"/>
+                                        <rect key="frame" x="46.5" y="135.5" width="108" height="14"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hypertension" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzA-RU-fbA">
-                                        <rect key="frame" x="226.5" y="132" width="95.5" height="19"/>
+                                        <rect key="frame" x="226.5" y="133" width="95.5" height="19"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2469,13 +2469,13 @@
                                         <rect key="frame" x="21.5" y="162" width="18" height="18"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELECTED DATE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8T-tw-2zz">
-                                        <rect key="frame" x="47.5" y="164" width="93.5" height="14"/>
+                                        <rect key="frame" x="47.5" y="165" width="93.5" height="14"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hypertension" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FlM-su-PFQ">
-                                        <rect key="frame" x="226.5" y="161.5" width="95.5" height="19"/>
+                                        <rect key="frame" x="226.5" y="162.5" width="95.5" height="19"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2484,7 +2484,7 @@
                                         <rect key="frame" x="21.5" y="192" width="18" height="18"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELECTED TIME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRv-4V-ps6">
-                                        <rect key="frame" x="46.5" y="194" width="92" height="14"/>
+                                        <rect key="frame" x="46.5" y="195" width="92" height="14"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2500,6 +2500,59 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z8m-4K-hXC">
+                                        <rect key="frame" x="0.0" y="228" width="347" height="90"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Appointment Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdL-P9-5Wo">
+                                                <rect key="frame" x="23" y="13" width="125" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="FWD-mY-AJT"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending Confirmation" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJz-Io-EuM">
+                                                <rect key="frame" x="165.5" y="13" width="157.5" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="0XY-wq-c69"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="184-Ey-f7S">
+                                                <rect key="frame" x="111" y="42" width="121" height="48"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSR-aV-m05">
+                                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                                        <state key="normal" image="Ok_100"/>
+                                                        <connections>
+                                                            <action selector="okButtonPressed:" destination="QPb-MD-TdG" eventType="touchUpInside" id="Hwl-aH-NUC"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3a-0R-Omd">
+                                                        <rect key="frame" x="73" y="0.0" width="48" height="48"/>
+                                                        <state key="normal" image="Cancel_100"/>
+                                                        <connections>
+                                                            <action selector="cancelButtonPressed:" destination="QPb-MD-TdG" eventType="touchUpInside" id="Zqx-Wc-2tR"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="184-Ey-f7S" secondAttribute="bottom" id="5W0-YA-WXq"/>
+                                            <constraint firstItem="RJz-Io-EuM" firstAttribute="top" secondItem="Z8m-4K-hXC" secondAttribute="top" constant="13" id="9O0-BI-1mF"/>
+                                            <constraint firstAttribute="height" constant="90" id="Ddn-s0-M5C"/>
+                                            <constraint firstAttribute="trailing" secondItem="RJz-Io-EuM" secondAttribute="trailing" constant="24" id="Fvq-gA-DiC"/>
+                                            <constraint firstItem="RJz-Io-EuM" firstAttribute="leading" secondItem="fdL-P9-5Wo" secondAttribute="trailing" constant="17" id="Kww-2F-919"/>
+                                            <constraint firstItem="fdL-P9-5Wo" firstAttribute="leading" secondItem="Z8m-4K-hXC" secondAttribute="leading" constant="23" id="OGP-B4-J2R"/>
+                                            <constraint firstItem="fdL-P9-5Wo" firstAttribute="top" secondItem="Z8m-4K-hXC" secondAttribute="top" constant="13" id="bsk-GH-0RG"/>
+                                            <constraint firstItem="184-Ey-f7S" firstAttribute="centerX" secondItem="Z8m-4K-hXC" secondAttribute="centerX" constant="-2" id="n66-Wo-ZMv"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -2513,11 +2566,12 @@
                                     <constraint firstItem="yBb-rb-FKh" firstAttribute="leading" secondItem="MFy-aU-UOp" secondAttribute="leading" constant="1" id="CF0-Jr-5Qs"/>
                                     <constraint firstItem="kTB-vJ-80Z" firstAttribute="leading" secondItem="yBb-rb-FKh" secondAttribute="leading" id="HW8-6y-PrH"/>
                                     <constraint firstItem="d2Y-kg-u2U" firstAttribute="trailing" secondItem="FlM-su-PFQ" secondAttribute="trailing" id="IvG-n9-jTJ"/>
-                                    <constraint firstAttribute="height" constant="350" id="JzH-U7-tFS"/>
+                                    <constraint firstAttribute="height" constant="345" id="JzH-U7-tFS"/>
                                     <constraint firstItem="idf-JM-Lah" firstAttribute="centerY" secondItem="yBb-rb-FKh" secondAttribute="centerY" id="LOl-Lo-sDF"/>
                                     <constraint firstItem="82o-aS-X7d" firstAttribute="centerY" secondItem="kTB-vJ-80Z" secondAttribute="centerY" id="Mm6-WU-hpM"/>
                                     <constraint firstItem="Vpl-LR-GYe" firstAttribute="top" secondItem="d8G-85-7OF" secondAttribute="bottom" constant="12" id="OdL-sH-SU8"/>
                                     <constraint firstItem="A9M-Nz-ZKW" firstAttribute="top" secondItem="kTB-vJ-80Z" secondAttribute="bottom" constant="5" id="OtP-Li-wzi"/>
+                                    <constraint firstAttribute="bottom" secondItem="Z8m-4K-hXC" secondAttribute="bottom" constant="27" id="QJ8-w0-RSO"/>
                                     <constraint firstItem="Map-vQ-Sn9" firstAttribute="leading" secondItem="1Hm-Nu-vdQ" secondAttribute="leading" constant="20" id="QXz-O7-CgR"/>
                                     <constraint firstItem="w8T-tw-2zz" firstAttribute="leading" secondItem="Vpl-LR-GYe" secondAttribute="trailing" constant="7.5" id="SwP-3W-eaG"/>
                                     <constraint firstItem="nRv-4V-ps6" firstAttribute="leading" secondItem="roa-2U-339" secondAttribute="trailing" constant="7.5" id="TKS-oH-tAo"/>
@@ -2525,12 +2579,14 @@
                                     <constraint firstItem="5ni-lY-L3t" firstAttribute="leading" secondItem="82o-aS-X7d" secondAttribute="leading" id="Zmt-B3-CVS"/>
                                     <constraint firstItem="2qo-Gs-lk5" firstAttribute="leading" secondItem="d8G-85-7OF" secondAttribute="trailing" constant="7.5" id="Zyq-cN-JyR"/>
                                     <constraint firstItem="mzA-RU-fbA" firstAttribute="centerY" secondItem="2qo-Gs-lk5" secondAttribute="centerY" id="aJD-Y6-Grj"/>
+                                    <constraint firstAttribute="trailing" secondItem="Z8m-4K-hXC" secondAttribute="trailing" id="b3x-V3-4uT"/>
                                     <constraint firstAttribute="trailing" secondItem="D56-tn-q1r" secondAttribute="trailing" id="bFN-8a-Fgd"/>
                                     <constraint firstItem="d8G-85-7OF" firstAttribute="top" secondItem="D56-tn-q1r" secondAttribute="bottom" constant="22" id="bK6-bR-pVl"/>
                                     <constraint firstItem="w8T-tw-2zz" firstAttribute="centerY" secondItem="Vpl-LR-GYe" secondAttribute="centerY" id="bMi-iD-KgO"/>
                                     <constraint firstItem="D56-tn-q1r" firstAttribute="leading" secondItem="1Hm-Nu-vdQ" secondAttribute="leading" id="bXC-RU-0pr"/>
                                     <constraint firstItem="FlM-su-PFQ" firstAttribute="trailing" secondItem="mzA-RU-fbA" secondAttribute="trailing" id="bed-eX-63G"/>
                                     <constraint firstItem="5ni-lY-L3t" firstAttribute="centerY" secondItem="A9M-Nz-ZKW" secondAttribute="centerY" id="c1V-n8-bPa"/>
+                                    <constraint firstItem="Z8m-4K-hXC" firstAttribute="leading" secondItem="1Hm-Nu-vdQ" secondAttribute="leading" id="cqf-Iq-fQH"/>
                                     <constraint firstAttribute="trailing" secondItem="mzA-RU-fbA" secondAttribute="trailing" constant="25" id="drC-hU-tTb"/>
                                     <constraint firstItem="A9M-Nz-ZKW" firstAttribute="leading" secondItem="kTB-vJ-80Z" secondAttribute="leading" id="egP-0d-OhT"/>
                                     <constraint firstItem="A9M-Nz-ZKW" firstAttribute="width" secondItem="kTB-vJ-80Z" secondAttribute="width" id="hJn-VS-CEG"/>
@@ -2568,14 +2624,14 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="1Hm-Nu-vdQ" firstAttribute="centerY" secondItem="ozg-M7-IdT" secondAttribute="centerY" id="5ar-ip-QZl"/>
+                            <constraint firstItem="1Hm-Nu-vdQ" firstAttribute="centerY" secondItem="ozg-M7-IdT" secondAttribute="centerY" constant="-2" id="5ar-ip-QZl"/>
                             <constraint firstItem="kIC-R7-c78" firstAttribute="centerX" secondItem="ozg-M7-IdT" secondAttribute="centerX" id="ANd-ON-EfT"/>
                             <constraint firstItem="kIC-R7-c78" firstAttribute="centerY" secondItem="ozg-M7-IdT" secondAttribute="centerY" id="JCg-L7-zzQ"/>
                             <constraint firstItem="zMJ-io-l3u" firstAttribute="width" secondItem="ozg-M7-IdT" secondAttribute="width" id="W8h-lV-1sX"/>
                             <constraint firstItem="zMJ-io-l3u" firstAttribute="centerX" secondItem="ozg-M7-IdT" secondAttribute="centerX" id="dkG-c9-4wZ"/>
                             <constraint firstItem="zMJ-io-l3u" firstAttribute="height" secondItem="ozg-M7-IdT" secondAttribute="height" id="jnY-pz-v2t"/>
                             <constraint firstItem="zMJ-io-l3u" firstAttribute="centerY" secondItem="ozg-M7-IdT" secondAttribute="centerY" id="mvQ-op-NVa"/>
-                            <constraint firstItem="1Hm-Nu-vdQ" firstAttribute="centerX" secondItem="ozg-M7-IdT" secondAttribute="centerX" id="nRQ-9V-ueR"/>
+                            <constraint firstItem="1Hm-Nu-vdQ" firstAttribute="centerX" secondItem="ozg-M7-IdT" secondAttribute="centerX" constant="1" id="nRQ-9V-ueR"/>
                             <constraint firstItem="kIC-R7-c78" firstAttribute="height" secondItem="ozg-M7-IdT" secondAttribute="height" id="oKn-cF-ySs"/>
                             <constraint firstItem="kIC-R7-c78" firstAttribute="width" secondItem="ozg-M7-IdT" secondAttribute="width" id="zdY-rr-1IQ"/>
                         </constraints>
@@ -2583,9 +2639,11 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="addressLabel" destination="82o-aS-X7d" id="4fX-5k-CaN"/>
+                        <outlet property="appointmentStatusView" destination="Z8m-4K-hXC" id="KAq-eG-NuB"/>
                         <outlet property="emailLabel" destination="5ni-lY-L3t" id="ATI-ZH-rsY"/>
                         <outlet property="imageView" destination="Map-vQ-Sn9" id="28w-sm-jnI"/>
                         <outlet property="nameLabel" destination="MFy-aU-UOp" id="Psr-P5-bgp"/>
+                        <outlet property="pendingConfirmationLabel" destination="RJz-Io-EuM" id="xCI-Hu-sL4"/>
                         <outlet property="phoneLabel" destination="idf-JM-Lah" id="b0K-XV-GV6"/>
                         <outlet property="reasonforvisitLabel" destination="mzA-RU-fbA" id="ebu-f5-ibN"/>
                         <outlet property="selectedLabel" destination="FlM-su-PFQ" id="uvh-sE-6Sy"/>
@@ -3855,6 +3913,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Cancel_100" width="48" height="48"/>
+        <image name="Ok_100" width="48" height="48"/>
         <image name="back-white" width="18" height="30"/>
         <image name="down-icon" width="15" height="9"/>
         <image name="email-icon" width="14" height="16"/>
