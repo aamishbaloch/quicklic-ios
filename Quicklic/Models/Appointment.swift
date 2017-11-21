@@ -11,7 +11,7 @@ import UIKit
 enum AppointmentStatus: Int {
     case Confirm = 1, Pending, NoShow, Cancel, Discard = 5
     
-    var value : String {
+        var value : String {
         switch self {
         case .Confirm:
             return "Confirmed"
@@ -78,6 +78,7 @@ class Appointment: BaseEntity {
     var patient = User()
     var reason = GenericModel()
     var start_datetime:Date?
+    var end_datetime:Date?
     var status: AppointmentStatus?
     
     

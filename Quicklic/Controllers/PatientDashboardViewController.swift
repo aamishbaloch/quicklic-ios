@@ -32,11 +32,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         setupDatePicker()
         collectionView.delegate = self
         collectionView.dataSource = self
-      
-        let date = Date()
-        selectedDate = UtilityManager.stringFromNSDateWithFormat(date: date as NSDate, format: "yyyy-MM-dd")
-       
-        
+   
         let user = ApplicationManager.sharedInstance.user
         if user.userType == nil {
             
@@ -46,7 +42,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
 
             SVProgressHUD.show()
             RequestManager.loginUser(param: params, successBlock: { (response: [String : AnyObject]) in
-//                SVProgressHUD.dismiss()
+            //SVProgressHUD.dismiss()
                 
                 let user = User(dictionary: response)
                 ApplicationManager.sharedInstance.user = user
@@ -58,6 +54,9 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
                 }
                 else{
                     ApplicationManager.sharedInstance.userType = .Doctor
+                }
+                if let leftController = self.sideMenuViewController.leftMenuViewController as? LeftMenuViewController{
+                    leftController.tableView.reloadData()
                 }
                 self.updateUI(user: user)
                 self.fetchData()
@@ -80,6 +79,9 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+       
+        let date = Date()
+        selectedDate = UtilityManager.stringFromNSDateWithFormat(date: date as NSDate, format: "yyyy-MM-dd")
         
     }
     
@@ -133,10 +135,9 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     func fetchData() {
         
         var params = [String: Any]()
-        
-       // params["start_date"] = "2017-11-17"
         if let date = selectedDate {
             params["start_date"] = date
+            params["end_date"] = date
         }
         
         RequestManager.getAppointments(params:params, successBlock: { (response) in
@@ -153,8 +154,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         }
         
     }
-    
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return appointmentsArray.count
     }
@@ -162,9 +162,8 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DoctorAppointmentCollectionViewCell.identifier, for: indexPath) as! DoctorAppointmentCollectionViewCell
+        
         let appointment = appointmentsArray[indexPath.item]
-        
-        
         if ApplicationManager.sharedInstance.userType == .Patient {
             cell.nameLabel.text = appointment.doctor.full_name
             cell.specializationLabel.text = appointment.doctor.specializationName

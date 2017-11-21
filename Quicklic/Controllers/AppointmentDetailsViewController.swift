@@ -18,16 +18,17 @@ class AppointmentDetailsViewController: UIViewController {
     
     static let storyboardID = "appointmentDetailsViewController"
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: DesignableImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var reasonforvisitLabel: UILabel!
-    @IBOutlet weak var selectedLabel: UILabel!
     @IBOutlet weak var selectedtimeLabel: UILabel!
     @IBOutlet weak var appointmentStatusView: UIView!
     @IBOutlet weak var pendingConfirmationLabel: UILabel!
+    @IBOutlet weak var selectedDateLabel: UILabel!
+    
     
     var appointment: Appointment!
     var doctor:User?
@@ -54,21 +55,29 @@ class AppointmentDetailsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        nameLabel.text = appointment.doctor.full_name ?? "N/A"
-        phoneLabel.text = appointment.doctor.phone ?? "N/A"
-        addressLabel.text = appointment.doctor.address ?? "N/A"
-        emailLabel.text = appointment.doctor.email ?? "N/A"
-        imageView.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
+        nameLabel.text = appointment.patient.full_name ?? "N/A"
+        phoneLabel.text = appointment.patient.phone ?? "N/A"
+        addressLabel.text = appointment.patient.address ?? "N/A"
+        emailLabel.text = appointment.patient.email ?? "N/A"
+        imageView.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
         if let startTime = appointment.start_datetime {
             selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
         }
         reasonforvisitLabel.text = appointment.reason.name ?? "N/A"
+        pendingConfirmationLabel.text = appointment.status?.value ?? "N/A"
+        selectedDateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
+        
+        if appointment.status?.value == "Confirmed"
+        {
+            pendingConfirmationLabel.textColor = UIColor.green
+        }else{
+            pendingConfirmationLabel.textColor = UIColor.red
+        }
         
     }
     
     @IBAction func okButtonPressed(_ sender: UIButton) {
-    
-        
+
         UIAlertController.showAlert(in: self, withTitle: "Confirmation", message: "Are you sure you want to confirm?", cancelButtonTitle: "No", destructiveButtonTitle: nil, otherButtonTitles: ["Yes"]) { (alertController, alertAction, buttonIndex) in
             if buttonIndex == alertController.firstOtherButtonIndex {
                  self.confirmed()
@@ -116,11 +125,9 @@ class AppointmentDetailsViewController: UIViewController {
         print("Appointment Id \(String(describing: appointment.id))")
         SVProgressHUD.show()
         RequestManager.appointmentStatus(doctorID:appointment.doctor.id!, appointmentID: appointment.id! , params: params, successBlock: { (response) in
-            self.pendingConfirmationLabel.text = "Discard"
             
             self.delegate?.appointmenConfirmation(status: AppointmentStatus.Discard, index: self.appointmentIndex!)
-            
-            self.pendingConfirmationLabel.textColor = UIColor.red
+
             SVProgressHUD.dismiss()
             self.dismiss(animated: false, completion: nil)
         }, failureBlock: { (error) in
