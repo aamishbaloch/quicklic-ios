@@ -15,6 +15,7 @@ class Clinic: BaseEntity {
     var phone: String?
     var location: String?
     var image: String?
+    var rating:String?
 
     override init() {
         super.init()

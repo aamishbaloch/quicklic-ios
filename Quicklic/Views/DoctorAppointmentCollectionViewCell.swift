@@ -23,14 +23,14 @@ class DoctorAppointmentCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        let path = UIBezierPath(roundedRect:statusView.bounds,
-                                byRoundingCorners:[.bottomLeft, .bottomRight],
-                                cornerRadii: CGSize(width: 5, height:  5))
-        
-        let maskLayer = CAShapeLayer()
-        
-        maskLayer.path = path.cgPath
-        statusView.layer.mask = maskLayer
+//        let path = UIBezierPath(roundedRect:statusView.bounds,
+//                                byRoundingCorners:[.bottomLeft, .bottomRight],
+//                                cornerRadii: CGSize(width: 5, height:  5))
+//
+//        let maskLayer = CAShapeLayer()
+//
+//        maskLayer.path = path.cgPath
+//        statusView.layer.mask = maskLayer
     }
 
     

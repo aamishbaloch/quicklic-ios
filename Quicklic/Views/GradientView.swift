@@ -39,8 +39,8 @@ import UIKit
         }
     }
     
-    @IBInspectable var gradientStartColor: UIColor = UIColor(hex: "#5cc25c")
-    @IBInspectable var gradientEndColor: UIColor = UIColor(hex: "#12ad8d")
+    @IBInspectable var gradientStartColor: UIColor = UIColor(hex: "#12ad8d")
+    @IBInspectable var gradientEndColor: UIColor = UIColor(hex: "#5cc25c")
     @IBInspectable var vertical : Bool = false
     @IBInspectable var bgImage: UIImage? = nil
     @IBInspectable var opacity: Float = 1.0

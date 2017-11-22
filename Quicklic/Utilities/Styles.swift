@@ -40,7 +40,7 @@ class Styles {
         //Probably want to set the tintColor of UIWindow but it didn't seem necessary right now
         
 //        UINavigationBar.appearance().barTintColor = UIColor(hex: "#71AB21")
-        UINavigationBar.appearance().barTintColor = UIColor(hex: "#429321")
+        UINavigationBar.appearance().barTintColor = UIColor(hex: "#12ad8d")
         
         UIApplication.shared.statusBarStyle = .lightContent
         UINavigationBar.appearance().tintColor = .white

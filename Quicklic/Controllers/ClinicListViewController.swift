@@ -65,15 +65,16 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ClinicCollectionViewCell.identifier, for: indexPath) as! ClinicCollectionViewCell
         
         let clinic = self.clinicArray[indexPath.row]
-        let clinicName = clinic.name
-        let clinicAddress = clinic.location
         
         
-        cell.nameLabel.text = clinicName! + "," + clinicAddress!
+        
+        var text  = clinic.name! + ", " + clinic.location!
+        text = text + clinic.phone!
+        
+        cell.nameLabel.text = text
         cell.clinicImageView.sd_setImage(with: URL(string: clinic.image ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
-       // cell.phoneLabel.text = clinic.phone
-      //  cell.locationLabel.text = clinicName! + "," + clinicAddress!
-        
+        let floatValue : Float = NSString(string: clinic.rating!).floatValue
+        cell.ratingView.value = CGFloat(floatValue)
         
         return cell
     }

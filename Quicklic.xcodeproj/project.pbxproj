@@ -104,6 +104,7 @@
 		D1295FA71FBC292000715C45 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1295FA61FBC292000715C45 /* Time.swift */; };
 		D1295FAB1FBC2D3600715C45 /* CreatAppointmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1295FAA1FBC2D3600715C45 /* CreatAppointmentCollectionViewCell.swift */; };
 		D1400AD11FBDA6100021726C /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1400AD01FBDA6100021726C /* Appointment.swift */; };
+		D1701A271FC5983700248867 /* HCSStarRatingView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1701A261FC5983700248867 /* HCSStarRatingView.framework */; };
 		D1BC6D541FBAD29D00A20344 /* ReasonSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BC6D531FBAD29D00A20344 /* ReasonSelectionViewController.swift */; };
 		D1BC6D561FBAEF3200A20344 /* ReasonSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BC6D551FBAEF3200A20344 /* ReasonSelectionTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -231,6 +232,7 @@
 		D1295FA61FBC292000715C45 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		D1295FAA1FBC2D3600715C45 /* CreatAppointmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatAppointmentCollectionViewCell.swift; sourceTree = "<group>"; };
 		D1400AD01FBDA6100021726C /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
+		D1701A261FC5983700248867 /* HCSStarRatingView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HCSStarRatingView.framework; path = Carthage/Build/iOS/HCSStarRatingView.framework; sourceTree = "<group>"; };
 		D1BC6D531FBAD29D00A20344 /* ReasonSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonSelectionViewController.swift; sourceTree = "<group>"; };
 		D1BC6D551FBAEF3200A20344 /* ReasonSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonSelectionTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -244,6 +246,7 @@
 				69F4B7D61F75317D00BFB414 /* SwiftValidator.framework in Frameworks */,
 				691AA9181F98A283002A6DFC /* MRCountryPicker.framework in Frameworks */,
 				86A4269C2E52DE810B7CD185 /* libPods-Quicklic.a in Frameworks */,
+				D1701A271FC5983700248867 /* HCSStarRatingView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +476,7 @@
 		F07639B97D5ACBBA47CF64B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D1701A261FC5983700248867 /* HCSStarRatingView.framework */,
 				691AA9171F98A282002A6DFC /* MRCountryPicker.framework */,
 				69F4B7D51F75317D00BFB414 /* SwiftValidator.framework */,
 				692AFF911F70368F00E3ECB9 /* MobileCoreServices.framework */,
@@ -620,6 +624,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftValidator.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MRCountryPicker.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/HCSStarRatingView.framework",
 			);
 			outputPaths = (
 			);

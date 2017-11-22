@@ -9,6 +9,5 @@ pod 'AFNetworking', '~> 3.0'
 pod 'TPKeyboardAvoiding'
 pod 'SVProgressHUD'
 pod 'SDWebImage', '~> 4.0'
-pod 'FloatRatingView', '~> 2.0.0'
 
 end
