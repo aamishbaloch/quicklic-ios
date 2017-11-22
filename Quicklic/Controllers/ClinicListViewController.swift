@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, HospitalDeletionDelegate {
+class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, HospitalDeletionDelegate,UICollectionViewDelegateFlowLayout {
 
     static let storyboardID = "clinicListViewController"
     
@@ -65,11 +65,16 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ClinicCollectionViewCell.identifier, for: indexPath) as! ClinicCollectionViewCell
         
         let clinic = self.clinicArray[indexPath.row]
+        let clinicName = clinic.name
+        let clinicAddress = clinic.location
         
-        cell.nameLabel.text = clinic.name
+        
+        cell.nameLabel.text = clinicName! + "," + clinicAddress!
         cell.clinicImageView.sd_setImage(with: URL(string: clinic.image ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
-        cell.phoneLabel.text = clinic.phone
-        cell.locationLabel.text = clinic.location
+       // cell.phoneLabel.text = clinic.phone
+      //  cell.locationLabel.text = clinicName! + "," + clinicAddress!
+        
+        
         return cell
     }
     
@@ -78,6 +83,13 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
         Router.sharedInstance.showHospitalDetails(clinic: clinicArray[indexPath.row], fromController: self)
         
     }
+    
+    func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellWidth = collectionView.bounds.width
+        
+        return CGSize(width: cellWidth, height: 185)
+    }
+    
     
     func addButtonPressed(_ sender: UIButton) {
         performSegue(withIdentifier: "showAddClinic", sender: self)

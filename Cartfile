@@ -1,2 +1,3 @@
 github "jpotts18/SwiftValidator"
 github "xTrinch/MRCountryPicker" ~> 0.0.7
+github "hsousa/HCSStarRatingView"

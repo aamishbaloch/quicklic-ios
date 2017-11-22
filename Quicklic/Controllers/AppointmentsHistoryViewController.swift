@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
 
     static let storyboardID = "appointmentsHistoryViewController"
     
@@ -64,6 +64,8 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         return cell
     }
     
+   
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
@@ -75,6 +77,7 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         if let endDate = date {
          params["end_date"] = endDate
         }
+        SVProgressHUD.show()
         RequestManager.getAppointments(params:params, successBlock: { (response) in
           //  self.appointmentsArray.removeAll()
             for object in response {
