@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate, DoctorDetailDelegate {
+class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, DoctorDetailDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
 
     static let storyboardID = "searchDoctorViewController"
     
@@ -25,6 +25,9 @@ class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UI
         title = "Select Doctor"
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        collectionView.emptyDataSetDelegate = self
+        collectionView.emptyDataSetSource = self
         
         searchField.delegate = self
 //        searchField.addTarget(self, action: #selector(self.searchFieldValueChanged(_:)), for: .)
@@ -84,6 +87,12 @@ class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UI
         Router.sharedInstance.showDoctorDetails(doctor: self.doctorsArray[indexPath.row], fromController: self)
     }
     
+    func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellWidth = collectionView.bounds.width
+        
+        return CGSize(width: cellWidth, height: CGFloat(90))
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -96,6 +105,84 @@ class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UI
     
     func didPressAppointmentButtion(doctor: User) {
         Router.sharedInstance.createAppointment(doctor: doctor, fromController: self)
+    }
+    
+    
+    
+    //MARK : - EmptyDataSource Methods
+    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "No Doctors Found"
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        paragraphStyle.alignment = .center
+        
+        let attributes : [String: Any] = [NSFontAttributeName: UIFont(font: .Medium, size: 17.0) as Any,
+                                          NSForegroundColorAttributeName: UIColor(red: 170.0/255.0, green: 171.0/255.0, blue: 179.0/255.0, alpha: 1.0),
+                                          NSParagraphStyleAttributeName: paragraphStyle]
+        return NSMutableAttributedString(string: text, attributes: attributes)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "Please ask your respective clinic to add their doctors to Quicklic"
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        paragraphStyle.alignment = .center
+        
+        let attributes : [String: Any] = [NSFontAttributeName: UIFont(font: .Standard, size: 15.0) as Any,
+                                          NSForegroundColorAttributeName: UIColor(red: 170.0/255.0, green: 171.0/255.0, blue: 179.0/255.0, alpha: 1.0),
+                                          NSParagraphStyleAttributeName: paragraphStyle]
+        return NSMutableAttributedString(string: text, attributes: attributes)
+    }
+    
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+        let text = "Reload"
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        paragraphStyle.alignment = .center
+        
+        var color: UIColor!
+        
+        if state == .normal {
+            color = UIColor(red: 44.0/255.0, green: 137.0/255.0, blue: 202.0/255.0, alpha: 1.0)
+        }
+        if state == .highlighted {
+            color = UIColor(red: 106.0/255.0, green: 187.0/255.0, blue: 227.0/255.0, alpha: 1.0)
+        }
+        
+        let attributes : [String: Any] = [NSFontAttributeName: UIFont(font: .SemiBold, size: 14.0) as Any,
+                                          NSForegroundColorAttributeName: color,
+                                          NSParagraphStyleAttributeName: paragraphStyle]
+        return NSMutableAttributedString(string: text, attributes: attributes)
+    }
+    
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return UIColor(white: 1.0, alpha: 1.0)
+    }
+    
+    func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func emptyDataSetShouldAllowTouch(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return false
+    }
+    
+    func emptyDataSet(_ scrollView: UIScrollView!, didTap view: UIView!) {
+        SVProgressHUD.show()
+        fetchData()
+    }
+    
+    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+        SVProgressHUD.show()
+        fetchData()
     }
     
     /*

@@ -8,11 +8,11 @@
 
 import UIKit
 
-class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,UICollectionViewDelegate,UICollectionViewDataSource{
+class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
-
+    
     static let storyboardID = "createAppointmentViewController"
-
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImageView: DesignableImageView!
     @IBOutlet weak var specialityLabel: UILabel!
@@ -55,7 +55,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
             }
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         
         super.didReceiveMemoryWarning()
@@ -66,16 +66,16 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         
         selectedReason = reason
         print("selected reason is:\(String(describing: selectedReason?.name))")
-      
+        
         if let isReason = selectedReason {
-            reasonButton.setTitle("\(isReason.name ?? "")", for: .normal)
+            reasonButton.setTitle("\(isReason.name ?? "")   ", for: .normal)
         }
         else{
             SVProgressHUD.showError(withStatus: "Please select reason")
             return
         }
     }
-  
+    
     @IBAction func reasonButtonPressed(_ sender: Any) {
         Router.sharedInstance.reasonSelection(fromController: self)
     }
@@ -93,7 +93,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
     @IBAction func didEndEditingDateField(_ sender: DatePickerTextField) {
         fetchTime(dateString: dateField.text)
     }
-   
+    
     func fetchTime(dateString: String? = nil){
         
         guard let date = dateString else { return }
@@ -103,9 +103,9 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         
         SVProgressHUD.show()
         RequestManager.getTimeList(doctorID: (doctor?.id)!,params: params, successBlock: { (response) in
- 
+            
             for object in response {
-            self.timeArray.append(Time(dictionary: object))
+                self.timeArray.append(Time(dictionary: object))
             }
             self.collectionView.reloadData()
             SVProgressHUD.dismiss()
@@ -114,7 +114,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
             SVProgressHUD.showError(withStatus: error)
         }
     }
-  
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.timeArray.count
     }
@@ -123,41 +123,58 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreatAppointmentCollectionViewCell.identifier, for: indexPath) as! CreatAppointmentCollectionViewCell
         
         if let startTime = self.timeArray[indexPath.row].start {
-            cell.timelbl.text = UtilityManager.stringFromNSDateWithFormat(date: startTime, format: "HH:mm a")
+            cell.timelbl.text = UtilityManager.stringFromNSDateWithFormat(date: startTime, format: "hh:mm a")
         }
         
+        cell.layer.cornerRadius = 5
+        cell.layer.masksToBounds = true
+        
         if indexPath.item == selectedTimeIndex {
-            cell.layer.borderWidth = 1.0
-            cell.layer.borderColor = UIColor.green.cgColor
+            cell.layer.borderWidth = 0.0
+            cell.backgroundColor = Styles.sharedStyles.primaryColor
+            cell.timelbl.textColor = .white
         }
         else{
-            cell.layer.borderWidth = 0
-            cell.layer.borderColor = UIColor.white.cgColor
+            cell.layer.borderWidth = 1
+            cell.layer.borderColor = UIColor.lightGray.cgColor
+            cell.backgroundColor = .white
+            cell.timelbl.textColor = .black
         }
-       
+        
         return cell
     }
     
-     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.allowsMultipleSelection = false
         selectedTimeIndex = indexPath.item
         collectionView.reloadData()
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.bounds.width/3) - 6
+        
+        return CGSize(width: width, height: 30)
+    }
+    
     func creatAppointment(){
         
-            guard let appointmentDate = dateField.text else {
+        guard let appointmentDate = dateField.text else {
             SVProgressHUD.showError(withStatus: "Please select date")
             return
         }
-      
+        
         var start = ""
         var end = ""
         
+        guard let reason = selectedReason else {
+            SVProgressHUD.showError(withStatus: "Please select reason")
+            return
+        }
+        
         if let startTime = self.timeArray[selectedTimeIndex].start,selectedTimeIndex >= 0 {
             let startDateString = UtilityManager.serverDateStringFromAppDateString(date: appointmentDate)
-            let startTimeString = UtilityManager.stringFromNSDateWithFormat(date: startTime, format: "hh:mm:ss")
+            let startTimeString = UtilityManager.stringFromNSDateWithFormat(date: startTime, format: "HH:mm:ss")
             start = "\(startDateString)T\(startTimeString)"
             print("Start date is: \(start)")
         }
@@ -166,14 +183,14 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
             return
         }
         
-       if let endTime = self.timeArray[selectedTimeIndex].end {
+        if let endTime = self.timeArray[selectedTimeIndex].end {
             let endDateString = UtilityManager.serverDateStringFromAppDateString(date: appointmentDate)
-            let endTimeString = UtilityManager.stringFromNSDateWithFormat(date: endTime, format: "hh:mm:ss")
+            let endTimeString = UtilityManager.stringFromNSDateWithFormat(date: endTime, format: "HH:mm:ss")
             end = "\(endDateString)T\(endTimeString)"
             print("End date is: \(end)")
         }
-       else{
-        
+        else{
+            
         }
         
         var params = [String: Any]()
@@ -182,7 +199,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         params["clinic"] = clinicID
         params["doctor"] = doctor?.id
         params["patient"] = ApplicationManager.sharedInstance.user.id
-        params["reason"] = selectedReason?.id
+        params["reason"] = reason.id
         params["status"] = 2
         
         SVProgressHUD.show()

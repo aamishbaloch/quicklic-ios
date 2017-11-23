@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PatientDashboardViewController: UIViewController, ScrollableDatepickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource,AppointmentStatusDelegate {
+class PatientDashboardViewController: UIViewController, ScrollableDatepickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,AppointmentStatusDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
   
     static let storyboardID = "patientContentController"
     
@@ -32,6 +32,9 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         setupDatePicker()
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        collectionView.emptyDataSetSource = self
+        collectionView.emptyDataSetDelegate = self
    
         let user = ApplicationManager.sharedInstance.user
         if user.userType == nil {
@@ -176,7 +179,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         }
         
         if let startTime = self.appointmentsArray[indexPath.row].start_datetime {
-            cell.timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
+            cell.timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "hh:mm a")
         }
         let status = appointment.status?.value
         cell.statusLabel.text = status
@@ -188,6 +191,12 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         Router.sharedInstance.showAppointmentDetails(appointment: self.appointmentsArray[indexPath.item],appointmentIndex: indexPath.item, fromController: self)
     }
     
+    func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellWidth = self.collectionView.bounds.width
+        
+        return CGSize(width: cellWidth, height: 90)
+    }
+    
     @IBAction func newAppointmentButtonPressed(_ sender: Any) {
         Router.sharedInstance.showSearchDoctor()
     }
@@ -195,6 +204,82 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     @IBAction func appointmentHistoryButtonPressed(_ sender: Any) {
         Router.sharedInstance.showAppointmentHistory()
         
+    }
+    
+    //MARK : - EmptyDataSource Methods
+    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "No Appointments Found"
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        paragraphStyle.alignment = .center
+        
+        let attributes : [String: Any] = [NSFontAttributeName: UIFont(font: .Medium, size: 17.0) as Any,
+                                          NSForegroundColorAttributeName: UIColor(red: 170.0/255.0, green: 171.0/255.0, blue: 179.0/255.0, alpha: 1.0),
+                                          NSParagraphStyleAttributeName: paragraphStyle]
+        return NSMutableAttributedString(string: text, attributes: attributes)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "Create an appointment by clicking on the button above"
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        paragraphStyle.alignment = .center
+        
+        let attributes : [String: Any] = [NSFontAttributeName: UIFont(font: .Standard, size: 15.0) as Any,
+                                          NSForegroundColorAttributeName: UIColor(red: 170.0/255.0, green: 171.0/255.0, blue: 179.0/255.0, alpha: 1.0),
+                                          NSParagraphStyleAttributeName: paragraphStyle]
+        return NSMutableAttributedString(string: text, attributes: attributes)
+    }
+    
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+        let text = "Reload"
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        paragraphStyle.alignment = .center
+        
+        var color: UIColor!
+        
+        if state == .normal {
+            color = UIColor(red: 44.0/255.0, green: 137.0/255.0, blue: 202.0/255.0, alpha: 1.0)
+        }
+        if state == .highlighted {
+            color = UIColor(red: 106.0/255.0, green: 187.0/255.0, blue: 227.0/255.0, alpha: 1.0)
+        }
+        
+        let attributes : [String: Any] = [NSFontAttributeName: UIFont(font: .SemiBold, size: 14.0) as Any,
+                                          NSForegroundColorAttributeName: color,
+                                          NSParagraphStyleAttributeName: paragraphStyle]
+        return NSMutableAttributedString(string: text, attributes: attributes)
+    }
+    
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return UIColor(white: 1.0, alpha: 1.0)
+    }
+    
+    func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func emptyDataSetShouldAllowTouch(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return false
+    }
+    
+    func emptyDataSet(_ scrollView: UIScrollView!, didTap view: UIView!) {
+        SVProgressHUD.show()
+        fetchData()
+    }
+    
+    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+        SVProgressHUD.show()
+        fetchData()
     }
     /*
     // MARK: - Navigation
