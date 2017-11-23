@@ -38,6 +38,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 //        nameLabel.text = user.full_name
 //        profileImageView.sd_setImage(with: URL(string: user.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
         
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+         
         
     }
     

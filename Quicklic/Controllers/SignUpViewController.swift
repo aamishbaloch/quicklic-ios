@@ -36,6 +36,7 @@ class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDel
         [nameField,passwordField,confirmPasswordField,phoneField].forEach { (field) in
             field?.delegate = self
         }
+      
         
     }
 
