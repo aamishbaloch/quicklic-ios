@@ -90,7 +90,7 @@ class Appointment: BaseEntity {
         super.init()
         let newDateFormatter = DateFormatter()
         newDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        newDateFormatter.timeZone = NSTimeZone(name: "UTC")! as TimeZone
+//        newDateFormatter.timeZone = NSTimeZone(name: "UTC")! as TimeZone
         self.setValuesForKeysWithJSONDictionary(dictionary, dateFormatter: newDateFormatter)
         self.clinic = Clinic(dictionary: dictionary["clinic"] as! [String: AnyObject])
         self.doctor = User(dictionary: dictionary["doctor"]  as! [String: AnyObject])

@@ -11,10 +11,13 @@ import UIKit
 
 class UtilityManager: NSObject {
     
-    static func stringFromNSDateWithFormat(date: NSDate, format : String) -> String {
+    static func stringFromNSDateWithFormat(date: NSDate, format : String, localTime: Bool = false) -> String {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
+        if localTime {
+            dateFormatter.timeZone = NSTimeZone.local
+        }
         return dateFormatter.string(from: date as Date)
         
     }
@@ -36,10 +39,13 @@ class UtilityManager: NSObject {
     static func serverDateStringFromAppDateString(date: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = Constant.appDateFormat
-
+//        dateFormatter.timeZone = NSTimeZone.local
+        
+        
         let newDateFormatter = DateFormatter()
         newDateFormatter.dateFormat = Constant.serverDateFormat
-        return newDateFormatter.string(from: dateFormatter.date(from: date)! as NSDate as Date)
+//        newDateFormatter.timeZone = NSTimeZone(name: "UTC")! as TimeZone
+        return newDateFormatter.string(from: dateFormatter.date(from: date)!)
     }
     
     

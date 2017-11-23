@@ -30,6 +30,7 @@ enum Font : String {
     case Bold = "SFUIDisplay-Bold"
     case SemiBold = "SFUIDisplay-SemiBold"
     case Light = "SFUIDisplay-Light"
+    case Medium = "SFUIDisplay-Medium"
 }
 
 class Styles {
@@ -40,11 +41,14 @@ class Styles {
         //Probably want to set the tintColor of UIWindow but it didn't seem necessary right now
         
 //        UINavigationBar.appearance().barTintColor = UIColor(hex: "#71AB21")
-        UINavigationBar.appearance().barTintColor = UIColor(hex: "#12ad8d")
+        UINavigationBar.appearance().barTintColor = Styles.sharedStyles.primaryColor
         
         UIApplication.shared.statusBarStyle = .lightContent
         UINavigationBar.appearance().tintColor = .white
         UIToolbar.appearance().tintColor = UIColor.blue
+        
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         
 //        UISegmentedControl.appearance().tintColor = UIColor.blue
 //        UINavigationBar.appearance().barStyle = UIBarStyle.black
@@ -66,6 +70,10 @@ class Styles {
     
     public var primaryGreyColor : UIColor {
         return UIColor(white: 0.2, alpha: 1.0)
+    }
+    
+    public var primaryColor : UIColor {
+        return UIColor(hex: "#12ad8d")
     }
     
     ///**Warning:** Not from style guide. Do not add more uses

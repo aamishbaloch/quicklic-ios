@@ -60,11 +60,11 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == selectedIndex {
-            Router.sharedInstance.hideSideMenu()
-            return
-        }
-        selectedIndex = indexPath.row
+//        if indexPath.row == selectedIndex {
+//            Router.sharedInstance.hideSideMenu()
+//            return
+//        }
+//        selectedIndex = indexPath.row
         
         switch ApplicationManager.sharedInstance.userType {
         case .Doctor:
