@@ -42,9 +42,10 @@ class Router: NSObject {
     }
     
     func showLandingPage() {
-//        UserDefaults.standard.set(nil, forKey: "userPhone")
-//        UserDefaults.standard.set(nil, forKey: "userPassword")
-        
+       //UserDefaults.standard.set(nil, forKey: "userPhone")
+       //UserDefaults.standard.set(nil, forKey: "userPassword")
+        UserDefaults.standard.set("", forKey: "token")
+        UserDefaults.standard.set(nil, forKey: "loggedIn")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController()

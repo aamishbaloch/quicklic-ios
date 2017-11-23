@@ -47,8 +47,7 @@ class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDel
     
     @IBAction func signupButtonPressed(_ sender: Any) {
         validator.validate(self)
-        
-        
+    
     }
     
     func validationSuccessful() {
@@ -69,6 +68,7 @@ class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDel
             UserDefaults.standard.set(response["token"] as! String, forKey: "token")
             UserDefaults.standard.set(user.phone, forKey: "userPhone")
             UserDefaults.standard.set(self.passwordField.text, forKey: "userPassword")
+            UserDefaults.standard.set(true, forKey: "loggedIn") 
             if response["role"] as! Int == Role.Patient.rawValue {
                 ApplicationManager.sharedInstance.userType = .Patient
             }

@@ -32,7 +32,8 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         [emailField,passwordField].forEach { (field) in
             field?.delegate = self
         }
-        
+         print( "Login data \(UserDefaults.standard.string(forKey: "userPhone") ?? "")")
+         print( "Login data \(UserDefaults.standard.string(forKey: "userPassword") ?? "")")
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,8 +50,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
     @IBAction func touchIDPressed(_ sender: Any) {
         
         authenticateUser()
-        
-        
+   
     }
     
     func authenticateUser() {
@@ -65,13 +65,15 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
                 
                 DispatchQueue.main.async {
                     if success {
-                        //self.runSecretCode()
-                       
-                        UserDefaults.standard.set(self.emailField.text, forKey: "userPhone")
-                        UserDefaults.standard.set(self.passwordField.text, forKey: "userPassword")
+                      
+                     let phone = UserDefaults.standard.string(forKey: "userPhone")
+                     let pass = UserDefaults.standard.string(forKey: "userPassword")
                         
-       
-                        
+                        if (phone != nil && pass != nil)
+                        {
+                            Router.sharedInstance.showDashboardAsRoot()
+                        }
+    
                     } else {
                         let ac = UIAlertController(title: "Authentication failed", message: "Sorry!", preferredStyle: .alert)
                         ac.addAction(UIAlertAction(title: "OK", style: .default))
@@ -101,6 +103,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
             UserDefaults.standard.set(response["token"] as! String, forKey: "token")
             UserDefaults.standard.set(user.phone, forKey: "userPhone")
             UserDefaults.standard.set(self.passwordField.text, forKey: "userPassword")
+            UserDefaults.standard.set(true, forKey: "loggedIn")
             if response["role"] as! Int == Role.Patient.rawValue {
                 ApplicationManager.sharedInstance.userType = .Patient
             }

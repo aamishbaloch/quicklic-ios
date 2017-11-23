@@ -78,7 +78,7 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
             case 3:
                 Router.sharedInstance.showClinicsList()
             case 4:
-                UserDefaults.standard.set("", forKey: "token")
+                
                 Router.sharedInstance.showLandingPage()
             
             default: break
@@ -97,7 +97,7 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
             case 4:
                 Router.sharedInstance.showClinicsList()
             case 5:
-                UserDefaults.standard.set("", forKey: "token")
+               // UserDefaults.standard.set("", forKey: "token")
                 Router.sharedInstance.showLandingPage()
             default: break
                 
