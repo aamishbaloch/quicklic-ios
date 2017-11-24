@@ -72,6 +72,10 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
                         if (phone != nil && pass != nil)
                         {
                             Router.sharedInstance.showDashboardAsRoot()
+                        }else{
+                            
+                            SVProgressHUD.showError(withStatus: "Please signin with your credentials to use touch id")
+                            
                         }
     
                     } else {
