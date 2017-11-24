@@ -71,6 +71,7 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
                         
                         if (phone != nil && pass != nil)
                         {
+                            self.validator.validate(self)
                             Router.sharedInstance.showDashboardAsRoot()
                         }else{
                             

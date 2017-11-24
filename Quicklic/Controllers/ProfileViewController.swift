@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    static let storyboardID = "profileViewController"
+    static let storyboardID = "profileViewNavController"
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var profileImageView: DesignableImageView!

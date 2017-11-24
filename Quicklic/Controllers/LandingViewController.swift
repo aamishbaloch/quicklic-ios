@@ -19,7 +19,7 @@ class LandingViewController: UIViewController, UICollectionViewDelegate, UIColle
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        if let phone = UserDefaults.standard.value(forKey: "loggedIn") as? String, phone != "" {
+        if let phone = UserDefaults.standard.value(forKey: "loggedIn") as? Bool, phone != false {
             Router.sharedInstance.showDashboardAsRoot()
         }
         

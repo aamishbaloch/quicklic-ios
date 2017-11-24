@@ -54,8 +54,8 @@ class Router: NSObject {
     }
     
     func showProfile() {
-        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "profileViewController") as! UINavigationController
-        let vc = controller.viewControllers.first as! ProfileViewController
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ProfileViewController.storyboardID) as! UINavigationController
+       // let vc = controller.viewControllers.first as! ProfileViewController
        // vc.editable = false
         centralRootViewController.setContentViewController(controller, animated: true)
         centralRootViewController.hideViewController()
