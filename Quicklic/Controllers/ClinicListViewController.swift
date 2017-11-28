@@ -14,6 +14,8 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var isLab = false
+    
     var clinicArray = [Clinic]()
     
     override func viewDidLoad() {
@@ -31,8 +33,12 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
         SVProgressHUD.show()
         fetchData()
         
-        let barButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(ClinicListViewController.addButtonPressed(_:)))
-        self.navigationItem.rightBarButtonItem = barButton
+        if !isLab {
+            let barButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(ClinicListViewController.addButtonPressed(_:)))
+            self.navigationItem.rightBarButtonItem = barButton
+        }
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,17 +48,33 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func fetchData() {
         
-        RequestManager.getClinicsList(successBlock: { (response) in
-            self.clinicArray.removeAll()
-            for object in response {
-                self.clinicArray.append(Clinic(dictionary: object))
-            }
-            self.collectionView.reloadData()
-            SVProgressHUD.dismiss()
-            
-        }) { (error) in
-            SVProgressHUD.showError(withStatus: error)
+        if isLab {
+            RequestManager.getLabsList(successBlock: { (response) in
+                self.clinicArray.removeAll()
+                for object in response {
+                    self.clinicArray.append(Clinic(dictionary: object))
+                }
+                self.collectionView.reloadData()
+                SVProgressHUD.dismiss()
+            }, failureBlock: { (error) in
+                SVProgressHUD.showError(withStatus: error)
+            })
         }
+        else{
+            RequestManager.getClinicsList(successBlock: { (response) in
+                self.clinicArray.removeAll()
+                for object in response {
+                    self.clinicArray.append(Clinic(dictionary: object))
+                }
+                self.collectionView.reloadData()
+                SVProgressHUD.dismiss()
+                
+            }) { (error) in
+                SVProgressHUD.showError(withStatus: error)
+            }
+        }
+        
+        
     
     }
     
@@ -83,8 +105,13 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if isLab {
+            Router.sharedInstance.showTests(clinic: clinicArray[indexPath.row], fromController: self)
+        }
+        else{
+            Router.sharedInstance.showHospitalDetails(clinic: clinicArray[indexPath.row], fromController: self)
+        }
         
-        Router.sharedInstance.showHospitalDetails(clinic: clinicArray[indexPath.row], fromController: self)
         
     }
     

@@ -121,6 +121,14 @@ class Router: NSObject {
         centralRootViewController.hideViewController()
     }
     
+    func showLabsList() {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ClinicListViewController.storyboardID) as! UINavigationController
+        let vc = controller.viewControllers.first as! ClinicListViewController
+        vc.isLab = true
+        centralRootViewController.setContentViewController(controller, animated: true)
+        centralRootViewController.hideViewController()
+    }
+    
     func showDoctorDetails(doctor: User, fromController: UIViewController) {
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: DoctorDetailViewController.storyboardID) as! DoctorDetailViewController
         if let from = fromController as? DoctorDetailDelegate {
@@ -136,6 +144,24 @@ class Router: NSObject {
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: CreateAppointmentViewController.storyboardID) as! CreateAppointmentViewController
         controller.doctor = doctor
        fromController.present(controller, animated: false, completion: nil)
+    }
+    
+    func addReview(appointment: Appointment, fromController: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: AddReviewViewController.storyboardID) as! AddReviewViewController
+        controller.appointment = appointment
+        fromController.present(controller, animated: false, completion: nil)
+    }
+    
+    func showTests(clinic: Clinic, fromController: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: TestListViewController.storyboardID) as! TestListViewController
+        controller.clinic = clinic
+        fromController.navigationController?.show(controller, sender: nil)
+    }
+    
+    func showTestDetail(test: Test, fromController: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: TestDetailViewController.storyboardID) as! TestDetailViewController
+        controller.test = test
+        fromController.navigationController?.show(controller, sender: nil)
     }
     
     func reasonSelection(fromController: UIViewController) {

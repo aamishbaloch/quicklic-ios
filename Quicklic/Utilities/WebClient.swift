@@ -372,6 +372,34 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
+    func getLabsList(successBlock success:@escaping ([[String: AnyObject]]) -> (),
+                        failureBlock failure:@escaping (String) -> ()){
+        
+        
+        let url = "test/lab/"
+        
+        self.getPath(urlString: url, params: [:], successBlock: { (response) in
+            print(response)
+            success(response["results"] as! [[String : AnyObject]])
+        }) { (error) in
+            failure(error)
+        }
+    }
+    
+    func getTestsList(clinicID: String, successBlock success:@escaping ([[String: AnyObject]]) -> (),
+                     failureBlock failure:@escaping (String) -> ()){
+        
+        
+        let url = "clinic/\(clinicID)/test/"
+        
+        self.getPath(urlString: url, params: [:], successBlock: { (response) in
+            print(response)
+            success(response["results"] as! [[String : AnyObject]])
+        }) { (error) in
+            failure(error)
+        }
+    }
+    
     func addClinic( params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (),
                          failureBlock failure:@escaping (String) -> ()){
         

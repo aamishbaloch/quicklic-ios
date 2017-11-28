@@ -204,7 +204,8 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         
         SVProgressHUD.show()
         RequestManager.createAppointment(params:params, successBlock: { (response) in
-            SVProgressHUD.dismiss()
+            SVProgressHUD.showSuccess(withStatus: "Appointment created successfully")
+            self.dismiss(animated: false, completion: nil)
             
         }) { (error) in
             SVProgressHUD.showError(withStatus: error)

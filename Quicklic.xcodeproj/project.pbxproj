@@ -22,6 +22,11 @@
 		69416EF01F87E2CE00E2E0E2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69416EEF1F87E2CE00E2E0E2 /* User.swift */; };
 		69416EF31F87EA9B00E2E0E2 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 69416EF21F87EA9B00E2E0E2 /* BaseEntity.m */; };
 		69439F4F1F99DC8A00DC6F44 /* CountryPickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69439F4E1F99DC8A00DC6F44 /* CountryPickerTextField.swift */; };
+		694923241FCC730D003CDA52 /* TestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694923231FCC730D003CDA52 /* TestListTableViewCell.swift */; };
+		694923261FCC7371003CDA52 /* TestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694923251FCC7371003CDA52 /* TestListViewController.swift */; };
+		694923281FCC75C1003CDA52 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694923271FCC75C1003CDA52 /* Test.swift */; };
+		6949232A1FCC87B3003CDA52 /* TestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694923291FCC87B3003CDA52 /* TestDetailViewController.swift */; };
+		6949232C1FCC9D2A003CDA52 /* AddReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6949232B1FCC9D2A003CDA52 /* AddReviewViewController.swift */; };
 		695FDA861FA9142F004B6735 /* DoctorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695FDA851FA9142F004B6735 /* DoctorDetailViewController.swift */; };
 		695FDA881FA9BD19004B6735 /* CreateAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695FDA871FA9BD19004B6735 /* CreateAppointmentViewController.swift */; };
 		696762941FA90D3C00C4E2F4 /* UIAlertController+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 696762931FA90D3B00C4E2F4 /* UIAlertController+Blocks.m */; };
@@ -141,6 +146,11 @@
 		69416EF11F87EA9B00E2E0E2 /* BaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEntity.h; sourceTree = "<group>"; };
 		69416EF21F87EA9B00E2E0E2 /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
 		69439F4E1F99DC8A00DC6F44 /* CountryPickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryPickerTextField.swift; sourceTree = "<group>"; };
+		694923231FCC730D003CDA52 /* TestListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestListTableViewCell.swift; sourceTree = "<group>"; };
+		694923251FCC7371003CDA52 /* TestListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestListViewController.swift; sourceTree = "<group>"; };
+		694923271FCC75C1003CDA52 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		694923291FCC87B3003CDA52 /* TestDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDetailViewController.swift; sourceTree = "<group>"; };
+		6949232B1FCC9D2A003CDA52 /* AddReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewViewController.swift; sourceTree = "<group>"; };
 		695FDA851FA9142F004B6735 /* DoctorDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorDetailViewController.swift; sourceTree = "<group>"; };
 		695FDA871FA9BD19004B6735 /* CreateAppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAppointmentViewController.swift; sourceTree = "<group>"; };
 		696762921FA90D3B00C4E2F4 /* UIAlertController+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Blocks.h"; sourceTree = "<group>"; };
@@ -356,6 +366,9 @@
 				69F785991F505535005197A6 /* SignUpViewController.swift */,
 				6916708D1F93711600C39034 /* VerificationViewController.swift */,
 				D1BC6D531FBAD29D00A20344 /* ReasonSelectionViewController.swift */,
+				694923251FCC7371003CDA52 /* TestListViewController.swift */,
+				694923291FCC87B3003CDA52 /* TestDetailViewController.swift */,
+				6949232B1FCC9D2A003CDA52 /* AddReviewViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -370,6 +383,7 @@
 				699E702E1FA39DF00070BFBA /* Clinic.swift */,
 				D1295FA61FBC292000715C45 /* Time.swift */,
 				D1400AD01FBDA6100021726C /* Appointment.swift */,
+				694923271FCC75C1003CDA52 /* Test.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -445,6 +459,7 @@
 				699E702C1FA39ADE0070BFBA /* ClinicCollectionViewCell.swift */,
 				D1BC6D551FBAEF3200A20344 /* ReasonSelectionTableViewCell.swift */,
 				D1295FAA1FBC2D3600715C45 /* CreatAppointmentCollectionViewCell.swift */,
+				694923231FCC730D003CDA52 /* TestListTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -692,6 +707,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				694923241FCC730D003CDA52 /* TestListTableViewCell.swift in Sources */,
 				695FDA861FA9142F004B6735 /* DoctorDetailViewController.swift in Sources */,
 				69A553A61F55D3ED00E8A5C5 /* EditProfileViewController.swift in Sources */,
 				69F785711F4AC629005197A6 /* SpringButton.swift in Sources */,
@@ -705,6 +721,7 @@
 				69A5539C1F544CCF00E8A5C5 /* DayCell.swift in Sources */,
 				699E702D1FA39ADE0070BFBA /* ClinicCollectionViewCell.swift in Sources */,
 				69F785751F4AC629005197A6 /* SpringTextView.swift in Sources */,
+				6949232C1FCC9D2A003CDA52 /* AddReviewViewController.swift in Sources */,
 				69416EF01F87E2CE00E2E0E2 /* User.swift in Sources */,
 				69F4B7D41F751F8A00BFB414 /* DatePickerTextField.swift in Sources */,
 				D1BC6D561FBAEF3200A20344 /* ReasonSelectionTableViewCell.swift in Sources */,
@@ -757,6 +774,7 @@
 				69F785771F4AC629005197A6 /* TransitionManager.swift in Sources */,
 				69F7857B1F4AC629005197A6 /* UtilityManager.swift in Sources */,
 				69F785611F4AC629005197A6 /* DesignableButton.swift in Sources */,
+				694923261FCC7371003CDA52 /* TestListViewController.swift in Sources */,
 				699E702F1FA39DF00070BFBA /* Clinic.swift in Sources */,
 				69F785601F4AC629005197A6 /* BlurView.swift in Sources */,
 				69F785981F50552C005197A6 /* SignInViewController.swift in Sources */,
@@ -764,10 +782,12 @@
 				696762941FA90D3C00C4E2F4 /* UIAlertController+Blocks.m in Sources */,
 				6916708E1F93711600C39034 /* VerificationViewController.swift in Sources */,
 				69F785631F4AC629005197A6 /* DesignableLabel.swift in Sources */,
+				694923281FCC75C1003CDA52 /* Test.swift in Sources */,
 				69F785701F4AC629005197A6 /* SpringAnimation.swift in Sources */,
 				6969CE961F56D837007E2E05 /* AnnouncementCollectionViewCell.swift in Sources */,
 				69F7855B1F4AC629005197A6 /* Constants.swift in Sources */,
 				69416EF31F87EA9B00E2E0E2 /* BaseEntity.m in Sources */,
+				6949232A1FCC87B3003CDA52 /* TestDetailViewController.swift in Sources */,
 				69F7856B1F4AC629005197A6 /* LoadingView.swift in Sources */,
 				69F785721F4AC629005197A6 /* SpringImageView.swift in Sources */,
 			);
@@ -912,7 +932,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = AYEH6C5B8A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -936,7 +956,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = AYEH6C5B8A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

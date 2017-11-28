@@ -13,7 +13,7 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
     static let storyboardID = "leftMenuViewController"
     
     var selectedIndex = 0
-    let patientmenuItems = ["Dashboard", "New Appointment", "Profile", "Appointment History", "Clinics", "Logout"]
+    let patientmenuItems = ["Dashboard", "New Appointment", "Profile", "Appointment History", "Clinics", "Labs", "Logout"]
     let doctorMenuItems = ["Appointments", "Patients", "Profile", "Clinics", "Logout"]
     
     @IBOutlet weak var tableView: UITableView!
@@ -78,7 +78,6 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
             case 3:
                 Router.sharedInstance.showClinicsList()
             case 4:
-                
                 Router.sharedInstance.showLandingPage()
             
             default: break
@@ -97,6 +96,8 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
             case 4:
                 Router.sharedInstance.showClinicsList()
             case 5:
+                Router.sharedInstance.showLabsList()
+            case 6:
                // UserDefaults.standard.set("", forKey: "token")
                 Router.sharedInstance.showLandingPage()
             default: break

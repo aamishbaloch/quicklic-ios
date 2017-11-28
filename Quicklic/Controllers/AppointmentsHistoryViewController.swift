@@ -50,11 +50,15 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
             cell.nameLabel.text = appointment.doctor.full_name
             cell.specializationLabel.text = appointment.doctor.specializationName
             cell.drImage.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
+            cell.addReviewButton.isHidden = false
+            cell.addReviewButton.addTarget(self, action: #selector(self.addReviewButtonPressed(_:)), for: UIControlEvents.touchUpInside)
+            cell.addReviewButton.tag = indexPath.row
         }
         else{
             cell.nameLabel.text = appointment.patient.full_name
             cell.specializationLabel.text = nil
             cell.drImage.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
+            cell.addReviewButton.isHidden = true
         }
         
         if let startTime = self.appointmentsArray[indexPath.row].end_datetime {
@@ -68,6 +72,12 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellWidth = self.collectionView.bounds.width
+        
+        return CGSize(width: cellWidth, height: 90)
     }
     
     func fetchData() {
@@ -93,6 +103,10 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         
     }
     
+    func addReviewButtonPressed(_ sender: UIButton) {
+        let appointment = appointmentsArray[sender.tag]
+        Router.sharedInstance.addReview(appointment: appointment, fromController: self)
+    }
 
     /*
     // MARK: - Navigation

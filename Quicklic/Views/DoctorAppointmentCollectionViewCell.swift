@@ -17,6 +17,7 @@ class DoctorAppointmentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var drImage: DesignableImageView!    
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var addReviewButton: UIButton!
     
     @IBOutlet weak var statusView: UIView!
     
