@@ -11,7 +11,7 @@ import UIKit
 class AddReviewViewController: UIViewController {
 
     static let storyboardID = "addReviewViewController"
-    
+   
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var starView: HCSStarRatingView!
     @IBOutlet weak var commentTextView: DesignableTextView!
@@ -23,6 +23,9 @@ class AddReviewViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        print("Doctor id \(String(describing: appointment.doctor.id))")
+        print("clinic id \(String(describing: appointment.clinic.id))")
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,7 +34,9 @@ class AddReviewViewController: UIViewController {
     }
     
     @IBAction func doneButtonPressed(_ sender: Any) {
-        var params = [String: AnyObject]()
+       // var params = [String: AnyObject]()
+        
+        addReview()
         
     }
     
@@ -39,6 +44,30 @@ class AddReviewViewController: UIViewController {
         self.dismiss(animated: false, completion: nil)
     }
 
+    func addReview(){
+        var params = [String: Any]()
+        let index  = segmentControl.selectedSegmentIndex + 1
+        if index == 1 {
+             params["doctor"] = appointment.doctor.id
+        }else{
+            params["clinic"] = appointment.clinic.id
+            }
+        params["type"] = index
+        params["rating"] = starView.value
+        params["comment"] = commentTextView.text
+        params["is_anonymous"] = false
+        print("StarView \(starView.value)")
+        SVProgressHUD.show()
+        RequestManager.addReview(params:params, successBlock: { (response) in
+
+            SVProgressHUD.dismiss()
+        }) { (error) in
+            SVProgressHUD.showError(withStatus: error)
+            print(error)
+        }
+    }
+    
+    
     /*
     // MARK: - Navigation
 

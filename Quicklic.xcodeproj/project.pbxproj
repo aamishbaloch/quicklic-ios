@@ -112,6 +112,9 @@
 		D1701A271FC5983700248867 /* HCSStarRatingView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1701A261FC5983700248867 /* HCSStarRatingView.framework */; };
 		D1BC6D541FBAD29D00A20344 /* ReasonSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BC6D531FBAD29D00A20344 /* ReasonSelectionViewController.swift */; };
 		D1BC6D561FBAEF3200A20344 /* ReasonSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BC6D551FBAEF3200A20344 /* ReasonSelectionTableViewCell.swift */; };
+		D1D0F0461FCD481400321730 /* ReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D0F0451FCD481400321730 /* ReviewsViewController.swift */; };
+		D1D0F0481FCD49CC00321730 /* ReviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D0F0471FCD49CC00321730 /* ReviewCollectionViewCell.swift */; };
+		D1D0F04C1FCDA2C700321730 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D0F04B1FCDA2C700321730 /* ConfirmationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -246,6 +249,9 @@
 		D1BA99791FC6BAC30023C09E /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		D1BC6D531FBAD29D00A20344 /* ReasonSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonSelectionViewController.swift; sourceTree = "<group>"; };
 		D1BC6D551FBAEF3200A20344 /* ReasonSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonSelectionTableViewCell.swift; sourceTree = "<group>"; };
+		D1D0F0451FCD481400321730 /* ReviewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsViewController.swift; sourceTree = "<group>"; };
+		D1D0F0471FCD49CC00321730 /* ReviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollectionViewCell.swift; sourceTree = "<group>"; };
+		D1D0F04B1FCDA2C700321730 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -369,6 +375,8 @@
 				694923251FCC7371003CDA52 /* TestListViewController.swift */,
 				694923291FCC87B3003CDA52 /* TestDetailViewController.swift */,
 				6949232B1FCC9D2A003CDA52 /* AddReviewViewController.swift */,
+				D1D0F0451FCD481400321730 /* ReviewsViewController.swift */,
+				D1D0F04B1FCDA2C700321730 /* ConfirmationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -460,6 +468,7 @@
 				D1BC6D551FBAEF3200A20344 /* ReasonSelectionTableViewCell.swift */,
 				D1295FAA1FBC2D3600715C45 /* CreatAppointmentCollectionViewCell.swift */,
 				694923231FCC730D003CDA52 /* TestListTableViewCell.swift */,
+				D1D0F0471FCD49CC00321730 /* ReviewCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -753,12 +762,15 @@
 				69BAE1A91F6FB4560035D23D /* HospitalDetailsViewController.swift in Sources */,
 				6969CE921F56B1A9007E2E05 /* AppointmentsHistoryViewController.swift in Sources */,
 				695FDA881FA9BD19004B6735 /* CreateAppointmentViewController.swift in Sources */,
+				D1D0F0461FCD481400321730 /* ReviewsViewController.swift in Sources */,
 				69D847E21F702E9C003A7EC9 /* PatientsListViewController.swift in Sources */,
 				69F785641F4AC629005197A6 /* DesignableTabBarController.swift in Sources */,
 				69F7855F1F4AC629005197A6 /* AutoTextView.swift in Sources */,
 				69F785791F4AC629005197A6 /* UnwindSegue.swift in Sources */,
 				69F785761F4AC629005197A6 /* SpringView.swift in Sources */,
+				D1D0F04C1FCDA2C700321730 /* ConfirmationViewController.swift in Sources */,
 				692AFF8E1F70333C00E3ECB9 /* PatientCollectionViewCell.swift in Sources */,
+				D1D0F0481FCD49CC00321730 /* ReviewCollectionViewCell.swift in Sources */,
 				69F7859C1F52E44B005197A6 /* PatientDashboardViewController.swift in Sources */,
 				69F785961F504430005197A6 /* LeftMenuViewController.swift in Sources */,
 				69F785731F4AC629005197A6 /* SpringLabel.swift in Sources */,

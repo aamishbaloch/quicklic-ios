@@ -529,7 +529,15 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
-  
+    func addReview(params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (), failureBlock failure:@escaping (String) -> ()){
+        
+        self.postPath(urlString: "review/", params: params as [String : AnyObject], successBlock: { (response) in
+            print(response)
+            success(response as! [String : AnyObject])
+        }) { (error) in
+            failure(error)
+        }
+    }
     
     
 }
