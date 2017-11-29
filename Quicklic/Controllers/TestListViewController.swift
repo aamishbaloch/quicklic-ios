@@ -29,7 +29,7 @@ class TestListViewController: UIViewController, UITableViewDelegate, UITableView
         text = text + "\n" + clinic.phone!
         
         nameLabel.text = text
-        clinicImageView.sd_setImage(with: URL(string: clinic.image ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
+        clinicImageView.sd_setImage(with: URL(string: clinic.image ?? ""), placeholderImage: UIImage(named: "placeholdernew"), options: SDWebImageOptions.refreshCached, completed: nil)
         let floatValue : Float = NSString(string: clinic.rating!).floatValue
         starView.value = CGFloat(floatValue)
         

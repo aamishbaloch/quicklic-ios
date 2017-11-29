@@ -28,6 +28,11 @@ class AppointmentDetailsViewController: UIViewController {
     @IBOutlet weak var appointmentStatusView: UIView!
     @IBOutlet weak var pendingConfirmationLabel: UILabel!
     @IBOutlet weak var selectedDateLabel: UILabel!
+      @IBOutlet weak var patientView: UIView!
+    
+    @IBOutlet weak var appointmentStatusLabel: UILabel!
+    
+    @IBOutlet weak var notesLabel: UILabel!
     
     
     var appointment: Appointment!
@@ -35,6 +40,7 @@ class AppointmentDetailsViewController: UIViewController {
     var delegate:AppointmentStatusDelegate?
     var appointmentIndex: Int?
     
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,8 +49,10 @@ class AppointmentDetailsViewController: UIViewController {
       if  ApplicationManager.sharedInstance.userType == .Doctor
       {
         appointmentStatusView.isHidden = false
+        patientView.isHidden =  true
       }else{
         appointmentStatusView.isHidden = true
+        patientView.isHidden = false
         }
     }
     override func didReceiveMemoryWarning() {
@@ -55,11 +63,26 @@ class AppointmentDetailsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        if ApplicationManager.sharedInstance.userType == .Patient {
+            nameLabel.text = appointment.doctor.full_name ?? "N/A"
+            phoneLabel.text = appointment.doctor.phone ?? "N/A"
+            addressLabel.text = appointment.doctor.address ?? "N/A"
+            emailLabel.text = appointment.doctor.email ?? "N/A"
+            imageView.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image-done"), options: SDWebImageOptions.refreshCached, completed: nil)
+            if let startTime = appointment.start_datetime {
+                selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
+            }
+            reasonforvisitLabel.text = appointment.reason.name ?? "N/A"
+            pendingConfirmationLabel.text = appointment.status?.value ?? "N/A"
+            selectedDateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
+            
+        }
+        else{
         nameLabel.text = appointment.patient.full_name ?? "N/A"
         phoneLabel.text = appointment.patient.phone ?? "N/A"
         addressLabel.text = appointment.patient.address ?? "N/A"
         emailLabel.text = appointment.patient.email ?? "N/A"
-        imageView.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
+        imageView.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image-done"), options: SDWebImageOptions.refreshCached, completed: nil)
         if let startTime = appointment.start_datetime {
             selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
         }
@@ -73,7 +96,8 @@ class AppointmentDetailsViewController: UIViewController {
         }else{
             pendingConfirmationLabel.textColor = UIColor.red
         }
-        
+    
+      }
     }
     
     @IBAction func okButtonPressed(_ sender: UIButton) {
@@ -135,6 +159,17 @@ class AppointmentDetailsViewController: UIViewController {
         })
   
     }
+    
+    
+   
+    @IBAction func editButtonPressed(_ sender: DesignableButton) {
+    }
+    
+    
+    @IBAction func cancelButtonPressedPatient(_ sender: Any) {
+    }
+    
+    
     
     /*
     // MARK: - Navigation

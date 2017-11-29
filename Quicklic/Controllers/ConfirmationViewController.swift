@@ -10,13 +10,27 @@ import UIKit
 
 class ConfirmationViewController: UIViewController {
 
+    static let storyboardID = "confirmationViewController"
     
+    @IBOutlet weak var confirmationLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     
+    var appointment:Appointment!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        if let startTime = appointment.start_datetime {
+            timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "hh:mm a")
+            print("startTime \(startTime)")
+        }
+        
+        dateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
+        
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,7 +38,11 @@ class ConfirmationViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func finishButton(_ sender: Any) {
+        
+        self.dismiss(animated: false, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 

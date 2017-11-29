@@ -48,7 +48,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         user = ApplicationManager.sharedInstance.user
        // nameLabel.text = user.full_name
-        profileImageView.sd_setImage(with: URL(string: user.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
+        profileImageView.sd_setImage(with: URL(string: user.avatar ?? ""), placeholderImage: UIImage(named: "user-image-done"), options: SDWebImageOptions.refreshCached, completed: nil)
         tableView.reloadData()
         
     }

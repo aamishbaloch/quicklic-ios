@@ -174,6 +174,11 @@ class Router: NSObject {
         fromController.present(controller, animated: true, completion: nil)
     }
     
-    
+    func showConfirmation(appointment: Appointment, fromController: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ConfirmationViewController.storyboardID) as! ConfirmationViewController
+          controller.appointment = appointment
+        
+        fromController.show(controller, sender: nil)
+    }
     
 }

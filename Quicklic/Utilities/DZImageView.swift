@@ -107,7 +107,7 @@ import UIKit
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             self.contentMode = .scaleAspectFill
-//            self.image = pickedImage
+        // self.image = pickedImage
             
             self.image = pickedImage.resizeImageWith(newSize: CGSize(width: 200, height: 200))
         }

@@ -49,7 +49,7 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         if ApplicationManager.sharedInstance.userType == .Patient {
             cell.nameLabel.text = appointment.doctor.full_name
             cell.specializationLabel.text = appointment.doctor.specializationName
-            cell.drImage.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
+            cell.drImage.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "placeholdernew"), options: SDWebImageOptions.refreshCached, completed: nil)
             cell.addReviewButton.isHidden = false
             cell.addReviewButton.addTarget(self, action: #selector(self.addReviewButtonPressed(_:)), for: UIControlEvents.touchUpInside)
             cell.addReviewButton.tag = indexPath.row
@@ -57,7 +57,7 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         else{
             cell.nameLabel.text = appointment.patient.full_name
             cell.specializationLabel.text = nil
-            cell.drImage.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
+            cell.drImage.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "placeholdernew"), options: SDWebImageOptions.refreshCached, completed: nil)
             cell.addReviewButton.isHidden = true
         }
         

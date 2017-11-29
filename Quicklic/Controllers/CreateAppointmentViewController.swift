@@ -29,6 +29,8 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
     var selectedTimeIndex = -1
     var timeArray = [Time]()
     
+    var appointment = Appointment()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,7 +44,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         nameLabel.text = doctor?.full_name ?? "N/A"
         phoneLabel.text = doctor?.phone ?? "N/A"
         specialityLabel.text = doctor?.specializationName ?? "N/A"
-        profileImageView.sd_setImage(with: URL(string: doctor?.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
+        profileImageView.sd_setImage(with: URL(string: doctor?.avatar ?? ""), placeholderImage: UIImage(named: "user-image-done"), options: SDWebImageOptions.refreshCached, completed: nil)
         dateField.text = UtilityManager.stringFromNSDateWithFormat(date: NSDate(), format: Constant.appDateFormat)
         fetchTime(dateString: dateField.text)
         
@@ -192,20 +194,29 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         else{
             
         }
-        
+     
         var params = [String: Any]()
         params["start_datetime"] = start
         params["end_datetime"] = end
         params["clinic"] = clinicID
-        params["doctor"] = doctor?.id
-        params["patient"] = ApplicationManager.sharedInstance.user.id
-        params["reason"] = reason.id
         params["status"] = 2
+        if let doctorId = doctor?.id {
+            params["doctor"] = doctorId
+        }
+        if let patient = ApplicationManager.sharedInstance.user.id {
+            params["patient"] = patient
+        }
+        if let reason = reason.id {
+            params["reason"] = reason
+        }
         
         SVProgressHUD.show()
         RequestManager.createAppointment(params:params, successBlock: { (response) in
-            SVProgressHUD.showSuccess(withStatus: "Appointment created successfully")
+           // SVProgressHUD.showSuccess(withStatus: "Appointment created successfully")
             self.dismiss(animated: false, completion: nil)
+            SVProgressHUD.dismiss()
+            let appointment = Appointment(dictionary: response)
+            Router.sharedInstance.showConfirmation(appointment: appointment, fromController: self)
             
         }) { (error) in
             SVProgressHUD.showError(withStatus: error)
