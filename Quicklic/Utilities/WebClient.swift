@@ -539,5 +539,28 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
+    func cancelAppointment(patientID: String,appointmentID:String, successBlock success:@escaping ([String: AnyObject]) -> (),
+                      failureBlock failure:@escaping (String) -> ()){
+        
+        
+        let url = "patient/\(patientID)/appointment/\(appointmentID)/cancel/"
+        
+        self.getPath(urlString: url, params: [:], successBlock: { (response) in
+            print(response)
+           success(response as! [String : AnyObject])
+        }) { (error) in
+            failure(error)
+        }
+    }
+    
+    func doctorsReview(doctorID: String , successBlock success:@escaping ([String: AnyObject]) -> (), failureBlock failure:@escaping (String) -> ()){
+        
+        self.getPath(urlString: "doctor/\(doctorID)/review/", params: [:], successBlock: { (response) in
+            print(response)
+            success(response as! [String : AnyObject])
+        }) { (error) in
+            failure(error)
+        }
+    }
     
 }

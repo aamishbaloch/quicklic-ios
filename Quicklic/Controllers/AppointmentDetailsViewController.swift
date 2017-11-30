@@ -163,12 +163,34 @@ class AppointmentDetailsViewController: UIViewController {
     
    
     @IBAction func editButtonPressed(_ sender: DesignableButton) {
+        
+        Router.sharedInstance.createAppointment(doctor: doctor!, fromController: self)
+        
     }
     
     
     @IBAction func cancelButtonPressedPatient(_ sender: Any) {
+        self.cancelAppointment()
     }
-    
+   
+    func cancelAppointment() {
+        SVProgressHUD.show()
+        guard let patientId = appointment.patient.id else { return }
+        guard let appointmentId = appointment.id else { return }
+        
+        print("Patient is: \(String(describing: patientId))")
+        print("Appointment id is: \(String(describing: appointmentId))")
+        
+        RequestManager.cancelAppointment(patientID: patientId, appointmentID:appointmentId, successBlock: { (response) in
+          
+              SVProgressHUD.showSuccess(withStatus: "Appointment cancelled successfully")
+           // SVProgressHUD.dismiss()
+            //self.dismiss(animated: false, completion: nil)
+            }) { (error) in
+            SVProgressHUD.showError(withStatus: error)
+        }
+        
+    }
     
     
     /*

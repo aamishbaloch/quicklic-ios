@@ -31,6 +31,7 @@ class DoctorDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        print("Doctor id:\(String(describing: doctor.id))")
         nameLabel.text = doctor.full_name
         profileImageView.sd_setImage(with: URL(string: doctor.avatar ?? ""), placeholderImage: UIImage(named: "placeholdernew"), options: SDWebImageOptions.refreshCached, completed: nil)
         specialityLabel.text = doctor.specializationName ?? "N/A"

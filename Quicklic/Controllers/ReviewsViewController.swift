@@ -8,8 +8,13 @@
 
 import UIKit
 
-class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
+class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
    
+    static let storyboardID = "reviewsViewController"
+    
+  //var appointment:Appointment!
+  //var doctor = User()
+    
     @IBOutlet weak var collectoinView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +22,11 @@ class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollect
         // Do any additional setup after loading the view.
         collectoinView.dataSource = self
         collectoinView.delegate = self
+        print("hashkdasjdkasdjaskdjaskdjsalfas")
+          self.fetchData()
+       //print("Doctor id thorough apointment \(String(describing: appointment.doctor.id))")
+       // print("Doctor id \(doctor?.id)")
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,6 +55,31 @@ class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollect
         
         return CGSize(width: cellWidth, height: 90)
     }
+    
+    @IBAction func menuButtonPressed(_ sender: UIBarButtonItem) {
+         self.presentLeftMenuViewController(nil)
+    }
+    
+    
+    func fetchData() {
+    
+//        guard let doctorID = doctor?.id else {
+//            return
+//        }
+        // print("Doctor id \(doctorID)")
+        SVProgressHUD.show()
+        
+        RequestManager.doctorsReview(doctorID:"12", successBlock: { (response) in
+            SVProgressHUD.dismiss()
+            print("Calling..")
+            
+        }) { (error) in
+            SVProgressHUD.showError(withStatus: error)
+        }
+        
+    }
+    
+    
     /*
     // MARK: - Navigation
 

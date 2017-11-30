@@ -104,15 +104,28 @@ import UIKit
         picker.dismiss(animated: true, completion: nil)
     }
     
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+//        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+//            self.contentMode = .scaleAspectFill
+//        // self.image = pickedImage
+//
+//            self.image = pickedImage.resizeImageWith(newSize: CGSize(width: 200, height: 200))
+//        }
+//
+//        picker.dismiss(animated: true, completion: nil)
+//    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+//            self.image = pickedImage
             self.contentMode = .scaleAspectFill
-        // self.image = pickedImage
-            
             self.image = pickedImage.resizeImageWith(newSize: CGSize(width: 200, height: 200))
         }
-        
-        picker.dismiss(animated: true, completion: nil)
+        else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.contentMode = .scaleAspectFill
+            self.image = image.resizeImageWith(newSize: CGSize(width: 200, height: 200))
+        }
+        picker.dismiss(animated: true, completion: nil);
     }
     
 
