@@ -12,15 +12,13 @@ class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollect
    
     static let storyboardID = "reviewsViewController"
     
-  //var appointment:Appointment!
-  //var doctor = User()
-    
-    var reviewArray = [Review]()
-    
+    var reviews = [Review]()
     
     @IBOutlet weak var collectoinView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Reviews"
 
         // Do any additional setup after loading the view.
         collectoinView.dataSource = self
@@ -30,6 +28,10 @@ class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollect
        //print("Doctor id thorough apointment \(String(describing: appointment.doctor.id))")
        // print("Doctor id \(doctor?.id)")
         
+        if let flowLayout = collectoinView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,13 +40,31 @@ class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return reviews.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewCollectionViewCell.identifier, for: indexPath) as! ReviewCollectionViewCell
         
+        let review = reviews[indexPath.row]
+        
+        guard let type = review.type else {
+            return cell
+        }
+        
+        switch type {
+        case 1:
+            cell.nameLabel.text = review.doctor.full_name
+            cell.imageView.sd_setImage(with: URL(string: review.doctor.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: .refreshCached, completed: nil)
+        case 2:
+            cell.nameLabel.text = review.clinic.name
+            cell.imageView.sd_setImage(with: URL(string: review.clinic.image ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: .refreshCached, completed: nil)
+        default: break
+        }
+        
+        cell.descriptionLabel.text = review.comment
+        cell.dateLabel.text = UtilityManager.stringFromNSDateWithFormat(date: review.created_at! as NSDate, format: Constant.appDateFormat)
+        cell.ratingView.value = CGFloat(review.rating!)
         
         return cell
     }
@@ -53,11 +73,11 @@ class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollect
        
     }
     
-    func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = self.collectoinView.bounds.width
-        
-        return CGSize(width: cellWidth, height: 90)
-    }
+//    func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let cellWidth = self.collectoinView.bounds.width
+//        
+//        return CGSize(width: cellWidth, height: 90)
+//    }
     
     @IBAction func menuButtonPressed(_ sender: UIBarButtonItem) {
          self.presentLeftMenuViewController(nil)
@@ -66,46 +86,20 @@ class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollect
     
     func fetchData() {
     
-//        guard let doctorID = doctor?.id else {
-//            return
-//        }
-        // print("Doctor id \(doctorID)")
         SVProgressHUD.show()
         
-        RequestManager.doctorsReview(successBlock: { (response) in
+        RequestManager.getReviews(successBlock: { (response) in
             SVProgressHUD.dismiss()
-            print("Calling..")
-            
-            self.reviewArray.removeAll()
-            for object in response {
-                self.reviewArray.removeAll()
-                for object in response {
-                  //self.reviewArray.append(Review(dictionary: object))
-                    print("Array is : \(object)")
-                }
-             //   self.collectionView.reloadData()
-
-                print("Array is : \(object)")
+            self.reviews.removeAll()
+            for review in response {
+                self.reviews.append(Review(dictionary: review))
             }
-           // self.collectionView.reloadData()
-
-            
+            self.collectoinView.reloadData()
             
         }) { (error) in
             SVProgressHUD.showError(withStatus: error)
         }
         
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

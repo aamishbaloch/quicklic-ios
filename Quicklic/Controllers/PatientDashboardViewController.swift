@@ -83,9 +83,13 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
        
-        let date = Date()
-        selectedDate = UtilityManager.stringFromNSDateWithFormat(date: date as NSDate, format: "yyyy-MM-dd")
-        self.fetchData()
+        if ApplicationManager.sharedInstance.user.id != nil {
+            let date = Date()
+            selectedDate = UtilityManager.stringFromNSDateWithFormat(date: date as NSDate, format: "yyyy-MM-dd")
+            self.fetchData()
+        }
+        
+        
     }
     
     func updateUI(user: User) {

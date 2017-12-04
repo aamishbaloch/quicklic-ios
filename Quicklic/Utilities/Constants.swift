@@ -12,6 +12,7 @@ public class Constant: NSObject {
 
     static let applicationName = "Quicklic"
     static let serverDateFormat = "yyyy-MM-dd"
+    static let serverDateFormatExtended = "yyyy-MM-dd'T'hh:mm:ss.SSS"
     static let appDateFormat = "MM/dd/yyyy"
     static let appAppointmentDateFormat = "MMM dd',' yyyy"
     static let animationDuration : TimeInterval = 0.5

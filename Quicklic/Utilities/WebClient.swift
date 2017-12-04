@@ -553,14 +553,13 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
-    func doctorsReview(successBlock success:@escaping ([String: AnyObject]) -> (), failureBlock failure:@escaping (String) -> ()){
+    func getReviews(successBlock success:@escaping ([[String: AnyObject]]) -> (), failureBlock failure:@escaping (String) -> ()){
         
         let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/review/" : "doctor/\(ApplicationManager.sharedInstance.user.id ?? "0")/review/"
-
         
         self.getPath(urlString: url, params: [:], successBlock: { (response) in
             print(response)
-            success(response["results"] as! [String : AnyObject])
+            success(response["results"] as! [[String : AnyObject]])
         }) { (error) in
             failure(error)
         }

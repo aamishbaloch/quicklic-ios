@@ -181,8 +181,10 @@ class Router: NSObject {
         fromController.show(controller, sender: nil)
     }
     
-    func showReviews() {
+    func showReviews(/*doctor:User*/) {
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ReviewsViewController.storyboardID) as! UINavigationController
+//         let vc = controller.viewControllers.first as! ReviewsViewController
+      
         centralRootViewController.setContentViewController(controller, animated: true)
         centralRootViewController.hideViewController()
         

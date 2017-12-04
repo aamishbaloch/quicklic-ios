@@ -16,6 +16,7 @@
 		691C040D1F39BE2E0078A4E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 691C040C1F39BE2E0078A4E4 /* Assets.xcassets */; };
 		691C04101F39BE2E0078A4E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 691C040E1F39BE2E0078A4E4 /* LaunchScreen.storyboard */; };
 		691C041B1F39BE2E0078A4E4 /* QuicklicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C041A1F39BE2E0078A4E4 /* QuicklicTests.swift */; };
+		6925DF5C1FD2FA0800B581FF /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6925DF5B1FD2FA0800B581FF /* Review.swift */; };
 		692AFF8E1F70333C00E3ECB9 /* PatientCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692AFF8D1F70333C00E3ECB9 /* PatientCollectionViewCell.swift */; };
 		692AFF901F7035D800E3ECB9 /* DZImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692AFF8F1F7035D800E3ECB9 /* DZImageView.swift */; };
 		692AFF921F70368F00E3ECB9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 692AFF911F70368F00E3ECB9 /* MobileCoreServices.framework */; };
@@ -142,6 +143,7 @@
 		691C04161F39BE2E0078A4E4 /* QuicklicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuicklicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		691C041A1F39BE2E0078A4E4 /* QuicklicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuicklicTests.swift; sourceTree = "<group>"; };
 		691C041C1F39BE2E0078A4E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6925DF5B1FD2FA0800B581FF /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		692AFF8D1F70333C00E3ECB9 /* PatientCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientCollectionViewCell.swift; sourceTree = "<group>"; };
 		692AFF8F1F7035D800E3ECB9 /* DZImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DZImageView.swift; sourceTree = "<group>"; };
 		692AFF911F70368F00E3ECB9 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -392,6 +394,7 @@
 				D1295FA61FBC292000715C45 /* Time.swift */,
 				D1400AD01FBDA6100021726C /* Appointment.swift */,
 				694923271FCC75C1003CDA52 /* Test.swift */,
+				6925DF5B1FD2FA0800B581FF /* Review.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -739,6 +742,7 @@
 				69F7859A1F505535005197A6 /* SignUpViewController.swift in Sources */,
 				6969CE901F56AC24007E2E05 /* SearchDoctorCollectionViewCell.swift in Sources */,
 				692AFF901F7035D800E3ECB9 /* DZImageView.swift in Sources */,
+				6925DF5C1FD2FA0800B581FF /* Review.swift in Sources */,
 				D1295FA71FBC292000715C45 /* Time.swift in Sources */,
 				69F785661F4AC629005197A6 /* DesignableTextView.swift in Sources */,
 				69439F4F1F99DC8A00DC6F44 /* CountryPickerTextField.swift in Sources */,
