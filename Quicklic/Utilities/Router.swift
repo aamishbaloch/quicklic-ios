@@ -100,6 +100,7 @@ class Router: NSObject {
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: AppointmentDetailsViewController.storyboardID) as! AppointmentDetailsViewController
         controller.appointment = appointment
         controller.appointmentIndex = appointmentIndex
+        controller.parentController = fromController
         
         if let from = fromController as? AppointmentStatusDelegate {
             controller.delegate = from
@@ -144,6 +145,14 @@ class Router: NSObject {
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: CreateAppointmentViewController.storyboardID) as! CreateAppointmentViewController
         controller.doctor = doctor
        fromController.present(controller, animated: false, completion: nil)
+    }
+    
+    func editAppointment(appointment: Appointment, fromController: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: CreateAppointmentViewController.storyboardID) as! CreateAppointmentViewController
+        controller.appointment = appointment
+        controller.isEditingMode = true
+        controller.doctor = appointment.doctor
+        fromController.present(controller, animated: false, completion: nil)
     }
     
     func addReview(appointment: Appointment, fromController: UIViewController) {

@@ -28,17 +28,19 @@ class AppointmentDetailsViewController: UIViewController {
     @IBOutlet weak var appointmentStatusView: UIView!
     @IBOutlet weak var pendingConfirmationLabel: UILabel!
     @IBOutlet weak var selectedDateLabel: UILabel!
-      @IBOutlet weak var patientView: UIView!
+    @IBOutlet weak var patientView: UIView!
     
     @IBOutlet weak var appointmentStatusLabel: UILabel!
     
     @IBOutlet weak var notesLabel: UILabel!
     
     
-    var appointment: Appointment!
+    var appointment = Appointment()
     var doctor:User?
     var delegate:AppointmentStatusDelegate?
     var appointmentIndex: Int?
+    
+    var parentController: UIViewController?
     
   
     override func viewDidLoad() {
@@ -68,7 +70,7 @@ class AppointmentDetailsViewController: UIViewController {
             phoneLabel.text = appointment.doctor.phone ?? "N/A"
             addressLabel.text = appointment.doctor.address ?? "N/A"
             emailLabel.text = appointment.doctor.email ?? "N/A"
-            imageView.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image-done"), options: SDWebImageOptions.refreshCached, completed: nil)
+            imageView.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
             if let startTime = appointment.start_datetime {
                 selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
             }
@@ -82,7 +84,7 @@ class AppointmentDetailsViewController: UIViewController {
         phoneLabel.text = appointment.patient.phone ?? "N/A"
         addressLabel.text = appointment.patient.address ?? "N/A"
         emailLabel.text = appointment.patient.email ?? "N/A"
-        imageView.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image-done"), options: SDWebImageOptions.refreshCached, completed: nil)
+        imageView.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
         if let startTime = appointment.start_datetime {
             selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
         }
@@ -159,16 +161,17 @@ class AppointmentDetailsViewController: UIViewController {
         })
   
     }
-    
-    
    
     @IBAction func editButtonPressed(_ sender: DesignableButton) {
         
-        Router.sharedInstance.createAppointment(doctor: doctor!, fromController: self)
+       // Router.sharedInstance.createAppointment(doctor: doctor?.id, fromController: self)
         
+        self.dismiss(animated: false) {
+            Router.sharedInstance.editAppointment(appointment: self.appointment, fromController: self.parentController!)
+        }
+  
     }
-    
-    
+   
     @IBAction func cancelButtonPressedPatient(_ sender: Any) {
         self.cancelAppointment()
     }
@@ -191,8 +194,7 @@ class AppointmentDetailsViewController: UIViewController {
         }
         
     }
-    
-    
+  
     /*
     // MARK: - Navigation
 

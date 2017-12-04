@@ -30,6 +30,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
     var timeArray = [Time]()
     
     var appointment = Appointment()
+    var isEditingMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,10 +45,10 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         nameLabel.text = doctor?.full_name ?? "N/A"
         phoneLabel.text = doctor?.phone ?? "N/A"
         specialityLabel.text = doctor?.specializationName ?? "N/A"
-        profileImageView.sd_setImage(with: URL(string: doctor?.avatar ?? ""), placeholderImage: UIImage(named: "user-image-done"), options: SDWebImageOptions.refreshCached, completed: nil)
+        profileImageView.sd_setImage(with: URL(string: doctor?.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
         dateField.text = UtilityManager.stringFromNSDateWithFormat(date: NSDate(), format: Constant.appDateFormat)
         fetchTime(dateString: dateField.text)
-        
+     
         if let doctorID = doctor?.id {
             RequestManager.getDoctorClinicsList(doctorID: doctorID, successBlock: { (response) in
                 let clinic = Clinic(dictionary: response.first)
@@ -210,17 +211,30 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
             params["reason"] = reason
         }
         
-        SVProgressHUD.show()
-        RequestManager.createAppointment(params:params, successBlock: { (response) in
-           // SVProgressHUD.showSuccess(withStatus: "Appointment created successfully")
-            self.dismiss(animated: false, completion: nil)
-            SVProgressHUD.dismiss()
-            let appointment = Appointment(dictionary: response)
-            Router.sharedInstance.showConfirmation(appointment: appointment, fromController: self)
-            
-        }) { (error) in
-            SVProgressHUD.showError(withStatus: error)
-            print(error)
+        if !isEditingMode{
+            SVProgressHUD.show()
+            RequestManager.createAppointment(params:params, successBlock: { (response) in
+                // SVProgressHUD.showSuccess(withStatus: "Appointment created successfully")
+                self.dismiss(animated: false, completion: nil)
+                SVProgressHUD.dismiss()
+                let appointment = Appointment(dictionary: response)
+                Router.sharedInstance.showConfirmation(appointment: appointment, fromController: self)
+            }) { (error) in
+                SVProgressHUD.showError(withStatus: error)
+                print(error)
+            }
+        }else{
+            SVProgressHUD.show()
+            RequestManager.editAppointment(appointmentID: appointment.id!, params:params, successBlock: { (response) in
+                // SVProgressHUD.showSuccess(withStatus: "Appointment created successfully")
+                self.dismiss(animated: false, completion: nil)
+                SVProgressHUD.dismiss()
+                let appointment = Appointment(dictionary: response)
+                Router.sharedInstance.showConfirmation(appointment: appointment, fromController: self)
+            }) { (error) in
+                SVProgressHUD.showError(withStatus: error)
+                print(error)
+            }
         }
     }
 }

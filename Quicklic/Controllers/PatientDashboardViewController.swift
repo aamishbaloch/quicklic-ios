@@ -87,6 +87,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
             let date = Date()
             selectedDate = UtilityManager.stringFromNSDateWithFormat(date: date as NSDate, format: "yyyy-MM-dd")
             self.fetchData()
+            collectionView.reloadData()
         }
         
         
@@ -94,7 +95,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     
     func updateUI(user: User) {
         nameLabel.text = user.full_name
-        profileImageView.sd_setImage(with: URL(string: user.avatar ?? ""), placeholderImage: UIImage(named: "user-image-done"), options: SDWebImageOptions.refreshCached, completed: nil)
+        profileImageView.sd_setImage(with: URL(string: user.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
         
         if ApplicationManager.sharedInstance.userType == .Doctor {
             newAppointmentButton.setTitle("Patients", for: UIControlState.normal)
@@ -157,6 +158,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
             SVProgressHUD.dismiss()
             
         }) { (error) in
+            
             SVProgressHUD.showError(withStatus: error)
         }
         
@@ -174,12 +176,12 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         if ApplicationManager.sharedInstance.userType == .Patient {
             cell.nameLabel.text = appointment.doctor.full_name
             cell.specializationLabel.text = appointment.doctor.specializationName
-            cell.drImage.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image-done"), options: SDWebImageOptions.refreshCached, completed: nil)
+            cell.drImage.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
         }
         else{
             cell.nameLabel.text = appointment.patient.full_name
             cell.specializationLabel.text = nil
-            cell.drImage.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image-done"), options: SDWebImageOptions.refreshCached, completed: nil)
+            cell.drImage.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
         }
         
         if let startTime = self.appointmentsArray[indexPath.row].start_datetime {
