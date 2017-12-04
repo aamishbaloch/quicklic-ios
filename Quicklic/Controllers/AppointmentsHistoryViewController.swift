@@ -83,7 +83,6 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
     func fetchData() {
         
         var params = [String: Any]()
-      
         if let endDate = date {
          params["end_date"] = endDate
         }

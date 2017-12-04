@@ -15,6 +15,9 @@ class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollect
   //var appointment:Appointment!
   //var doctor = User()
     
+    var reviewArray = [Review]()
+    
+    
     @IBOutlet weak var collectoinView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,9 +72,24 @@ class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollect
         // print("Doctor id \(doctorID)")
         SVProgressHUD.show()
         
-        RequestManager.doctorsReview(doctorID:"12", successBlock: { (response) in
+        RequestManager.doctorsReview(successBlock: { (response) in
             SVProgressHUD.dismiss()
             print("Calling..")
+            
+            self.reviewArray.removeAll()
+            for object in response {
+                self.reviewArray.removeAll()
+                for object in response {
+                  //self.reviewArray.append(Review(dictionary: object))
+                    print("Array is : \(object)")
+                }
+             //   self.collectionView.reloadData()
+
+                print("Array is : \(object)")
+            }
+           // self.collectionView.reloadData()
+
+            
             
         }) { (error) in
             SVProgressHUD.showError(withStatus: error)

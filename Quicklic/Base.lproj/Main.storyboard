@@ -1002,7 +1002,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U8P-Hp-Hf6" customClass="GradientView" customModule="Quicklic" customModuleProvider="target">
                                 <rect key="frame" x="-0.5" y="0.0" width="375" height="181"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholdernew" translatesAutoresizingMaskIntoConstraints="NO" id="Cja-rS-qRX" customClass="DesignableImageView" customModule="Quicklic" customModuleProvider="target">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-image-done" translatesAutoresizingMaskIntoConstraints="NO" id="Cja-rS-qRX" customClass="DesignableImageView" customModule="Quicklic" customModuleProvider="target">
                                         <rect key="frame" x="150" y="10" width="75" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="NX3-lw-cN4"/>
@@ -1139,7 +1139,7 @@
                                                             <color key="textColor" red="1" green="0.76470588235294112" blue="0.015686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholdernew" translatesAutoresizingMaskIntoConstraints="NO" id="Ry5-rT-VWo" customClass="DesignableImageView" customModule="Quicklic" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-image-done" translatesAutoresizingMaskIntoConstraints="NO" id="Ry5-rT-VWo" customClass="DesignableImageView" customModule="Quicklic" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="7" width="55" height="55"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="Ry5-rT-VWo" secondAttribute="height" multiplier="1:1" id="AjK-Z2-dWx"/>
@@ -1279,13 +1279,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quicklic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQW-ll-ZPk">
-                                <rect key="frame" x="71.5" y="120" width="143.5" height="51.5"/>
+                                <rect key="frame" x="71" y="120" width="143.5" height="51.5"/>
                                 <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="43"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="53" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gq7-CK-kZm">
-                                <rect key="frame" x="13" y="227" width="260" height="433"/>
+                                <rect key="frame" x="12" y="227" width="260" height="433"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="433" id="R9O-LX-ouG"/>
@@ -1936,7 +1936,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tEl-jA-XEM" customClass="DesignableView" customModule="Quicklic" customModuleProvider="target">
                                                     <rect key="frame" x="10" y="8" width="345" height="74"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholdernew" translatesAutoresizingMaskIntoConstraints="NO" id="hxK-xr-Gyo" customClass="DesignableImageView" customModule="Quicklic" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-image-done" translatesAutoresizingMaskIntoConstraints="NO" id="hxK-xr-Gyo" customClass="DesignableImageView" customModule="Quicklic" customModuleProvider="target">
                                                             <rect key="frame" x="10" y="9.5" width="55" height="55"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="hxK-xr-Gyo" secondAttribute="height" multiplier="1:1" id="2F7-qG-seK"/>
@@ -2146,7 +2146,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOC-d4-il6" customClass="DesignableView" customModule="Quicklic" customModuleProvider="target">
                                                     <rect key="frame" x="11" y="7" width="343" height="77"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholdernew" translatesAutoresizingMaskIntoConstraints="NO" id="3mm-E4-8uX" customClass="DesignableImageView" customModule="Quicklic" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-image-done" translatesAutoresizingMaskIntoConstraints="NO" id="3mm-E4-8uX" customClass="DesignableImageView" customModule="Quicklic" customModuleProvider="target">
                                                             <rect key="frame" x="10" y="11" width="55" height="55"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="55" id="2p6-Zx-C62"/>
@@ -2360,12 +2360,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Hm-Nu-vdQ" customClass="DesignableView" customModule="Quicklic" customModuleProvider="target">
                                 <rect key="frame" x="15" y="159" width="347" height="376"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholdernew" translatesAutoresizingMaskIntoConstraints="NO" id="Map-vQ-Sn9" customClass="DesignableImageView" customModule="Quicklic" customModuleProvider="target">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-image-done" translatesAutoresizingMaskIntoConstraints="NO" id="Map-vQ-Sn9" customClass="DesignableImageView" customModule="Quicklic" customModuleProvider="target">
                                         <rect key="frame" x="20" y="15" width="80" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="2ge-h0-pRH"/>
                                             <constraint firstAttribute="width" constant="80" id="QEA-co-sSd"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="-1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Melissa John" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFy-aU-UOp">
                                         <rect key="frame" x="115" y="15" width="132.5" height="30"/>
@@ -2784,7 +2789,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfF-ar-upy" customClass="DesignableView" customModule="Quicklic" customModuleProvider="target">
                                                     <rect key="frame" x="5" y="0.0" width="145" height="185"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholdernew" translatesAutoresizingMaskIntoConstraints="NO" id="37B-Q0-aFy">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-image-done" translatesAutoresizingMaskIntoConstraints="NO" id="37B-Q0-aFy">
                                                             <rect key="frame" x="48" y="5" width="50" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="1H1-lZ-4o1"/>
@@ -4316,7 +4321,7 @@
                                 <rect key="frame" x="14.5" y="133.5" width="347" height="400"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ru-MB-Tpf">
-                                        <rect key="frame" x="46.5" y="15" width="254.5" height="43"/>
+                                        <rect key="frame" x="47" y="15" width="254.5" height="43"/>
                                         <string key="text">Please select which one you want
  to review?</string>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="18"/>
