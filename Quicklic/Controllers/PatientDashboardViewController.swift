@@ -177,12 +177,12 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         if ApplicationManager.sharedInstance.userType == .Patient {
             cell.nameLabel.text = appointment.doctor.full_name ?? "N/A"
             cell.specializationLabel.text = appointment.doctor.specializationName ?? "N/A"
-            cell.drImage.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
+            cell.drImage.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         }
         else{
             cell.nameLabel.text = appointment.patient.full_name ?? "N/A"
             cell.specializationLabel.text = nil
-            cell.drImage.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
+            cell.drImage.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         }
         
         if let startTime = self.appointmentsArray[indexPath.row].start_datetime {
@@ -197,6 +197,9 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
             cell.statusLabel.textColor = UIColor.orange
         }
         else if status == "Discard" {
+            cell.statusLabel.textColor = UIColor.red
+        }
+        else if status == "Cancel" {
             cell.statusLabel.textColor = UIColor.red
         }
         

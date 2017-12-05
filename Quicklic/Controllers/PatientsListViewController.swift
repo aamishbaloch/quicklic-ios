@@ -46,7 +46,7 @@ class PatientsListViewController: UIViewController, UICollectionViewDelegate, UI
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PatientCollectionViewCell.identifier, for: indexPath) as! PatientCollectionViewCell
         
         let paitent = paitentArray[indexPath.row]
-        cell.imageView.sd_setImage(with: URL(string: paitent.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
+        cell.imageView.sd_setImage(with: URL(string: paitent.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         cell.nameLabel.text = paitent.full_name ?? "N/A"
         cell.phoneLabel.text = paitent.phone ?? "N/A"
         cell.addressLabel.text = paitent.address ?? "N/A"

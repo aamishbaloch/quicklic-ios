@@ -45,7 +45,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         nameLabel.text = doctor?.full_name ?? "N/A"
         phoneLabel.text = doctor?.phone ?? "N/A"
         specialityLabel.text = doctor?.specializationName ?? "N/A"
-        profileImageView.sd_setImage(with: URL(string: doctor?.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
+        profileImageView.sd_setImage(with: URL(string: doctor?.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         dateField.text = UtilityManager.stringFromNSDateWithFormat(date: NSDate(), format: Constant.appDateFormat)
         fetchTime(dateString: dateField.text)
      

@@ -94,7 +94,7 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
         text = text + "\n" + clinic.phone!
         
         cell.nameLabel.text = text
-        cell.clinicImageView.sd_setImage(with: URL(string: clinic.image ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
+        cell.clinicImageView.sd_setImage(with: URL(string: clinic.image ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         let floatValue : Float = NSString(string: clinic.rating!).floatValue
         cell.ratingView.value = CGFloat(floatValue)
         
