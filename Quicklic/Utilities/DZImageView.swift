@@ -120,10 +120,13 @@ import UIKit
 //            self.image = pickedImage
             self.contentMode = .scaleAspectFill
             self.image = pickedImage.resizeImageWith(newSize: CGSize(width: 200, height: 200))
+            self.image = pickedImage
         }
         else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.contentMode = .scaleAspectFill
             self.image = image.resizeImageWith(newSize: CGSize(width: 200, height: 200))
+            self.image = image
+            
         }
         picker.dismiss(animated: true, completion: nil);
     }

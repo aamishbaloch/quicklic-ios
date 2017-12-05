@@ -48,7 +48,18 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         user = ApplicationManager.sharedInstance.user
        // nameLabel.text = user.full_name
-        profileImageView.sd_setImage(with: URL(string: user.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
+        let url = URL(string: user.avatar ?? "")
+//        profileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
+        profileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed]) { (image, error, cacheType, url) in
+            if error == nil {
+                self.profileImageView.image = image
+            }
+            else{
+                print(error)
+            }
+        }
+        
+//        profileImageView.sd_setImage(with: <#T##URL?#>, placeholderImage: <#T##UIImage?#>, op tions: <#T##SDWebImageOptions#>, completed: <#T##SDExternalCompletionBlock?##SDExternalCompletionBlock?##(UIImage?, Error?, SDImageCacheType, URL?) -> Void#>)
         tableView.reloadData()
         
     }

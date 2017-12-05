@@ -96,7 +96,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     
     func updateUI(user: User) {
         nameLabel.text = user.full_name
-        profileImageView.sd_setImage(with: URL(string: user.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
+        profileImageView.sd_setImage(with: URL(string: user.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         
         if ApplicationManager.sharedInstance.userType == .Doctor {
             newAppointmentButton.setTitle("Patients", for: UIControlState.normal)

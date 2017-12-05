@@ -65,12 +65,7 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
         }
         
         profileImageView.parentController = self
-        // Do any additional setup after loading the view.
         
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         let user = ApplicationManager.sharedInstance.user
         
         
@@ -102,6 +97,13 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
         }
         
         occupationField.text = user.occupationName
+        // Do any additional setup after loading the view.
+        
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     override func didReceiveMemoryWarning() {
