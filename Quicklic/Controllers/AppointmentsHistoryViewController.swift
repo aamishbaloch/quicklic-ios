@@ -65,6 +65,19 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         if let startTime = self.appointmentsArray[indexPath.row].end_datetime {
             cell.timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
         }
+        
+        let status = appointment.status?.value
+        cell.statusLabel.text = status
+        if status == "Confirmed"
+        {
+            cell.statusLabel.textColor = UIColor.green
+        }else if status == "Pending" {
+            cell.statusLabel.textColor = UIColor.orange
+        }
+        else if status == "Discard" {
+            cell.statusLabel.textColor = UIColor.red
+        }
+        
      
         return cell
     }

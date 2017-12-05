@@ -80,24 +80,26 @@ class AppointmentDetailsViewController: UIViewController {
             
         }
         else{
-        nameLabel.text = appointment.patient.full_name ?? "N/A"
-        phoneLabel.text = appointment.patient.phone ?? "N/A"
-        addressLabel.text = appointment.patient.address ?? "N/A"
-        emailLabel.text = appointment.patient.email ?? "N/A"
-        imageView.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
-        if let startTime = appointment.start_datetime {
-            selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
-        }
-        reasonforvisitLabel.text = appointment.reason.name ?? "N/A"
-        pendingConfirmationLabel.text = appointment.status?.value ?? "N/A"
-        selectedDateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
+            nameLabel.text = appointment.patient.full_name ?? "N/A"
+            phoneLabel.text = appointment.patient.phone ?? "N/A"
+            addressLabel.text = appointment.patient.address ?? "N/A"
+            emailLabel.text = appointment.patient.email ?? "N/A"
+            imageView.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
+            if let startTime = appointment.start_datetime {
+                selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
+            }
+            reasonforvisitLabel.text = appointment.reason.name ?? "N/A"
+            pendingConfirmationLabel.text = appointment.status?.value ?? "N/A"
+            selectedDateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
         
-        if appointment.status?.value == "Confirmed"
-        {
-            pendingConfirmationLabel.textColor = UIColor.green
-        }else{
-            pendingConfirmationLabel.textColor = UIColor.red
-        }
+            if appointment.status?.value == "Confirmed"
+            {
+                pendingConfirmationLabel.textColor = UIColor.green
+            }else if appointment.status?.value == "Pending" {
+                pendingConfirmationLabel.textColor = UIColor.orange
+            }else{
+                pendingConfirmationLabel.textColor = UIColor.red
+            }
     
       }
     }

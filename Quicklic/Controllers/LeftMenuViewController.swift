@@ -13,8 +13,8 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
     static let storyboardID = "leftMenuViewController"
     
     var selectedIndex = 0
-    let patientmenuItems = ["Dashboard", "New Appointment", "Profile", "Appointment History", "Clinics", "Labs","Reviews", "Logout"]
-    let doctorMenuItems = ["Appointments", "Patients", "Profile", "Clinics","Reviews", "Logout"]
+    let patientmenuItems = ["Dashboard", "New Appointment", "Appointment History", "Profile", "Clinics", "Labs","Reviews", "Logout"]
+    let doctorMenuItems = ["Dashboard","Appointments", "Patients", "Profile", "Clinics","Reviews", "Logout"]
     
     var doctorArray = [User]()
     
@@ -72,16 +72,18 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
         case .Doctor:
             switch indexPath.row {
             case 0:
-                Router.sharedInstance.showAppointmentHistory()
+               Router.sharedInstance.showPatientDashboard()
             case 1:
-                Router.sharedInstance.showPatientsList()
+                Router.sharedInstance.showAppointmentHistory()
             case 2:
-                Router.sharedInstance.showProfile()
+                Router.sharedInstance.showPatientsList()
             case 3:
-                Router.sharedInstance.showClinicsList()
+                Router.sharedInstance.showProfile()
             case 4:
-                Router.sharedInstance.showReviews()
+                Router.sharedInstance.showClinicsList()
             case 5:
+                Router.sharedInstance.showReviews()
+            case 6:
                 Router.sharedInstance.showLandingPage()
                 
             default: break
@@ -94,9 +96,9 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
             case 1:
                 Router.sharedInstance.showSearchDoctor()
             case 2:
-                Router.sharedInstance.showProfile()
-            case 3:
                 Router.sharedInstance.showAppointmentHistory()
+            case 3:
+                 Router.sharedInstance.showProfile()
             case 4:
                 Router.sharedInstance.showClinicsList()
             case 5:

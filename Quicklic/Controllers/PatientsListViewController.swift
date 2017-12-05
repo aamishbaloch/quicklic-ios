@@ -14,6 +14,9 @@ class PatientsListViewController: UIViewController, UICollectionViewDelegate, UI
     
     
     @IBOutlet weak var collectionView: UICollectionView!
+    var paitentArray = [User]()
+    var appointment = Appointment()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +25,8 @@ class PatientsListViewController: UIViewController, UICollectionViewDelegate, UI
         title = "Patients"
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        fetchData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -34,11 +39,31 @@ class PatientsListViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return paitentArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PatientCollectionViewCell.identifier, for: indexPath) as! PatientCollectionViewCell
+        
+        let paitent = paitentArray[indexPath.row]
+        cell.imageView.sd_setImage(with: URL(string: paitent.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
+        cell.nameLabel.text = paitent.full_name ?? "N/A"
+        cell.phoneLabel.text = paitent.phone ?? "N/A"
+        cell.addressLabel.text = paitent.address ?? "N/A"
+        cell.emailLabel.text = paitent.email ?? "N/A"
+    
+        let status = appointment.status?.value
+        cell.statusLabel.text = status
+        if status == "Confirmed"
+        {
+            cell.statusLabel.textColor = UIColor.green
+        }else if status == "Pending" {
+            cell.statusLabel.textColor = UIColor.orange
+        }
+        else if status == "Discard" {
+            cell.statusLabel.textColor = UIColor.red
+        }
+       
         return cell
     }
     
@@ -46,6 +71,25 @@ class PatientsListViewController: UIViewController, UICollectionViewDelegate, UI
         
     }
 
+    
+    func fetchData(){
+        
+        var params = [String: Any]()
+   
+        SVProgressHUD.show()
+        RequestManager.getPatientsList(params: params, successBlock: { (response) in
+            self.paitentArray.removeAll()
+            for object in response {
+               self.paitentArray.append(User(dictionary: object))
+            }
+            self.collectionView.reloadData()
+            SVProgressHUD.dismiss()
+            
+        }) { (error) in
+            SVProgressHUD.showError(withStatus: error)
+        }
+     
+    }
 
     /*
     // MARK: - Navigation

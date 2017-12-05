@@ -32,7 +32,7 @@ class DoctorDetailViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         print("Doctor id:\(String(describing: doctor.id))")
-        nameLabel.text = doctor.full_name
+        nameLabel.text = doctor.full_name ?? "N/A"
         profileImageView.sd_setImage(with: URL(string: doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
         specialityLabel.text = doctor.specializationName ?? "N/A"
         phoneLabel.text = doctor.phone ?? "N?A"

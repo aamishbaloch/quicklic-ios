@@ -56,15 +56,15 @@ class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollect
         
         switch type {
         case 1:
-            cell.nameLabel.text = review.doctor.full_name
+            cell.nameLabel.text = review.doctor.full_name ?? "N/A"
             cell.imageView.sd_setImage(with: URL(string: review.doctor.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: .refreshCached, completed: nil)
         case 2:
-            cell.nameLabel.text = review.clinic.name
+            cell.nameLabel.text = review.clinic.name ?? "N/A"
             cell.imageView.sd_setImage(with: URL(string: review.clinic.image ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: .refreshCached, completed: nil)
         default: break
         }
         
-        cell.descriptionLabel.text = review.comment
+        cell.descriptionLabel.text = review.comment ?? "N/A"
         cell.dateLabel.text = UtilityManager.stringFromNSDateWithFormat(date: review.created_at! as NSDate, format: Constant.appDateFormat)
         cell.ratingView.value = CGFloat(review.rating!)
         

@@ -374,8 +374,7 @@ class WebClient: AFHTTPSessionManager {
     
     func getLabsList(successBlock success:@escaping ([[String: AnyObject]]) -> (),
                         failureBlock failure:@escaping (String) -> ()){
-        
-        
+    
         let url = "test/lab/"
         
         self.getPath(urlString: url, params: [:], successBlock: { (response) in
@@ -508,7 +507,7 @@ class WebClient: AFHTTPSessionManager {
     
     func editAppointment(appointmentID:String, params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (), failureBlock failure:@escaping (String) -> ()){
         
-        self.postPath(urlString: "appointment/\(appointmentID)", params: params as [String : AnyObject], successBlock: { (response) in
+        self.getPath(urlString: "appointment/\(appointmentID)", params: params as [String : AnyObject], successBlock: { (response) in
             print(response)
             success(response as! [String : AnyObject])
         }) { (error) in
@@ -568,6 +567,20 @@ class WebClient: AFHTTPSessionManager {
         let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/review/" : "doctor/\(ApplicationManager.sharedInstance.user.id ?? "0")/review/"
         
         self.getPath(urlString: url, params: [:], successBlock: { (response) in
+            print(response)
+            success(response["results"] as! [[String : AnyObject]])
+        }) { (error) in
+            failure(error)
+        }
+    }
+    
+    func getPatientsList( params: [String: Any], successBlock success:@escaping ([[String: AnyObject]]) -> (),
+                         failureBlock failure:@escaping (String) -> ()){
+        
+        var params = params
+        params["active"] = "true"
+        
+        self.getPath(urlString: "patient/", params: params as [String : AnyObject], successBlock: { (response) in
             print(response)
             success(response["results"] as! [[String : AnyObject]])
         }) { (error) in

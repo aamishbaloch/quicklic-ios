@@ -20,6 +20,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
    
    
     var appointmentsArray = [Appointment]()
+    var appointment = Appointment()
     var selectedDate:String?
     
     override func viewDidLoad() {
@@ -174,12 +175,12 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         
         let appointment = appointmentsArray[indexPath.item]
         if ApplicationManager.sharedInstance.userType == .Patient {
-            cell.nameLabel.text = appointment.doctor.full_name
-            cell.specializationLabel.text = appointment.doctor.specializationName
+            cell.nameLabel.text = appointment.doctor.full_name ?? "N/A"
+            cell.specializationLabel.text = appointment.doctor.specializationName ?? "N/A"
             cell.drImage.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
         }
         else{
-            cell.nameLabel.text = appointment.patient.full_name
+            cell.nameLabel.text = appointment.patient.full_name ?? "N/A"
             cell.specializationLabel.text = nil
             cell.drImage.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
         }
@@ -189,6 +190,15 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         }
         let status = appointment.status?.value
         cell.statusLabel.text = status
+        if status == "Confirmed"
+        {
+           cell.statusLabel.textColor = UIColor.green
+        }else if status == "Pending" {
+            cell.statusLabel.textColor = UIColor.orange
+        }
+        else if status == "Discard" {
+            cell.statusLabel.textColor = UIColor.red
+        }
         
         return cell
     }
@@ -204,7 +214,12 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     }
     
     @IBAction func newAppointmentButtonPressed(_ sender: Any) {
-        Router.sharedInstance.showSearchDoctor()
+      
+        if ApplicationManager.sharedInstance.userType == .Doctor {
+         Router.sharedInstance.showPatientsList()
+        }else{
+         Router.sharedInstance.showSearchDoctor()
+        }
     }
     
     @IBAction func appointmentHistoryButtonPressed(_ sender: Any) {

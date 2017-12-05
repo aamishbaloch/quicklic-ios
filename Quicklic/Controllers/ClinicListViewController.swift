@@ -73,9 +73,6 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
                 SVProgressHUD.showError(withStatus: error)
             }
         }
-        
-        
-    
     }
     
     @IBAction func menuButtonPressed(_ sender: Any) {
