@@ -47,7 +47,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewWillAppear(animated)
         
         user = ApplicationManager.sharedInstance.user
-        //        nameLabel.text = user.full_name
+            //nameLabel.text = user.full_name
         let url = URL(string: user.avatar ?? "")
         profileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed]) { (image, error, cacheType, url) in
             if error == nil {
@@ -81,15 +81,18 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         switch indexPath.row {
         case 0:
+            cell.headingLabel.text = "Name"
+            cell.bodyField.text = user.full_name ?? "N/A"
+        case 1:
             cell.headingLabel.text = "Phone Number"
             cell.bodyField.text = user.phone ?? "N/A"
-        case 1:
+        case 2:
             cell.headingLabel.text = "Email"
             cell.bodyField.text = user.email ?? "N/A"
-        case 2:
+        case 3:
             cell.headingLabel.text = "Gender"
             cell.bodyField.text = user.gender?.value ?? "N/A"
-        case 3:
+        case 4:
             cell.headingLabel.text = "Date of Birth"
             if let dob = user.dob {
                 cell.bodyField.text = UtilityManager.stringFromNSDateWithFormat(date: dob, format: Constant.appDateFormat)
@@ -97,16 +100,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             else{
                 cell.bodyField.text = "N/A"
             }
-        case 4:
+        case 5:
             cell.headingLabel.text = "Address"
             cell.bodyField.text = user.address ?? "N/A"
-        case 5:
+        case 6:
             cell.headingLabel.text = "City"
             cell.bodyField.text = user.cityName ?? "N/A"
-        case 6:
+        case 7:
             cell.headingLabel.text = "Country"
             cell.bodyField.text = user.countryName ?? "N/A"
-        case 7:
+        case 8:
             if user.userType == .Patient {
                 cell.headingLabel.text = "Height"
                 cell.bodyField.text = user.height ?? "N/A"
@@ -115,7 +118,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.headingLabel.text = "Services"
                 cell.bodyField.text = user.servicesArray.joined(separator: ", ")
             }
-        case 8:
+        case 9:
             if user.userType == .Patient {
                 cell.headingLabel.text = "Weight"
                 cell.bodyField.text = user.weight ?? "N/A"
@@ -124,7 +127,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.headingLabel.text = "Specialization"
                 cell.bodyField.text = user.specializationName ?? "N/A"
             }
-        case 9:
+        case 10:
             if user.userType == .Patient {
                 cell.headingLabel.text = "Marital Status"
                 cell.bodyField.text = user.marital_status?.value ?? "N/A"
@@ -134,7 +137,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.bodyField.text = user.degree
             }
             
-        case 10:
+        case 11:
             cell.headingLabel.text = "Occupation"
             cell.bodyField.text = user.occupationName ?? "N/A"
         default: break

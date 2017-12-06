@@ -73,7 +73,7 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
         self.nameField.text = "\(user.first_name!) \(user.last_name!)"
         self.emailField.text = user.email
         if let avatar = URL(string: user.avatar ?? "") {
-            self.profileImageView.sd_setImage(with: avatar, completed: nil)
+            self.profileImageView.sd_setImage(with: avatar, placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         }
         self.addressField.text = user.address
         self.cityField.text = user.cityName
