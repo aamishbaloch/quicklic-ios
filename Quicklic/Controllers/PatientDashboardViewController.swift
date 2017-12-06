@@ -110,7 +110,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     
     func setupDatePicker() {
         var dates = [Date]()
-        for day in -15...15 {
+        for day in -15...150 {
             dates.append(Date(timeIntervalSinceNow: Double(day * 86400)))
         }
         
