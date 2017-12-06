@@ -11,7 +11,7 @@ import UIKit
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     static let storyboardID = "profileViewNavController"
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var profileImageView: DesignableImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -20,26 +20,26 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         title = "Profile"
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 38
+        tableView.estimatedRowHeight = 20
         
         tableView.delegate = self
         tableView.dataSource = self
         
-//        tableView.separatorColor = UIColor.clear
-//        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView.separatorColor = UIColor.clear
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
-//        user = ApplicationManager.sharedInstance.user
-//        nameLabel.text = user.full_name
-//        profileImageView.sd_setImage(with: URL(string: user.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
+        //        user = ApplicationManager.sharedInstance.user
+        //        nameLabel.text = user.full_name
+        //        profileImageView.sd_setImage(with: URL(string: user.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: SDWebImageOptions.refreshCached, completed: nil)
         
         tableView.tableFooterView = UIView()
-         
+        
         
     }
     
@@ -47,32 +47,24 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewWillAppear(animated)
         
         user = ApplicationManager.sharedInstance.user
-       // nameLabel.text = user.full_name
+        //        nameLabel.text = user.full_name
         let url = URL(string: user.avatar ?? "")
-//        profileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
         profileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed]) { (image, error, cacheType, url) in
             if error == nil {
                 self.profileImageView.image = image
             }
             else{
-                print(error)
+                print(error ?? "")
             }
         }
-        
-//        profileImageView.sd_setImage(with: <#T##URL?#>, placeholderImage: <#T##UIImage?#>, op tions: <#T##SDWebImageOptions#>, completed: <#T##SDExternalCompletionBlock?##SDExternalCompletionBlock?##(UIImage?, Error?, SDImageCacheType, URL?) -> Void#>)
         tableView.reloadData()
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 77
-    }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if user.userType == .Patient {
@@ -151,7 +143,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
         
     }
-
+    
     
     @IBAction func menuButtonPressed(_ sender: Any) {
         
@@ -159,13 +151,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
