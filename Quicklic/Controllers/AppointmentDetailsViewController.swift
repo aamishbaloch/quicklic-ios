@@ -75,7 +75,24 @@ class AppointmentDetailsViewController: UIViewController {
                 selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
             }
             reasonforvisitLabel.text = appointment.reason.name ?? "N/A"
-            pendingConfirmationLabel.text = appointment.status?.value ?? "N/A"
+            
+            if let status = appointment.status?.value
+            {
+                appointmentStatusLabel.text = status
+                print("Status is : \(String(describing: status))")
+            }
+            if appointment.status?.value == "Confirmed"
+            {
+                appointmentStatusLabel.textColor = UIColor.green
+                
+            }else if appointment.status?.value == "Pending" {
+                
+                appointmentStatusLabel.textColor = UIColor.orange
+                
+            }else{
+                
+                appointmentStatusLabel.textColor = UIColor.red
+            }
             selectedDateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
             
         }
@@ -89,19 +106,24 @@ class AppointmentDetailsViewController: UIViewController {
                 selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
             }
             reasonforvisitLabel.text = appointment.reason.name ?? "N/A"
+          
             pendingConfirmationLabel.text = appointment.status?.value ?? "N/A"
             selectedDateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
         
             if appointment.status?.value == "Confirmed"
             {
                 pendingConfirmationLabel.textColor = UIColor.green
+                
             }else if appointment.status?.value == "Pending" {
+                
                 pendingConfirmationLabel.textColor = UIColor.orange
+                
             }else{
+                
                 pendingConfirmationLabel.textColor = UIColor.red
             }
-    
-      }
+            
+        }
     }
     
     @IBAction func okButtonPressed(_ sender: UIButton) {
