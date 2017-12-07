@@ -1,31 +1,42 @@
 //
-//  AppointmentsHistoryViewController.swift
+//  VisitListViewController.swift
 //  Quicklic
 //
-//  Created by Danial Zahid on 30/08/2017.
+//  Created by Furqan Nadeem on 12/7/17.
 //  Copyright © 2017 Danial Zahid. All rights reserved.
 //
 
 import UIKit
 
-class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate {
-
-    static let storyboardID = "appointmentsHistoryViewController"
+class VisitListViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,AppointmentStatusDelegate {
     
+   
+    
+    static let storyboardID = "VisitListViewController"
     @IBOutlet weak var collectionView: UICollectionView!
-     var appointmentsArray = [Appointment]()
-     var date:String?
+    
+    var visitArray = [Appointment]()
+    var appointment = Appointment()
+    var statusIs:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        title = "Appointments History"
+        
+        title = "Visits"
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
+        
+     // collectionView.reloadData()
         fetchData()
+    }
+    
+    func appointmenConfirmation(status: AppointmentStatus, index: Int) {
+        visitArray[index].status = status
+        collectionView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,40 +44,45 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func menuButtonPressed(_ sender: Any) {
-        self.presentLeftMenuViewController(nil)
+
+    @IBAction func menubuttonPressed(_ sender: UIBarButtonItem) {
+         self.presentLeftMenuViewController(nil)
     }
+    
+    func fetchData() {
+        
+        guard let doctorId = ApplicationManager.sharedInstance.user.id  else {return}
+        print("Doctor id: \(doctorId)")
+        SVProgressHUD.show()
+        RequestManager.getVisitList(doctorID:doctorId, params: [:],successBlock: { (response) in
+            SVProgressHUD.dismiss()
+            self.visitArray.removeAll()
+            for object in response {
+                self.visitArray.append(Appointment(dictionary: object))
+            }
+            
+            self.collectionView.reloadData()
+        }) { (error) in
+            SVProgressHUD.showError(withStatus: error)
+        }
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return appointmentsArray.count
+        return visitArray.count
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DoctorAppointmentCollectionViewCell.identifier, for: indexPath) as! DoctorAppointmentCollectionViewCell
-       
-        let appointment = appointmentsArray[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VisitCollectionViewCell.identifier, for: indexPath) as! VisitCollectionViewCell
         
-        if ApplicationManager.sharedInstance.userType == .Patient {
-            cell.nameLabel.text = appointment.doctor.full_name
-            cell.specializationLabel.text = appointment.doctor.specializationName
-            cell.drImage.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
-            cell.addReviewButton.isHidden = false
-            cell.addReviewButton.addTarget(self, action: #selector(self.addReviewButtonPressed(_:)), for: UIControlEvents.touchUpInside)
-            cell.addReviewButton.tag = indexPath.row
-        }
-        else{
-            cell.nameLabel.text = appointment.patient.full_name
-            cell.specializationLabel.text = nil
-            cell.drImage.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
-            cell.addReviewButton.isHidden = true
+        let visit  = visitArray[indexPath.row]
+        cell.nameLabel.text = visit.doctor.full_name
+        cell.imageView.sd_setImage(with: URL(string: visit.doctor.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
+        if let startTime = self.visitArray[indexPath.row].start_datetime {
+            cell.timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "hh:mm a")
         }
         
-        if let startTime = self.appointmentsArray[indexPath.row].end_datetime {
-            cell.timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
-        }
-        
-        let status = appointment.status?.value
+        let status = visit.status?.value
         cell.statusLabel.text = status
         if status == "Confirmed"
         {
@@ -77,54 +93,21 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         else if status == "Discard" {
             cell.statusLabel.textColor = UIColor.red
         }
+        else if status == "Cancel" {
+            cell.statusLabel.textColor = UIColor.red
+        }
         
-     
         return cell
     }
     
-   
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = self.collectionView.bounds.width
-        
-        return CGSize(width: cellWidth, height: 90)
-    }
-    
-    func fetchData() {
-        
-        var params = [String: Any]()
-        if let endDate = date {
-         params["end_date"] = endDate
-        }
-        SVProgressHUD.show()
-        RequestManager.getAppointmentHistory(params:params, successBlock: { (response) in
-            self.appointmentsArray.removeAll()
-            for object in response {
-                self.appointmentsArray.append(Appointment(dictionary: object))
-                print("Array is : \(object)")
-            }
-            self.collectionView.reloadData()
-            SVProgressHUD.dismiss()
-            
-        }) { (error) in
-            SVProgressHUD.showError(withStatus: error)
-        }
-        
-    }
-    
-    func addReviewButtonPressed(_ sender: UIButton) {
-        let appointment = appointmentsArray[sender.tag]
-        Router.sharedInstance.addReview(appointment: appointment, fromController: self)
+        Router.sharedInstance.showAppointmentDetailsForVisit(appointment: self.visitArray[indexPath.item],appointmentIndex: indexPath.item, fromController: self)
     }
     
     //MARK : - EmptyDataSource Methods
     
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "History not Found"
+        let text = "No Visits Found"
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakMode = .byWordWrapping
@@ -196,7 +179,9 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         SVProgressHUD.show()
         fetchData()
     }
-
+    
+    
+    
     /*
     // MARK: - Navigation
 

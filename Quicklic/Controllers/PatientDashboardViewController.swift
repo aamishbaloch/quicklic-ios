@@ -90,8 +90,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
             self.fetchData()
             collectionView.reloadData()
         }
-        
-        
+      
     }
     
     func updateUI(user: User) {

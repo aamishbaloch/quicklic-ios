@@ -527,6 +527,19 @@ class WebClient: AFHTTPSessionManager {
             failure(error)
         }
     }
+    
+    func getAppointmentHistory(params: [String: Any],successBlock success:@escaping ([[String: AnyObject]]) -> (),
+                         failureBlock failure:@escaping (String) -> ()){
+        
+        let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/appointment/" : "doctor/\(ApplicationManager.sharedInstance.user.id ?? "0")/appointment/history"
+        
+        self.getPath(urlString: url, params: params as [String : AnyObject], successBlock: { (response) in
+            print(response)
+            success(response["results"] as! [[String : AnyObject]])
+        }) { (error) in
+            failure(error)
+        }
+    }
    
     func appointmentStatus(doctorID: String ,appointmentID:String ,params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (), failureBlock failure:@escaping (String) -> ()){
         
@@ -588,4 +601,15 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
+    func getVisitList(doctorID: String, params: [String: Any],successBlock success:@escaping ([[String: AnyObject]]) -> (),
+                          failureBlock failure:@escaping (String) -> ()){
+        
+        self.getPath(urlString: "doctor/\(doctorID)/appointment/visit", params:[:], successBlock: { (response) in
+            print(response)
+            success(response["results"] as! [[String : AnyObject]])
+        }) { (error) in
+            failure(error)
+        }
+    }
+   
 }

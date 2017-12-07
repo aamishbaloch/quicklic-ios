@@ -107,6 +107,8 @@
 		69F7859A1F505535005197A6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F785991F505535005197A6 /* SignUpViewController.swift */; };
 		69F7859C1F52E44B005197A6 /* PatientDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F7859B1F52E44B005197A6 /* PatientDashboardViewController.swift */; };
 		86A4269C2E52DE810B7CD185 /* libPods-Quicklic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5516CCBDAF692E4BBD7432D6 /* libPods-Quicklic.a */; };
+		D10E40AB1FD91C6B00FC43F4 /* VisitListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10E40AA1FD91C6B00FC43F4 /* VisitListViewController.swift */; };
+		D10E40AD1FD91C9C00FC43F4 /* VisitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10E40AC1FD91C9C00FC43F4 /* VisitCollectionViewCell.swift */; };
 		D1295FA71FBC292000715C45 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1295FA61FBC292000715C45 /* Time.swift */; };
 		D1295FAB1FBC2D3600715C45 /* CreatAppointmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1295FAA1FBC2D3600715C45 /* CreatAppointmentCollectionViewCell.swift */; };
 		D1400AD11FBDA6100021726C /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1400AD01FBDA6100021726C /* Appointment.swift */; };
@@ -244,6 +246,8 @@
 		69F7859B1F52E44B005197A6 /* PatientDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDashboardViewController.swift; sourceTree = "<group>"; };
 		9B3B503ED6796ADFF30BC563 /* Pods-Quicklic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quicklic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Quicklic/Pods-Quicklic.debug.xcconfig"; sourceTree = "<group>"; };
 		AF5168AC7A62D6EF164AEDB8 /* Pods-Quicklic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quicklic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Quicklic/Pods-Quicklic.release.xcconfig"; sourceTree = "<group>"; };
+		D10E40AA1FD91C6B00FC43F4 /* VisitListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitListViewController.swift; sourceTree = "<group>"; };
+		D10E40AC1FD91C9C00FC43F4 /* VisitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitCollectionViewCell.swift; sourceTree = "<group>"; };
 		D1295FA61FBC292000715C45 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		D1295FAA1FBC2D3600715C45 /* CreatAppointmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatAppointmentCollectionViewCell.swift; sourceTree = "<group>"; };
 		D1400AD01FBDA6100021726C /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
@@ -379,6 +383,7 @@
 				6949232B1FCC9D2A003CDA52 /* AddReviewViewController.swift */,
 				D1D0F0451FCD481400321730 /* ReviewsViewController.swift */,
 				D1D0F04B1FCDA2C700321730 /* ConfirmationViewController.swift */,
+				D10E40AA1FD91C6B00FC43F4 /* VisitListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -472,6 +477,7 @@
 				D1295FAA1FBC2D3600715C45 /* CreatAppointmentCollectionViewCell.swift */,
 				694923231FCC730D003CDA52 /* TestListTableViewCell.swift */,
 				D1D0F0471FCD49CC00321730 /* ReviewCollectionViewCell.swift */,
+				D10E40AC1FD91C9C00FC43F4 /* VisitCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -745,6 +751,7 @@
 				6925DF5C1FD2FA0800B581FF /* Review.swift in Sources */,
 				D1295FA71FBC292000715C45 /* Time.swift in Sources */,
 				69F785661F4AC629005197A6 /* DesignableTextView.swift in Sources */,
+				D10E40AB1FD91C6B00FC43F4 /* VisitListViewController.swift in Sources */,
 				69439F4F1F99DC8A00DC6F44 /* CountryPickerTextField.swift in Sources */,
 				69D0D4ED1FA607A600D4E0D2 /* AddClinicViewController.swift in Sources */,
 				D1295FAB1FBC2D3600715C45 /* CreatAppointmentCollectionViewCell.swift in Sources */,
@@ -803,6 +810,7 @@
 				6969CE961F56D837007E2E05 /* AnnouncementCollectionViewCell.swift in Sources */,
 				69F7855B1F4AC629005197A6 /* Constants.swift in Sources */,
 				69416EF31F87EA9B00E2E0E2 /* BaseEntity.m in Sources */,
+				D10E40AD1FD91C9C00FC43F4 /* VisitCollectionViewCell.swift in Sources */,
 				6949232A1FCC87B3003CDA52 /* TestDetailViewController.swift in Sources */,
 				69F7856B1F4AC629005197A6 /* LoadingView.swift in Sources */,
 				69F785721F4AC629005197A6 /* SpringImageView.swift in Sources */,

@@ -101,11 +101,26 @@ class Router: NSObject {
         controller.appointment = appointment
         controller.appointmentIndex = appointmentIndex
         controller.parentController = fromController
+        controller.isVisit = false
         
         if let from = fromController as? AppointmentStatusDelegate {
             controller.delegate = from
         }
        
+        fromController.present(controller, animated: false, completion: nil)
+    }
+    
+    func showAppointmentDetailsForVisit(appointment: Appointment, appointmentIndex: Int, fromController: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: AppointmentDetailsViewController.storyboardID) as! AppointmentDetailsViewController
+        controller.appointment = appointment
+        controller.appointmentIndex = appointmentIndex
+        controller.parentController = fromController
+        controller.isVisit = true
+        
+        if let from = fromController as? AppointmentStatusDelegate {
+            controller.delegate = from
+        }
+        
         fromController.present(controller, animated: false, completion: nil)
     }
     
@@ -190,14 +205,21 @@ class Router: NSObject {
         fromController.show(controller, sender: nil)
     }
     
-    func showReviews(/*doctor:User*/) {
+    func showReviews() {
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ReviewsViewController.storyboardID) as! UINavigationController
-//         let vc = controller.viewControllers.first as! ReviewsViewController
-      
         centralRootViewController.setContentViewController(controller, animated: true)
         centralRootViewController.hideViewController()
         
     }
+    
+    func showVisits() {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: VisitListViewController.storyboardID) as! UINavigationController
+        centralRootViewController.setContentViewController(controller, animated: true)
+        centralRootViewController.hideViewController()
+        
+    }
+    
+    
  
     
 }

@@ -29,19 +29,19 @@ class AppointmentDetailsViewController: UIViewController {
     @IBOutlet weak var pendingConfirmationLabel: UILabel!
     @IBOutlet weak var selectedDateLabel: UILabel!
     @IBOutlet weak var patientView: UIView!
-    
     @IBOutlet weak var appointmentStatusLabel: UILabel!
-    
     @IBOutlet weak var notesLabel: UILabel!
     
+    @IBOutlet weak var statusfromVisitLabel: UILabel!
+    
+    @IBOutlet weak var viewFromVisit: UIView!
     
     var appointment = Appointment()
     var doctor:User?
     var delegate:AppointmentStatusDelegate?
     var appointmentIndex: Int?
-    
     var parentController: UIViewController?
-    
+    var isVisit : Bool = false
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +56,13 @@ class AppointmentDetailsViewController: UIViewController {
         appointmentStatusView.isHidden = true
         patientView.isHidden = false
         }
+        
+        if !isVisit {
+            viewFromVisit.isHidden = true
+        }else{
+            viewFromVisit.isHidden = false
+        }
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -79,6 +86,7 @@ class AppointmentDetailsViewController: UIViewController {
             if let status = appointment.status?.value
             {
                 appointmentStatusLabel.text = status
+                
                 print("Status is : \(String(describing: status))")
             }
             if appointment.status?.value == "Confirmed"
@@ -110,19 +118,27 @@ class AppointmentDetailsViewController: UIViewController {
             pendingConfirmationLabel.text = appointment.status?.value ?? "N/A"
             selectedDateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
         
+            if let status = appointment.status?.value
+            {
+                statusfromVisitLabel.text = status
+                
+                print("Status is : \(String(describing: status))")
+            }
             if appointment.status?.value == "Confirmed"
             {
                 pendingConfirmationLabel.textColor = UIColor.green
+                statusfromVisitLabel.textColor = UIColor.green
                 
             }else if appointment.status?.value == "Pending" {
                 
                 pendingConfirmationLabel.textColor = UIColor.orange
-                
+                statusfromVisitLabel.textColor = UIColor.orange
+
             }else{
                 
                 pendingConfirmationLabel.textColor = UIColor.red
+                statusfromVisitLabel.textColor = UIColor.red
             }
-            
         }
     }
     
