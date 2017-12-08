@@ -219,7 +219,13 @@ class Router: NSObject {
         
     }
     
-    
+    func showCommentView(fromController: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: AddCommentViewController.storyboardID) as! AddCommentViewController
+        
+        if let from = fromController as? commentDelegate {
+            controller.delegate = from
+        }
+        fromController.present(controller, animated: false, completion: nil)
+    }
  
-    
 }

@@ -14,7 +14,9 @@ protocol AppointmentStatusDelegate {
     
 }
 
-class AppointmentDetailsViewController: UIViewController {
+class AppointmentDetailsViewController: UIViewController,commentDelegate {
+    
+    
     
     static let storyboardID = "appointmentDetailsViewController"
     
@@ -31,6 +33,7 @@ class AppointmentDetailsViewController: UIViewController {
     @IBOutlet weak var patientView: UIView!
     @IBOutlet weak var appointmentStatusLabel: UILabel!
     @IBOutlet weak var notesLabel: UILabel!
+    @IBOutlet weak var notesLabelFromvisit: UILabel!
     
     @IBOutlet weak var statusfromVisitLabel: UILabel!
     
@@ -42,7 +45,8 @@ class AppointmentDetailsViewController: UIViewController {
     var appointmentIndex: Int?
     var parentController: UIViewController?
     var isVisit : Bool = false
-  
+    var comments:String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -69,6 +73,33 @@ class AppointmentDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func comments(textdata: String) {
+        comments = textdata
+        addVisit()
+    }
+    
+    func addVisit(){
+        
+        var params = [String: Any]()
+       
+          params["clinic"] = appointment.clinic.id
+          params["doctor"] = appointment.doctor.id
+          params["patient"] = appointment.patient.id
+          params["appointment"] = appointment.id
+          params["comments"] = comments
+         
+        SVProgressHUD.show()
+        RequestManager.addVisit(appointmentID: appointment.id!, params:params, successBlock: { (response) in
+            
+            SVProgressHUD.dismiss()
+        }) { (error) in
+            SVProgressHUD.showError(withStatus: error)
+            print(error)
+        }
+        
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
@@ -86,23 +117,17 @@ class AppointmentDetailsViewController: UIViewController {
             if let status = appointment.status?.value
             {
                 appointmentStatusLabel.text = status
-                
                 print("Status is : \(String(describing: status))")
             }
             if appointment.status?.value == "Confirmed"
             {
                 appointmentStatusLabel.textColor = UIColor.green
-                
             }else if appointment.status?.value == "Pending" {
-                
                 appointmentStatusLabel.textColor = UIColor.orange
-                
             }else{
-                
                 appointmentStatusLabel.textColor = UIColor.red
             }
             selectedDateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
-            
         }
         else{
             nameLabel.text = appointment.patient.full_name ?? "N/A"
@@ -114,7 +139,8 @@ class AppointmentDetailsViewController: UIViewController {
                 selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
             }
             reasonforvisitLabel.text = appointment.reason.name ?? "N/A"
-          
+            notesLabelFromvisit.text = comments
+            print("Comment is: \(comments)")
             pendingConfirmationLabel.text = appointment.status?.value ?? "N/A"
             selectedDateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
         
@@ -169,7 +195,7 @@ class AppointmentDetailsViewController: UIViewController {
 
     func confirmed(){
         
-        let params = ["status": 1]
+        let params = ["status":AppointmentStatus.Confirm]
         print("Appointment Id \(String(describing: appointment.id))")
         SVProgressHUD.show()
         RequestManager.appointmentStatus(doctorID:appointment.doctor.id!, appointmentID: appointment.id! , params: params, successBlock: { (response) in
@@ -187,7 +213,7 @@ class AppointmentDetailsViewController: UIViewController {
     
     func cancelled(){
         
-        let params = ["status": 5]
+        let params = ["status": AppointmentStatus.Cancel]
         print("Appointment Id \(String(describing: appointment.id))")
         SVProgressHUD.show()
         RequestManager.appointmentStatus(doctorID:appointment.doctor.id!, appointmentID: appointment.id! , params: params, successBlock: { (response) in
@@ -201,11 +227,28 @@ class AppointmentDetailsViewController: UIViewController {
         })
   
     }
+    
+    func noShow(){
+        
+        let params = ["status": AppointmentStatus.NoShow]
+        print("Appointment Id \(String(describing: appointment.id))")
+        SVProgressHUD.show()
+        RequestManager.appointmentStatus(doctorID:appointment.doctor.id!, appointmentID: appointment.id! , params: params, successBlock: { (response) in
+            
+            self.delegate?.appointmenConfirmation(status: AppointmentStatus.NoShow, index: self.appointmentIndex!)
+            
+            SVProgressHUD.dismiss()
+            self.dismiss(animated: false, completion: nil)
+        }, failureBlock: { (error) in
+            SVProgressHUD.showError(withStatus: error)
+        })
+        
+    }
+    
    
     @IBAction func editButtonPressed(_ sender: DesignableButton) {
         
        // Router.sharedInstance.createAppointment(doctor: doctor?.id, fromController: self)
-        
         self.dismiss(animated: false) {
             Router.sharedInstance.editAppointment(appointment: self.appointment, fromController: self.parentController!)
         }
@@ -235,8 +278,22 @@ class AppointmentDetailsViewController: UIViewController {
         
     }
   
+   
+    
+    @IBAction func noShowButtonPressed(_ sender: Any) {
+        noShow()
+    }
+    
+    @IBAction func completeButtonPressed(_ sender: Any) {
+        
+        Router.sharedInstance.showCommentView(fromController: self)
+        
+    }
     /*
-    // MARK: - Navigation
+     @IBAction func completeButtonPressed(_ sender: DesignableButton) {
+     }
+     
+     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
