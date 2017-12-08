@@ -34,8 +34,17 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         }
          print( "Login data \(UserDefaults.standard.string(forKey: "userPhone") ?? "")")
          print( "Login data \(UserDefaults.standard.string(forKey: "userPassword") ?? "")")
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SignInViewController.dismissKeyboard))
+        
+        view.addGestureRecognizer(tap)
+      
     }
 
+    func dismissKeyboard() {
+       
+        view.endEditing(true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -46,11 +55,12 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         validator.validate(self)
         
     }
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
     @IBAction func touchIDPressed(_ sender: Any) {
-        
         authenticateUser()
-   
     }
     
     func authenticateUser() {

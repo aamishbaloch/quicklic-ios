@@ -195,7 +195,7 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
 
     func confirmed(){
         
-        let params = ["status":AppointmentStatus.Confirm]
+        let params = ["status":AppointmentStatus.Confirm.rawValue]
         print("Appointment Id \(String(describing: appointment.id))")
         SVProgressHUD.show()
         RequestManager.appointmentStatus(doctorID:appointment.doctor.id!, appointmentID: appointment.id! , params: params, successBlock: { (response) in
@@ -213,12 +213,12 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
     
     func cancelled(){
         
-        let params = ["status": AppointmentStatus.Cancel]
+        let params = ["status": AppointmentStatus.Discard.rawValue]
         print("Appointment Id \(String(describing: appointment.id))")
         SVProgressHUD.show()
         RequestManager.appointmentStatus(doctorID:appointment.doctor.id!, appointmentID: appointment.id! , params: params, successBlock: { (response) in
             
-            self.delegate?.appointmenConfirmation(status: AppointmentStatus.Discard, index: self.appointmentIndex!)
+            self.delegate?.appointmenConfirmation(status: AppointmentStatus(rawValue: AppointmentStatus.Discard.rawValue)!, index: self.appointmentIndex!)
 
             SVProgressHUD.dismiss()
             self.dismiss(animated: false, completion: nil)
@@ -230,7 +230,7 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
     
     func noShow(){
         
-        let params = ["status": AppointmentStatus.NoShow]
+        let params = ["status": AppointmentStatus.NoShow.rawValue]
         print("Appointment Id \(String(describing: appointment.id))")
         SVProgressHUD.show()
         RequestManager.appointmentStatus(doctorID:appointment.doctor.id!, appointmentID: appointment.id! , params: params, successBlock: { (response) in

@@ -32,6 +32,9 @@ class AddCommentViewController: UIViewController,UITextViewDelegate {
         textView.clipsToBounds = false
         textView.layer.shadowOpacity=0.4
         textView.layer.shadowOffset = CGSize(width: 1.5, height: 1.5)
+        
+        textView.returnKeyType = UIReturnKeyType.done
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,6 +66,14 @@ class AddCommentViewController: UIViewController,UITextViewDelegate {
             textView.text = "Type here"
             textView.textColor = UIColor.lightGray
         }
+    }
+    
+    @nonobjc func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
     }
     /*
     // MARK: - Navigation

@@ -36,8 +36,13 @@ class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDel
         [nameField,passwordField,confirmPasswordField,phoneField].forEach { (field) in
             field?.delegate = self
         }
-      
-        
+    
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,7 +52,6 @@ class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDel
     
     @IBAction func signupButtonPressed(_ sender: Any) {
         validator.validate(self)
-    
     }
     
     func validationSuccessful() {
@@ -78,10 +82,7 @@ class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDel
             
             SVProgressHUD.dismiss()
             Router.sharedInstance.showVerification(fromController: self)
-            
-            
-            
-
+        
         }) { (error) in
             SVProgressHUD.showError(withStatus: error)
             print(error)
