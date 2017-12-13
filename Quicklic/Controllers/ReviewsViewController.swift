@@ -65,7 +65,11 @@ class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollect
         }
         
         cell.descriptionLabel.text = review.comment ?? "N/A"
-        cell.dateLabel.text = UtilityManager.stringFromNSDateWithFormat(date: review.created_at! as NSDate, format: Constant.appDateFormat)
+        
+        if let created =  review.created_at{
+            cell.dateLabel.text = UtilityManager.stringFromNSDateWithFormat(date: created as NSDate, format: Constant.appDateFormat)
+        }
+        
         cell.ratingView.value = CGFloat(review.rating!)
         
         return cell

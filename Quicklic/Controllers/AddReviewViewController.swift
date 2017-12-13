@@ -59,7 +59,7 @@ class AddReviewViewController: UIViewController {
         print("StarView \(starView.value)")
         SVProgressHUD.show()
         RequestManager.addReview(params:params, successBlock: { (response) in
-
+            self.dismiss(animated: false, completion: nil)
             SVProgressHUD.dismiss()
         }) { (error) in
             SVProgressHUD.showError(withStatus: error)
