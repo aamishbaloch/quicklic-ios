@@ -80,6 +80,7 @@ class Appointment: BaseEntity {
     var start_datetime:Date?
     var end_datetime:Date?
     var status: AppointmentStatus?
+    var notes:String?
     
     
     override init() {

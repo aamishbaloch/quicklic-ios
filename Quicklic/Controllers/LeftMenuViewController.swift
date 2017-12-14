@@ -13,7 +13,7 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
     static let storyboardID = "leftMenuViewController"
     
     var selectedIndex = 0
-    let patientmenuItems = ["Dashboard", "New Appointment", "Appointment History", "Profile", "Clinics", "Labs","Reviews", "Logout"]
+    let patientmenuItems = ["Dashboard", "New Appointment", "Appointment History", "Profile", "Clinics", "Test Labs","Reviews", "Logout"]
     let doctorMenuItems = ["Dashboard","Appointments", "Patients", "Profile", "Clinics","Reviews","Visits", "Logout"]
     
     var doctorArray = [User]()

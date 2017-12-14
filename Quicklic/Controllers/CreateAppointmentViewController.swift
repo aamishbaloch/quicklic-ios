@@ -18,6 +18,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
     @IBOutlet weak var specialityLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var reasonButton: UIButton!
+    @IBOutlet weak var textview: UITextView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var dateField: DatePickerTextField!
     
@@ -57,6 +58,11 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
                 SVProgressHUD.showError(withStatus: error)
             }
         }
+        
+        textview.layer.borderWidth = 1
+        textview.layer.cornerRadius = 5
+        textview.layer.borderColor = UIColor.lightGray.cgColor
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -201,6 +207,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         params["end_datetime"] = end
         params["clinic"] = clinicID
         params["status"] = 2
+        params["notes"] = textview.text
         if let doctorId = doctor?.id {
             params["doctor"] = doctorId
         }

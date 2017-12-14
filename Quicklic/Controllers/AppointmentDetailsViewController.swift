@@ -128,6 +128,9 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
                 appointmentStatusLabel.textColor = UIColor.red
             }
             selectedDateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
+            
+            notesLabel.text = appointment.notes
+            
         }
         else{
             nameLabel.text = appointment.patient.full_name ?? "N/A"
@@ -140,10 +143,10 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
             }
             reasonforvisitLabel.text = appointment.reason.name ?? "N/A"
             notesLabelFromvisit.text = comments
-            print("Comment is: \(comments)")
+           // print("Comment is: \(comments)")
             pendingConfirmationLabel.text = appointment.status?.value ?? "N/A"
             selectedDateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
-        
+            notesLabel.text = appointment.notes
             if let status = appointment.status?.value
             {
                 statusfromVisitLabel.text = status
