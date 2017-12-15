@@ -51,6 +51,10 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Access camera thank you</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
