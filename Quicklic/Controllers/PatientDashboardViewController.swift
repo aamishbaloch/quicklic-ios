@@ -133,7 +133,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     }
 
     func datepicker(_ datepicker: ScrollableDatepicker, didSelectDate date: Date) {
-        
+        SVProgressHUD.show()
         selectedDate = UtilityManager.stringFromNSDateWithFormat(date: date as NSDate, format: "yyyy-MM-dd")
         //print("Did select date ! \(String(describing: selectedDate))")
         fetchData()

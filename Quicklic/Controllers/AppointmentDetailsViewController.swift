@@ -15,9 +15,7 @@ protocol AppointmentStatusDelegate {
 }
 
 class AppointmentDetailsViewController: UIViewController,commentDelegate {
-    
-    
-    
+   
     static let storyboardID = "appointmentDetailsViewController"
     
     @IBOutlet weak var imageView: DesignableImageView!
@@ -40,6 +38,7 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
     @IBOutlet weak var doctorNotesLabel: UILabel!
     @IBOutlet weak var drNotes: UILabel!
     @IBOutlet weak var patientNotes: UILabel!
+ 
     
     
     var appointment = Appointment()
@@ -49,6 +48,7 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
     var parentController: UIViewController?
     var isVisit : Bool = false
     var comments:String?
+    var visitArray = [Visit]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +59,7 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
       {
         appointmentStatusView.isHidden = false
         patientView.isHidden =  true
+       
       }else{
         appointmentStatusView.isHidden = true
         patientView.isHidden = false
@@ -135,13 +136,19 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
             appointmentStatusLabel.textColor = UIColor.green
         }else if appointment.status?.value == "Pending" {
             appointmentStatusLabel.textColor = UIColor.orange
+        }else if appointment.status?.value == "No Show" {
+            
+          //pendingConfirmationLabel.textColor = UIColor.yellow
+          //statusfromVisitLabel.textColor = UIColor.yellow
+            
         }else{
             appointmentStatusLabel.textColor = UIColor.red
         }
         selectedDateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
         
         notesLabel.text = appointment.notes ?? "No notes provided"
-        
+        drNotes.text =  appointment.visit.comments ?? "There are no doctor notes."
+       
     }
     
     func patientData () {
@@ -155,8 +162,7 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
         }
         notesLabelFromvisit.text = appointment.notes ?? "No notes provided"
         reasonforvisitLabel.text = appointment.reason.name ?? "N/A"
-        drNotes.text = comments ?? "There are no doctor notes."
-        print("Comment is: \(comments)")
+        drNotes.text = appointment.visit.comments ?? "There are no doctor notes."
         notesLabel.text = appointment.notes ?? "There are no doctor notes."
         patientNotes.text = appointment.notes ?? ""
         pendingConfirmationLabel.text = appointment.status?.value ?? "N/A"
@@ -177,6 +183,11 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
             
             pendingConfirmationLabel.textColor = UIColor.orange
             statusfromVisitLabel.textColor = UIColor.orange
+            
+        }else if appointment.status?.value == "No Show" {
+            
+//            pendingConfirmationLabel.textColor = UIColor.yellow
+//            statusfromVisitLabel.textColor = UIColor.yellow
             
         }else{
             

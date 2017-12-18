@@ -81,7 +81,9 @@ class Appointment: BaseEntity {
     var end_datetime:Date?
     var status: AppointmentStatus?
     var notes:String?
-    
+    var full_name:String?
+    var comment:String?
+    var visit = Visit()
     
     override init() {
         super.init()
@@ -98,6 +100,11 @@ class Appointment: BaseEntity {
         self.reason = GenericModel(dictionary: dictionary["reason"] as! [String: AnyObject])
         self.patient = User(dictionary: dictionary["patient"] as! [String: AnyObject])
         self.status = AppointmentStatus(rawValue: dictionary["status"] as? Int ?? 2)
+    //    self.visit = Visit(dictionary: dictionary["visit"] as! [String: AnyObject])
+        if let visitObj = dictionary["visit"]  as? [String: AnyObject] {
+            self.visit = Visit(dictionary: visitObj)
+        }
+        
     }
 }
 

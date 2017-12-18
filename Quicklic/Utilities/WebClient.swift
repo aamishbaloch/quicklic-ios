@@ -621,5 +621,15 @@ class WebClient: AFHTTPSessionManager {
             failure(error)
         }
     }
-   
+    
+    func getVisit(visitID:String, appointmentID:String,params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (), failureBlock failure:@escaping (String) -> ()){
+        
+        self.postPath(urlString: "appointment/\(appointmentID)/visit/\(visitID)", params: params as [String : AnyObject], successBlock: { (response) in
+            print(response)
+            success(response as! [String : AnyObject])
+        }) { (error) in
+            failure(error)
+        }
+    }
+ 
 }

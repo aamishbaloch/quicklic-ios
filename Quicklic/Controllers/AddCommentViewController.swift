@@ -46,6 +46,7 @@ class AddCommentViewController: UIViewController,UITextViewDelegate {
         
         self.dismiss(animated: true) {
             self.delegate?.comments(textdata: self.textView.text)
+            print("Doctor Comment\(self.textView.text)")
         }
         
     }
