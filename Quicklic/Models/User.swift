@@ -92,6 +92,7 @@ class User: BaseEntity {
     var countryName: String?
     var verified: Bool?
     var notes: String?
+    var comment:String?
     
     //Patient variables
     var height: String?

@@ -15,9 +15,7 @@ protocol AppointmentStatusDelegate {
 }
 
 class AppointmentDetailsViewController: UIViewController,commentDelegate {
-    
-    
-    
+   
     static let storyboardID = "appointmentDetailsViewController"
     
     @IBOutlet weak var imageView: DesignableImageView!
@@ -34,10 +32,14 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
     @IBOutlet weak var appointmentStatusLabel: UILabel!
     @IBOutlet weak var notesLabel: UILabel!
     @IBOutlet weak var notesLabelFromvisit: UILabel!
-    
     @IBOutlet weak var statusfromVisitLabel: UILabel!
-    
     @IBOutlet weak var viewFromVisit: UIView!
+    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var doctorNotesLabel: UILabel!
+    @IBOutlet weak var drNotes: UILabel!
+    @IBOutlet weak var patientNotes: UILabel!
+ 
+    
     
     var appointment = Appointment()
     var doctor:User?
@@ -46,6 +48,7 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
     var parentController: UIViewController?
     var isVisit : Bool = false
     var comments:String?
+    var visitArray = [Visit]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +59,7 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
       {
         appointmentStatusView.isHidden = false
         patientView.isHidden =  true
+       
       }else{
         appointmentStatusView.isHidden = true
         patientView.isHidden = false
@@ -104,71 +108,93 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
         super.viewWillAppear(true)
         
         if ApplicationManager.sharedInstance.userType == .Patient {
-            nameLabel.text = appointment.doctor.full_name ?? "N/A"
-            phoneLabel.text = appointment.doctor.phone ?? "N/A"
-            addressLabel.text = appointment.doctor.address ?? "N/A"
-            emailLabel.text = appointment.doctor.email ?? "N/A"
-            imageView.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
-            if let startTime = appointment.start_datetime {
-                selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
-            }
-            reasonforvisitLabel.text = appointment.reason.name ?? "N/A"
-            
-            if let status = appointment.status?.value
-            {
-                appointmentStatusLabel.text = status
-                print("Status is : \(String(describing: status))")
-            }
-            if appointment.status?.value == "Confirmed"
-            {
-                appointmentStatusLabel.textColor = UIColor.green
-            }else if appointment.status?.value == "Pending" {
-                appointmentStatusLabel.textColor = UIColor.orange
-            }else{
-                appointmentStatusLabel.textColor = UIColor.red
-            }
-            selectedDateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
-            
-            notesLabel.text = appointment.notes
-            
+            doctorData()
         }
         else{
-            nameLabel.text = appointment.patient.full_name ?? "N/A"
-            phoneLabel.text = appointment.patient.phone ?? "N/A"
-            addressLabel.text = appointment.patient.address ?? "N/A"
-            emailLabel.text = appointment.patient.email ?? "N/A"
-            imageView.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
-            if let startTime = appointment.start_datetime {
-                selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
-            }
-            reasonforvisitLabel.text = appointment.reason.name ?? "N/A"
-            notesLabelFromvisit.text = comments
-           // print("Comment is: \(comments)")
-            pendingConfirmationLabel.text = appointment.status?.value ?? "N/A"
-            selectedDateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
-            notesLabel.text = appointment.notes
-            if let status = appointment.status?.value
-            {
-                statusfromVisitLabel.text = status
-                
-                print("Status is : \(String(describing: status))")
-            }
-            if appointment.status?.value == "Confirmed"
-            {
-                pendingConfirmationLabel.textColor = UIColor.green
-                statusfromVisitLabel.textColor = UIColor.green
-                
-            }else if appointment.status?.value == "Pending" {
-                
-                pendingConfirmationLabel.textColor = UIColor.orange
-                statusfromVisitLabel.textColor = UIColor.orange
-
-            }else{
-                
-                pendingConfirmationLabel.textColor = UIColor.red
-                statusfromVisitLabel.textColor = UIColor.red
-            }
+            patientData()
+    }
+        
+}
+    func doctorData(){
+        nameLabel.text = appointment.doctor.full_name ?? "N/A"
+        phoneLabel.text = appointment.doctor.phone ?? "N/A"
+        addressLabel.text = appointment.doctor.address ?? "N/A"
+        emailLabel.text = appointment.doctor.email ?? "N/A"
+        imageView.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
+        if let startTime = appointment.start_datetime {
+            selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
         }
+        reasonforvisitLabel.text = appointment.reason.name ?? "N/A"
+        
+        if let status = appointment.status?.value
+        {
+            appointmentStatusLabel.text = status
+            print("Status is : \(String(describing: status))")
+        }
+        if appointment.status?.value == "Confirmed"
+        {
+            appointmentStatusLabel.textColor = UIColor.green
+        }else if appointment.status?.value == "Pending" {
+            appointmentStatusLabel.textColor = UIColor.orange
+        }else if appointment.status?.value == "No Show" {
+            
+          //pendingConfirmationLabel.textColor = UIColor.yellow
+          //statusfromVisitLabel.textColor = UIColor.yellow
+            
+        }else{
+            appointmentStatusLabel.textColor = UIColor.red
+        }
+        selectedDateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
+        
+        notesLabel.text = appointment.notes ?? "No notes provided"
+        drNotes.text =  appointment.visit.comments ?? "There are no doctor notes."
+       
+    }
+    
+    func patientData () {
+        nameLabel.text = appointment.patient.full_name ?? "N/A"
+        phoneLabel.text = appointment.patient.phone ?? "N/A"
+        addressLabel.text = appointment.patient.address ?? "N/A"
+        emailLabel.text = appointment.patient.email ?? "N/A"
+        imageView.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
+        if let startTime = appointment.start_datetime {
+            selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
+        }
+        notesLabelFromvisit.text = appointment.notes ?? "No notes provided"
+        reasonforvisitLabel.text = appointment.reason.name ?? "N/A"
+        drNotes.text = appointment.visit.comments ?? "There are no doctor notes."
+        notesLabel.text = appointment.notes ?? "There are no doctor notes."
+        patientNotes.text = appointment.notes ?? ""
+        pendingConfirmationLabel.text = appointment.status?.value ?? "N/A"
+        selectedDateLabel.text = UtilityManager.stringFromNSDateWithFormat(date:appointment.start_datetime! as NSDate , format: Constant.appDateFormat)
+        notesLabel.text = appointment.notes
+        if let status = appointment.status?.value
+        {
+            statusfromVisitLabel.text = status
+            
+            print("Status is : \(String(describing: status))")
+        }
+        if appointment.status?.value == "Confirmed"
+        {
+            pendingConfirmationLabel.textColor = UIColor.green
+            statusfromVisitLabel.textColor = UIColor.green
+            
+        }else if appointment.status?.value == "Pending" {
+            
+            pendingConfirmationLabel.textColor = UIColor.orange
+            statusfromVisitLabel.textColor = UIColor.orange
+            
+        }else if appointment.status?.value == "No Show" {
+            
+//            pendingConfirmationLabel.textColor = UIColor.yellow
+//            statusfromVisitLabel.textColor = UIColor.yellow
+            
+        }else{
+            
+            pendingConfirmationLabel.textColor = UIColor.red
+            statusfromVisitLabel.textColor = UIColor.red
+        }
+        
     }
     
     @IBAction func okButtonPressed(_ sender: UIButton) {

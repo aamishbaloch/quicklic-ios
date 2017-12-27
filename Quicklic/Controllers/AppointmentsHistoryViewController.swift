@@ -54,6 +54,7 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
             cell.addReviewButton.isHidden = false
             cell.addReviewButton.addTarget(self, action: #selector(self.addReviewButtonPressed(_:)), for: UIControlEvents.touchUpInside)
             cell.addReviewButton.tag = indexPath.row
+            
         }
         else{
             cell.nameLabel.text = appointment.patient.full_name
@@ -105,7 +106,7 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
             self.appointmentsArray.removeAll()
             for object in response {
                 self.appointmentsArray.append(Appointment(dictionary: object))
-                print("Array is : \(object)")
+                print("Appointment History is : \(object)")
             }
             self.collectionView.reloadData()
             SVProgressHUD.dismiss()

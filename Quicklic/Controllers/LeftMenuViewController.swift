@@ -14,7 +14,7 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
     
     var selectedIndex = 0
     let patientmenuItems = ["Dashboard", "New Appointment", "Appointment History", "Profile", "Clinics", "Test Labs","Reviews", "Logout"]
-    let doctorMenuItems = ["Dashboard","Appointments", "Patients", "Profile", "Clinics","Reviews","Visits", "Logout"]
+    let doctorMenuItems = ["Dashboard","Appointments History", "Patients","Profile","Test Labs","Reviews","Visits", "Logout"]
     
     var doctorArray = [User]()
     
@@ -80,7 +80,7 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
             case 3:
                 Router.sharedInstance.showProfile()
             case 4:
-                Router.sharedInstance.showClinicsList()
+               Router.sharedInstance.showLabsList()
             case 5:
                 Router.sharedInstance.showReviews()
             case 6:
