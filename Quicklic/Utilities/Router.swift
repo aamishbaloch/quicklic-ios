@@ -228,4 +228,14 @@ class Router: NSObject {
         fromController.present(controller, animated: false, completion: nil)
     }
  
+    func showNotificationList() {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: NotificationListViewController.storyboardID)
+        
+        
+    centralRootViewController.setContentViewController(controller, animated: true)
+        centralRootViewController.hideViewController()
+    }
+    
+    
+    
 }

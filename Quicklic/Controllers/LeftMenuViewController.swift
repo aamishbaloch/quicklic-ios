@@ -13,8 +13,8 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
     static let storyboardID = "leftMenuViewController"
     
     var selectedIndex = 0
-    let patientmenuItems = ["Dashboard", "New Appointment", "Appointment History", "Profile", "Clinics", "Test Labs","Reviews", "Logout"]
-    let doctorMenuItems = ["Dashboard","Appointments History", "Patients","Profile","Test Labs","Reviews","Visits", "Logout"]
+    let patientmenuItems = ["Dashboard", "New Appointment", "Appointment History", "Profile", "Clinics", "Test Labs","Reviews","Notifications", "Logout"]
+    let doctorMenuItems = ["Dashboard","Appointments History", "Patients","Profile","Test Labs","Reviews","Visits" ,"Notifications","Logout"]
     
     var doctorArray = [User]()
     
@@ -86,8 +86,10 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
             case 6:
                 Router.sharedInstance.showVisits()
             case 7:
-                Router.sharedInstance.showLandingPage()
+                Router.sharedInstance.showNotificationList()
                 
+            case 8:
+                Router.sharedInstance.showLandingPage()
             default: break
                 
             }
@@ -110,6 +112,9 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
 
             case 7:
                 // UserDefaults.standard.set("", forKey: "token")
+               Router.sharedInstance.showNotificationList()
+                
+            case 8:
                 Router.sharedInstance.showLandingPage()
             default: break
                 

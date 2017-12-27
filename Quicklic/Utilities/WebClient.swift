@@ -631,5 +631,16 @@ class WebClient: AFHTTPSessionManager {
             failure(error)
         }
     }
+    
+    func getNotificationList(params: [String: Any],successBlock success:@escaping ([[String: AnyObject]]) -> (),
+                      failureBlock failure:@escaping (String) -> ()){
+        
+        self.getPath(urlString: "notification/", params:[:], successBlock: { (response) in
+            print("Notification \(response)")
+            success(response["results"] as! [[String : AnyObject]])
+        }) { (error) in
+            failure(error)
+        }
+    }
  
 }
