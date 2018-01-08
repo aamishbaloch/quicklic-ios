@@ -20,8 +20,8 @@ lane :beta do
 
   # build your iOS app
   gym(
-    # scheme: "YourScheme",
-    export_method: "ad-hoc"
+    scheme: "Quicklic",
+    export_method: "development"
   )
 
   # upload to Beta by Crashlytics

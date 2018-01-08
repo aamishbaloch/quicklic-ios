@@ -31,19 +31,27 @@ class VisitListViewController: UIViewController,UICollectionViewDelegate,UIColle
         collectionView.emptyDataSetDelegate = self
         
         collectionView.reloadData()
+        
+        SVProgressHUD.show()
         fetchData()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     func appointmenConfirmation(status: AppointmentStatus, index: Int) {
         visitArray[index].status = status
         collectionView.reloadData()
+        fetchData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     @IBAction func menubuttonPressed(_ sender: UIBarButtonItem) {
          self.presentLeftMenuViewController(nil)
@@ -53,7 +61,6 @@ class VisitListViewController: UIViewController,UICollectionViewDelegate,UIColle
         
         guard let doctorId = ApplicationManager.sharedInstance.user.id  else {return}
         print("Doctor id: \(doctorId)")
-        SVProgressHUD.show()
         RequestManager.getVisitList(doctorID:doctorId, params: [:],successBlock: { (response) in
             SVProgressHUD.dismiss()
             self.visitArray.removeAll()
@@ -179,8 +186,6 @@ class VisitListViewController: UIViewController,UICollectionViewDelegate,UIColle
         SVProgressHUD.show()
         fetchData()
     }
-    
-    
     
     /*
     // MARK: - Navigation

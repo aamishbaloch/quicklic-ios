@@ -96,6 +96,8 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
         RequestManager.addVisit(appointmentID: appointment.id!, params:params, successBlock: { (response) in
             
             SVProgressHUD.dismiss()
+            self.dismiss(animated: false, completion: nil)
+            self.delegate?.appointmenConfirmation(status: AppointmentStatus.Confirm, index: 0)
         }) { (error) in
             SVProgressHUD.showError(withStatus: error)
             print(error)

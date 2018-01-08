@@ -116,7 +116,7 @@
 		D10F67CB1FDA73FF000741BA /* AddCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10F67CA1FDA73FF000741BA /* AddCommentViewController.swift */; };
 		D1101E451FF3B295009EDFE2 /* NotificationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1101E441FF3B295009EDFE2 /* NotificationListViewController.swift */; };
 		D1101E471FF3B2CA009EDFE2 /* NotificationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1101E461FF3B2CA009EDFE2 /* NotificationCollectionViewCell.swift */; };
-		D1101E4B1FF3C3A1009EDFE2 /* NotificationL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1101E4A1FF3C3A1009EDFE2 /* NotificationL.swift */; };
+		D1101E4B1FF3C3A1009EDFE2 /* NotificationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1101E4A1FF3C3A1009EDFE2 /* NotificationObject.swift */; };
 		D1295FA71FBC292000715C45 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1295FA61FBC292000715C45 /* Time.swift */; };
 		D1295FAB1FBC2D3600715C45 /* CreatAppointmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1295FAA1FBC2D3600715C45 /* CreatAppointmentCollectionViewCell.swift */; };
 		D1400AD11FBDA6100021726C /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1400AD01FBDA6100021726C /* Appointment.swift */; };
@@ -288,7 +288,7 @@
 		D10F67CA1FDA73FF000741BA /* AddCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentViewController.swift; sourceTree = "<group>"; };
 		D1101E441FF3B295009EDFE2 /* NotificationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListViewController.swift; sourceTree = "<group>"; };
 		D1101E461FF3B2CA009EDFE2 /* NotificationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCollectionViewCell.swift; sourceTree = "<group>"; };
-		D1101E4A1FF3C3A1009EDFE2 /* NotificationL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationL.swift; sourceTree = "<group>"; };
+		D1101E4A1FF3C3A1009EDFE2 /* NotificationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationObject.swift; sourceTree = "<group>"; };
 		D1295FA61FBC292000715C45 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		D1295FAA1FBC2D3600715C45 /* CreatAppointmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatAppointmentCollectionViewCell.swift; sourceTree = "<group>"; };
 		D1400AD01FBDA6100021726C /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
@@ -464,7 +464,7 @@
 				694923271FCC75C1003CDA52 /* Test.swift */,
 				6925DF5B1FD2FA0800B581FF /* Review.swift */,
 				D10F67C81FDA71D8000741BA /* Visit.swift */,
-				D1101E4A1FF3C3A1009EDFE2 /* NotificationL.swift */,
+				D1101E4A1FF3C3A1009EDFE2 /* NotificationObject.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -911,7 +911,7 @@
 				69F7855C1F4AC629005197A6 /* Router.swift in Sources */,
 				69F785671F4AC629005197A6 /* DesignableView.swift in Sources */,
 				69F7856D1F4AC629005197A6 /* Misc.swift in Sources */,
-				D1101E4B1FF3C3A1009EDFE2 /* NotificationL.swift in Sources */,
+				D1101E4B1FF3C3A1009EDFE2 /* NotificationObject.swift in Sources */,
 				69F7855E1F4AC629005197A6 /* AsyncImageView.swift in Sources */,
 				69A5539F1F544CCF00E8A5C5 /* ScrollableDatepicker.swift in Sources */,
 				69BAE1A91F6FB4560035D23D /* HospitalDetailsViewController.swift in Sources */,
@@ -1119,7 +1119,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1147,7 +1147,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1206,6 +1206,7 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AYEH6C5B8A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1214,6 +1215,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danialzahid.Quicklic.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1233,6 +1236,7 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AYEH6C5B8A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1241,6 +1245,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danialzahid.Quicklic.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

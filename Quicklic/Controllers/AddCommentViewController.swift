@@ -48,7 +48,6 @@ class AddCommentViewController: UIViewController,UITextViewDelegate {
             self.delegate?.comments(textdata: self.textView.text)
             print("Doctor Comment\(self.textView.text)")
         }
-        
     }
     
     @IBAction func closeButtonPressed(_ sender: Any) {

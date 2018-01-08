@@ -154,7 +154,7 @@ class WebClient: AFHTTPSessionManager {
                        image: UIImage?,
                        addToken: Bool = true,
                        successBlock success:@escaping (AnyObject) -> (),
-                       failureBlock failure: @escaping (String) -> ()){
+                       failureBlock failure: @escaping (AnyObject) -> ()){
         
         let manager = AFHTTPSessionManager()
         manager.requestSerializer = AFJSONRequestSerializer()
@@ -185,15 +185,15 @@ class WebClient: AFHTTPSessionManager {
                 do {
                     if let data = err.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as? Data {
                         let dictionary = try JSONSerialization.jsonObject(with: data,
-                                                                          options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: String]
-                        failure(dictionary["detail"]!)
+                                                                          options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: AnyObject]
+                        failure(dictionary as AnyObject)
                     }
                     else{
-                        failure("Failed to connect")
+                        failure("Failed to connect" as AnyObject)
                     }
                 }catch
                 {
-                    failure(err.localizedDescription)
+                    failure(err.localizedDescription as AnyObject)
                 }
             }
         }
@@ -276,7 +276,7 @@ class WebClient: AFHTTPSessionManager {
     }
     
     func editUser(param: [String: Any],image: UIImage?, successBlock success:@escaping ([String: AnyObject]) -> (),
-                  failureBlock failure:@escaping (String) -> ()){
+                  failureBlock failure:@escaping (AnyObject) -> ()){
         
         var url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/" : "doctor/"
         url.append(ApplicationManager.sharedInstance.user.id!)

@@ -8,22 +8,30 @@
 
 import UIKit
 
-class NotificationListViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
-
-   static let storyboardID = "NotificationListViewController"
+class NotificationListViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    var notificationArray = [NotificationL]()
+    static let storyboardID = "NotificationListViewController"
+    
+    var notificationArray = [NotificationObject]()
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
-        notificationData()
+        fetchData()
+        
+        title = "Notifications"
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
+        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -33,21 +41,28 @@ class NotificationListViewController: UIViewController,UICollectionViewDelegate,
         self.presentLeftMenuViewController(nil)
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       // return notificationArray.count
-        return 10
+        return notificationArray.count
+        //        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NotificationCollectionViewCell.identifier, for: indexPath) as! NotificationCollectionViewCell
-       
+        let notification = notificationArray[indexPath.item]
+        
+        cell.nameLabel.text = notification.heading
+        cell.contentLabel.text = notification.content
+        if let creationdate = notification.created_at as NSDate? {
+            cell.timeLabel.text = UtilityManager.timeAgoSinceDate(date: creationdate, numericDates: true)
+        }
+        
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        Router.sharedInstance.showAppointmentDetails(appointment: self.appointmentsArray[indexPath.item],appointmentIndex: indexPath.item, fromController: self)
+        Router.sharedInstance.showAppointmentDetails(appointment: self.notificationArray[indexPath.item].appointment!,appointmentIndex: indexPath.item, fromController: self)
     }
     
     func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -56,18 +71,12 @@ class NotificationListViewController: UIViewController,UICollectionViewDelegate,
         return CGSize(width: cellWidth, height: 90)
     }
     
-    func notificationData() {
+    func fetchData() {
         
-//        var params = [String: Any]()
-//        if let date = selectedDate {
-//            params["start_date"] = date
-//            params["end_date"] = date
-//        }
-       
         RequestManager.getNotificationList(params:[:], successBlock: { (response) in
-           self.notificationArray.removeAll()
+            self.notificationArray.removeAll()
             for object in response {
-                self.notificationArray.append(NotificationL(dictionary: object))
+                self.notificationArray.append(NotificationObject(dictionary: object))
                 print("Array is : \(object)")
             }
             self.collectionView.reloadData()
@@ -81,13 +90,13 @@ class NotificationListViewController: UIViewController,UICollectionViewDelegate,
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

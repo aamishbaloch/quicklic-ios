@@ -54,14 +54,20 @@ class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollect
             return cell
         }
         
-        switch type {
-        case 1:
-            cell.nameLabel.text = review.doctor.full_name ?? "N/A"
-            cell.imageView.sd_setImage(with: URL(string: review.doctor.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
-        case 2:
-            cell.nameLabel.text = review.clinic.name ?? "N/A"
-            cell.imageView.sd_setImage(with: URL(string: review.clinic.image ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
-        default: break
+        switch ApplicationManager.sharedInstance.userType {
+        case .Patient:
+            switch type {
+            case 1:
+                cell.nameLabel.text = review.doctor.full_name ?? "N/A"
+                cell.imageView.sd_setImage(with: URL(string: review.doctor.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
+            case 2:
+                cell.nameLabel.text = review.clinic.name ?? "N/A"
+                cell.imageView.sd_setImage(with: URL(string: review.clinic.image ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
+            default: break
+            }
+        case .Doctor:
+            cell.nameLabel.text = review.creator.full_name ?? "N/A"
+            cell.imageView.sd_setImage(with: URL(string: review.creator.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         }
         
         cell.descriptionLabel.text = review.comment ?? "N/A"

@@ -180,17 +180,23 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
             SVProgressHUD.showError(withStatus: "Please select reason")
             return
         }
-        
-        if let startTime = self.timeArray[selectedTimeIndex].start,selectedTimeIndex >= 0 {
-            let startDateString = UtilityManager.serverDateStringFromAppDateString(date: appointmentDate)
-            let startTimeString = UtilityManager.stringFromNSDateWithFormat(date: startTime, format: "HH:mm:ss")
-            start = "\(startDateString)T\(startTimeString)"
-            print("Start date is: \(start)")
+        if selectedTimeIndex >= 0 {
+            if let startTime = self.timeArray[selectedTimeIndex].start {
+                let startDateString = UtilityManager.serverDateStringFromAppDateString(date: appointmentDate)
+                let startTimeString = UtilityManager.stringFromNSDateWithFormat(date: startTime, format: "HH:mm:ss")
+                start = "\(startDateString)T\(startTimeString)"
+                print("Start date is: \(start)")
+            }
+            else{
+                SVProgressHUD.showError(withStatus: "Please select time")
+                return
+            }
         }
         else{
             SVProgressHUD.showError(withStatus: "Please select time")
             return
         }
+        
         
         if let endTime = self.timeArray[selectedTimeIndex].end {
             let endDateString = UtilityManager.serverDateStringFromAppDateString(date: appointmentDate)

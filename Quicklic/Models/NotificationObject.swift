@@ -7,14 +7,11 @@
 //
 
 import Foundation
-class NotificationL: BaseEntity {
+class NotificationObject: BaseEntity {
     
     var id:String?
     var heading:String?
     var content:String?
-    var clinic = Clinic()
-    var doctor = User()
-    var patient = User()
     var type : Int?
     var user_type : Int?
     var moderator: Int?
@@ -30,18 +27,13 @@ class NotificationL: BaseEntity {
         super.init()
         let newDateFormatter = DateFormatter()
         newDateFormatter.dateFormat = Constant.serverDateFormatExtended
-        //        newDateFormatter.timeZone = NSTimeZone(name: "UTC")! as TimeZone
         self.setValuesForKeysWithJSONDictionary(dictionary, dateFormatter: newDateFormatter)
-        //        if let clinicObject = dictionary["clinic"] as? [String: AnyObject] {
-        //            self.clinic = Clinic(dictionary: clinicObject)
-        //        }
-        //        if let doctorObject = dictionary["doctor"]  as? [String: AnyObject] {
-        //            self.doctor = User(dictionary: doctorObject)
-        //        }
-        //        if let patientObject = dictionary["patient"] as? [String: AnyObject] {
-        //            self.creator = User(dictionary: creatorObject)
-        //        }
-        
-}
+        if let appointmentObject = dictionary["appointment"] as? [String: AnyObject] {
+            self.appointment = Appointment(dictionary: appointmentObject)
+        }
+//        if let creationDate = dictionary["created_at"] as? String {
+//            UtilityManager.dateFromStringWithFormat(date: creationDate, format: "yyyy-MM-dd'T'hh:mm:ss.SSS")
+//        }
+    }
     
 }

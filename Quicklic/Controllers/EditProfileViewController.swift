@@ -142,7 +142,13 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
             SVProgressHUD.showSuccess(withStatus: "Updated")
             self.navigationController?.popViewController(animated: true)
         }) { (error) in
-            SVProgressHUD.showError(withStatus: error)
+            if let err = error as? String {
+                SVProgressHUD.showError(withStatus: err)
+            }
+            else {
+                SVProgressHUD.showError(withStatus: "Please verify the fields again")
+            }
+            
         }
         
     }
