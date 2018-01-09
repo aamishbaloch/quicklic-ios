@@ -14,7 +14,7 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
     
     var selectedIndex = 0
     let patientmenuItems = ["Dashboard", "New Appointment", "Appointment History", "Profile", "Clinics", "Test Labs","Reviews","Notifications", "Logout"]
-    let doctorMenuItems = ["Dashboard","Appointments History", "Patients","Profile","Test Labs","Reviews","Visits" ,"Notifications","Logout"]
+    let doctorMenuItems = ["Dashboard","Profile","Test Labs","Reviews","Visits" ,"Notifications","Logout"]
     
     var doctorArray = [User]()
     
@@ -73,22 +73,21 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
             switch indexPath.row {
             case 0:
                Router.sharedInstance.showPatientDashboard()
+//            case 1:
+//                Router.sharedInstance.showAppointmentHistory()
+//            case 2:
+//                Router.sharedInstance.showPatientsList()
             case 1:
-                Router.sharedInstance.showAppointmentHistory()
-            case 2:
-                Router.sharedInstance.showPatientsList()
-            case 3:
                 Router.sharedInstance.showProfile()
-            case 4:
+            case 2:
                Router.sharedInstance.showLabsList()
-            case 5:
+            case 3:
                 Router.sharedInstance.showReviews()
-            case 6:
+            case 4:
                 Router.sharedInstance.showVisits()
-            case 7:
+            case 5:
                 Router.sharedInstance.showNotificationList()
-                
-            case 8:
+            case 6:
                 Router.sharedInstance.showLandingPage()
             default: break
                 

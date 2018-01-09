@@ -64,6 +64,10 @@ class SignUpViewController: UIViewController, ValidationDelegate, UITextFieldDel
         params["gender"] = "\(genderSegmentControl.selectedSegmentIndex+1)"
         params["phone"] = phoneCodeField.text! + phoneField.text!
         params["dob"] = UtilityManager.serverDateStringFromAppDateString(date: dobField.text!)
+        if let deviceID = UserDefaults.standard.value(forKey: "pushNotificationToken") as? String {
+            params["device_id"] = deviceID
+            params["device_type"] = "0"
+        }
         SVProgressHUD.show()
         RequestManager.signUpUser(param: params, successBlock: { (response: [String : AnyObject]) in
             

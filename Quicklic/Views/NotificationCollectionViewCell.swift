@@ -12,6 +12,7 @@ class NotificationCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "NotificationCollectionViewCell"
     
+    @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var imageView: DesignableImageView!

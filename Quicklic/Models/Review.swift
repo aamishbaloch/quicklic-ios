@@ -39,7 +39,7 @@ class Review: BaseEntity {
         if let doctorObject = dictionary["doctor"]  as? [String: AnyObject] {
             self.doctor = User(dictionary: doctorObject)
         }
-        if let creatorObject = dictionary["patient"] as? [String: AnyObject] {
+        if let creatorObject = dictionary["creator"] as? [String: AnyObject] {
             self.creator = User(dictionary: creatorObject)
         }
         

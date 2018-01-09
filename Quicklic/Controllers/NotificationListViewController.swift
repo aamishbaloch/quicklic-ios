@@ -13,6 +13,7 @@ class NotificationListViewController: UIViewController,UICollectionViewDelegate,
     static let storyboardID = "NotificationListViewController"
     
     var notificationArray = [NotificationObject]()
+    var nextPageLink: String?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -56,13 +57,27 @@ class NotificationListViewController: UIViewController,UICollectionViewDelegate,
         if let creationdate = notification.created_at as NSDate? {
             cell.timeLabel.text = UtilityManager.timeAgoSinceDate(date: creationdate, numericDates: true)
         }
-        
+        if let isRead = notification.is_read {
+            if isRead {
+                cell.mainView.backgroundColor = UIColor.white
+            }
+            else{
+                cell.mainView.backgroundColor = UIColor(red: 219.0/255.0, green: 245.0/255.0, blue: 253.0/255.0, alpha: 1.0)
+            }
+        }
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         Router.sharedInstance.showAppointmentDetails(appointment: self.notificationArray[indexPath.item].appointment!,appointmentIndex: indexPath.item, fromController: self)
+        notificationArray[indexPath.row].is_read = true
+        self.collectionView.reloadData()
+        RequestManager.markNotificationRead(notificationID: notificationArray[indexPath.row].id ?? "0", params: [:], successBlock: { (response) in
+            
+        }) { (error) in
+            SVProgressHUD.showError(withStatus: error)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -86,6 +101,10 @@ class NotificationListViewController: UIViewController,UICollectionViewDelegate,
             
             SVProgressHUD.showError(withStatus: error)
         }
+        
+    }
+    
+    func pagination() {
         
     }
     

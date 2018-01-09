@@ -212,7 +212,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellWidth = self.collectionView.bounds.width
         
-        return CGSize(width: cellWidth, height: 90)
+        return CGSize(width: cellWidth, height: 85)
     }
     
     @IBAction func newAppointmentButtonPressed(_ sender: Any) {

@@ -82,7 +82,11 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
                         if (phone != nil && pass != nil)
                         {
                             self.validator.validate(self)
-                            Router.sharedInstance.showDashboardAsRoot()
+                            var params = [String: String]()
+                            params["phone"] = phone
+                            params["password"] = pass
+                            self.signinUser(params: params)
+//                            Router.sharedInstance.showDashboardAsRoot()
                         }else{
                             
                             SVProgressHUD.showError(withStatus: "Please signin with your credentials to use touch id")
@@ -108,6 +112,18 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         var params = [String: String]()
         params["phone"] = countryCodeField.text! + emailField.text!
         params["password"] = passwordField.text
+        signinUser(params: params)
+    }
+    
+    func signinUser(params: [String: String]) {
+        
+        var params = params
+        
+        if let deviceID = UserDefaults.standard.value(forKey: "pushNotificationToken") as? String{
+            params["device_id"] = deviceID
+            params["device_type"] = "0"
+        }
+        
         SVProgressHUD.show(withStatus: "Signing In")
         RequestManager.loginUser(param: params, successBlock: { (response: [String : AnyObject]) in
             SVProgressHUD.dismiss()

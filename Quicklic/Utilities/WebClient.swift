@@ -642,5 +642,36 @@ class WebClient: AFHTTPSessionManager {
             failure(error)
         }
     }
+    
+    func markNotificationRead(notificationID:String, params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (), failureBlock failure:@escaping (String) -> ()){
+        
+        self.postPath(urlString: "notification/\(notificationID)/read", params: params as [String : AnyObject], successBlock: { (response) in
+            print(response)
+            success(response as! [String : AnyObject])
+        }) { (error) in
+            failure(error)
+        }
+    }
+    
+    func markAllNotifcationsRead(notificationID:String, params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (), failureBlock failure:@escaping (String) -> ()){
+        
+        self.postPath(urlString: "notification/\(notificationID)/read", params: params as [String : AnyObject], successBlock: { (response) in
+            print(response)
+            success(response as! [String : AnyObject])
+        }) { (error) in
+            failure(error)
+        }
+    }
+    
+    func getPaginationResponse(url: String,successBlock success:@escaping ([[String: AnyObject]]) -> (),
+                             failureBlock failure:@escaping (String) -> ()){
+        
+        self.getPath(urlString: url, params:[:], successBlock: { (response) in
+            print("Notification \(response)")
+            success(response["results"] as! [[String : AnyObject]])
+        }) { (error) in
+            failure(error)
+        }
+    }
  
 }

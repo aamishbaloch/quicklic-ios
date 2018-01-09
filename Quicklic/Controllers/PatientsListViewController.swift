@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PatientsListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class PatientsListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     static let storyboardID = "patientsListViewController"
     
@@ -70,11 +70,17 @@ class PatientsListViewController: UIViewController, UICollectionViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
+    
+    func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellWidth = self.collectionView.bounds.width
+        
+        return CGSize(width: cellWidth-5, height: 125)
+    }
 
     
     func fetchData(){
         
-        var params = [String: Any]()
+        let params = [String: Any]()
    
         SVProgressHUD.show()
         RequestManager.getPatientsList(params: params, successBlock: { (response) in

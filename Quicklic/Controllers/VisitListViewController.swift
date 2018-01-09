@@ -111,6 +111,12 @@ class VisitListViewController: UIViewController,UICollectionViewDelegate,UIColle
         Router.sharedInstance.showAppointmentDetailsForVisit(appointment: self.visitArray[indexPath.item],appointmentIndex: indexPath.item, fromController: self)
     }
     
+    func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellWidth = self.collectionView.bounds.width
+        
+        return CGSize(width: cellWidth, height: 90)
+    }
+    
     //MARK : - EmptyDataSource Methods
     
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {

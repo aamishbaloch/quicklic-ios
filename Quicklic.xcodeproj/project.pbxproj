@@ -58,6 +58,7 @@
 		69D0D4ED1FA607A600D4E0D2 /* AddClinicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D0D4EC1FA607A600D4E0D2 /* AddClinicViewController.swift */; };
 		69D847E01F702BD5003A7EC9 /* ApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D847DF1F702BD5003A7EC9 /* ApplicationManager.swift */; };
 		69D847E21F702E9C003A7EC9 /* PatientsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D847E11F702E9C003A7EC9 /* PatientsListViewController.swift */; };
+		69D93C632003D6DF004D9948 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D93C622003D6DF004D9948 /* UserNotifications.framework */; };
 		69F4B7D21F74F3C000BFB414 /* WebClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F4B7D11F74F3C000BFB414 /* WebClient.swift */; };
 		69F4B7D41F751F8A00BFB414 /* DatePickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F4B7D31F751F8A00BFB414 /* DatePickerTextField.swift */; };
 		69F4B7D61F75317D00BFB414 /* SwiftValidator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F4B7D51F75317D00BFB414 /* SwiftValidator.framework */; };
@@ -226,6 +227,7 @@
 		69D0D4EC1FA607A600D4E0D2 /* AddClinicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClinicViewController.swift; sourceTree = "<group>"; };
 		69D847DF1F702BD5003A7EC9 /* ApplicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationManager.swift; sourceTree = "<group>"; };
 		69D847E11F702E9C003A7EC9 /* PatientsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientsListViewController.swift; sourceTree = "<group>"; };
+		69D93C622003D6DF004D9948 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		69F4B7D11F74F3C000BFB414 /* WebClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebClient.swift; sourceTree = "<group>"; };
 		69F4B7D31F751F8A00BFB414 /* DatePickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTextField.swift; sourceTree = "<group>"; };
 		69F4B7D51F75317D00BFB414 /* SwiftValidator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftValidator.framework; path = Carthage/Build/iOS/SwiftValidator.framework; sourceTree = SOURCE_ROOT; };
@@ -325,6 +327,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69D93C632003D6DF004D9948 /* UserNotifications.framework in Frameworks */,
 				D0940BEC5468F3F45AE1CF43 /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -578,6 +581,7 @@
 		F07639B97D5ACBBA47CF64B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				69D93C622003D6DF004D9948 /* UserNotifications.framework */,
 				D1BA99791FC6BAC30023C09E /* LocalAuthentication.framework */,
 				D1701A261FC5983700248867 /* HCSStarRatingView.framework */,
 				691AA9171F98A282002A6DFC /* MRCountryPicker.framework */,
@@ -1119,7 +1123,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1147,7 +1151,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1211,7 +1215,7 @@
 				DEVELOPMENT_TEAM = AYEH6C5B8A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danialzahid.Quicklic.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1241,7 +1245,7 @@
 				DEVELOPMENT_TEAM = AYEH6C5B8A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danialzahid.Quicklic.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";

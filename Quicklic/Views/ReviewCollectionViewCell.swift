@@ -21,7 +21,7 @@ class ReviewCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
         let screenWidth = UIScreen.main.bounds.size.width
-        widthConstraint.constant = screenWidth - 30
+        widthConstraint.constant = screenWidth - 15
     }
     
 }

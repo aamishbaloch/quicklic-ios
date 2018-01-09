@@ -83,15 +83,11 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         return cell
     }
     
-   
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
     }
     
     func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellWidth = self.collectionView.bounds.width
-        
         return CGSize(width: cellWidth, height: 90)
     }
     

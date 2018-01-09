@@ -116,6 +116,9 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
             for object in response {
                 self.timeArray.append(Time(dictionary: object))
             }
+            
+            self.timeArray = self.timeArray.filter { $0.available == true }
+            
             self.collectionView.reloadData()
             SVProgressHUD.dismiss()
             

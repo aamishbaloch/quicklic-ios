@@ -31,6 +31,7 @@ class NotificationObject: BaseEntity {
         if let appointmentObject = dictionary["appointment"] as? [String: AnyObject] {
             self.appointment = Appointment(dictionary: appointmentObject)
         }
+        self.is_read = dictionary["is_read"] as? Bool ?? false
 //        if let creationDate = dictionary["created_at"] as? String {
 //            UtilityManager.dateFromStringWithFormat(date: creationDate, format: "yyyy-MM-dd'T'hh:mm:ss.SSS")
 //        }
