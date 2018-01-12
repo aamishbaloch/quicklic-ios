@@ -41,25 +41,6 @@ class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UI
         // Dispose of any resources that can be recreated.
     }
     
-    func fetchData(searchString: String? = nil) {
-        
-        var params = [String:String]()
-        if let string = searchString {
-            params["query"] = string
-        }
-        
-        RequestManager.getDoctorsList(params: params, successBlock: { (response) in
-            self.doctorsArray.removeAll()
-            for object in response {
-                self.doctorsArray.append(User(dictionary: object))
-            }
-            self.collectionView.reloadData()
-            SVProgressHUD.dismiss()
-            
-        }) { (error) in
-            SVProgressHUD.showError(withStatus: error)
-        }
-    }
     
     @IBAction func menuButtonPressed(_ sender: Any) {
         self.presentLeftMenuViewController(nil)
@@ -79,6 +60,10 @@ class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UI
         cell.profileImageView.sd_setImage(with: URL(string: user.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         cell.specializationLabel.text = user.specializationName ?? "N/A"
         cell.phoneLabel.text = user.phone ?? "N/A"
+        cell.patientsSeenLabel.text = user.patients_seen ?? "0"
+        
+        let floatValue : Float = NSString(string: user.rating!).floatValue
+        cell.ratingView.value = CGFloat(floatValue)
         
         return cell
     }
@@ -183,6 +168,54 @@ class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UI
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
         SVProgressHUD.show()
         fetchData()
+    }
+    
+    func fetchData(searchString: String? = nil) {
+        
+        var params = [String:String]()
+        if let string = searchString {
+            params["query"] = string
+        }
+        
+        RequestManager.getDoctorsList(params: params, successBlock: { (response, nextPageLink) in
+            self.doctorsArray.removeAll()
+            self.processAPICallResponse(response: response, nextPageLink: nextPageLink)
+            
+        }) { (error) in
+            SVProgressHUD.showError(withStatus: error)
+        }
+    }
+    
+    //MARK: - Pagination methods
+    
+    var nextPageLink: String?
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if nextPageLink != nil {
+            if indexPath.row + 3 == doctorsArray.count {
+                fetchPagination()
+            }
+        }
+    }
+    
+    func fetchPagination() {
+        
+        if let link = nextPageLink {
+            RequestManager.getPaginationResponse(url: link, successBlock: { (response, nextPageLink) in
+                self.processAPICallResponse(response: response, nextPageLink: nextPageLink)
+            }, failureBlock: { (error) in
+                SVProgressHUD.showError(withStatus: error)
+            })
+        }
+    }
+    
+    func processAPICallResponse(response: [[String: AnyObject]], nextPageLink : String?) {
+        self.nextPageLink = nextPageLink
+        for object in response {
+            self.doctorsArray.append(User(dictionary: object))
+        }
+        self.collectionView.reloadData()
+        SVProgressHUD.dismiss()
     }
     
     /*

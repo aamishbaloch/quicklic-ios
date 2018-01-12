@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate{
     
     
     static let storyboardID = "createAppointmentViewController"
@@ -16,6 +16,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImageView: DesignableImageView!
     @IBOutlet weak var specialityLabel: UILabel!
+    @IBOutlet weak var ratingView: HCSStarRatingView!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var reasonButton: UIButton!
     @IBOutlet weak var textview: UITextView!
@@ -39,6 +40,9 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        collectionView.emptyDataSetSource = self
+        collectionView.emptyDataSetDelegate = self
+        
         
         dateField.pickerView.minimumDate = NSDate() as Date
         dateField.pickerView.maximumDate = nil
@@ -48,6 +52,8 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         specialityLabel.text = doctor?.specializationName ?? "N/A"
         profileImageView.sd_setImage(with: URL(string: doctor?.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         dateField.text = UtilityManager.stringFromNSDateWithFormat(date: NSDate(), format: Constant.appDateFormat)
+        let floatValue : Float = NSString(string: doctor?.rating ?? "0").floatValue
+        ratingView.value = CGFloat(floatValue)
         fetchTime(dateString: dateField.text)
      
         if let doctorID = doctor?.id {
@@ -57,6 +63,13 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
             }) { (error) in
                 SVProgressHUD.showError(withStatus: error)
             }
+        }
+        
+        if isEditingMode {
+            selectedReason = appointment.reason
+            reasonButton.setTitle(appointment.reason.name, for: .normal)
+            dateField.text = UtilityManager.stringFromNSDateWithFormat(date: appointment.start_datetime! as NSDate, format: Constant.appDateFormat)
+            
         }
         
         textview.layer.borderWidth = 1
@@ -112,7 +125,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         
         SVProgressHUD.show()
         RequestManager.getTimeList(doctorID: (doctor?.id)!,params: params, successBlock: { (response) in
-            
+            self.timeArray.removeAll()
             for object in response {
                 self.timeArray.append(Time(dictionary: object))
             }
@@ -252,5 +265,81 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
                 print(error)
             }
         }
+    }
+    
+    
+    
+    //MARK : - EmptyDataSource Methods
+    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "No Slots Found"
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        paragraphStyle.alignment = .center
+        
+        let attributes : [String: Any] = [NSFontAttributeName: UIFont(font: .Medium, size: 14.0) as Any,
+                                          NSForegroundColorAttributeName: UIColor(red: 170.0/255.0, green: 171.0/255.0, blue: 179.0/255.0, alpha: 1.0),
+                                          NSParagraphStyleAttributeName: paragraphStyle]
+        return NSMutableAttributedString(string: text, attributes: attributes)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = ""
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        paragraphStyle.alignment = .center
+        
+        let attributes : [String: Any] = [NSFontAttributeName: UIFont(font: .Standard, size: 15.0) as Any,
+                                          NSForegroundColorAttributeName: UIColor(red: 170.0/255.0, green: 171.0/255.0, blue: 179.0/255.0, alpha: 1.0),
+                                          NSParagraphStyleAttributeName: paragraphStyle]
+        return NSMutableAttributedString(string: text, attributes: attributes)
+    }
+    
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+        let text = ""
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        paragraphStyle.alignment = .center
+        
+        var color: UIColor!
+        
+        if state == .normal {
+            color = UIColor(red: 44.0/255.0, green: 137.0/255.0, blue: 202.0/255.0, alpha: 1.0)
+        }
+        if state == .highlighted {
+            color = UIColor(red: 106.0/255.0, green: 187.0/255.0, blue: 227.0/255.0, alpha: 1.0)
+        }
+        
+        let attributes : [String: Any] = [NSFontAttributeName: UIFont(font: .SemiBold, size: 14.0) as Any,
+                                          NSForegroundColorAttributeName: color,
+                                          NSParagraphStyleAttributeName: paragraphStyle]
+        return NSMutableAttributedString(string: text, attributes: attributes)
+    }
+    
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return UIColor(white: 1.0, alpha: 1.0)
+    }
+    
+    func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func emptyDataSetShouldAllowTouch(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return false
+    }
+    
+    func emptyDataSet(_ scrollView: UIScrollView!, didTap view: UIView!) {
+        
+    }
+    
+    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+        
     }
 }

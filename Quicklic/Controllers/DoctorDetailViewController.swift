@@ -22,6 +22,8 @@ class DoctorDetailViewController: UIViewController {
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var educationLabel: UILabel!
     @IBOutlet weak var serviceLabel: UILabel!
+    @IBOutlet weak var ratingView: HCSStarRatingView!
+    @IBOutlet weak var patientsSeenLabel: UILabel!
     
     var doctor: User!
     
@@ -38,6 +40,9 @@ class DoctorDetailViewController: UIViewController {
         phoneLabel.text = doctor.phone ?? "N?A"
         educationLabel.text = doctor.degree ?? "N/A"
         serviceLabel.text = doctor.servicesArray.joined(separator: ", ").length > 0 ? doctor.servicesArray.joined(separator: ", ") : "N/A"
+        let floatValue : Float = NSString(string: doctor.rating!).floatValue
+        ratingView.value = CGFloat(floatValue)
+        patientsSeenLabel.text = doctor.patients_seen ?? "0"
     }
 
     override func didReceiveMemoryWarning() {

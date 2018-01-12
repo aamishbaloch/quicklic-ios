@@ -10,4 +10,7 @@ import UIKit
 
 class AnnouncementCollectionViewCell: UICollectionViewCell {
     static let identifier = "announcementCollectionViewCell"
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
 }

@@ -16,6 +16,8 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
      var appointmentsArray = [Appointment]()
      var date:String?
     
+    let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,8 +25,13 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         title = "Appointments History"
         collectionView.delegate = self
         collectionView.dataSource = self
+        
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
+        
+        refreshControl.addTarget(self, action: #selector(fetchData), for: UIControlEvents.valueChanged)
+        collectionView.refreshControl = refreshControl
+        
         fetchData()
     }
 
@@ -49,7 +56,7 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         
         if ApplicationManager.sharedInstance.userType == .Patient {
             cell.nameLabel.text = appointment.doctor.full_name
-            cell.specializationLabel.text = appointment.doctor.specializationName
+            
             cell.drImage.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
             cell.addReviewButton.isHidden = false
             cell.addReviewButton.addTarget(self, action: #selector(self.addReviewButtonPressed(_:)), for: UIControlEvents.touchUpInside)
@@ -58,14 +65,16 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         }
         else{
             cell.nameLabel.text = appointment.patient.full_name
-            cell.specializationLabel.text = nil
+            
             cell.drImage.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
             cell.addReviewButton.isHidden = true
         }
         
-        if let startTime = self.appointmentsArray[indexPath.row].end_datetime {
-            cell.timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "HH:mm a")
+        if let startTime = self.appointmentsArray[indexPath.row].start_datetime {
+            cell.timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "hh:mm a MM-dd-yyyy")
         }
+        
+        cell.specializationLabel.text = appointment.reason.name
         
         let status = appointment.status?.value
         cell.statusLabel.text = status
@@ -75,15 +84,20 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         }else if status == "Pending" {
             cell.statusLabel.textColor = UIColor.orange
         }
-        else if status == "Discard" {
+        else if status == "Discard" || status == "Cancel" || status == "No Show" {
             cell.statusLabel.textColor = UIColor.red
         }
+        else if status == "Done" {
+            cell.statusLabel.textColor = .green
+        }
+        
         
      
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        Router.sharedInstance.showAppointmentDetails(appointment: appointmentsArray[indexPath.item], appointmentIndex: indexPath.item, fromController: self)
     }
     
     func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -91,27 +105,7 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         return CGSize(width: cellWidth, height: 90)
     }
     
-    func fetchData() {
-        
-        var params = [String: Any]()
-        if let endDate = date {
-         params["end_date"] = endDate
-        }
-        SVProgressHUD.show()
-        RequestManager.getAppointmentHistory(params:params, successBlock: { (response) in
-            self.appointmentsArray.removeAll()
-            for object in response {
-                self.appointmentsArray.append(Appointment(dictionary: object))
-                print("Appointment History is : \(object)")
-            }
-            self.collectionView.reloadData()
-            SVProgressHUD.dismiss()
-            
-        }) { (error) in
-            SVProgressHUD.showError(withStatus: error)
-        }
-        
-    }
+    
     
     func addReviewButtonPressed(_ sender: UIButton) {
         let appointment = appointmentsArray[sender.tag]
@@ -192,6 +186,56 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
         SVProgressHUD.show()
         fetchData()
+    }
+    
+    
+    func fetchData() {
+        
+        var params = [String: Any]()
+        let date = Date(timeInterval: 86400, since: NSDate() as Date)
+        params["end_date"] = UtilityManager.stringFromNSDateWithFormat(date: date as NSDate, format: "yyyy-MM-dd")
+        
+        SVProgressHUD.show()
+        RequestManager.getAppointmentHistory(params:params, successBlock: { (response, nextPageLink) in
+            self.appointmentsArray.removeAll()
+            self.refreshControl.endRefreshing()
+            self.processAPICallResponse(response: response, nextPageLink: nextPageLink)
+        }) { (error) in
+            SVProgressHUD.showError(withStatus: error)
+        }
+        
+    }
+    
+    //MARK: - Pagination methods
+    
+    var nextPageLink: String?
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if nextPageLink != nil {
+            if indexPath.row + 3 == appointmentsArray.count {
+                fetchPagination()
+            }
+        }
+    }
+    
+    func fetchPagination() {
+        
+        if let link = nextPageLink {
+            RequestManager.getPaginationResponse(url: link, successBlock: { (response, nextPageLink) in
+                self.processAPICallResponse(response: response, nextPageLink: nextPageLink)
+            }, failureBlock: { (error) in
+                SVProgressHUD.showError(withStatus: error)
+            })
+        }
+    }
+    
+    func processAPICallResponse(response: [[String: AnyObject]], nextPageLink : String?) {
+        self.nextPageLink = nextPageLink
+        for object in response {
+            self.appointmentsArray.append(Appointment(dictionary: object))
+        }
+        self.collectionView.reloadData()
+        SVProgressHUD.dismiss()
     }
 
     /*

@@ -30,7 +30,7 @@ class Review: BaseEntity {
     override init(dictionary: [AnyHashable : Any]!) {
         super.init()
         let newDateFormatter = DateFormatter()
-        newDateFormatter.dateFormat = Constant.serverDateFormatExtended
+        newDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
         //        newDateFormatter.timeZone = NSTimeZone(name: "UTC")! as TimeZone
         self.setValuesForKeysWithJSONDictionary(dictionary, dateFormatter: newDateFormatter)
         if let clinicObject = dictionary["clinic"] as? [String: AnyObject] {

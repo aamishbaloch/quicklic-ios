@@ -14,21 +14,26 @@ class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollect
     
     var reviews = [Review]()
     
+    let refreshControl = UIRefreshControl()
+    
     @IBOutlet weak var collectoinView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Reviews"
-
+        
         // Do any additional setup after loading the view.
         collectoinView.dataSource = self
         collectoinView.delegate = self
+        
         collectoinView.emptyDataSetSource = self
         collectoinView.emptyDataSetDelegate = self
-        print("hashkdasjdkasdjaskdjaskdjsalfas")
-          self.fetchData()
-       //print("Doctor id thorough apointment \(String(describing: appointment.doctor.id))")
-       // print("Doctor id \(doctor?.id)")
+        
+        refreshControl.addTarget(self, action: #selector(fetchData), for: UIControlEvents.valueChanged)
+        collectoinView.refreshControl = refreshControl
+        
+        
+        self.fetchData()
         
         if let flowLayout = collectoinView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
@@ -73,7 +78,7 @@ class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollect
         cell.descriptionLabel.text = review.comment ?? "N/A"
         
         if let created =  review.created_at{
-            cell.dateLabel.text = UtilityManager.stringFromNSDateWithFormat(date: created as NSDate, format: Constant.appDateFormat)
+            cell.dateLabel.text = UtilityManager.timeAgoSinceDate(date: created as NSDate, numericDates: true)
         }
         
         cell.ratingView.value = CGFloat(review.rating!)
@@ -95,23 +100,6 @@ class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollect
          self.presentLeftMenuViewController(nil)
     }
     
-    func fetchData() {
-        
-        SVProgressHUD.show()
-        
-        RequestManager.getReviews(successBlock: { (response) in
-            SVProgressHUD.dismiss()
-            self.reviews.removeAll()
-            for review in response {
-                self.reviews.append(Review(dictionary: review))
-            }
-            self.collectoinView.reloadData()
-            
-        }) { (error) in
-            SVProgressHUD.showError(withStatus: error)
-        }
-        
-    }
     
     //MARK : - EmptyDataSource Methods
     
@@ -187,6 +175,53 @@ class ReviewsViewController: UIViewController,UICollectionViewDelegate,UICollect
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
         SVProgressHUD.show()
         fetchData()
+    }
+    
+    func fetchData() {
+        
+        SVProgressHUD.show()
+        
+        RequestManager.getReviews(successBlock: { (response, nextPageLink) in
+            self.reviews.removeAll()
+            self.refreshControl.endRefreshing()
+            self.processAPICallResponse(response: response, nextPageLink: nextPageLink)
+            
+        }) { (error) in
+            SVProgressHUD.showError(withStatus: error)
+        }
+        
+    }
+    
+    //MARK: - Pagination methods
+    
+    var nextPageLink: String?
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if nextPageLink != nil {
+            if indexPath.row + 3 == reviews.count {
+                fetchPagination()
+            }
+        }
+    }
+    
+    func fetchPagination() {
+        
+        if let link = nextPageLink {
+            RequestManager.getPaginationResponse(url: link, successBlock: { (response, nextPageLink) in
+                self.processAPICallResponse(response: response, nextPageLink: nextPageLink)
+            }, failureBlock: { (error) in
+                SVProgressHUD.showError(withStatus: error)
+            })
+        }
+    }
+    
+    func processAPICallResponse(response: [[String: AnyObject]], nextPageLink : String?) {
+        self.nextPageLink = nextPageLink
+        for review in response {
+            self.reviews.append(Review(dictionary: review))
+        }
+        self.collectoinView.reloadData()
+        SVProgressHUD.dismiss()
     }
    
 

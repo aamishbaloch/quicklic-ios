@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		69025FE01F975409000C312B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69025FDF1F975409000C312B /* ProfileViewController.swift */; };
 		69025FE21F9768FA000C312B /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69025FE11F9768FA000C312B /* ProfileTableViewCell.swift */; };
+		6907B61D2008FF3500B3B592 /* LandingPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6907B61C2008FF3500B3B592 /* LandingPageCollectionViewCell.swift */; };
 		6916708E1F93711600C39034 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6916708D1F93711600C39034 /* VerificationViewController.swift */; };
 		691AA9181F98A283002A6DFC /* MRCountryPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 691AA9171F98A282002A6DFC /* MRCountryPicker.framework */; };
 		691C04061F39BE2E0078A4E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C04051F39BE2E0078A4E4 /* AppDelegate.swift */; };
@@ -28,6 +29,7 @@
 		694923281FCC75C1003CDA52 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694923271FCC75C1003CDA52 /* Test.swift */; };
 		6949232A1FCC87B3003CDA52 /* TestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694923291FCC87B3003CDA52 /* TestDetailViewController.swift */; };
 		6949232C1FCC9D2A003CDA52 /* AddReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6949232B1FCC9D2A003CDA52 /* AddReviewViewController.swift */; };
+		6953A6AD20063C3E00B682D9 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6953A6AC20063C3E00B682D9 /* ForgotPasswordViewController.swift */; };
 		695C83431FE2FBE50026A03A /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695C83421FE2FBE50026A03A /* NotificationService.swift */; };
 		695C83471FE2FBE50026A03A /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 695C83401FE2FBE50026A03A /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		695FDA861FA9142F004B6735 /* DoctorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695FDA851FA9142F004B6735 /* DoctorDetailViewController.swift */; };
@@ -59,6 +61,8 @@
 		69D847E01F702BD5003A7EC9 /* ApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D847DF1F702BD5003A7EC9 /* ApplicationManager.swift */; };
 		69D847E21F702E9C003A7EC9 /* PatientsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D847E11F702E9C003A7EC9 /* PatientsListViewController.swift */; };
 		69D93C632003D6DF004D9948 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D93C622003D6DF004D9948 /* UserNotifications.framework */; };
+		69EE33B520068FF1004847BF /* FloatLabelTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EE33B320068FF0004847BF /* FloatLabelTextView.swift */; };
+		69EE33B620068FF1004847BF /* FloatLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EE33B420068FF0004847BF /* FloatLabelTextField.swift */; };
 		69F4B7D21F74F3C000BFB414 /* WebClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F4B7D11F74F3C000BFB414 /* WebClient.swift */; };
 		69F4B7D41F751F8A00BFB414 /* DatePickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F4B7D31F751F8A00BFB414 /* DatePickerTextField.swift */; };
 		69F4B7D61F75317D00BFB414 /* SwiftValidator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F4B7D51F75317D00BFB414 /* SwiftValidator.framework */; };
@@ -165,6 +169,7 @@
 		677556B59ED6AB9187B71CDE /* libPods-OneSignalNotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneSignalNotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69025FDF1F975409000C312B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		69025FE11F9768FA000C312B /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		6907B61C2008FF3500B3B592 /* LandingPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageCollectionViewCell.swift; sourceTree = "<group>"; };
 		690AFF8C1FE303D700317436 /* Quicklic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Quicklic.entitlements; sourceTree = "<group>"; };
 		6916708D1F93711600C39034 /* VerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
 		691AA9171F98A282002A6DFC /* MRCountryPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MRCountryPicker.framework; path = Carthage/Build/iOS/MRCountryPicker.framework; sourceTree = "<group>"; };
@@ -190,6 +195,7 @@
 		694923271FCC75C1003CDA52 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		694923291FCC87B3003CDA52 /* TestDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDetailViewController.swift; sourceTree = "<group>"; };
 		6949232B1FCC9D2A003CDA52 /* AddReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewViewController.swift; sourceTree = "<group>"; };
+		6953A6AC20063C3E00B682D9 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		695C83401FE2FBE50026A03A /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		695C83421FE2FBE50026A03A /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		695C83441FE2FBE50026A03A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -228,6 +234,8 @@
 		69D847DF1F702BD5003A7EC9 /* ApplicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationManager.swift; sourceTree = "<group>"; };
 		69D847E11F702E9C003A7EC9 /* PatientsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientsListViewController.swift; sourceTree = "<group>"; };
 		69D93C622003D6DF004D9948 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		69EE33B320068FF0004847BF /* FloatLabelTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatLabelTextView.swift; sourceTree = "<group>"; };
+		69EE33B420068FF0004847BF /* FloatLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatLabelTextField.swift; sourceTree = "<group>"; };
 		69F4B7D11F74F3C000BFB414 /* WebClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebClient.swift; sourceTree = "<group>"; };
 		69F4B7D31F751F8A00BFB414 /* DatePickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTextField.swift; sourceTree = "<group>"; };
 		69F4B7D51F75317D00BFB414 /* SwiftValidator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftValidator.framework; path = Carthage/Build/iOS/SwiftValidator.framework; sourceTree = SOURCE_ROOT; };
@@ -421,35 +429,45 @@
 			path = DatePicker;
 			sourceTree = "<group>";
 		};
+		69EE33B220068FF0004847BF /* FloatLabelFields */ = {
+			isa = PBXGroup;
+			children = (
+				69EE33B320068FF0004847BF /* FloatLabelTextView.swift */,
+				69EE33B420068FF0004847BF /* FloatLabelTextField.swift */,
+			);
+			path = FloatLabelFields;
+			sourceTree = "<group>";
+		};
 		69F785291F4AC629005197A6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				69D0D4EC1FA607A600D4E0D2 /* AddClinicViewController.swift */,
+				D10F67CA1FDA73FF000741BA /* AddCommentViewController.swift */,
+				6949232B1FCC9D2A003CDA52 /* AddReviewViewController.swift */,
 				69BAE1AA1F6FBC020035D23D /* AppointmentDetailsViewController.swift */,
 				6969CE911F56B1A9007E2E05 /* AppointmentsHistoryViewController.swift */,
 				699E702A1FA38CEC0070BFBA /* ClinicListViewController.swift */,
+				D1D0F04B1FCDA2C700321730 /* ConfirmationViewController.swift */,
 				695FDA871FA9BD19004B6735 /* CreateAppointmentViewController.swift */,
 				695FDA851FA9142F004B6735 /* DoctorDetailViewController.swift */,
-				694923291FCC87B3003CDA52 /* TestDetailViewController.swift */,
 				69A553A51F55D3ED00E8A5C5 /* EditProfileViewController.swift */,
 				69BAE1A81F6FB4560035D23D /* HospitalDetailsViewController.swift */,
 				6969CE931F56D785007E2E05 /* LandingViewController.swift */,
 				69F785951F504430005197A6 /* LeftMenuViewController.swift */,
+				D1101E441FF3B295009EDFE2 /* NotificationListViewController.swift */,
 				69F7859B1F52E44B005197A6 /* PatientDashboardViewController.swift */,
 				69D847E11F702E9C003A7EC9 /* PatientsListViewController.swift */,
 				69025FDF1F975409000C312B /* ProfileViewController.swift */,
+				D1BC6D531FBAD29D00A20344 /* ReasonSelectionViewController.swift */,
+				D1D0F0451FCD481400321730 /* ReviewsViewController.swift */,
 				6969CE8D1F569EC7007E2E05 /* SearchDoctorViewController.swift */,
 				69F785971F50552C005197A6 /* SignInViewController.swift */,
 				69F785991F505535005197A6 /* SignUpViewController.swift */,
-				6916708D1F93711600C39034 /* VerificationViewController.swift */,
-				D1BC6D531FBAD29D00A20344 /* ReasonSelectionViewController.swift */,
+				694923291FCC87B3003CDA52 /* TestDetailViewController.swift */,
 				694923251FCC7371003CDA52 /* TestListViewController.swift */,
-				6949232B1FCC9D2A003CDA52 /* AddReviewViewController.swift */,
-				D1D0F0451FCD481400321730 /* ReviewsViewController.swift */,
-				D1D0F04B1FCDA2C700321730 /* ConfirmationViewController.swift */,
+				6916708D1F93711600C39034 /* VerificationViewController.swift */,
 				D10E40AA1FD91C6B00FC43F4 /* VisitListViewController.swift */,
-				D10F67CA1FDA73FF000741BA /* AddCommentViewController.swift */,
-				D1101E441FF3B295009EDFE2 /* NotificationListViewController.swift */,
+				6953A6AC20063C3E00B682D9 /* ForgotPasswordViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -475,6 +493,7 @@
 		69F785301F4AC629005197A6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				69EE33B220068FF0004847BF /* FloatLabelFields */,
 				696762921FA90D3B00C4E2F4 /* UIAlertController+Blocks.h */,
 				696762931FA90D3B00C4E2F4 /* UIAlertController+Blocks.m */,
 				69439F4E1F99DC8A00DC6F44 /* CountryPickerTextField.swift */,
@@ -547,6 +566,7 @@
 				D1D0F0471FCD49CC00321730 /* ReviewCollectionViewCell.swift */,
 				D10E40AC1FD91C9C00FC43F4 /* VisitCollectionViewCell.swift */,
 				D1101E461FF3B2CA009EDFE2 /* NotificationCollectionViewCell.swift */,
+				6907B61C2008FF3500B3B592 /* LandingPageCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -879,6 +899,7 @@
 				6975ADB81F94FDD500CEF94D /* GenericModel.swift in Sources */,
 				69F7857E1F4C16FC005197A6 /* GradientView.swift in Sources */,
 				6968D6691F8E589200B39CCF /* MLPAutoCompleteTextField.m in Sources */,
+				69EE33B520068FF1004847BF /* FloatLabelTextView.swift in Sources */,
 				69025FE01F975409000C312B /* ProfileViewController.swift in Sources */,
 				69BAE1AB1F6FBC020035D23D /* AppointmentDetailsViewController.swift in Sources */,
 				69F7857A1F4AC629005197A6 /* Styles.swift in Sources */,
@@ -896,6 +917,7 @@
 				692AFF901F7035D800E3ECB9 /* DZImageView.swift in Sources */,
 				6925DF5C1FD2FA0800B581FF /* Review.swift in Sources */,
 				D1295FA71FBC292000715C45 /* Time.swift in Sources */,
+				6953A6AD20063C3E00B682D9 /* ForgotPasswordViewController.swift in Sources */,
 				69F785661F4AC629005197A6 /* DesignableTextView.swift in Sources */,
 				D10E40AB1FD91C6B00FC43F4 /* VisitListViewController.swift in Sources */,
 				69439F4F1F99DC8A00DC6F44 /* CountryPickerTextField.swift in Sources */,
@@ -917,6 +939,7 @@
 				69F7856D1F4AC629005197A6 /* Misc.swift in Sources */,
 				D1101E4B1FF3C3A1009EDFE2 /* NotificationObject.swift in Sources */,
 				69F7855E1F4AC629005197A6 /* AsyncImageView.swift in Sources */,
+				6907B61D2008FF3500B3B592 /* LandingPageCollectionViewCell.swift in Sources */,
 				69A5539F1F544CCF00E8A5C5 /* ScrollableDatepicker.swift in Sources */,
 				69BAE1A91F6FB4560035D23D /* HospitalDetailsViewController.swift in Sources */,
 				6969CE921F56B1A9007E2E05 /* AppointmentsHistoryViewController.swift in Sources */,
@@ -959,6 +982,7 @@
 				69F785701F4AC629005197A6 /* SpringAnimation.swift in Sources */,
 				6969CE961F56D837007E2E05 /* AnnouncementCollectionViewCell.swift in Sources */,
 				69F7855B1F4AC629005197A6 /* Constants.swift in Sources */,
+				69EE33B620068FF1004847BF /* FloatLabelTextField.swift in Sources */,
 				69416EF31F87EA9B00E2E0E2 /* BaseEntity.m in Sources */,
 				D10E40AD1FD91C9C00FC43F4 /* VisitCollectionViewCell.swift in Sources */,
 				6949232A1FCC87B3003CDA52 /* TestDetailViewController.swift in Sources */,
@@ -1123,7 +1147,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1151,7 +1175,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

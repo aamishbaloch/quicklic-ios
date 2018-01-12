@@ -63,11 +63,51 @@ class WebClient: AFHTTPSessionManager {
         })
     }
     
-    func deletePath(urlString: String,
+    
+    func putPath(urlString: String,
                   params: [String: AnyObject],
                   addToken: Bool = true,
                   successBlock success:@escaping (AnyObject) -> (),
                   failureBlock failure: @escaping (String) -> ()){
+        
+        let manager = AFHTTPSessionManager()
+        manager.requestSerializer = AFJSONRequestSerializer()
+        manager.responseSerializer = AFJSONResponseSerializer()
+        
+        if let sessionID = UserDefaults.standard.value(forKey: "token") as? String , addToken == true {
+            manager.requestSerializer.setValue("Bearer \(sessionID)", forHTTPHeaderField: "Authorization")
+        }
+        
+        manager.put((NSURL(string: urlString, relativeTo: self.baseURL)?.absoluteString)!, parameters: params, success: {
+            (sessionTask, responseObject) -> () in
+            print(responseObject ?? "")
+            success(responseObject! as AnyObject)
+        },  failure: {
+            (sessionTask, error) -> () in
+            print(error)
+            let err = error as NSError
+            do {
+                if let data = err.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as? Data {
+                    let dictionary = try JSONSerialization.jsonObject(with: data,
+                                                                      options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: String]
+                    failure(dictionary["detail"]!)
+                }
+                else{
+                    failure("Failed to connect")
+                }
+            }catch
+            {
+                failure(error.localizedDescription)
+            }
+            
+        })
+    }
+    
+    func deletePath(urlString: String,
+                    params: [String: AnyObject],
+                    addToken: Bool = true,
+                    successBlock success:@escaping (AnyObject) -> (),
+                    failureBlock failure: @escaping (String) -> ()){
         
         let manager = AFHTTPSessionManager()
         manager.requestSerializer = AFJSONRequestSerializer()
@@ -150,11 +190,11 @@ class WebClient: AFHTTPSessionManager {
     
     
     func multipartPut(urlString: String,
-                       params: [String: AnyObject],
-                       image: UIImage?,
-                       addToken: Bool = true,
-                       successBlock success:@escaping (AnyObject) -> (),
-                       failureBlock failure: @escaping (AnyObject) -> ()){
+                      params: [String: AnyObject],
+                      image: UIImage?,
+                      addToken: Bool = true,
+                      successBlock success:@escaping (AnyObject) -> (),
+                      failureBlock failure: @escaping (AnyObject) -> ()){
         
         let manager = AFHTTPSessionManager()
         manager.requestSerializer = AFJSONRequestSerializer()
@@ -231,7 +271,7 @@ class WebClient: AFHTTPSessionManager {
             do {
                 if let data = err.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] as? Data {
                     let dictionary = try JSONSerialization.jsonObject(with: data,
-                        options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: String]
+                                                                      options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: String]
                     failure(dictionary["detail"]!)
                 }
                 else{
@@ -244,7 +284,7 @@ class WebClient: AFHTTPSessionManager {
             
         })
     }
-  
+    
     func signUpUser(param: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (),
                     failureBlock failure:@escaping (String) -> ()){
         self.postPath(urlString: Constant.registrationURL, params: param as [String : AnyObject],addToken: false, successBlock: { (response) in
@@ -287,12 +327,12 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
-//    func newEditUser(param: [String: Any],image: UIImage?, successBlock success:@escaping ([String: AnyObject]) -> (),
-//                     failureBlock failure:@escaping (String) -> ()){
-//
-//        self.
-//
-//    }
+    //    func newEditUser(param: [String: Any],image: UIImage?, successBlock success:@escaping ([String: AnyObject]) -> (),
+    //                     failureBlock failure:@escaping (String) -> ()){
+    //
+    //        self.
+    //
+    //    }
     
     func getCities(query: String, successBlock success:@escaping ([[String: AnyObject]]) -> (),
                    failureBlock failure:@escaping (String) -> ()){
@@ -305,7 +345,7 @@ class WebClient: AFHTTPSessionManager {
     }
     
     func getServices(query: String, successBlock success:@escaping ([[String: AnyObject]]) -> (),
-                   failureBlock failure:@escaping (String) -> ()){
+                     failureBlock failure:@escaping (String) -> ()){
         self.getPath(urlString: "service/", params: ["query":query as AnyObject], successBlock: { (response) in
             print(response)
             success(response as! [[String : AnyObject]])
@@ -315,7 +355,7 @@ class WebClient: AFHTTPSessionManager {
     }
     
     func getSpecializations(query: String, successBlock success:@escaping ([[String: AnyObject]]) -> (),
-                   failureBlock failure:@escaping (String) -> ()){
+                            failureBlock failure:@escaping (String) -> ()){
         self.getPath(urlString: "specialization/", params: ["query":query as AnyObject], successBlock: { (response) in
             print(response)
             success(response as! [[String : AnyObject]])
@@ -344,7 +384,7 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
-    func getDoctorsList( params: [String: Any], successBlock success:@escaping ([[String: AnyObject]]) -> (),
+    func getDoctorsList( params: [String: Any], successBlock success:@escaping ([[String: AnyObject]], String?) -> (),
                          failureBlock failure:@escaping (String) -> ()){
         
         var params = params
@@ -352,58 +392,58 @@ class WebClient: AFHTTPSessionManager {
         
         self.getPath(urlString: "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/doctor/", params: params as [String : AnyObject], successBlock: { (response) in
             print(response)
-            success(response["results"] as! [[String : AnyObject]])
+            success(response["results"] as! [[String : AnyObject]], response["next"] as? String)
         }) { (error) in
             failure(error)
         }
     }
     
-    func getClinicsList(successBlock success:@escaping ([[String: AnyObject]]) -> (),
-                         failureBlock failure:@escaping (String) -> ()){
+    func getClinicsList(successBlock success:@escaping ([[String: AnyObject]], String?) -> (),
+                        failureBlock failure:@escaping (String) -> ()){
         
         
         let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/clinic/" : "doctor/\(ApplicationManager.sharedInstance.user.id ?? "0")/clinic/"
         
         self.getPath(urlString: url, params: [:], successBlock: { (response) in
             print(response)
-            success(response["results"] as! [[String : AnyObject]])
+            success(response["results"] as! [[String : AnyObject]], response["next"] as? String)
         }) { (error) in
             failure(error)
         }
     }
     
-    func getLabsList(successBlock success:@escaping ([[String: AnyObject]]) -> (),
-                        failureBlock failure:@escaping (String) -> ()){
-    
+    func getLabsList(successBlock success:@escaping ([[String: AnyObject]], String?) -> (),
+                     failureBlock failure:@escaping (String) -> ()){
+        
         let url = "test/lab/"
         
         self.getPath(urlString: url, params: [:], successBlock: { (response) in
             print(response)
-            success(response["results"] as! [[String : AnyObject]])
+            success(response["results"] as! [[String : AnyObject]], response["next"] as? String)
         }) { (error) in
             failure(error)
         }
     }
     
-    func getTestsList(clinicID: String, successBlock success:@escaping ([[String: AnyObject]]) -> (),
-                     failureBlock failure:@escaping (String) -> ()){
+    func getTestsList(clinicID: String, successBlock success:@escaping ([[String: AnyObject]], String?) -> (),
+                      failureBlock failure:@escaping (String) -> ()){
         
         
         let url = "clinic/\(clinicID)/test/"
         
         self.getPath(urlString: url, params: [:], successBlock: { (response) in
             print(response)
-            success(response["results"] as! [[String : AnyObject]])
+            success(response["results"] as! [[String : AnyObject]], response["next"] as? String)
         }) { (error) in
             failure(error)
         }
     }
     
     func addClinic( params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (),
-                         failureBlock failure:@escaping (String) -> ()){
+                    failureBlock failure:@escaping (String) -> ()){
         
         let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/clinic/" : "doctor/\(ApplicationManager.sharedInstance.user.id ?? "0")/clinic/"
-
+        
         self.postPath(urlString: url, params: params as [String : AnyObject], successBlock: { (response) in
             print(response)
             success(response as! [String : AnyObject])
@@ -413,7 +453,7 @@ class WebClient: AFHTTPSessionManager {
     }
     
     func deleteClinic( clinicID: String, successBlock success:@escaping ([String: AnyObject]) -> (),
-                    failureBlock failure:@escaping (String) -> ()){
+                       failureBlock failure:@escaping (String) -> ()){
         let url = String("patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/clinic/") + clinicID
         self.deletePath(urlString: url, params: [:], successBlock: { (response) in
             print(response)
@@ -435,7 +475,7 @@ class WebClient: AFHTTPSessionManager {
     }
     
     func getDoctorClinicsList(doctorID: String, successBlock success:@escaping ([[String: AnyObject]]) -> (),
-                         failureBlock failure:@escaping (String) -> ()){
+                              failureBlock failure:@escaping (String) -> ()){
         
         self.getPath(urlString: "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/doctor/\(doctorID)/clinic/", params: [:] as [String : AnyObject], successBlock: { (response) in
             print(response)
@@ -444,9 +484,9 @@ class WebClient: AFHTTPSessionManager {
             failure(error)
         }
     }
-   
+    
     func getTimeList(doctorID: String, params: [String: Any], successBlock success:@escaping ([[String: AnyObject]]) -> (),
-                              failureBlock failure:@escaping (String) -> ()){
+                     failureBlock failure:@escaping (String) -> ()){
         
         self.getPath(urlString: "doctor/\(doctorID)/appointment_slots/", params: params as [String : AnyObject], successBlock: { (response) in
             print(response)
@@ -506,8 +546,7 @@ class WebClient: AFHTTPSessionManager {
     }
     
     func editAppointment(appointmentID:String, params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (), failureBlock failure:@escaping (String) -> ()){
-        
-        self.getPath(urlString: "appointment/\(appointmentID)", params: params as [String : AnyObject], successBlock: { (response) in
+        self.putPath(urlString: "appointment/\(appointmentID)", params: params as [String : AnyObject], successBlock: { (response) in
             print(response)
             success(response as! [String : AnyObject])
         }) { (error) in
@@ -515,32 +554,34 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
-    func getAppointments(params: [String: Any],successBlock success:@escaping ([[String: AnyObject]]) -> (),
-                                failureBlock failure:@escaping (String) -> ()){
+    func getAppointments(params: [String: Any],successBlock success:@escaping ([[String: AnyObject]], String?) -> (),
+                         failureBlock failure:@escaping (String) -> ()){
         
         let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/appointment/" : "doctor/\(ApplicationManager.sharedInstance.user.id ?? "0")/appointment/"
         
         self.getPath(urlString: url, params: params as [String : AnyObject], successBlock: { (response) in
             print(response)
-            success(response["results"] as! [[String : AnyObject]])
+            success(response["results"] as! [[String : AnyObject]], response["next"] as? String)
         }) { (error) in
             failure(error)
         }
     }
     
-    func getAppointmentHistory(params: [String: Any],successBlock success:@escaping ([[String: AnyObject]]) -> (),
-                         failureBlock failure:@escaping (String) -> ()){
+    func getAppointmentHistory(params: [String: Any],successBlock success:@escaping ([[String: AnyObject]], String?) -> (),
+                               failureBlock failure:@escaping (String) -> ()){
         
         let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/appointment/" : "doctor/\(ApplicationManager.sharedInstance.user.id ?? "0")/appointment/history"
         
+        
+        
         self.getPath(urlString: url, params: params as [String : AnyObject], successBlock: { (response) in
             print(response)
-            success(response["results"] as! [[String : AnyObject]])
+            success(response["results"] as! [[String : AnyObject]], response["next"] as? String)
         }) { (error) in
             failure(error)
         }
     }
-   
+    
     func appointmentStatus(doctorID: String ,appointmentID:String ,params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (), failureBlock failure:@escaping (String) -> ()){
         
         self.postPath(urlString: "doctor/\(doctorID)/appointment/\(appointmentID)/status/", params: params as [String : AnyObject], successBlock: { (response) in
@@ -562,51 +603,52 @@ class WebClient: AFHTTPSessionManager {
     }
     
     func cancelAppointment(patientID: String,appointmentID:String, successBlock success:@escaping ([String: AnyObject]) -> (),
-                      failureBlock failure:@escaping (String) -> ()){
+                           failureBlock failure:@escaping (String) -> ()){
         
         
         let url = "patient/\(patientID)/appointment/\(appointmentID)/cancel/"
         
         self.getPath(urlString: url, params: [:], successBlock: { (response) in
             print(response)
-           success(response as! [String : AnyObject])
+            success(response as! [String : AnyObject])
         }) { (error) in
             failure(error)
         }
     }
     
-    func getReviews(successBlock success:@escaping ([[String: AnyObject]]) -> (), failureBlock failure:@escaping (String) -> ()){
+    func getReviews(successBlock success:@escaping ([[String: AnyObject]], String?) -> (),
+                    failureBlock failure:@escaping (String) -> ()){
         
         let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/review/" : "doctor/\(ApplicationManager.sharedInstance.user.id ?? "0")/review/"
         
         self.getPath(urlString: url, params: [:], successBlock: { (response) in
             print(response)
-            success(response["results"] as! [[String : AnyObject]])
+            success(response["results"] as! [[String : AnyObject]], response["next"] as? String)
         }) { (error) in
             failure(error)
         }
     }
     
-    func getPatientsList( params: [String: Any], successBlock success:@escaping ([[String: AnyObject]]) -> (),
-                         failureBlock failure:@escaping (String) -> ()){
+    func getPatientsList( params: [String: Any], successBlock success:@escaping ([[String: AnyObject]], String?) -> (),
+                          failureBlock failure:@escaping (String) -> ()){
         
         var params = params
         params["active"] = "true"
         
-        self.getPath(urlString: "patient/", params: params as [String : AnyObject], successBlock: { (response) in
+        self.getPath(urlString: "doctor/\(ApplicationManager.sharedInstance.user.id ?? "0")/patients/", params: params as [String : AnyObject], successBlock: { (response) in
             print(response)
-            success(response["results"] as! [[String : AnyObject]])
+            success(response["results"] as! [[String : AnyObject]], response["next"] as? String)
         }) { (error) in
             failure(error)
         }
     }
     
-    func getVisitList(doctorID: String, params: [String: Any],successBlock success:@escaping ([[String: AnyObject]]) -> (),
-                          failureBlock failure:@escaping (String) -> ()){
+    func getVisitList(doctorID: String, params: [String: Any],successBlock success:@escaping ([[String: AnyObject]], String?) -> (),
+                      failureBlock failure:@escaping (String) -> ()){
         
         self.getPath(urlString: "doctor/\(doctorID)/appointment/visit", params:[:], successBlock: { (response) in
             print(response)
-            success(response["results"] as! [[String : AnyObject]])
+            success(response["results"] as! [[String : AnyObject]], response["next"] as? String)
         }) { (error) in
             failure(error)
         }
@@ -632,12 +674,12 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
-    func getNotificationList(params: [String: Any],successBlock success:@escaping ([[String: AnyObject]]) -> (),
-                      failureBlock failure:@escaping (String) -> ()){
+    func getNotificationList(params: [String: Any],successBlock success:@escaping ([[String: AnyObject]], String?) -> (),
+                             failureBlock failure:@escaping (String) -> ()){
         
         self.getPath(urlString: "notification/", params:[:], successBlock: { (response) in
             print("Notification \(response)")
-            success(response["results"] as! [[String : AnyObject]])
+            success(response["results"] as! [[String : AnyObject]], response["next"] as? String)
         }) { (error) in
             failure(error)
         }
@@ -653,9 +695,9 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
-    func markAllNotifcationsRead(notificationID:String, params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (), failureBlock failure:@escaping (String) -> ()){
+    func markAllNotifcationsRead(successBlock success:@escaping ([String: AnyObject]) -> (), failureBlock failure:@escaping (String) -> ()){
         
-        self.postPath(urlString: "notification/\(notificationID)/read", params: params as [String : AnyObject], successBlock: { (response) in
+        self.postPath(urlString: "notification/\(ApplicationManager.sharedInstance.user.id ?? "0")/read_all", params: [:], successBlock: { (response) in
             print(response)
             success(response as! [String : AnyObject])
         }) { (error) in
@@ -663,15 +705,44 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
-    func getPaginationResponse(url: String,successBlock success:@escaping ([[String: AnyObject]]) -> (),
-                             failureBlock failure:@escaping (String) -> ()){
+    func getPaginationResponse(url: String,successBlock success:@escaping ([[String: AnyObject]], String?) -> (),
+                               failureBlock failure:@escaping (String) -> ()){
         
         self.getPath(urlString: url, params:[:], successBlock: { (response) in
-            print("Notification \(response)")
-            success(response["results"] as! [[String : AnyObject]])
+            success(response["results"] as! [[String : AnyObject]], response["next"] as? String)
         }) { (error) in
             failure(error)
         }
     }
- 
+    
+    func forgotPassword(params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (), failureBlock failure:@escaping (String) -> ()){
+        
+        self.postPath(urlString: "auth/forgot_password/", params: params as [String : AnyObject], successBlock: { (response) in
+            print(response)
+            success(response as! [String : AnyObject])
+        }) { (error) in
+            failure(error)
+        }
+    }
+    
+    func forgotPasswordCodeVerify(params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (), failureBlock failure:@escaping (String) -> ()){
+        
+        self.postPath(urlString: "auth/password/verify/", params: params as [String : AnyObject], successBlock: { (response) in
+            print(response)
+            success(response as! [String : AnyObject])
+        }) { (error) in
+            failure(error)
+        }
+    }
+    
+    func forgotPasswordChangePass(params: [String: Any], successBlock success:@escaping ([String: AnyObject]) -> (), failureBlock failure:@escaping (String) -> ()){
+        
+        self.postPath(urlString: "auth/password/change/", params: params as [String : AnyObject], successBlock: { (response) in
+            print(response)
+            success(response as! [String : AnyObject])
+        }) { (error) in
+            failure(error)
+        }
+    }
+    
 }

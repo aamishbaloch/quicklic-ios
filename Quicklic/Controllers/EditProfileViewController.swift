@@ -70,7 +70,7 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
         
         
         //Universal fields
-        self.nameField.text = "\(user.first_name!) \(user.last_name!)"
+        self.nameField.text = user.full_name
         self.emailField.text = user.email
         if let avatar = URL(string: user.avatar ?? "") {
             self.profileImageView.sd_setImage(with: avatar, placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
@@ -83,6 +83,8 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
             //Doctor Fields
             doctorView.isHidden = false
             doctorSubmitConstraint.constant = -30
+            self.degreeField.text = user.degree
+            self.specializationField.text = user.specializationName
             
         }
         else{
@@ -116,9 +118,7 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
         
         var params = [String: AnyObject]()
         
-        let names = nameField.text?.components(separatedBy: " ")
-        params["first_name"] = names?.first as AnyObject
-        params["last_name"] = names?.last as AnyObject
+        params["first_name"] = nameField.text as AnyObject
         params["address"] = addressField.text as AnyObject
         params["city"] = cityField.text as AnyObject
         params["country"] = countryField.text as AnyObject

@@ -23,13 +23,13 @@ class TestListViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Tests"
+        title = "Test Labs"
 
         var text  = clinic.name! + ", " + clinic.location!
         text = text + "\n" + clinic.phone!
         
         nameLabel.text = text
-        clinicImageView.sd_setImage(with: URL(string: clinic.image ?? ""), placeholderImage: UIImage(named: "placeholdernew"), options: SDWebImageOptions.refreshCached, completed: nil)
+        clinicImageView.sd_setImage(with: URL(string: clinic.image ?? ""), placeholderImage: UIImage(named: "placeholder-banner"), options: SDWebImageOptions.retryFailed, completed: nil)
         let floatValue : Float = NSString(string: clinic.rating!).floatValue
         starView.value = CGFloat(floatValue)
         
@@ -39,7 +39,7 @@ class TestListViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.tableFooterView = UIView()
         
         SVProgressHUD.show()
-        RequestManager.getTestsList(clinicID: clinic.id ?? "", successBlock: { (response) in
+        RequestManager.getTestsList(clinicID: clinic.id ?? "", successBlock: { (response, nextPageLink) in
             self.tests.removeAll()
             for object in response {
                 self.tests.append(Test(dictionary: object))

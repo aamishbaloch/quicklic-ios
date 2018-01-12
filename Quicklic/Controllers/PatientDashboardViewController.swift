@@ -17,7 +17,9 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     @IBOutlet weak var newAppointmentButton: DesignableButton!
     @IBOutlet weak var profileImageView: DesignableImageView!
     @IBOutlet weak var nameLabel: UILabel!
-   
+    @IBOutlet weak var appointmentHistoryButton: DesignableButton!
+    
+    let refreshControl = UIRefreshControl()
    
     var appointmentsArray = [Appointment]()
     var appointment = Appointment()
@@ -36,6 +38,9 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
+        
+        refreshControl.addTarget(self, action: #selector(fetchData), for: UIControlEvents.valueChanged)
+        collectionView.refreshControl = refreshControl
    
         let user = ApplicationManager.sharedInstance.user
         if user.userType == nil {
@@ -43,6 +48,10 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
             var params = [String: String]()
             params["phone"] = UserDefaults.standard.value(forKey: "userPhone") as? String
             params["password"] = UserDefaults.standard.value(forKey: "userPassword") as? String
+            if let deviceID = UserDefaults.standard.value(forKey: "pushNotificationToken") as? String{
+                params["device_id"] = deviceID
+                params["device_type"] = "0"
+            }
 
             SVProgressHUD.show()
             RequestManager.loginUser(param: params, successBlock: { (response: [String : AnyObject]) in
@@ -63,6 +72,8 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
                     leftController.tableView.reloadData()
                 }
                 self.updateUI(user: user)
+                let date = Date()
+                self.selectedDate = UtilityManager.stringFromNSDateWithFormat(date: date as NSDate, format: "yyyy-MM-dd")
                 self.fetchData()
             }) { (error) in
                 SVProgressHUD.showError(withStatus: error)
@@ -98,8 +109,12 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         profileImageView.sd_setImage(with: URL(string: user.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         
         if ApplicationManager.sharedInstance.userType == .Doctor {
-            newAppointmentButton.setTitle("Patients", for: UIControlState.normal)
+            newAppointmentButton.setTitle("Visits", for: UIControlState.normal)
         }
+        else{
+            newAppointmentButton.setTitle("New Appointment", for: .normal)
+        }
+        appointmentHistoryButton.setTitle("Appointment History", for: .normal)
     }
 
     override func didReceiveMemoryWarning() {
@@ -109,7 +124,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     
     func setupDatePicker() {
         var dates = [Date]()
-        for day in -15...150 {
+        for day in -5...30 {
             dates.append(Date(timeIntervalSinceNow: Double(day * 86400)))
         }
         
@@ -122,7 +137,10 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         configuration.weekendDayStyle.weekDayTextColor = UIColor(red: 242.0/255.0, green: 93.0/255.0, blue: 28.0/255.0, alpha: 1.0)
         
         // selected date customization
-        configuration.selectedDayStyle.selectorColor = UIColor(hex: "#007AFF")
+        configuration.selectedDayStyle.selectorColor = UIColor(hex: "#12ad8d")
+        
+        
+        
         configuration.daySizeCalculation = .numberOfVisibleItems(5)
         
         datePicker.configuration = configuration
@@ -139,30 +157,6 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         fetchData()
         
     }
-    
-    func fetchData() {
-        
-        var params = [String: Any]()
-        if let date = selectedDate {
-            params["start_date"] = date
-            params["end_date"] = date
-        }
-        
-        RequestManager.getAppointments(params:params, successBlock: { (response) in
-            self.appointmentsArray.removeAll()
-            for object in response {
-                self.appointmentsArray.append(Appointment(dictionary: object))
-                print("Array is : \(object)")
-            }
-            self.collectionView.reloadData()
-            SVProgressHUD.dismiss()
-            
-        }) { (error) in
-            
-            SVProgressHUD.showError(withStatus: error)
-        }
-        
-    }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return appointmentsArray.count
@@ -175,14 +169,14 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         let appointment = appointmentsArray[indexPath.item]
         if ApplicationManager.sharedInstance.userType == .Patient {
             cell.nameLabel.text = appointment.doctor.full_name ?? "N/A"
-            cell.specializationLabel.text = appointment.doctor.specializationName ?? "N/A"
             cell.drImage.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         }
         else{
             cell.nameLabel.text = appointment.patient.full_name ?? "N/A"
-            cell.specializationLabel.text = nil
             cell.drImage.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         }
+        
+        cell.specializationLabel.text = appointment.reason.name
         
         if let startTime = self.appointmentsArray[indexPath.row].start_datetime {
             cell.timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "hh:mm a")
@@ -201,6 +195,12 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         else if status == "Cancel" {
             cell.statusLabel.textColor = UIColor.red
         }
+        else if status == "No Show" {
+            cell.statusLabel.textColor = .red
+        }
+        else if status == "Done" {
+            cell.statusLabel.textColor = .green
+        }
         
         return cell
     }
@@ -218,7 +218,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     @IBAction func newAppointmentButtonPressed(_ sender: Any) {
       
         if ApplicationManager.sharedInstance.userType == .Doctor {
-         Router.sharedInstance.showPatientsList()
+         Router.sharedInstance.showVisits()
         }else{
          Router.sharedInstance.showSearchDoctor()
         }
@@ -245,7 +245,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "Create an appointment by clicking on the button above"
+        let text = ""
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakMode = .byWordWrapping
@@ -304,14 +304,58 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         SVProgressHUD.show()
         fetchData()
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func fetchData() {
+        
+        var params = [String: Any]()
+        if let date = selectedDate {
+            params["start_date"] = date
+            params["end_date"] = date
+        }
+        
+        RequestManager.getAppointments(params:params, successBlock: { (response, nextPageLink) in
+            self.appointmentsArray.removeAll()
+            self.refreshControl.endRefreshing()
+            self.processAPICallResponse(response: response, nextPageLink: nextPageLink)
+            
+        }) { (error) in
+            
+            SVProgressHUD.showError(withStatus: error)
+        }
+        
     }
-    */
+    
+    
+    //MARK: - Pagination methods
+    
+    var nextPageLink: String?
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if nextPageLink != nil {
+            if indexPath.row + 3 == appointmentsArray.count {
+                fetchPagination()
+            }
+        }
+    }
+    
+    func fetchPagination() {
+        
+        if let link = nextPageLink {
+            RequestManager.getPaginationResponse(url: link, successBlock: { (response, nextPageLink) in
+                self.processAPICallResponse(response: response, nextPageLink: nextPageLink)
+            }, failureBlock: { (error) in
+                SVProgressHUD.showError(withStatus: error)
+            })
+        }
+    }
+    
+    func processAPICallResponse(response: [[String: AnyObject]], nextPageLink : String?) {
+        self.nextPageLink = nextPageLink
+        for object in response {
+            self.appointmentsArray.append(Appointment(dictionary: object))
+        }
+        self.collectionView.reloadData()
+        SVProgressHUD.dismiss()
+    }
 
 }

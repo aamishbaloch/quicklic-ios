@@ -26,14 +26,12 @@ class AddCommentViewController: UIViewController,UITextViewDelegate {
 
         // Do any additional setup after loading the view.
         
-        textView.text = "Type here"
-        textView.textColor = UIColor.lightGray
         textView.layer.cornerRadius = 1
         textView.clipsToBounds = false
         textView.layer.shadowOpacity=0.4
         textView.layer.shadowOffset = CGSize(width: 1.5, height: 1.5)
         
-        textView.returnKeyType = UIReturnKeyType.done
+        textView.returnKeyType = UIReturnKeyType.default
 
     }
 

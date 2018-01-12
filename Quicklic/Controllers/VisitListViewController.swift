@@ -19,6 +19,8 @@ class VisitListViewController: UIViewController,UICollectionViewDelegate,UIColle
     var appointment = Appointment()
     var statusIs:String?
     
+    let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,6 +31,9 @@ class VisitListViewController: UIViewController,UICollectionViewDelegate,UIColle
         collectionView.dataSource = self
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
+        
+        refreshControl.addTarget(self, action: #selector(fetchData), for: UIControlEvents.valueChanged)
+        collectionView.refreshControl = refreshControl
         
         collectionView.reloadData()
         
@@ -57,23 +62,6 @@ class VisitListViewController: UIViewController,UICollectionViewDelegate,UIColle
          self.presentLeftMenuViewController(nil)
     }
     
-    func fetchData() {
-        
-        guard let doctorId = ApplicationManager.sharedInstance.user.id  else {return}
-        print("Doctor id: \(doctorId)")
-        RequestManager.getVisitList(doctorID:doctorId, params: [:],successBlock: { (response) in
-            SVProgressHUD.dismiss()
-            self.visitArray.removeAll()
-            for object in response {
-                self.visitArray.append(Appointment(dictionary: object))
-            }
-            
-            self.collectionView.reloadData()
-        }) { (error) in
-            SVProgressHUD.showError(withStatus: error)
-        }
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return visitArray.count
     }
@@ -86,7 +74,7 @@ class VisitListViewController: UIViewController,UICollectionViewDelegate,UIColle
       //print("Name is:\(visit.doctor.full_name)")
         cell.imageView.sd_setImage(with: URL(string: visit.patient.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         if let startTime = self.visitArray[indexPath.row].start_datetime {
-            cell.timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "hh:mm a")
+            cell.timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "hh:mm a MM-dd-yyyy")
         }
         
         let status = visit.status?.value
@@ -191,6 +179,55 @@ class VisitListViewController: UIViewController,UICollectionViewDelegate,UIColle
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
         SVProgressHUD.show()
         fetchData()
+    }
+    
+    func fetchData() {
+        
+        guard let doctorId = ApplicationManager.sharedInstance.user.id  else {return}
+        print("Doctor id: \(doctorId)")
+        
+//        var params = [String: Any]()
+//        let date = Date()
+//        params["end_date"] = UtilityManager.stringFromNSDateWithFormat(date: date as NSDate, format: "yyyy-MM-dd")
+        RequestManager.getVisitList(doctorID:doctorId, params: [:],successBlock: { (response, nextPageLink) in
+            self.refreshControl.endRefreshing()
+            self.visitArray.removeAll()
+            self.processAPICallResponse(response: response, nextPageLink: nextPageLink)
+        }) { (error) in
+            SVProgressHUD.showError(withStatus: error)
+        }
+    }
+    
+    //MARK: - Pagination methods
+    
+    var nextPageLink: String?
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if nextPageLink != nil {
+            if indexPath.row + 3 == visitArray.count {
+                fetchPagination()
+            }
+        }
+    }
+    
+    func fetchPagination() {
+        
+        if let link = nextPageLink {
+            RequestManager.getPaginationResponse(url: link, successBlock: { (response, nextPageLink) in
+                self.processAPICallResponse(response: response, nextPageLink: nextPageLink)
+            }, failureBlock: { (error) in
+                SVProgressHUD.showError(withStatus: error)
+            })
+        }
+    }
+    
+    func processAPICallResponse(response: [[String: AnyObject]], nextPageLink : String?) {
+        self.nextPageLink = nextPageLink
+        for object in response {
+            self.visitArray.append(Appointment(dictionary: object))
+        }
+        self.collectionView.reloadData()
+        SVProgressHUD.dismiss()
     }
     
     /*

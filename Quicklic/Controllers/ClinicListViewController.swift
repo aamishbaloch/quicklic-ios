@@ -17,18 +17,28 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
     var isLab = false
     
     var clinicArray = [Clinic]()
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         
-        title = "Clinics"
+        if isLab {
+            title = "Test Labs"
+        }
+        else{
+            title = "Clinics"
+        }
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         
         collectionView.emptyDataSetDelegate = self
         collectionView.emptyDataSetSource = self
+        
+        refreshControl.addTarget(self, action: #selector(fetchData), for: UIControlEvents.valueChanged)
+        collectionView.refreshControl = refreshControl
         
         SVProgressHUD.show()
         fetchData()
@@ -46,34 +56,7 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
         // Dispose of any resources that can be recreated.
     }
     
-    func fetchData() {
-        
-        if isLab {
-            RequestManager.getLabsList(successBlock: { (response) in
-                self.clinicArray.removeAll()
-                for object in response {
-                    self.clinicArray.append(Clinic(dictionary: object))
-                }
-                self.collectionView.reloadData()
-                SVProgressHUD.dismiss()
-            }, failureBlock: { (error) in
-                SVProgressHUD.showError(withStatus: error)
-            })
-        }
-        else{
-            RequestManager.getClinicsList(successBlock: { (response) in
-                self.clinicArray.removeAll()
-                for object in response {
-                    self.clinicArray.append(Clinic(dictionary: object))
-                }
-                self.collectionView.reloadData()
-                SVProgressHUD.dismiss()
-                
-            }) { (error) in
-                SVProgressHUD.showError(withStatus: error)
-            }
-        }
-    }
+    
     
     @IBAction func menuButtonPressed(_ sender: Any) {
         self.presentLeftMenuViewController(nil)
@@ -90,11 +73,16 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
         
         
         
-        var text  = clinic.name! + ", " + clinic.location!
-        text = text + "\n" + clinic.phone!
+        let text  = clinic.name! + ", " + clinic.location!
         
         cell.nameLabel.text = text
-        cell.clinicImageView.sd_setImage(with: URL(string: clinic.image ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
+        
+        let activityIndicator = UtilityManager.activityIndicatorForView(view: cell.clinicImageView)
+        activityIndicator.startAnimating()
+        
+        cell.clinicImageView.sd_setImage(with: URL(string: clinic.image ?? ""), placeholderImage: UIImage(named: "placeholder-banner"), options: [.refreshCached, .retryFailed]) { (image, error, cache, url) in
+            activityIndicator.stopAnimating()
+        }
         let floatValue : Float = NSString(string: clinic.rating!).floatValue
         cell.ratingView.value = CGFloat(floatValue)
         
@@ -143,7 +131,7 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "Go ahead and add a new clinic by tapping on the + button on top right!"
+        let text = ""
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakMode = .byWordWrapping
@@ -202,6 +190,59 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
         SVProgressHUD.show()
         fetchData()
+    }
+    
+    func fetchData() {
+        
+        if isLab {
+            RequestManager.getLabsList(successBlock: { (response, nextPageLink) in
+                self.clinicArray.removeAll()
+                self.refreshControl.endRefreshing()
+                self.processAPICallResponse(response: response, nextPageLink: nextPageLink)
+            }, failureBlock: { (error) in
+                SVProgressHUD.showError(withStatus: error)
+            })
+        }
+        else{
+            RequestManager.getClinicsList(successBlock: { (response, nextPageLink) in
+                self.clinicArray.removeAll()
+                self.processAPICallResponse(response: response, nextPageLink: nextPageLink)
+            }) { (error) in
+                SVProgressHUD.showError(withStatus: error)
+            }
+        }
+    }
+    
+    //MARK: - Pagination methods
+    
+    var nextPageLink: String?
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if nextPageLink != nil {
+            if indexPath.row + 3 == clinicArray.count {
+                fetchPagination()
+            }
+        }
+    }
+    
+    func fetchPagination() {
+        
+        if let link = nextPageLink {
+            RequestManager.getPaginationResponse(url: link, successBlock: { (response, nextPageLink) in
+                self.processAPICallResponse(response: response, nextPageLink: nextPageLink)
+            }, failureBlock: { (error) in
+                SVProgressHUD.showError(withStatus: error)
+            })
+        }
+    }
+    
+    func processAPICallResponse(response: [[String: AnyObject]], nextPageLink : String?) {
+        self.nextPageLink = nextPageLink
+        for object in response {
+            self.clinicArray.append(Clinic(dictionary: object))
+        }
+        self.collectionView.reloadData()
+        SVProgressHUD.dismiss()
     }
 
 }

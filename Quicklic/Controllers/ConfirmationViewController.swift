@@ -39,7 +39,7 @@ class ConfirmationViewController: UIViewController {
     }
     
     @IBAction func finishButton(_ sender: Any) {
-        
+        Router.sharedInstance.showPatientDashboard()
         self.dismiss(animated: false, completion: nil)
     }
     

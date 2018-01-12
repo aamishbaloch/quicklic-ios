@@ -20,6 +20,9 @@ class HospitalDetailsViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var ratingView: HCSStarRatingView!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var websiteLabel: UILabel!
     
     var delegate: HospitalDeletionDelegate?
     var clinic: Clinic!
@@ -34,6 +37,10 @@ class HospitalDetailsViewController: UIViewController {
         clinicImageView.sd_setImage(with: URL(string: clinic.image ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         phoneLabel.text = clinic.phone
         locationLabel.text = clinic.location
+        websiteLabel.text = clinic.website
+        emailLabel.text = clinic.email
+        let floatValue : Float = NSString(string: clinic.rating!).floatValue
+        ratingView.value = CGFloat(floatValue)
     }
 
     override func didReceiveMemoryWarning() {

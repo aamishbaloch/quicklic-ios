@@ -79,8 +79,6 @@ class User: BaseEntity {
     var id: String?
     var userType : UserType?
     var avatar: String?
-    var first_name: String?
-    var last_name: String?
     var full_name: String?
     var role: UserType?
     var phone: String?
@@ -105,6 +103,9 @@ class User: BaseEntity {
     var specializationName : String?
     var degree: String?
     
+    var rating: String?
+    var patients_seen: String?
+    
     override init() {
         super.init()
     }
@@ -119,7 +120,7 @@ class User: BaseEntity {
         self.marital_status = MaritalStatus(rawValue: dictionary["marital_status"] as? Int ?? 1)
         self.userType = UserType(rawValue: dictionary["role"] as? Int ?? 1)
         self.gender = Gender(rawValue:  dictionary["gender"] as? Int ?? 1)
-        self.full_name = "\(first_name ?? "") \(last_name ?? "")"
+        self.full_name = "\(dictionary["first_name"]  ?? "") \(dictionary["last_name"]  ?? "")"
         if let date = dictionary["dob"] as? String {
             self.dob = UtilityManager.dateFromStringWithFormat(date:  date, format: Constant.serverDateFormat)
         }

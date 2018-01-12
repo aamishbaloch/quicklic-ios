@@ -19,6 +19,7 @@ class Clinic: BaseEntity {
     var email: String?
     var website: String?
     var is_lab: Bool?
+    var formatted_address: String?
 
     override init() {
         super.init()
@@ -27,5 +28,6 @@ class Clinic: BaseEntity {
     override init(dictionary: [AnyHashable : Any]!) {
         super.init()
         self.setValuesForKeysWithJSONDictionary(dictionary, dateFormatter: nil)
+        self.location = dictionary["formatted_address"] as? String ?? ""
     }
 }

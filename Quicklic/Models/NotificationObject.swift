@@ -26,12 +26,13 @@ class NotificationObject: BaseEntity {
     override init(dictionary: [AnyHashable : Any]!) {
         super.init()
         let newDateFormatter = DateFormatter()
-        newDateFormatter.dateFormat = Constant.serverDateFormatExtended
+        newDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
         self.setValuesForKeysWithJSONDictionary(dictionary, dateFormatter: newDateFormatter)
         if let appointmentObject = dictionary["appointment"] as? [String: AnyObject] {
             self.appointment = Appointment(dictionary: appointmentObject)
         }
         self.is_read = dictionary["is_read"] as? Bool ?? false
+        self.type = dictionary["type"] as? Int ?? 1
 //        if let creationDate = dictionary["created_at"] as? String {
 //            UtilityManager.dateFromStringWithFormat(date: creationDate, format: "yyyy-MM-dd'T'hh:mm:ss.SSS")
 //        }

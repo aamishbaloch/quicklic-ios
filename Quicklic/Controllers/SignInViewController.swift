@@ -63,6 +63,10 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
         authenticateUser()
     }
     
+    @IBAction func forgotPasswordButtonPressed(_ sender: Any) {
+        Router.sharedInstance.showForgotPassword(fromController: self)
+    }
+    
     func authenticateUser() {
         let context = LAContext()
         var error: NSError?
@@ -81,10 +85,10 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
                         
                         if (phone != nil && pass != nil)
                         {
-                            self.validator.validate(self)
                             var params = [String: String]()
                             params["phone"] = phone
                             params["password"] = pass
+                            
                             self.signinUser(params: params)
 //                            Router.sharedInstance.showDashboardAsRoot()
                         }else{
@@ -132,8 +136,13 @@ class SignInViewController: UIViewController, ValidationDelegate, UITextFieldDel
             ApplicationManager.sharedInstance.user = user
             
             UserDefaults.standard.set(response["token"] as! String, forKey: "token")
-            UserDefaults.standard.set(user.phone, forKey: "userPhone")
-            UserDefaults.standard.set(self.passwordField.text, forKey: "userPassword")
+            if let pass = self.passwordField.text {
+                if pass.count >= 0 {
+                    UserDefaults.standard.set(user.phone, forKey: "userPhone")
+                    UserDefaults.standard.set(pass, forKey: "userPassword")
+                }
+            }
+            
             UserDefaults.standard.set(true, forKey: "loggedIn")
             if response["role"] as! Int == Role.Patient.rawValue {
                 ApplicationManager.sharedInstance.userType = .Patient

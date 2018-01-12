@@ -12,6 +12,8 @@ class LandingViewController: UIViewController, UICollectionViewDelegate, UIColle
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    let announceents = ["Schedule appointments right from your home, and notify your doctors instantly","Receive instant notifications when an action is performed on your appointment","Now get VIP access to all doctors for your clinic or hospital"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,11 +33,12 @@ class LandingViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return announceents.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AnnouncementCollectionViewCell.identifier, for: indexPath) as! AnnouncementCollectionViewCell
+        cell.nameLabel.text = announceents[indexPath.item]
         return cell
     }
     

@@ -62,6 +62,16 @@ class Router: NSObject {
         
     }
     
+    func showOtherProfile(user: User, fromController: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ProfileViewController.storyboardIDForProfile) as! ProfileViewController
+        
+        controller.mainUser = user
+        
+        let navController = UINavigationController(rootViewController: controller)
+        
+        fromController.present(navController, animated: true, completion: nil)
+    }
+    
     func showEditProfile(fromController: UIViewController) {
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: EditProfileViewController.storyboardID) as! EditProfileViewController
         
@@ -231,9 +241,14 @@ class Router: NSObject {
     func showNotificationList() {
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: NotificationListViewController.storyboardID)
         
-        
-    centralRootViewController.setContentViewController(controller, animated: true)
+        centralRootViewController.setContentViewController(controller, animated: true)
         centralRootViewController.hideViewController()
+    }
+    
+    func showForgotPassword(fromController: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ForgotPasswordViewController.storyboardID) as! ForgotPasswordViewController
+        
+        fromController.show(controller, sender: nil)
     }
     
     

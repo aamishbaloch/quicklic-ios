@@ -16,6 +16,8 @@ class SearchDoctorCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var specializationLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var ratingView: HCSStarRatingView!
+    @IBOutlet weak var patientsSeenLabel: UILabel!
     
     
 }

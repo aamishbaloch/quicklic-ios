@@ -9,7 +9,7 @@
 import UIKit
 
 enum AppointmentStatus: Int {
-    case Confirm = 1, Pending, NoShow, Cancel, Discard = 5
+    case Confirm = 1, Pending, NoShow, Cancel, Discard, Done = 6
     
         var value : String {
         switch self {
@@ -23,6 +23,8 @@ enum AppointmentStatus: Int {
             return "Cancel"
         case .Discard:
             return "Discard"
+        case .Done:
+            return "Done"
         }
     }
 }
@@ -84,6 +86,7 @@ class Appointment: BaseEntity {
     var full_name:String?
     var comment:String?
     var visit = Visit()
+    var qid: String?
     
     override init() {
         super.init()
