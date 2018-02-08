@@ -5,4 +5,4 @@
 # https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Appfile.md
 
 app_identifier "com.danialzahid.Quicklic" # the bundle identifier of your app
-# apple_id "apple@fastlane.tools" # Your Apple ID
+apple_id "danialzahid94@outlook.com" # Your Apple ID

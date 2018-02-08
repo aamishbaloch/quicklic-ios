@@ -215,6 +215,10 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         return CGSize(width: cellWidth, height: 85)
     }
     
+    @IBAction func notificationButtonPressed(_ sender: Any) {
+        Router.sharedInstance.showNotificationList()
+    }
+    
     @IBAction func newAppointmentButtonPressed(_ sender: Any) {
       
         if ApplicationManager.sharedInstance.userType == .Doctor {

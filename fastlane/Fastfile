@@ -30,3 +30,16 @@ lane :beta do
     build_secret: "cc6f317198954f0f8cf555987a265a4a14dd63d95af983aca4539311f2dff19e"
   )
 end
+
+lane :itunes do
+  increment_build_number
+
+  # build your iOS app
+  gym(
+    scheme: "Quicklic",
+    export_method: "app-store"
+  )
+
+  # upload to Testflight
+  pilot(skip_waiting_for_build_processing: true)
+end

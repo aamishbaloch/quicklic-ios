@@ -68,7 +68,6 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
         
         let user = ApplicationManager.sharedInstance.user
         
-        
         //Universal fields
         self.nameField.text = user.full_name
         self.emailField.text = user.email
@@ -85,7 +84,7 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
             doctorSubmitConstraint.constant = -30
             self.degreeField.text = user.degree
             self.specializationField.text = user.specializationName
-            
+            self.serviceField.text = user.servicesArray.joined(separator: ",")
         }
         else{
             doctorView.isHidden = true
@@ -131,7 +130,7 @@ class EditProfileViewController: UIViewController, MLPAutoCompleteTextFieldDeleg
         }
         else{
             params["specialization"] = specializationField.text as AnyObject
-            params["services"] = [serviceField.text] as AnyObject
+            params["services"] = serviceField.text as AnyObject
             params["degree"] = degreeField.text as AnyObject
         }
         

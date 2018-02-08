@@ -15,6 +15,7 @@ class TestListViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var clinicImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var starView: HCSStarRatingView!
+    @IBOutlet weak var nameTextView: UITextView!
     @IBOutlet weak var tableView: UITableView!
     
     var clinic = Clinic()
@@ -29,6 +30,7 @@ class TestListViewController: UIViewController, UITableViewDelegate, UITableView
         text = text + "\n" + clinic.phone!
         
         nameLabel.text = text
+        nameTextView.text = text
         clinicImageView.sd_setImage(with: URL(string: clinic.image ?? ""), placeholderImage: UIImage(named: "placeholder-banner"), options: SDWebImageOptions.retryFailed, completed: nil)
         let floatValue : Float = NSString(string: clinic.rating!).floatValue
         starView.value = CGFloat(floatValue)

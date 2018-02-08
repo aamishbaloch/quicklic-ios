@@ -22,6 +22,11 @@ xcode-select --install
 fastlane beta
 ```
 
+### itunes
+```
+fastlane itunes
+```
+
 
 ----
 
