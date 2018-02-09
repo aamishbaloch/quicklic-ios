@@ -2499,8 +2499,8 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="rounded" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Melissa John" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFy-aU-UOp">
-                                        <rect key="frame" x="115" y="27" width="132.5" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Melissa John" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="MFy-aU-UOp">
+                                        <rect key="frame" x="115" y="27" width="227" height="30"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -3016,6 +3016,7 @@
                                     <constraint firstItem="w8T-tw-2zz" firstAttribute="leading" secondItem="Vpl-LR-GYe" secondAttribute="trailing" constant="7.5" id="SwP-3W-eaG"/>
                                     <constraint firstItem="nRv-4V-ps6" firstAttribute="leading" secondItem="roa-2U-339" secondAttribute="trailing" constant="7.5" id="TKS-oH-tAo"/>
                                     <constraint firstItem="roa-2U-339" firstAttribute="top" secondItem="Vpl-LR-GYe" secondAttribute="bottom" constant="12" id="VPm-dd-clM"/>
+                                    <constraint firstAttribute="trailing" secondItem="MFy-aU-UOp" secondAttribute="trailing" constant="5" id="WpD-Dc-2ej"/>
                                     <constraint firstAttribute="trailing" secondItem="1v7-43-3mb" secondAttribute="trailing" id="YOk-jJ-Fbu"/>
                                     <constraint firstItem="2qo-Gs-lk5" firstAttribute="leading" secondItem="d8G-85-7OF" secondAttribute="trailing" constant="7.5" id="Zyq-cN-JyR"/>
                                     <constraint firstItem="mzA-RU-fbA" firstAttribute="centerY" secondItem="2qo-Gs-lk5" secondAttribute="centerY" id="aJD-Y6-Grj"/>
@@ -3625,8 +3626,8 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="rounded" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Melissa John" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPA-5L-HgW">
-                                        <rect key="frame" x="115" y="15" width="132.5" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Melissa John" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="JPA-5L-HgW">
+                                        <rect key="frame" x="115" y="15" width="227" height="30"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -3777,6 +3778,7 @@
                                     <constraint firstItem="nPZ-NH-NJd" firstAttribute="top" secondItem="Jmg-sU-6Tx" secondAttribute="bottom" constant="-10" id="rar-9b-Jtg"/>
                                     <constraint firstAttribute="trailing" secondItem="oj5-7Q-89T" secondAttribute="trailing" id="rwh-l8-SJ4"/>
                                     <constraint firstItem="LQV-Pc-aiT" firstAttribute="top" secondItem="wyS-KA-WpE" secondAttribute="top" id="sCD-jx-3pO"/>
+                                    <constraint firstAttribute="trailing" secondItem="JPA-5L-HgW" secondAttribute="trailing" constant="5" id="vXS-S6-daQ"/>
                                     <constraint firstItem="LQV-Pc-aiT" firstAttribute="top" secondItem="miM-gR-XaZ" secondAttribute="bottom" constant="13" id="xGh-VY-daU"/>
                                     <constraint firstItem="SBv-4y-HYc" firstAttribute="leading" secondItem="JPA-5L-HgW" secondAttribute="leading" id="zOM-ds-3oJ"/>
                                 </constraints>
@@ -4488,8 +4490,8 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="rounded" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Melissa John" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mm6-sS-olA">
-                                                        <rect key="frame" x="115" y="20" width="132.5" height="30"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Melissa John" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="mm6-sS-olA">
+                                                        <rect key="frame" x="115" y="20" width="227" height="30"/>
                                                         <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="25"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -4687,6 +4689,7 @@
                                                     <constraint firstItem="FUR-1v-Dgo" firstAttribute="top" secondItem="ICW-PA-gZS" secondAttribute="bottom" constant="15" id="bK1-Ek-3tD"/>
                                                     <constraint firstItem="40d-vh-n9h" firstAttribute="top" secondItem="xWP-YD-Pwc" secondAttribute="bottom" constant="5.5" id="cIP-L2-FzY"/>
                                                     <constraint firstItem="mm6-sS-olA" firstAttribute="leading" secondItem="ICW-PA-gZS" secondAttribute="trailing" constant="15" id="fdp-UT-r8X"/>
+                                                    <constraint firstAttribute="trailing" secondItem="mm6-sS-olA" secondAttribute="trailing" constant="5" id="fxh-dU-cji"/>
                                                     <constraint firstItem="FUR-1v-Dgo" firstAttribute="leading" secondItem="2CE-DO-T7F" secondAttribute="leading" id="h6c-e8-ASb"/>
                                                     <constraint firstItem="40d-vh-n9h" firstAttribute="leading" secondItem="xWP-YD-Pwc" secondAttribute="leading" id="hnd-yM-ayw"/>
                                                     <constraint firstItem="2qo-TW-4ff" firstAttribute="leading" secondItem="2CE-DO-T7F" secondAttribute="leading" constant="22" id="i27-tU-umZ"/>

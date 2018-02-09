@@ -745,4 +745,14 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
+    func logoutUser(successBlock success:@escaping ([String: AnyObject]) -> (),
+                   failureBlock failure:@escaping (String) -> ()){
+        self.postPath(urlString: "auth/logout/", params: [:],addToken: true, successBlock: { (response) in
+            print(response)
+            success(response as! [String : AnyObject])
+        }) { (error) in
+            failure(error)
+        }
+    }
+    
 }

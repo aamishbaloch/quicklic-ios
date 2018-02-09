@@ -89,6 +89,11 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
             case 5:
                 Router.sharedInstance.showLabsList()
             case 6:
+                RequestManager.logoutUser(successBlock: { (response) in
+                    
+                }, failureBlock: { (error) in
+                    
+                })
                 Router.sharedInstance.showLandingPage()
             default: break
                 
@@ -115,6 +120,11 @@ class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableView
                 Router.sharedInstance.showLabsList()
                 
             case 6:
+                RequestManager.logoutUser(successBlock: { (response) in
+                    
+                }, failureBlock: { (error) in
+                    
+                })
                 Router.sharedInstance.showLandingPage()
             default: break
                 

@@ -112,7 +112,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.headingLabel.text = "Country"
             cell.bodyField.text = user.countryName ?? "N/A"
         case 6:
-            if user.userType == .Patient {
+            if user.userType == .Patient || mainUser != nil {
                 cell.headingLabel.text = "Height"
                 cell.bodyField.text = user.height ?? "N/A"
             }
@@ -121,7 +121,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.bodyField.text = user.servicesArray.joined(separator: ", ")
             }
         case 7:
-            if user.userType == .Patient {
+            if user.userType == .Patient || mainUser != nil {
                 cell.headingLabel.text = "Weight"
                 cell.bodyField.text = user.weight ?? "N/A"
             }
@@ -130,7 +130,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.bodyField.text = user.specializationName ?? "N/A"
             }
         case 8:
-            if user.userType == .Patient {
+            if user.userType == .Patient || mainUser != nil {
                 cell.headingLabel.text = "Marital Status"
                 cell.bodyField.text = user.marital_status?.value ?? "N/A"
             }
