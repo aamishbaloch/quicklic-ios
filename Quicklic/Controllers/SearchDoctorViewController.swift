@@ -57,7 +57,7 @@ class SearchDoctorViewController: UIViewController, UICollectionViewDelegate, UI
         let user = self.doctorsArray[indexPath.row]
         
         cell.nameLabel.text = user.full_name ?? "N/A"
-        cell.profileImageView.sd_setImage(with: URL(string: user.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
+        cell.profileImageView.sd_setImage(with: URL(string: user.thumb ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         cell.specializationLabel.text = user.specializationName ?? "N/A"
         cell.phoneLabel.text = user.phone ?? "N/A"
         cell.patientsSeenLabel.text = user.patients_seen ?? "0"

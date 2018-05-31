@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>38</string>
+	<string>51</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -50,7 +50,9 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Access camera thank you</string>
+	<string>To allow you to select image for your profile</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To allow you to select image for your profile</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

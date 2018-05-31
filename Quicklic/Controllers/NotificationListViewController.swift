@@ -59,7 +59,7 @@ class NotificationListViewController: UIViewController,UICollectionViewDelegate,
         let notification = notificationArray[indexPath.item]
         
         if notification.type == 1 {
-            let image = ApplicationManager.sharedInstance.userType == .Patient ? notification.appointment?.doctor.avatar ?? "" : notification.appointment?.patient.avatar ?? ""
+            let image = ApplicationManager.sharedInstance.userType == .Patient ? notification.appointment?.doctor.thumb ?? "" : notification.appointment?.patient.thumb ?? ""
             cell.imageView.sd_setImage(with: URL(string: image), placeholderImage: UIImage(named: "user-image-done"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
             cell.nameLabel.text = notification.content
         }

@@ -36,6 +36,7 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
     @IBOutlet weak var drNotes: UILabel!
     @IBOutlet weak var patientNotes: UILabel!
     @IBOutlet weak var idLabel: UILabel!
+    @IBOutlet weak var clinicNameLabel: UILabel!
     
     @IBOutlet weak var doctorsButtonView: UIView!
     @IBOutlet weak var patientsButtonView: UIView!
@@ -144,9 +145,9 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
     
     func doctorData(){
         nameLabel.text = appointment.doctor.full_name ?? "N/A"
+        clinicNameLabel.text = appointment.clinic.name ?? "N/A"
         
-        
-        imageView.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
+        imageView.sd_setImage(with: URL(string: appointment.doctor.thumb ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
         if let startTime = appointment.start_datetime {
             selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "hh:mm a")
         }
@@ -182,8 +183,9 @@ class AppointmentDetailsViewController: UIViewController,commentDelegate {
     }
     
     func patientData () {
+        clinicNameLabel.text = appointment.clinic.name ?? "N/A"
         nameLabel.text = appointment.patient.full_name ?? "N/A"
-        imageView.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
+        imageView.sd_setImage(with: URL(string: appointment.patient.thumb ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
         if let startTime = appointment.start_datetime {
             selectedtimeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "hh:mm a")
         }

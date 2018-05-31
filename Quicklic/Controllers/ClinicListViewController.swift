@@ -80,7 +80,7 @@ class ClinicListViewController: UIViewController, UICollectionViewDelegate, UICo
         let activityIndicator = UtilityManager.activityIndicatorForView(view: cell.clinicImageView)
         activityIndicator.startAnimating()
         
-        cell.clinicImageView.sd_setImage(with: URL(string: clinic.image ?? ""), placeholderImage: UIImage(named: "placeholder-banner"), options: [.refreshCached, .retryFailed]) { (image, error, cache, url) in
+        cell.clinicImageView.sd_setImage(with: URL(string: clinic.image_thumb ?? ""), placeholderImage: UIImage(named: "placeholder-banner"), options: [.refreshCached, .retryFailed]) { (image, error, cache, url) in
             activityIndicator.stopAnimating()
         }
         let floatValue : Float = NSString(string: clinic.rating!).floatValue

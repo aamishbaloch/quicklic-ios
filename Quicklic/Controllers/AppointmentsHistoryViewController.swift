@@ -57,7 +57,7 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         if ApplicationManager.sharedInstance.userType == .Patient {
             cell.nameLabel.text = appointment.doctor.full_name
             
-            cell.drImage.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
+            cell.drImage.sd_setImage(with: URL(string: appointment.doctor.thumb ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
             cell.addReviewButton.isHidden = false
             cell.addReviewButton.addTarget(self, action: #selector(self.addReviewButtonPressed(_:)), for: UIControlEvents.touchUpInside)
             cell.addReviewButton.tag = indexPath.row
@@ -66,15 +66,16 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
         else{
             cell.nameLabel.text = appointment.patient.full_name
             
-            cell.drImage.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
+            cell.drImage.sd_setImage(with: URL(string: appointment.patient.thumb ?? ""), placeholderImage: UIImage(named: "user-image2"), options: SDWebImageOptions.refreshCached, completed: nil)
             cell.addReviewButton.isHidden = true
         }
         
         if let startTime = self.appointmentsArray[indexPath.row].start_datetime {
-            cell.timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "hh:mm a MM-dd-yyyy")
+            cell.timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "hh:mm a MMMM-dd-yyyy")
         }
         
-        cell.specializationLabel.text = appointment.reason.name
+        cell.specializationLabel.text = nil
+        cell.specializationLabel.isHidden = true
         
         let status = appointment.status?.value
         cell.statusLabel.text = status
@@ -191,9 +192,9 @@ class AppointmentsHistoryViewController: UIViewController, UICollectionViewDataS
     
     func fetchData() {
         
-        var params = [String: Any]()
-        let date = Date(timeInterval: 86400, since: NSDate() as Date)
-        params["end_date"] = UtilityManager.stringFromNSDateWithFormat(date: date as NSDate, format: "yyyy-MM-dd")
+        let params = [String: Any]()
+//        let date = NSDate() as Date
+//        params["end_date"] = UtilityManager.stringFromNSDateWithFormat(date: date as NSDate, format: "yyyy-MM-dd")
         
         SVProgressHUD.show()
         RequestManager.getAppointmentHistory(params:params, successBlock: { (response, nextPageLink) in

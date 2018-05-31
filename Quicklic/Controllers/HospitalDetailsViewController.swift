@@ -34,7 +34,7 @@ class HospitalDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         titleLabel.text = clinic.name
-        clinicImageView.sd_setImage(with: URL(string: clinic.image ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
+        clinicImageView.sd_setImage(with: URL(string: clinic.image_thumb ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         phoneLabel.text = clinic.phone
         locationLabel.text = clinic.location
         websiteLabel.text = clinic.website

@@ -14,7 +14,7 @@ class Clinic: BaseEntity {
     var name: String?
     var phone: String?
     var location: String?
-    var image: String?
+    var image_thumb: String?
     var rating:String?
     var email: String?
     var website: String?

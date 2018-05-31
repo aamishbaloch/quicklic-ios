@@ -208,6 +208,18 @@ class Router: NSObject {
         fromController.present(controller, animated: true, completion: nil)
     }
     
+    func clinicSelection(fromController: UIViewController, clinics: [Clinic]) {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ReasonSelectionViewController.storyboardID) as! UINavigationController
+        let vc = controller.viewControllers.first as! ReasonSelectionViewController
+        vc.isClinic = true
+        vc.clinics = clinics
+        if let from = fromController as? ReasonSelectionDelegate {
+            vc.delegate = from
+        }
+        
+        fromController.present(controller, animated: true, completion: nil)
+    }
+    
     func showConfirmation(appointment: Appointment, fromController: UIViewController) {
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ConfirmationViewController.storyboardID) as! ConfirmationViewController
           controller.appointment = appointment

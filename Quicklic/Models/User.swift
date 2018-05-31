@@ -78,7 +78,7 @@ class User: BaseEntity {
 
     var id: String?
     var userType : UserType?
-    var avatar: String?
+    var thumb: String?
     var full_name: String?
     var role: UserType?
     var phone: String?

@@ -10,6 +10,7 @@ import UIKit
 
 protocol ReasonSelectionDelegate {
     func didSelectReason(reason:GenericModel)
+    func didSelectClinic(clinic: Clinic)
 }
 
 class ReasonSelectionViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
@@ -17,6 +18,8 @@ class ReasonSelectionViewController: UIViewController,UITableViewDelegate,UITabl
     static let storyboardID = "reasonSelectionViewController"
     
     var reasons = [GenericModel]()
+    var clinics = [Clinic]()
+    var isClinic = false
     
     @IBOutlet weak var reasonSelectionTable: UITableView!
     var delegate:ReasonSelectionDelegate?
@@ -27,7 +30,13 @@ class ReasonSelectionViewController: UIViewController,UITableViewDelegate,UITabl
         title = "Select Reason"
         
         setupNav()
-        fetchData()
+        if !isClinic {
+            fetchData()
+        }
+        else{
+            
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,13 +51,24 @@ class ReasonSelectionViewController: UIViewController,UITableViewDelegate,UITabl
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return reasons.count
+        if !isClinic {
+            return reasons.count
+        }
+        else{
+            return clinics.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = reasonSelectionTable.dequeueReusableCell(withIdentifier: ReasonSelectionTableViewCell.identifier, for: indexPath) as! ReasonSelectionTableViewCell
         
-        cell.lblReason.text = reasons[indexPath.row].name
+        if !isClinic {
+            cell.lblReason.text = reasons[indexPath.row].name
+        }
+        else{
+            cell.lblReason.text = clinics[indexPath.row].name
+        }
         
         return cell
     }
@@ -56,7 +76,13 @@ class ReasonSelectionViewController: UIViewController,UITableViewDelegate,UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         self.dismiss(animated: true) {
-            self.delegate?.didSelectReason(reason: self.reasons[indexPath.row])
+            if !self.isClinic {
+                self.delegate?.didSelectReason(reason: self.reasons[indexPath.row])
+            }
+            else{
+                self.delegate?.didSelectClinic(clinic: self.clinics[indexPath.row])
+            }
+            
         }
     }
     

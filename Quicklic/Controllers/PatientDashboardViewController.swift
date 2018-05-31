@@ -106,7 +106,7 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
     
     func updateUI(user: User) {
         nameLabel.text = user.full_name
-        profileImageView.sd_setImage(with: URL(string: user.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
+        profileImageView.sd_setImage(with: URL(string: user.thumb ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         
         if ApplicationManager.sharedInstance.userType == .Doctor {
             newAppointmentButton.setTitle("Visits", for: UIControlState.normal)
@@ -169,11 +169,11 @@ class PatientDashboardViewController: UIViewController, ScrollableDatepickerDele
         let appointment = appointmentsArray[indexPath.item]
         if ApplicationManager.sharedInstance.userType == .Patient {
             cell.nameLabel.text = appointment.doctor.full_name ?? "N/A"
-            cell.drImage.sd_setImage(with: URL(string: appointment.doctor.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
+            cell.drImage.sd_setImage(with: URL(string: appointment.doctor.thumb ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         }
         else{
             cell.nameLabel.text = appointment.patient.full_name ?? "N/A"
-            cell.drImage.sd_setImage(with: URL(string: appointment.patient.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
+            cell.drImage.sd_setImage(with: URL(string: appointment.patient.thumb ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         }
         
         cell.specializationLabel.text = appointment.reason.name

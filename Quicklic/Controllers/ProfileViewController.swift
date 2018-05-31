@@ -56,7 +56,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         nameLabel.text = user.full_name
         phoneLabel.text = user.phone
-        let url = URL(string: user.avatar ?? "")
+        let url = URL(string: user.thumb ?? "")
         profileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed]) { (image, error, cacheType, url) in
             if error == nil {
                 self.profileImageView.image = image

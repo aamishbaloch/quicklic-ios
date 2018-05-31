@@ -72,9 +72,9 @@ class VisitListViewController: UIViewController,UICollectionViewDelegate,UIColle
         let visit  = visitArray[indexPath.row]
         cell.nameLabel.text = visit.patient.full_name
       //print("Name is:\(visit.doctor.full_name)")
-        cell.imageView.sd_setImage(with: URL(string: visit.patient.avatar ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
+        cell.imageView.sd_setImage(with: URL(string: visit.patient.thumb ?? ""), placeholderImage: UIImage(named: "placeholder-image"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         if let startTime = self.visitArray[indexPath.row].start_datetime {
-            cell.timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "hh:mm a MM-dd-yyyy")
+            cell.timeLabel.text = UtilityManager.stringFromNSDateWithFormat(date: startTime as NSDate, format: "hh:mm a MMMM-dd-yyyy")
         }
         
         let status = visit.status?.value

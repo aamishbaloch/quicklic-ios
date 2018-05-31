@@ -19,6 +19,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
     @IBOutlet weak var ratingView: HCSStarRatingView!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var reasonButton: UIButton!
+    @IBOutlet weak var clinicButton: UIButton!
     @IBOutlet weak var textview: UITextView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var dateField: DatePickerTextField!
@@ -26,7 +27,8 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
     var doctor: User?
     var reasons = [GenericModel]()
     var selectedReason: GenericModel?
-    var clinicID = ""
+    var clinicArray = [Clinic]()
+    var selectedClinic : Clinic?
     var startTime:NSDate?
     var selectedTimeIndex = -1
     var timeArray = [Time]()
@@ -50,16 +52,21 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         nameLabel.text = doctor?.full_name ?? "N/A"
         phoneLabel.text = doctor?.phone ?? "N/A"
         specialityLabel.text = doctor?.specializationName ?? "N/A"
-        profileImageView.sd_setImage(with: URL(string: doctor?.avatar ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
+        profileImageView.sd_setImage(with: URL(string: doctor?.thumb ?? ""), placeholderImage: UIImage(named: "user-image2"), options: [SDWebImageOptions.refreshCached, SDWebImageOptions.retryFailed], completed: nil)
         dateField.text = UtilityManager.stringFromNSDateWithFormat(date: NSDate(), format: Constant.appDateFormat)
         let floatValue : Float = NSString(string: doctor?.rating ?? "0").floatValue
         ratingView.value = CGFloat(floatValue)
-        fetchTime(dateString: dateField.text)
+        
      
         if let doctorID = doctor?.id {
             RequestManager.getDoctorClinicsList(doctorID: doctorID, successBlock: { (response) in
-                let clinic = Clinic(dictionary: response.first)
-                self.clinicID = clinic.id!
+                self.clinicArray.removeAll()
+                for object in response {
+                    self.clinicArray.append(Clinic(dictionary: object))
+                }
+                self.selectedClinic = self.clinicArray.first
+                self.didSelectClinic(clinic: self.selectedClinic!)
+                self.fetchTime(dateString: self.dateField.text)
             }) { (error) in
                 SVProgressHUD.showError(withStatus: error)
             }
@@ -90,7 +97,7 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         print("selected reason is:\(String(describing: selectedReason?.name))")
         
         if let isReason = selectedReason {
-            reasonButton.setTitle("\(isReason.name ?? "")   ", for: .normal)
+            reasonButton.setTitle("\(isReason.name ?? "")  ", for: .normal)
         }
         else{
             SVProgressHUD.showError(withStatus: "Please select reason")
@@ -98,8 +105,24 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         }
     }
     
+    func didSelectClinic(clinic: Clinic) {
+        selectedClinic = clinic
+        
+        if let clinic = selectedClinic {
+            clinicButton.setTitle("\(clinic.name ?? "")  ", for: .normal)
+        }
+        else{
+            SVProgressHUD.showError(withStatus: "Please select clinic")
+            return
+        }
+    }
+    
     @IBAction func reasonButtonPressed(_ sender: Any) {
         Router.sharedInstance.reasonSelection(fromController: self)
+    }
+    
+    @IBAction func clinicButtonPressed(_ sender: Any) {
+        Router.sharedInstance.clinicSelection(fromController: self, clinics: self.clinicArray)
     }
     
     @IBAction func doneButtonPressed(_ sender: Any) {
@@ -119,12 +142,12 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
     func fetchTime(dateString: String? = nil){
         
         guard let date = dateString else { return }
-        
+        guard let clinicID = self.selectedClinic?.id else { return }
         let convertedDate = UtilityManager.serverDateStringFromAppDateString(date: date)
         let params = ["date": convertedDate]
         
         SVProgressHUD.show()
-        RequestManager.getTimeList(doctorID: (doctor?.id)!,params: params, successBlock: { (response) in
+        RequestManager.getTimeList(doctorID: (doctor?.id)!, clinicID: clinicID, params: params, successBlock: { (response) in
             self.timeArray.removeAll()
             for object in response {
                 self.timeArray.append(Time(dictionary: object))
@@ -210,6 +233,11 @@ class CreateAppointmentViewController: UIViewController,ReasonSelectionDelegate,
         }
         else{
             SVProgressHUD.showError(withStatus: "Please select time")
+            return
+        }
+        
+        guard let clinicID = self.selectedClinic?.id as? String else {
+            SVProgressHUD.showError(withStatus: "Clinic not selected")
             return
         }
         

@@ -485,10 +485,10 @@ class WebClient: AFHTTPSessionManager {
         }
     }
     
-    func getTimeList(doctorID: String, params: [String: Any], successBlock success:@escaping ([[String: AnyObject]]) -> (),
+    func getTimeList(doctorID: String, clinicID: String, params: [String: Any], successBlock success:@escaping ([[String: AnyObject]]) -> (),
                      failureBlock failure:@escaping (String) -> ()){
         
-        self.getPath(urlString: "doctor/\(doctorID)/appointment_slots/", params: params as [String : AnyObject], successBlock: { (response) in
+        self.getPath(urlString: "doctor/\(doctorID)/clinic/\(clinicID)/appointment_slots/", params: params as [String : AnyObject], successBlock: { (response) in
             print(response)
             success(response as! [[String : AnyObject]])
         }) { (error) in
@@ -570,7 +570,7 @@ class WebClient: AFHTTPSessionManager {
     func getAppointmentHistory(params: [String: Any],successBlock success:@escaping ([[String: AnyObject]], String?) -> (),
                                failureBlock failure:@escaping (String) -> ()){
         
-        let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/appointment/" : "doctor/\(ApplicationManager.sharedInstance.user.id ?? "0")/appointment/history"
+        let url = ApplicationManager.sharedInstance.userType == .Patient ? "patient/\(ApplicationManager.sharedInstance.user.id ?? "0")/appointment/history" : "doctor/\(ApplicationManager.sharedInstance.user.id ?? "0")/appointment/history"
         
         
         
